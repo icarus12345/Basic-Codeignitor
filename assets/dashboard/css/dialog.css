@@ -1,0 +1,29 @@
+.dialog-content{
+    padding:0 14px 12px 14px
+}
+.modal-header{
+    padding:12px 14px 12px 14px;
+    position: relative;
+}
+.modal-body{
+    padding: 12px 14px 12px 14px;
+    position: relative;
+    width: 100%;
+}
+.modal-footer{
+    padding: 6px 14px;
+    position: relative;
+}
+.modal-action{ 
+    position: absolute;right: 10px;top: 50%;height: 20px;
+    margin-top: -10px;
+}
+.modal-action>div>a,
+.modal-action>div>span{
+    line-height: 20px;text-align: center;display: block;
+}
+.modal-action>div{
+    display: inline-block;
+    width: 20px;height: 20px;
+    margin-left: 5px;
+}

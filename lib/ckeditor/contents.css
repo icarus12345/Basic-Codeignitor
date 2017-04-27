@@ -1,0 +1,158 @@
+/*
+Copyright (c) 2003-2015, CKSource - Frederico Knabben. All rights reserved.
+For licensing, see LICENSE.md or http://ckeditor.com/license
+*/
+
+body.cke_editable{
+	/* Font */
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 13px;
+
+	/* Text color */
+	color: #333;
+
+	/* Remove the background color to make it transparent */
+	background-color: #fff;
+	margin: 0;
+	padding: 5px;
+}
+@import '/assets/css/nta.css';
+.cke_editable
+{
+	/*font-size: 13px;*/
+	line-height: 1.4;
+}
+
+blockquote
+{
+	font-style: italic;
+	font-family: Georgia, Times, "Times New Roman", serif;
+	padding: 2px 0;
+	border-style: solid;
+	border-color: #ccc;
+	border-width: 0;
+}
+
+.cke_contents_ltr blockquote
+{
+	padding-left: 20px;
+	padding-right: 8px;
+	border-left-width: 5px;
+}
+
+.cke_contents_rtl blockquote
+{
+	padding-left: 8px;
+	padding-right: 20px;
+	border-right-width: 5px;
+}
+
+.ckeditor a
+{
+	color: #0782C1;
+}
+
+.ckeditor ol,.ckeditor ul,.ckeditor dl
+{
+	/* IE7: reset rtl list margin. (#7334) */
+	*margin-right: 0px;
+	/* preserved spaces for list items with text direction other than the list. (#6249,#8049)*/
+	padding: 0 40px;
+}
+.ckeditor h1,
+.ckeditor h2,
+.ckeditor h3,
+.ckeditor h4,
+.ckeditor h5{
+	margin: 0;
+    font-weight: 100;
+        font-family: 'Roboto','Roboto Condensed', sans-serif;
+}
+.ckeditor h1,.ckeditor h2,.ckeditor h3,.ckeditor h4,.ckeditor h5,.ckeditor h6
+{
+	font-weight: normal;
+	line-height: 1.5;
+}
+
+.ckeditor hr
+{
+	border: 0px;
+	border-top: 1px solid #ccc;
+}
+.ckeditor img{max-width: 100%;}
+.ckeditor img.right
+{
+	border: 1px solid #ccc;
+	float: right;
+	margin-left: 15px;
+	padding: 5px;
+}
+
+.ckeditor img.left
+{
+	border: 1px solid #ccc;
+	float: left;
+	margin-right: 15px;
+	padding: 5px;
+}
+
+.ckeditor pre
+{
+	white-space: pre-wrap; /* CSS 2.1 */
+	word-wrap: break-word; /* IE7 */
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	-webkit-tab-size: 4;
+	tab-size: 4;
+}
+
+.ckeditor .marker
+{
+	background-color: Yellow;
+}
+
+.ckeditor span[lang]
+{
+	font-style: italic;
+}
+
+.ckeditor figure
+{
+	text-align: center;
+	border: solid 1px #ccc;
+	border-radius: 2px;
+	background: rgba(0,0,0,0.05);
+	padding: 10px;
+	margin: 10px 20px;
+	display: inline-block;
+}
+
+.ckeditor figure > figcaption
+{
+	text-align: center;
+	display: block; /* For IE8 */
+}
+
+
+.cke_editable .cke-video{
+	margin:auto;position:relative;max-width:320px;
+	font-size: 0;
+}
+.cke-video>.cke-ration-16-9{
+	padding-bottom: 56.25%;position: relative;
+	
+}
+.cke-video>.cke-ration-21-9{
+	padding-bottom: 42.8%;position: relative;
+	
+}
+.cke-video>.cke-ration-4-3{
+	padding-bottom: 75%;position: relative;
+	
+}
+.cke-video>div iframe{
+	position:absolute;top:0;left:0;width:100%;height:100%;border: 0;
+}
+body.cke_editable .cke-video>div iframe{display: none;}
+body.cke_editable .cke-video>div{background:  url(images/movie.png) no-repeat center #f9f9f9;border: 1px solid #ccc}
+.cke-video>div .cke_iframe{position: absolute;left: 50%;top: 50%;margin: -40px 0 0 -40px;display: none;}
