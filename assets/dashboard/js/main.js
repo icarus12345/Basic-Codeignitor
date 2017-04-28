@@ -195,6 +195,32 @@ App.Request = function (opt) {
         }
     };
 }
+App.Confirm = function(title, message, callback) {
+    if ($("#confirm-dialog").length === 0) {
+        $('body').append('<div id="confirm-dialog">'+message+'</div>');
+    }
+    $('#confirm-dialog').html(message);
+    uidialog({
+        'message' : $('#confirm-dialog'),
+        'title': title,
+                'width':'320px',
+        'type':'confirm',
+        'buttons' : [{
+            'text': 'Confirm',
+            'class': 'btn btn-link',
+            'click': function() {
+                if(typeof callback == 'function') callback();
+                $(this).dialog("close");
+            }
+        }, {
+            'text': 'Cancel',
+            'class': 'btn btn-ui',
+            'click': function() {
+                $(this).dialog("close");
+            }
+        }]
+    }).open();
+}
 App.Auth = {
     Login: function(){
         var frm = $(document['login-frm']);

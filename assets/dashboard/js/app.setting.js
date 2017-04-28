@@ -262,7 +262,7 @@ $(document).ready(function(){
                 App.Setting.Save();
             },
             Delete: function(id){
-
+                
             },
             Save: function(){
                 var frm = $('#detail-setting-frm');
