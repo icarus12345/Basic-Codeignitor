@@ -31,10 +31,10 @@ $this->CI =& get_instance();
                         <a href="JavaScript:" class="icon-options-vertical" data-toggle="dropdown" title="Show more action"></a>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                             <li><a href="JavaScript:App.Setting.ShowDetailDialog()"><span class="icon-plus"></span> Add New</a></li>
-                            <li><a href="#">Another action</a></li>
+                            <li><a href="JavaScript:App.Setting.Refresh()"><span class="icon-refresh"></span> Refresh</a></li>
                             <li><a href="#"><span class="icon-settings"></span> Setting</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="JavaScript:App.Setting.Refresh()"><span class="icon-refresh"></span> Refresh</a></li>
+                            <li><a href="#"><span class="icon-question"></span> Help</a></li>
                         </ul>
                     </div>
                 </div>

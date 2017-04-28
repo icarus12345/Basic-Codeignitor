@@ -129,11 +129,16 @@ App.Dialog = function (option) {
                 } catch (e) {}
             }
         },
-        'create': function() {
+        'create': function(event, ui) {
             if (me.option.hideclose === true) {
                 $(this).closest(".ui-dialog")
                     .find(".ui-dialog-titlebar-close")
                     .hide();
+            }
+            if (me.option.oncreate && typeof(me.option.oncreate) === "function") {
+                try {
+                    me.option.oncreate(event, ui);
+                } catch (e) {}
             }
         }
     });

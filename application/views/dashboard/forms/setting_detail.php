@@ -138,10 +138,6 @@
     <div class="row half">
         <div class="col-xs-12 half">
             <div id="columnsGrid" style="height: 240px"></div>
-            <div>
-                <button class="btn btn-ui btn-sm">Add</button>
-                <button class="btn btn-link btn-sm">Add</button>
-            </div>
         </div>
     </div>
 </form>

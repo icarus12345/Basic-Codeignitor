@@ -253,6 +253,45 @@ $(document).ready(function(){
             Refresh: function() {
                 $(gridElm).jqxGrid('updatebounddata');
             },
+            Duplicate: function(){
+                var frm = $('#detail-setting-frm');
+                frm.find('input[name="id"]').val('');
+                frm.find('input[name="title"]').val(frm.find('input[name="title"]').val() + '(copy)');
+                frm.find('input[name="alias"]').val(frm.find('input[name="alias"]').val() + '-copy');
+                frm.find('input[name="id"]').val('');
+                App.Setting.Save();
+            },
+            Delete: function(id){
+
+            },
+            Save: function(){
+                var frm = $('#detail-setting-frm');
+                if( frm.validationEngine('validate') === false){
+                    toastr.warning('Please complete input data.','Warning');
+                    return;
+                }
+                //columnLocalData
+                
+                var data = $('#detail-setting-frm').serializeObject();
+                data.data.columns = columnLocalData;
+                data.data.add = !!data.data.add;
+                data.data.edit = !!data.data.edit;
+                data.data.delete = !!data.data.delete;
+                console.log(data);
+
+                new App.Request({
+                    url: App.BaseUrl + 'dashboard/setting/commit',
+                    data: data,
+                }).done(function(res){
+                    if(res.code < 0){
+                        toastr.warning(res.message,'Warning');
+                    } else {
+                        toastr.success(res.message,'Success');
+                        $('#detail-setting-dialog').dialog("close");
+                        App.Setting.Refresh();
+                    }
+                })
+            },
             ShowDetailDialog: function(id){
                 if ($("#detail-setting-dialog").length === 0) {
                     $('body').append('<div id="detail-setting-dialog"></div>');
@@ -268,39 +307,34 @@ $(document).ready(function(){
                     'type':'notice',
                     'hideclose':true,
                     'closeOnEscape':false,
+                    'oncreate': function(event, ui){
+                        var toolbar = [
+                            '<div class="modal-action">',
+                                '<div class="dropdown pull-right">',
+                                    '<a href="JavaScript:" class="icon-options-vertical" data-toggle="dropdown" title="Show more action"></a>',
+                                    '<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">',
+                                        '<li><a href="#"><span class="icon-settings"></span> Setting</a></li>',
+                                        '<li role="separator" class="divider"></li>',
+                                        '<li><a href="#"><span class="icon-question"></span> Help</a></li>',
+                                    '</ul>',
+                                '</div>',
+                            '</div>'
+                        ].join('')
+                        $(event.target).dialog('widget')
+                            .find('.ui-widget-header')
+                            .append(toolbar)
+                    },
                     'buttons' : [{
+                        'text': 'Duplicate',
+                        'class': 'ui-btn btn',
+                        'click': App.Setting.Duplicate
+                    },{
                         'text': 'Done',
                         'class': 'ui-btn btn',
-                        'click': function() {
-                            var frm = $('#detail-setting-frm');
-                            if( frm.validationEngine('validate') === false){
-                                toastr.warning('Please complete input data.','Warning');
-                                return;
-                            }
-                            //columnLocalData
-                            
-                            var data = $('#detail-setting-frm').serializeObject();
-                            data.data.columns = columnLocalData;
-                            data.data.add = !!data.data.add;
-                            data.data.edit = !!data.data.edit;
-                            data.data.delete = !!data.data.delete;
-                            console.log(data);
-
-                            new App.Request({
-                                url: App.BaseUrl + 'dashboard/setting/commit',
-                                data: data,
-                            }).done(function(res){
-                                if(res.code < 0){
-                                    toastr.warning(res.message,'Warning');
-                                } else {
-                                    toastr.success(res.message,'Success');
-                                    $(this).dialog("close");
-                                }
-                            })
-                        }
+                        'click': App.Setting.Save
                     },{
                         'text': 'Cancel',
-                        'class': 'ui-btn btn',
+                        'class': 'btn btn-link',
                         'click': function() {
                             $(this).dialog("close");
                         }
@@ -361,8 +395,22 @@ $(document).ready(function(){
                     'type':'notice',
                     'hideclose':true,
                     'closeOnEscape':false,
-                    'onopen': function(){
-                        
+                    'oncreate': function(event, ui){
+                        var toolbar = [
+                            '<div class="modal-action">',
+                                '<div class="dropdown pull-right">',
+                                    '<a href="JavaScript:" class="icon-options-vertical" data-toggle="dropdown" title="Show more action"></a>',
+                                    '<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">',
+                                        '<li><a href="#"><span class="icon-settings"></span> Setting</a></li>',
+                                        '<li role="separator" class="divider"></li>',
+                                        '<li><a href="#"><span class="icon-question"></span> Help</a></li>',
+                                    '</ul>',
+                                '</div>',
+                            '</div>'
+                        ].join('')
+                        $(event.target).dialog('widget')
+                            .find('.ui-widget-header')
+                            .append(toolbar)
                     },
                     'buttons' : [{
                         'text': 'Done',
@@ -414,8 +462,22 @@ $(document).ready(function(){
                     'type':'notice',
                     'hideclose':true,
                     'closeOnEscape':false,
-                    'onopen': function(){
-                        
+                    'oncreate': function(event, ui){
+                        var toolbar = [
+                            '<div class="modal-action">',
+                                '<div class="dropdown pull-right">',
+                                    '<a href="JavaScript:" class="icon-options-vertical" data-toggle="dropdown" title="Show more action"></a>',
+                                    '<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">',
+                                        '<li><a href="#"><span class="icon-settings"></span> Setting</a></li>',
+                                        '<li role="separator" class="divider"></li>',
+                                        '<li><a href="#"><span class="icon-question"></span> Help</a></li>',
+                                    '</ul>',
+                                '</div>',
+                            '</div>'
+                        ].join('')
+                        $(event.target).dialog('widget')
+                            .find('.ui-widget-header')
+                            .append(toolbar)
                     },
                     'buttons' : [{
                         'text': 'Done',
