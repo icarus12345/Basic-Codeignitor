@@ -27,6 +27,7 @@
         <script type="text/javascript" src="<?php echo base_url() ?>lib/jquery.routes.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>assets/dashboard/js/main.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>assets/dashboard/js/route.js"></script>
+        <script type="text/javascript" src="<?php echo base_url() ?>assets/dashboard/js/app.helper.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>assets/dashboard/js/app.setting.js"></script>
 
         <script type="text/javascript" src="<?php echo base_url() ?>lib/serialize-object.js"></script>

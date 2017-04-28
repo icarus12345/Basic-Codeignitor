@@ -27,7 +27,7 @@ class Core_Controller extends CI_Controller {
                 );
                 $this->output
                     ->set_content_type('application/json')
-                    ->set_status_header(200)
+                    ->set_status_header(403)
                     ->set_output(json_encode($output,JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
                     ->_display();
                 die;

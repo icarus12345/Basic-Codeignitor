@@ -26,11 +26,11 @@ $this->CI =& get_instance();
                     Setting <small>Function</small>
                 </h4>
                 <div class="modal-action">
-                    <div><a href="JavaScript:App.Setting.Add()" class="icon-plus" title="Add new entry"></a></div>
+                    <div><a href="JavaScript:App.Setting.ShowDetailDialog()" class="icon-plus" title="Add new entry"></a></div>
                     <div class="dropdown pull-right">
                         <a href="JavaScript:" class="icon-options-vertical" data-toggle="dropdown" title="Show more action"></a>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                            <li><a href="JavaScript:App.Setting.Add()"><span class="icon-plus"></span> Add New</a></li>
+                            <li><a href="JavaScript:App.Setting.ShowDetailDialog()"><span class="icon-plus"></span> Add New</a></li>
                             <li><a href="#">Another action</a></li>
                             <li><a href="#"><span class="icon-settings"></span> Setting</a></li>
                             <li role="separator" class="divider"></li>

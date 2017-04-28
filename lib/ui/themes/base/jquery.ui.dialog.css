@@ -8,7 +8,7 @@
  *
  * http://docs.jquery.com/UI/Dialog#theming
  */
-body .ui-widget-overlay{background:rgba(0,0,0,.35);opacity:1}
+body .ui-widget-overlay{background:rgba(0,0,0,.1);opacity:1}
 /*
 .ui-warning{padding-left:20px;background:url(images/dialog_warning.png) no-repeat left center}
 .ui-error{padding-left:20px;background:url(images/dialog_error.png) no-repeat left center}
@@ -56,7 +56,7 @@ body .ui-widget-overlay{background:rgba(0,0,0,.35);opacity:1}
 	box-sizing: border-box;
 	-moz-box-sizing:border-box;
 	-webkit-box-sizing:border-box;
-	max-width:100%;
+	max-width:calc(100% - 20px);
 }
 .ui-dialog-buttonpane.ui-widget-content{
 /*    background: none;*/
@@ -129,7 +129,7 @@ body .ui-widget-overlay{background:rgba(0,0,0,.35);opacity:1}
 .ui-timepicker-div{font-size: 11px}
 
 
-
+.btn-ui,
 .ui-dialog-buttonset button{
     padding: 3px 12px 3px 12px;line-height: 18px;
 	border: 1px solid #d3d3d3/*{borderColorDefault}*/;
@@ -144,9 +144,10 @@ body .ui-widget-overlay{background:rgba(0,0,0,.35);opacity:1}
 	background: -ms-linear-gradient(top,#FAFAFA 0%,#DADADA 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FAFAFA',endColorstr='#DADADA',GradientType=0 );
 	background: linear-gradient(to bottom,#FAFAFA 0%,#DADADA 100%);
-	box-shadow: 0 0 10px #ccc;
+	box-shadow: 0 0 10px #eee;
     
 }
+.btn-ui:hover,
 .ui-dialog-buttonset button:hover{
 	border: 1px solid #d3d3d3/*{borderColorHover}*/;
 	background: #dadada/*{bgColorHover}*/ url(images/ui-bg_glass_75_dadada_1x400.png)/*{bgImgUrlHover}*/ 50%/*{bgHoverXPos}*/ 50%/*{bgHoverYPos}*/ repeat-x/*{bgHoverRepeat}*/;

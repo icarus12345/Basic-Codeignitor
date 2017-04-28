@@ -23,7 +23,7 @@ class Api_Controller extends CI_Controller {
             );
             $this->output
                 ->set_content_type('application/json')
-                ->set_status_header(200)
+                ->set_status_header(403)
                 ->set_output(json_encode($output,JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
                 ->_display();
             die;
@@ -42,8 +42,8 @@ class Api_Controller extends CI_Controller {
         $type = $this->input->get_post('type');
         $this->Core_Model = new Core_Model($this->table);
         $this->Core_Model->table_config=array(
-            "table"     =>"{$this->table}",
-            "select"    =>"
+            "table"     => "{$this->table}",
+            "select"    => "
                 SELECT SQL_CALC_FOUND_ROWS 
                     {$this->table}.{$this->prefix}id,
                     {$this->table}.{$this->prefix}title,
@@ -51,11 +51,11 @@ class Api_Controller extends CI_Controller {
                     {$this->table}.{$this->prefix}modified,
                     {$this->table}.{$this->prefix}status
                 ",
-            "from"      =>"
+            "from"      => "
                 FROM `{$this->table}` 
             ",
-            "where"     =>"WHERE `{$this->prefix}type` = '$type'",
-            "order_by"  =>"ORDER BY `{$this->prefix}created` DESC",
+            "where"     => !empty($type)?"WHERE `{$this->prefix}type` = '$type'":'',
+            "order_by"  => "ORDER BY `{$this->prefix}created` DESC",
             "columnmaps"=>array(
                 
             ),

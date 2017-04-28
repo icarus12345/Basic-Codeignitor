@@ -11,20 +11,28 @@ class common extends Api_Controller {
     }
     public $rules = array(
         'insert' => array(
-                'username' => array(
-                    'field'=>'username',
-                    'label'=>'Username',
-                    'rules'=>'trim|required'
+                'title' => array(
+                    'field'=>'title',
+                    'label'=>'Title',
+                    'rules'=>'trim|required|min_length[4]|max_length[255]'
                     ),
-                        
-                'email' => array(
-                    'field'=>'email',
-                    'label'=>'Email',
-                    'rules'=>'trim|valid_email|required',
+                'alias' => array(
+                    'field'=>'alias',
+                    'label'=>'Alias',
+                    'rules'=>'trim|required|min_length[4]|max_length[255]'
+                    ),
+                'data[type]' => array(
+                    'field'=>'data[type]',
+                    'label'=>'Type',
+                    'rules'=>'trim|required|min_length[4]|max_length[50]'
+                    ),
+                'type' => array(
+                    'field'=>'type',
+                    'label'=>'TypeKey',
+                    'rules'=>'trim|max_length[50]',
                     'errors' => array (
-                        'required' => 'Error Message rule "required" for field email',
-                        'trim' => 'Error message for rule "trim" for field email',
-                        'valid_email' => 'Error message for rule "valid_email" for field email'
+                        // 'required' => 'Error Message rule "required" for field Type',
+                        // 'trim' => 'Error message for rule "trim" for field email',
                     )
                 ),
         ),
@@ -63,6 +71,11 @@ class common extends Api_Controller {
             $output['validation'] = validation_errors_array();
             $output['message'] = validation_errors();
             // $output['code'] = -1;
+        } else {
+            $data = $this->input->post('data');
+            $id = $this->input->post('id');
+            $title = $this->input->post('title');
+            $type = $this->input->post('type');
         }
         return $this->output
             ->set_content_type('application/json')
