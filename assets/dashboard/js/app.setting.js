@@ -1,7 +1,11 @@
 $(document).ready(function(){
     App.Setting = (function(){
-
-        var bindingUrl = App.BaseUrl + '/api/common/bind';
+        var URI = {
+            binding : App.BaseUrl + 'api/setting/bind',
+            detail  : App.BaseUrl + 'api/setting/detail',
+            commit  : App.BaseUrl + 'api/setting/commit',
+            delete  : App.BaseUrl + 'api/setting/delete',
+        };
         var gridElm = $('#jqxGrid');
         var theme = 'metro';
         var datafields = [
@@ -10,6 +14,7 @@ $(document).ready(function(){
             {name: 'status' , type: 'bool'},
             {name: 'created' , type: 'date'},
             {name: 'modified' , type: 'date'},
+            {name: 'lock' , type: 'bool'},
         ];
         var columns = [
             {
@@ -25,7 +30,7 @@ $(document).ready(function(){
                             ";
                             str += "<a href='JavaScript:void(0)'"+
                             "style='padding: 5px; float: left;margin-top: 2px;' " +
-                            "onclick=\"myApp.removeItem(" + value + ","+row+");\" "+ 
+                            "onclick=\"App.Setting.Delete(" + value + ","+row+");\" "+ 
                             "title='Delete :" + value + "'><i class=\"fa fa-trash-o\"></i></a>\
                             ";
                         } catch (e) {
@@ -85,7 +90,7 @@ $(document).ready(function(){
                 datatype    : "json",
                 type        : "POST",
                 datafields  : datafields,
-                url         : bindingUrl,
+                url         : URI.binding,
                 id          :'id',
                 root        : 'rows',
                 filter: function() {
@@ -141,7 +146,8 @@ $(document).ready(function(){
                 },
             })
         }
-        var dialog,editrow,columnLocalData = [];
+        var dialog,editrow,columnLocalData = [],columnLocalDataBig;
+        var selectedColumnLocalData;
         function createColumnsGrid(){
             var columnSource = {
                 localdata: columnLocalData,
@@ -165,20 +171,21 @@ $(document).ready(function(){
             {
                 theme: 'metro',
                 width: '100%',
-                height: 240,
+                height: 180,
                 source: new $.jqx.dataAdapter(columnSource),
                 pageable: false,
                 // autoheight: true,
                 columns: [
                     { text: 'Title', datafield: 'title', minWidth: 120 },
-                    { text: 'Type', datafield: 'type', width: 80 },
+                    { text: 'Type', datafield: 'type', width: 60 },
                     { 
                         text: 'Edit', datafield: 'Edit', columntype: 'button', 
-                        width: 60,
+                        width: 40,
                         cellsrenderer: function () {
                             return "Edit";
                         }, buttonclick: function (row) {
                             // get the clicked row's data and initialize the input fields.
+                            selectedColumnLocalData = columnLocalData;
                             editrow = row;
                             var dataRecord = $("#columnsGrid").jqxGrid('getrowdata', row);
                             var frm = $('#column-detail-frm');
@@ -189,8 +196,8 @@ $(document).ready(function(){
                             frm.find('input[name="client"]').val(dataRecord.client);
                             frm.find('input[name="server"]').val(dataRecord.server);
                             frm.find('select[name="type"]').selectpicker('refresh');
-                            if(columnLocalData[dataRecord.uid].data){
-                                var html = columnLocalData[dataRecord.uid].data.map(function(item){
+                            if(selectedColumnLocalData[dataRecord.uid].data){
+                                var html = selectedColumnLocalData[dataRecord.uid].data.map(function(item){
                                         return [
                                         '<tr>',
                                             '<td data-field="value">',
@@ -219,9 +226,11 @@ $(document).ready(function(){
                     var me = this;
                     var container = $("<div style='padding: 4px;line-height:20px;'></div>");
                     toolbar.append(container);
-                    container.append('<span id="addrowbutton"  class="fa fa-plus" title="Edit column"></span>');
+                    container.append('<a href="JavaScript:" id="addrowbutton" ><span class="fa fa-plus" title="Edit column"></span> Add new item</a>');
+                    container.append('<a href="JavaScript:" id="deleterowbutton" ><span class="fa fa-trash-o" title="Delete selected item"></span> Delete selected item</a>');
                     $("#addrowbutton").on('click', function () {
                         editrow = undefined;
+                        selectedColumnLocalData = columnLocalData;
                         // show the popup window.
                         App.Setting.ShowColumnDetailDialog()
                         var frm = $('#column-detail-frm');
@@ -234,18 +243,135 @@ $(document).ready(function(){
                         frm.find('[data-box="data"] table tbody').empty();
                     });
                     // // create new rows.
-                    // $("#deleterowbutton").on('click', function () {
-                    //     var selectedrowindex = $("#columnsGrid").jqxGrid('getselectedrowindex');
-                    //     var rowscount = $("#columnsGrid").jqxGrid('getdatainformation').rowscount;
-                    //     if (selectedrowindex >= 0 && selectedrowindex < rowscount) {
-                    //         var id = $("#columnsGrid").jqxGrid('getrowid', selectedrowindex);
-                    //         var commit = $("#columnsGrid").jqxGrid('deleterow', id);
-                    //     }
-                    // });
+                    $("#deleterowbutton").on('click', function () {
+                        var selectedrowindex = $("#columnsGrid").jqxGrid('getselectedrowindex');
+                        var rowscount = $("#columnsGrid").jqxGrid('getdatainformation').rowscount;
+                        if (selectedrowindex >= 0 && selectedrowindex < rowscount) {
+                            var id = $("#columnsGrid").jqxGrid('getrowid', selectedrowindex);
+                            // var commit = $("#columnsGrid").jqxGrid('deleterow', id);
+                            columnLocalData.splice(selectedrowindex, 1);
+                            $("#columnsGrid").jqxGrid('updatebounddata');
+                        } else {
+                            toastr.warning('Please select item.','Warning');
+                        }
+                    });
+                },
+            });
+        }
+        function createColumnsGrid_b(){
+            var columnSource = {
+                localdata: columnLocalDataBig,
+                datatype: "array",
+                datafields:
+                [
+                    { name: 'name', type: 'string' },
+                    { name: 'title', type: 'string' },
+                    { name: 'type', type: 'string' },
+                    { name: 'client', type: 'string' },
+                    { name: 'server', type: 'string' },
+                ],
+                updaterow: function (rowid, rowdata, commit) {
+                    // synchronize with the server - send update command
+                    // call commit with parameter true if the synchronization with the server is successful 
+                    // and with parameter false if the synchronization failder.
+                    commit(true);
+                }
+            };
+            $("#columnsGrid_b").jqxGrid(
+            {
+                theme: 'metro',
+                width: '100%',
+                height: 180,
+                source: new $.jqx.dataAdapter(columnSource),
+                pageable: false,
+                // autoheight: true,
+                columns: [
+                    { text: 'Title', datafield: 'title', minWidth: 120 },
+                    { text: 'Type', datafield: 'type', width: 60 },
+                    { 
+                        text: 'Edit', datafield: 'Edit', columntype: 'button', 
+                        width: 40,
+                        cellsrenderer: function () {
+                            return "Edit";
+                        }, buttonclick: function (row) {
+                            // get the clicked row's data and initialize the input fields.
+                            selectedColumnLocalData = columnLocalDataBig;
+                            editrow = row;
+                            var dataRecord = $("#columnsGrid_b").jqxGrid('getrowdata', row);
+                            var frm = $('#column-detail-frm');
+                            App.Setting.ShowColumnDetailDialog()
+                            frm.find('input[name="name"]').val(dataRecord.name);
+                            frm.find('input[name="title"]').val(dataRecord.title);
+                            frm.find('select[name="type"]').val(dataRecord.type).change();
+                            frm.find('input[name="client"]').val(dataRecord.client);
+                            frm.find('input[name="server"]').val(dataRecord.server);
+                            frm.find('select[name="type"]').selectpicker('refresh');
+                            if(selectedColumnLocalData[dataRecord.uid].data){
+                                var html = selectedColumnLocalData[dataRecord.uid].data.map(function(item){
+                                        return [
+                                        '<tr>',
+                                            '<td data-field="value">',
+                                                item.value,
+                                            '</td>',
+                                            '<td data-field="display">',
+                                                item.display,
+                                            '</td>',
+                                            '<td>',
+                                                '<a href="JavaScript:" onclick="$(this).parents(\'tr\').remove()" class="icon-close"></span>',
+                                            '</td>',
+                                        '</tr>'
+                                        ].join('');
+                                    }).join('')
+                                //.join('');
+                                frm.find('div[data-box="data"] table tbody').html(html)
+                            }else{
+                                frm.find('[data-box="data"] table tbody').html('')
+                            }
+                        }
+                    }
+                ],
+                showtoolbar: true,
+                toolbarheight: 30,
+                rendertoolbar: function (toolbar) {
+                    var me = this;
+                    var container = $("<div style='padding: 4px;line-height:20px;'></div>");
+                    toolbar.append(container);
+                    var addToolbar = $('<a href="JavaScript:"><span class="fa fa-plus" title="Edit column"></span> Add new item</a>')
+                    container.append(addToolbar);
+                    var deleteToolbar = $('<a href="JavaScript:"><span class="fa fa-trash-o" title="Delete selected item"></span> Delete selected item</a>');
+                    container.append(deleteToolbar);
+                    addToolbar.on('click', function () {
+                        editrow = undefined;
+                        selectedColumnLocalData = columnLocalDataBig;
+                        // show the popup window.
+                        App.Setting.ShowColumnDetailDialog()
+                        var frm = $('#column-detail-frm');
+                        frm.find('input[name="name"]').val('');
+                        frm.find('input[name="title"]').val('');
+                        frm.find('select[name="type"]').val('string').change();
+                        frm.find('input[name="client"]').val('');
+                        frm.find('input[name="server"]').val('');
+                        frm.find('select[name="type"]').selectpicker('refresh');
+                        frm.find('[data-box="data"] table tbody').empty();
+                    });
+                    // // create new rows.
+                    deleteToolbar.on('click', function () {
+                        var selectedrowindex = $("#columnsGrid_b").jqxGrid('getselectedrowindex');
+                        var rowscount = $("#columnsGrid_b").jqxGrid('getdatainformation').rowscount;
+                        if (selectedrowindex >= 0 && selectedrowindex < rowscount) {
+                            var id = $("#columnsGrid_b").jqxGrid('getrowid', selectedrowindex);
+                            var commit = $("#columnsGrid_b").jqxGrid('deleterow', id);
+                            $("#columnsGrid_b").jqxGrid('updatebounddata');
+                            columnLocalDataBig.splice(selectedrowindex, 1);
+                        } else {
+                            toastr.warning('Please select item.','Warning');
+                        }
+                    });
                 },
             });
         }
         var columnDialog;
+
         return {
             Grid: function(){
                 createGrid();
@@ -261,8 +387,33 @@ $(document).ready(function(){
                 frm.find('input[name="id"]').val('');
                 App.Setting.Save();
             },
-            Delete: function(id){
-                
+            Delete: function(id,row){
+                // toastr.warning('This function to requires an administrative account.<br/>Please check your authority, and try again.','Warning');
+                var _data = $(gridElm).jqxGrid('getrowdata', row);
+                if(_data.lock == 1){
+                    toastr.warning('You can not delete this Item.','Warning');
+                    return; 
+                }
+                var itemName = _data.title;
+                App.Confirm(
+                    'Delete item ?',
+                    'Do you want delete "'+itemName+'".<br/>These items will be permanently deleted and cannot be recovered. Are you sure ?',
+                    function(){
+                        new App.Request({
+                            'url': URI.delete,
+                            'data': {
+                                'id': id
+                            },
+                        }).done(function(res) {
+                            if (res.code < 0) {
+                                toastr.error(res.message,'Error');
+                            } else {
+                                toastr.success(res.message,'Success');
+                                App.Setting.Refresh();
+                            }
+                        })
+                    }
+                );
             },
             Save: function(){
                 var frm = $('#detail-setting-frm');
@@ -270,17 +421,17 @@ $(document).ready(function(){
                     toastr.warning('Please complete input data.','Warning');
                     return;
                 }
-                //columnLocalData
                 
                 var data = $('#detail-setting-frm').serializeObject();
                 data.data.columns = columnLocalData;
+                data.data.bigcolumns = columnLocalDataBig;
                 data.data.add = !!data.data.add;
                 data.data.edit = !!data.data.edit;
                 data.data.delete = !!data.data.delete;
                 console.log(data);
 
                 new App.Request({
-                    url: App.BaseUrl + 'dashboard/setting/commit',
+                    url: URI.commit,
                     data: data,
                 }).done(function(res){
                     if(res.code < 0){
@@ -298,7 +449,7 @@ $(document).ready(function(){
                 }
 
                 $('#detail-setting-dialog').html('<div class="loading"><span>Loading...</span></div>')
-                dialog = dialog || new App.Dialog({
+                dialog = new App.Dialog({
                     'modal': true,
                     'message' : $('#detail-setting-dialog'),
                     'title': '<h4>Add <small>Function setting</small></h4>',
@@ -326,7 +477,7 @@ $(document).ready(function(){
                     },
                     'buttons' : [{
                         'text': 'Duplicate',
-                        'class': 'ui-btn btn',
+                        'class': 'ui-btn btn ' + (id?'':'hidden'),
                         'click': App.Setting.Duplicate
                     },{
                         'text': 'Done',
@@ -344,7 +495,7 @@ $(document).ready(function(){
                 dialog.open();
 
                 new App.Request({
-                    url: App.BaseUrl + 'dashboard/setting/detail',
+                    url: URI.detail,
                     // datatype: 'html',
                     data: {
                         id: id || null
@@ -354,15 +505,21 @@ $(document).ready(function(){
                         toastr.warning(res.message,'Warning');
                     } else {
                         $('#detail-setting-dialog').html(res.html);
-                        if(res.data)
+                        if(res.data){
                             columnLocalData = res.data.data.columns || [];
-                        else columnLocalData = []
+                            columnLocalDataBig = res.data.data.bigcolumns || [];
+                        }
+                        else {
+                            columnLocalData = [];
+                            columnLocalDataBig = [];
+                        }
                         dialog.close();
                         dialog.open();
                         App.InitForm($('#detail-setting-frm'));
 
                         var frm = $('#column-detail-frm');
                         createColumnsGrid();
+                        createColumnsGrid_b();
                         App.InitForm(frm);
                         columnDialog = null;
                         frm.find('select[name="type"]').change(function(){
@@ -431,14 +588,20 @@ $(document).ready(function(){
                                     }
                                 });
                             if (editrow >= 0) {
-                                var rowID = $("#columnsGrid").jqxGrid('getrowid', editrow);
+                                var rowID;
+                                if(selectedColumnLocalData == columnLocalData){
+                                    rowID = $("#columnsGrid").jqxGrid('getrowid', editrow);
+                                } else {
+                                    rowID = $("#columnsGrid_b").jqxGrid('getrowid', editrow);
+                                }
                                 // $("#columnsGrid").jqxGrid('updaterow', rowID, data);
-                                columnLocalData[rowID] = data;
+                                selectedColumnLocalData[rowID] = data;
                             }else{
                                 // var commit = $("#columnsGrid").jqxGrid('addrow', null, data);
-                                columnLocalData.push(data)
+                                selectedColumnLocalData.push(data)
                             }
                             $("#columnsGrid").jqxGrid('updatebounddata');
+                            $("#columnsGrid_b").jqxGrid('updatebounddata');
                             $(this).dialog("close");
                         }
                     },{
@@ -515,5 +678,4 @@ $(document).ready(function(){
             }
         }
     }())
-    App.Setting.Grid();
 })

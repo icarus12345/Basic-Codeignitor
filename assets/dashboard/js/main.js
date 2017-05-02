@@ -200,14 +200,14 @@ App.Confirm = function(title, message, callback) {
         $('body').append('<div id="confirm-dialog">'+message+'</div>');
     }
     $('#confirm-dialog').html(message);
-    uidialog({
+    new App.Dialog({
         'message' : $('#confirm-dialog'),
         'title': title,
                 'width':'320px',
         'type':'confirm',
         'buttons' : [{
-            'text': 'Confirm',
-            'class': 'btn btn-link',
+            'text': 'OK',
+            'class': 'btn btn-ui',
             'click': function() {
                 if(typeof callback == 'function') callback();
                 $(this).dialog("close");

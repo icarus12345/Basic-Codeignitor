@@ -11,54 +11,62 @@ class common extends Api_Controller {
     }
     public $rules = array(
         'insert' => array(
-                'title' => array(
-                    'field'=>'title',
-                    'label'=>'Title',
-                    'rules'=>'trim|required|min_length[4]|max_length[255]'
-                    ),
-                'alias' => array(
-                    'field'=>'alias',
-                    'label'=>'Alias',
-                    'rules'=>'trim|required|min_length[4]|max_length[255]'
-                    ),
-                'data[type]' => array(
-                    'field'=>'data[type]',
-                    'label'=>'Type',
-                    'rules'=>'trim|required|min_length[4]|max_length[50]'
-                    ),
-                'type' => array(
-                    'field'=>'type',
-                    'label'=>'TypeKey',
-                    'rules'=>'trim|max_length[50]',
-                    'errors' => array (
-                        // 'required' => 'Error Message rule "required" for field Type',
-                        // 'trim' => 'Error message for rule "trim" for field email',
-                    )
+            'title' => array(
+                'field'=>'title',
+                'label'=>'Title',
+                'rules'=>'trim|required|min_length[4]|max_length[255]'
                 ),
+            'alias' => array(
+                'field'=>'alias',
+                'label'=>'Alias',
+                'rules'=>'trim|required|min_length[4]|max_length[255]'
+                ),
+            'data[type]' => array(
+                'field'=>'data[type]',
+                'label'=>'Type',
+                'rules'=>'trim|required|min_length[4]|max_length[50]'
+                ),
+            'type' => array(
+                'field'=>'type',
+                'label'=>'TypeKey',
+                'rules'=>'trim|max_length[50]',
+                'errors' => array (
+                    // 'required' => 'Error Message rule "required" for field Type',
+                    // 'trim' => 'Error message for rule "trim" for field email',
+                )
+            ),
         ),
         'update' => array(
-                'username' => array(
-                    'field'=>'username',
-                    'label'=>'Username',
-                    'rules'=>'trim|required'
+            'title' => array(
+                'field'=>'title',
+                'label'=>'Title',
+                'rules'=>'trim|required|min_length[4]|max_length[255]'
                 ),
-                        
-                'email' => array(
-                    'field'=>'email',
-                    'label'=>'Email',
-                    'rules'=>'trim|valid_email|required',
-                    'errors' => array (
-                        'required' => 'Error Message rule "required" for field email',
-                        'trim' => 'Error message for rule "trim" for field email',
-                        'valid_email' => 'Error message for rule "valid_email" for field email'
-                    )
+            'alias' => array(
+                'field'=>'alias',
+                'label'=>'Alias',
+                'rules'=>'trim|required|min_length[4]|max_length[255]'
                 ),
-                'id' => array(
-                    'field'=>'id',
-                    'label'=>'ID',
-                    'rules'=>'trim|is_natural_no_zero|required'
+            'data[type]' => array(
+                'field'=>'data[type]',
+                'label'=>'Type',
+                'rules'=>'trim|required|min_length[4]|max_length[50]'
                 ),
-        )                    
+            'type' => array(
+                'field'=>'type',
+                'label'=>'TypeKey',
+                'rules'=>'trim|max_length[50]',
+                'errors' => array (
+                    // 'required' => 'Error Message rule "required" for field Type',
+                    // 'trim' => 'Error message for rule "trim" for field email',
+                )
+            ),
+            'id' => array(
+                'field'=>'id',
+                'label'=>'Id',
+                'rules'=>'trim|is_natural_no_zero|required'
+            ),
+        )
     );
     public function create(){
         $output = array(

@@ -1,12 +1,6 @@
 <?php
+if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-/*
-  Project     : 48c6c450f1a4a0cc53d9585dc0fee742
-  Created on  : Mar 16, 2013, 11:29:15 PM
-  Author      : Truong Khuong - khuongxuantruong@gmail.com
-  Description :
-  Purpose of the stylesheet follows.
- */
 class Core_Model extends CI_Model {
     private $configs;
     function __construct($table = '', $prefix = '',$colid='id',$status=null) {
@@ -302,9 +296,8 @@ class Core_Model extends CI_Model {
         } else {
             $SQLquery = "$FstrSQL $where $strgroupby $orderby $limit";
         }
-        
         $query = $this->db->query($SQLquery);
-        $result['query'] =$SQLquery;
+        // $result['query'] =$SQLquery;
         $errordb = $this->db->error();
         $error_message = $errordb['message'];
         if($errordb['code']==0){

@@ -9,17 +9,41 @@
         name="alias" 
         value="<?php echo $entry_detail->alias; ?>" 
         id="detail-setting-alias">
-    <div class="pull-bottom">
-        <div>Title :(*)</div>
-        <div class="control-group">
-            <input 
-                type="text"
-                class="form-control validate[required,minSize[4],maxSize[50]]" 
-                placeholder=""
-                id="detail-setting-title"
-                name="title"
-                onblur="App.Helper.Alias(this)"
-                value="<?php echo $entry_detail->title; ?>" >
+    <div class="row half">
+        <div class="col-xs-6 half">
+            <div class="pull-bottom">
+                <div>Title :(*)</div>
+                <div class="control-group">
+                    <input 
+                        type="text"
+                        class="form-control validate[required,minSize[4],maxSize[50]]" 
+                        placeholder=""
+                        id="detail-setting-title"
+                        name="title"
+                        onblur="App.Helper.Alias(this)"
+                        value="<?php echo $entry_detail->title; ?>" >
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 half">
+            <div class="pull-bottom">
+                <div>Storage at :(*)</div>
+                <div class="control-group">
+                    <div>
+                        <select 
+                            name="data[storage]" 
+                            class="form-control selectpicker validate[required]"
+                            data-putto="#frm-err-data-storage"
+                            >
+                            <option value="tbl_data" <?php echo $entry_detail->data['storage'] == 'tbl_data'?'selected="1"':''; ?>>Storage 01</option>
+                            <option value="tbl_data2" <?php echo $entry_detail->data['storage2'] == 'tbl_data'?'selected="1"':''; ?>>Storage 02</option>
+                            <option value="tbl_data3" <?php echo $entry_detail->data['storage3'] == 'tbl_data'?'selected="1"':''; ?>>Storage 03</option>
+                            <option value="tbl_data4" <?php echo $entry_detail->data['storage4'] == 'tbl_data'?'selected="1"':''; ?>>Storage 04</option>
+                        </select>
+                    </div>
+                    <div id="frm-err-data-storage"></div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row half">
@@ -31,7 +55,7 @@
                         <select 
                             name="data[size]" 
                             class="form-control selectpicker validate[required]"
-                            data-putto="#frm-err-data-id"
+                            data-putto="#frm-err-data-size"
                             data-live-search="true"
                             data-size="10"
                             >
@@ -69,7 +93,7 @@
                             -->
                         </select>
                     </div>
-                    <div id="frm-err-data-id"></div>
+                    <div id="frm-err-data-size"></div>
                 </div>
             </div>
         </div>
@@ -136,8 +160,11 @@
         </div>
     </div>
     <div class="row half">
-        <div class="col-xs-12 half">
-            <div id="columnsGrid" style="height: 240px"></div>
+        <div class="col-xs-6 half">
+            <div id="columnsGrid" style="height: 180px"></div>
+        </div>
+        <div class="col-xs-6 half">
+            <div id="columnsGrid_b" style="height: 180px"></div>
         </div>
     </div>
 </form>
@@ -152,7 +179,7 @@
                             <div class="control-group">
                                 <input 
                                     type="text" 
-                                    class="form-control validate[required,minSize[4],maxSize[50]]" 
+                                    class="form-control validate[required,maxSize[50]]" 
                                     placeholder="" name="name" 
                                     value="" >
                             </div>
@@ -164,7 +191,7 @@
                             <div class="control-group">
                                 <input 
                                     type="text" 
-                                    class="form-control validate[required,minSize[4],maxSize[50]]" 
+                                    class="form-control validate[required,maxSize[50]]" 
                                     placeholder="" name="title" 
                                     value="" >
                             </div>

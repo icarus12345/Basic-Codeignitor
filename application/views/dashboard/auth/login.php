@@ -14,7 +14,7 @@ $this->load->view('dashboard/inc/meta');
                             <h4>Login <small>Authentication</small></h4>
                         </div>
                         <div class="modal-body" id="login-dialog">
-                                <form name="login-frm" target="integration_asynchronous" class="validation-frm">
+                                <form name="login-frm" target="integration_asynchronous" class="validation-frm" onsubmit="return App.Auth.Login() || false;">
                                     <div class="pull-bottom">
                                         <div>User name :(*)</div>
                                         <div class="control-group">
@@ -35,6 +35,7 @@ $this->load->view('dashboard/inc/meta');
                                                 value="" >
                                         </div>
                                     </div>
+                                    <button type="submit" style="position:absolute;opacity:0"></button>
                                 </form>
                         </div>
                         <div class="modal-footer">

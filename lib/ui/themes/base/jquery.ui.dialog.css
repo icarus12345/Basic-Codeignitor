@@ -191,8 +191,7 @@ body .ui-widget-overlay{background:rgba(0,0,0,.1);opacity:1}
 .ui-dialog.ui-widget-content.success,
 .ui-dialog.ui-widget-content.info,
 .ui-dialog.ui-widget-content.confirm{
-    border-radius: 0;
-    border-radius: 0;
+    border-radius: 4px;
     /*background: #fff;*/
     padding: 0;
 }
@@ -250,8 +249,8 @@ body .ui-widget-overlay{background:rgba(0,0,0,.1);opacity:1}
 }
 .ui-dialog.ui-widget-content.info,
 .ui-dialog.ui-widget-content.confirm{
-    border: 1px solid #2196F3;
-    box-shadow: 0 0 10px 1px #87aeb3
+    /*border: 1px solid #2196F3;*/
+    box-shadow: 0 0 10px 1px #2196F3
 }
 .ui-dialog.ui-widget-content.warning{
     border:1px solid #d24726;
@@ -289,5 +288,6 @@ body .ui-widget-overlay{background:rgba(0,0,0,.1);opacity:1}
 .btn.btn-info{    background: #a7f3fd;border-color: #00BCD4;}
 .ui-dialog .ui-dialog-buttonpane .btn.btn-info:hover,
 .btn.btn-info:hover{background: #97f0fb}
+.ui-dialog .ui-dialog-buttonpane .btn-link{background: transparent;border-color: transparent;color: inherit;border-color: transparent;background-image:none;outline: none;text-decoration: none;box-shadow: none;}
 .ui-dialog-content .containner-inputs .row{padding: 4px 0 0 0}
 /* Dialog MS ] */

@@ -30,7 +30,7 @@ button{
 .btn-warning-hvr:active{
     background: #ffcc00;border:1px solid #ffcc00;color: #fff
 }
-.btn-link{background: transparent;border-color: transparent;color: inherit;}
+.btn-link{background: transparent;border-color: transparent;color: inherit;border-color: transparent;background-image:none;outline: none;}
 .btn-link:hover{}
 .btn-link:active{}
 .btn-none{background: transparent;border-color: transparent;color: inherit;}

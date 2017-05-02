@@ -1,7 +1,7 @@
 <?php
+if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Api_Controller extends CI_Controller {
     public $assigns;
-    public $layout = 'main';
     public function __construct() {
         parent::__construct();
         $this->CI =& get_instance();
@@ -71,5 +71,4 @@ class Api_Controller extends CI_Controller {
     }
 }
 
-// include 'FE_Controller.php';
 // include 'CP_Controller.php';

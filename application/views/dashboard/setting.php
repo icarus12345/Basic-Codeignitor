@@ -16,14 +16,14 @@ $this->CI =& get_instance();
                     <a href="/dashboard/cp">Content Provider</a>
                 </li>
                 <li>
-                    <a href="#">...</a>
+                    <a href="#">Setting</a>
                 </li>
             </ul>
         </div>
         <div class="secondary-box" >
             <div class="modal-header">
                 <h4>
-                    ... <small>...</small>
+                    Setting <small>Function</small>
                 </h4>
                 <div class="modal-action">
                     <div><a href="JavaScript:App.Setting.ShowDetailDialog()" class="icon-plus" title="Add new entry"></a></div>
@@ -48,3 +48,8 @@ $this->CI =& get_instance();
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        setTimeout(App.Setting.Grid, 300)
+    })
+</script>

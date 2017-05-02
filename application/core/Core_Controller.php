@@ -1,4 +1,5 @@
 <?php
+if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Core_Controller extends CI_Controller {
     public $assigns;
     public $layout = 'main';
