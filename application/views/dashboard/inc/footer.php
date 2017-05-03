@@ -4,3 +4,6 @@
     </div>
 </footer>
 <iframe id="integration_asynchronous" name="integration_asynchronous" style="width: 0;height: 0;border: 0;position: absolute"></iframe>
+<script type="text/javascript">
+    $('#navigation a[href^="<?php echo base_url(uri_string()); ?>"]').parents('li').addClass('active open');
+</script>

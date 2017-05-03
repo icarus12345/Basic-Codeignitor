@@ -31,10 +31,10 @@ class category extends Core_Controller {
         ));
         $this->index();
     }
-    function tree($sid = 0){
+    function vtree($sid = 0){
         
     }
-    function list($sid = 0){
+    function vlist($sid = 0){
 
     }
 }

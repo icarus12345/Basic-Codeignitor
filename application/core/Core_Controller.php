@@ -13,7 +13,15 @@ class Core_Controller extends CI_Controller {
         $this->isAjax = $this->input->is_ajax_request();
         $this->checklogin();
         
-        
+        $this->load->model('dashboard/category_model');
+        $cat_type = 'dashboard';
+        $cate_data = $this->category_model
+            ->get_by_type($cat_type);
+        $dashboard_menus = $this->category_model
+            ->buildTree($cate_data);
+        $this->load->vars(array(
+            'dashboard_menus' => $dashboard_menus
+        ));
     }
 
     function checklogin() {

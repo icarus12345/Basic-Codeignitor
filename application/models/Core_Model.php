@@ -38,7 +38,12 @@ class Core_Model extends CI_Model {
         $query = $this->db
             ->where("{$this->prefix}alias", $alias)
             ->get($this->table);
-        return $query->row();
+        $row = $query->row();
+        if($row) {
+            $data = $this->prefix.'data';
+            $row->$data = unserialize($row->$data);
+        }
+        return $row;
     }
     function get_by_type($type=''){
         if($this->status){
@@ -47,7 +52,11 @@ class Core_Model extends CI_Model {
         $query = $this->db
             ->where("{$this->prefix}type", $type)
             ->get($this->table);
-        return $query->result();
+        $entrys = $query->result();
+        if($entrys) foreach ($entrys as $key => $value) {
+            $entrys[$key]->data = unserialize($entrys[$key]->data);
+        }
+        return $entrys;
     }
     function gets() {
         if($this->status){
@@ -57,7 +66,11 @@ class Core_Model extends CI_Model {
             ->from($this->table)
             ->order_by($this->prefix . 'created', 'DESC')
             ->get();
-        return $query->result();
+        $entrys = $query->result();
+        if($entrys) foreach ($entrys as $key => $value) {
+            $entrys[$key]->data = unserialize($entrys[$key]->data);
+        }
+        return $entrys;
     }
     function onInsert($params) {
         $this->db->set($this->prefix . 'created', 'NOW()', FALSE);
