@@ -157,6 +157,7 @@ $(document).ready(function(){
                     { name: 'name', type: 'string' },
                     { name: 'title', type: 'string' },
                     { name: 'type', type: 'string' },
+                    { name: 'col', type: 'string' },
                     { name: 'client', type: 'string' },
                     { name: 'server', type: 'string' },
                 ],
@@ -195,6 +196,7 @@ $(document).ready(function(){
                             frm.find('select[name="type"]').val(dataRecord.type).change();
                             frm.find('input[name="client"]').val(dataRecord.client);
                             frm.find('input[name="server"]').val(dataRecord.server);
+                            frm.find('input[name="col"]').val(dataRecord.col);
                             frm.find('select[name="type"]').selectpicker('refresh');
                             if(selectedColumnLocalData[dataRecord.uid].data){
                                 var html = selectedColumnLocalData[dataRecord.uid].data.map(function(item){
@@ -239,6 +241,7 @@ $(document).ready(function(){
                         frm.find('select[name="type"]').val('string').change();
                         frm.find('input[name="client"]').val('');
                         frm.find('input[name="server"]').val('');
+                        frm.find('input[name="col"]').val('12');
                         frm.find('select[name="type"]').selectpicker('refresh');
                         frm.find('[data-box="data"] table tbody').empty();
                     });
@@ -305,6 +308,7 @@ $(document).ready(function(){
                             frm.find('select[name="type"]').val(dataRecord.type).change();
                             frm.find('input[name="client"]').val(dataRecord.client);
                             frm.find('input[name="server"]').val(dataRecord.server);
+                            frm.find('input[name="col"]').val(dataRecord.col);
                             frm.find('select[name="type"]').selectpicker('refresh');
                             if(selectedColumnLocalData[dataRecord.uid].data){
                                 var html = selectedColumnLocalData[dataRecord.uid].data.map(function(item){
@@ -351,6 +355,7 @@ $(document).ready(function(){
                         frm.find('select[name="type"]').val('string').change();
                         frm.find('input[name="client"]').val('');
                         frm.find('input[name="server"]').val('');
+                        frm.find('input[name="col"]').val('12');
                         frm.find('select[name="type"]').selectpicker('refresh');
                         frm.find('[data-box="data"] table tbody').empty();
                     });
@@ -525,12 +530,15 @@ $(document).ready(function(){
                         frm.find('select[name="type"]').change(function(){
                             var type = this.value;
                             frm.find('[data-box]').hide();
+                            console.log('HEEE',type)
                             switch(type) {
                                 case 'checklist':
                                 case 'list':
                                 case 'radio':
                                     frm.find('[data-box="data"]').show();
                                 case 'string':
+                                case 'catelist':
+                                case 'catetree':
                                 case 'text':
                                 case 'html':
                                 case 'image':
@@ -548,7 +556,7 @@ $(document).ready(function(){
                     'message' : $('#column-detail-dialog'),
                     'title': '<h4>Field <small>Setting Field</small></h4>',
                     'dialogClass':'',
-                    'width':'520px',
+                    'width':'420px',
                     'type':'notice',
                     'hideclose':true,
                     'closeOnEscape':false,

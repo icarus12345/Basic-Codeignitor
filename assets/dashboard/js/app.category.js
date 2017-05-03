@@ -11,6 +11,7 @@ $(document).ready(function(){
         var datafields = [
             {name: 'id', type: 'int'},
             {name: 'title'},
+            {name: 'level'},
             {name: 'status' , type: 'bool'},
             {name: 'created' , type: 'date'},
             {name: 'modified' , type: 'date'},
@@ -25,12 +26,12 @@ $(document).ready(function(){
                         try {
                             str += "<a href='JavaScript:void(0)'"+
                             "style='padding: 5px; float: left;margin-top: 2px;' " +
-                            "onclick=\"App.Setting.ShowDetailDialog(" + value + ");\" "+ 
+                            "onclick=\"App.Category.ShowDetailDialog(" + value + ");\" "+ 
                             "title='Edit :" + value + "'><i class=\"fa fa-pencil-square\"></i></a>\
                             ";
                             str += "<a href='JavaScript:void(0)'"+
                             "style='padding: 5px; float: left;margin-top: 2px;' " +
-                            "onclick=\"App.Setting.Delete(" + value + ","+row+");\" "+ 
+                            "onclick=\"App.Category.Delete(" + value + ","+row+");\" "+ 
                             "title='Delete :" + value + "'><i class=\"fa fa-trash-o\"></i></a>\
                             ";
                         } catch (e) {
@@ -44,7 +45,15 @@ $(document).ready(function(){
                 filterable: false, sortable: false,editable: false,hidden:true
             },{
                 text: 'Title', dataField: 'title', minWidth: 180, sortable: true,
-                columntype: 'textbox', filtertype: 'textbox', filtercondition: 'CONTAINS'
+                columntype: 'textbox', filtertype: 'textbox', filtercondition: 'CONTAINS',
+                cellsrenderer: function (row, columnfield, value, defaulthtml, columnproperties) {
+                    var dataRow = $(gridElm).jqxGrid('getrowdata', row);
+                    var str = '<div style="overflow: hidden; text-overflow: ellipsis; padding-bottom: 4px; text-align: left; margin-right: 2px; margin-left: 4px; padding-top: 4px;">';
+                    str+='<span style="padding-left:'+dataRow.level*20+'px;">'+value+'</span>';
+                    //str+=dataRow.Display;
+                    str+='</div>';
+                    return str;
+                }
                 
             },{
                 text: 'Status'    , dataField: 'status' , cellsalign: 'center',
@@ -103,7 +112,7 @@ $(document).ready(function(){
             };
             var dataAdapter = new $.jqx.dataAdapter(source, {
                 formatData: function (data) {
-                    data.type = '';
+                    data.type = App.Category.entry_setting.data.type || '';
                     data.table = 'tbl_setting';
                     return data;
                 },
@@ -161,7 +170,7 @@ $(document).ready(function(){
                 frm.find('input[name="title"]').val(frm.find('input[name="title"]').val() + '(copy)');
                 frm.find('input[name="alias"]').val(frm.find('input[name="alias"]').val() + '-copy');
                 frm.find('input[name="id"]').val('');
-                App.Setting.Save();
+                App.Category.Save();
             },
             Delete: function(id,row){
                 // toastr.warning('This function to requires an administrative account.<br/>Please check your authority, and try again.','Warning');
@@ -185,7 +194,7 @@ $(document).ready(function(){
                                 toastr.error(res.message,'Error');
                             } else {
                                 toastr.success(res.message,'Success');
-                                App.Setting.Refresh();
+                                App.Category.Refresh();
                             }
                         })
                     }
@@ -199,13 +208,7 @@ $(document).ready(function(){
                 }
                 
                 var data = $('#detail-setting-frm').serializeObject();
-                data.data.columns = columnLocalData;
-                data.data.bigcolumns = columnLocalDataBig;
-                data.data.add = !!data.data.add;
-                data.data.edit = !!data.data.edit;
-                data.data.delete = !!data.data.delete;
-                console.log(data);
-
+                
                 new App.Request({
                     url: URI.commit,
                     data: data,
@@ -215,7 +218,7 @@ $(document).ready(function(){
                     } else {
                         toastr.success(res.message,'Success');
                         $('#detail-setting-dialog').dialog("close");
-                        App.Setting.Refresh();
+                        App.Category.Refresh();
                     }
                 })
             },
@@ -230,7 +233,7 @@ $(document).ready(function(){
                     'message' : $('#detail-setting-dialog'),
                     'title': '<h4>Add <small>'+App.Category.entry_setting.title+'</small></h4>',
                     'dialogClass':'',
-                    'width':'480px',
+                    'width': App.Category.entry_setting.data.size,
                     'type':'notice',
                     'hideclose':true,
                     'closeOnEscape':false,
@@ -254,11 +257,11 @@ $(document).ready(function(){
                     'buttons' : [{
                         'text': 'Duplicate',
                         'class': 'ui-btn btn ' + (id?'':'hidden'),
-                        'click': App.Setting.Duplicate
+                        'click': App.Category.Duplicate
                     },{
                         'text': 'Done',
                         'class': 'ui-btn btn',
-                        'click': App.Setting.Save
+                        'click': App.Category.Save
                     },{
                         'text': 'Cancel',
                         'class': 'btn btn-link',

@@ -18,17 +18,12 @@ class category extends Api_Controller {
                 'title' => array(
                     'field'=>'title',
                     'label'=>'Title',
-                    'rules'=>'trim|required|min_length[4]|max_length[255]'
+                    'rules'=>'trim|required|min_length[4]|max_length[255]|is_unique[tbl_category.title]'
                     ),
                 'alias' => array(
                     'field'=>'alias',
                     'label'=>'Alias',
                     'rules'=>'trim|required|min_length[4]|max_length[255]'
-                    ),
-                'data[type]' => array(
-                    'field'=>'data[type]',
-                    'label'=>'Type',
-                    'rules'=>'trim|required|min_length[4]|max_length[50]'
                     ),
                 'type' => array(
                     'field'=>'type',
@@ -38,6 +33,11 @@ class category extends Api_Controller {
                         // 'required' => 'Error Message rule "required" for field Type',
                         // 'trim' => 'Error message for rule "trim" for field email',
                     )
+                ),
+                'pid' => array(
+                    'field'=>'pid',
+                    'label'=>'Parent ID',
+                    'rules'=>'trim|integer'
                 ),
         ),
         'update' => array(
@@ -50,11 +50,6 @@ class category extends Api_Controller {
                     'field'=>'alias',
                     'label'=>'Alias',
                     'rules'=>'trim|required|min_length[4]|max_length[255]'
-                    ),
-                'data[type]' => array(
-                    'field'=>'data[type]',
-                    'label'=>'Type',
-                    'rules'=>'trim|required|min_length[4]|max_length[50]'
                     ),
                 'type' => array(
                     'field'=>'type',
@@ -70,6 +65,11 @@ class category extends Api_Controller {
                     'label'=>'ID',
                     'rules'=>'trim|is_natural_no_zero|required'
                 ),
+                'pid' => array(
+                    'field'=>'pid',
+                    'label'=>'Parent ID',
+                    'rules'=>'trim|integer'
+                ),
         )                    
     );
     function detail(){
@@ -81,8 +81,31 @@ class category extends Api_Controller {
         $id = $this->input->post('id');
         $sid = $this->input->post('sid');
         if(!empty($sid)) {
+            $entry_setting = $this->Setting_Model->get($sid);
+            if(
+                !empty($entry_setting->data['catetype']) &&
+                $entry_setting->data['cateviewer'] == 'tree'
+                ){
+                $cat_type = $entry_setting->data['catetype'];
+                $cate_data = $this->category_model->get_by_type($cat_type);
+                $entry_setting->data['categories'] = $this->category_model
+                    ->buildTreeArray($cate_data);
+            }
+            if($entry_setting->data['columns'])
+            foreach ($entry_setting->data['columns'] as $key => $column) {
+                if($column['type'] == 'catetree'){
+                    $cat_type = $column['name'];
+                    $cate_data = $this->category_model->get_by_type($cat_type);
+                    $entry_setting->data['columns'][$key]['categories'] = $this->category_model
+                        ->buildTreeArray($cate_data);
+                } else if($column['type'] == 'catelist'){
+                    $cat_type = $column['name'];
+                    $cate_data = $this->category_model->get_by_type($cat_type);
+                    $entry_setting->data['columns'][$key]['categories'] = $cate_data;
+                }
+            }
             $this->load->vars(array(
-                'entry_setting' => $this->Setting_Model->get($sid)
+                'entry_setting' => $entry_setting
             ));
         }
         if(!empty($id)) {
@@ -146,13 +169,15 @@ class category extends Api_Controller {
         } else {
             $data = $this->input->post('data');
             $id = $this->input->post('id');
+            $pid = $this->input->post('pid');
             $title = $this->input->post('title');
             $type = $this->input->post('type');
             $alias = $this->input->post('alias');
             $params = array(
                 'title' => $title,
                 'alias' => $alias,
-                // 'type' => $type,
+                'pid' => $pid,
+                'type' => $type,
                 'data' => serialize($data),
                 );
             $rs = $this->Core_Model->onUpdate($id, $params);
@@ -184,13 +209,15 @@ class category extends Api_Controller {
         } else {
             $data = $this->input->post('data');
             $id = $this->input->post('id');
+            $pid = $this->input->post('pid');
             $title = $this->input->post('title');
             $type = $this->input->post('type');
             $alias = $this->input->post('alias');
             $params = array(
                 'title' => $title,
                 'alias' => $alias,
-                // 'type' => $type,
+                'type' => $type,
+                'pid' => $pid,
                 'data' => serialize($data),
                 );
             $this->Core_Model = new Core_Model($this->table);
@@ -216,7 +243,8 @@ class category extends Api_Controller {
             }
         }
     }
-    function bind($type=''){
+    function bind(){
+        $type = $this->input->post('type');
         $this->category_model->table_config=array(
             "table"     =>"{$this->table}",
             "select"    =>"
@@ -229,7 +257,7 @@ class category extends Api_Controller {
                     {$this->table}.{$this->prefix}status
                 ",
             "from"      =>" FROM `{$this->table}` ",
-            "where"     =>"WHERE `{$this->prefix}type` = '$type'",
+            "where"     =>!empty($type)?"WHERE `{$this->prefix}type` = '$type'":'',
             "order_by"  =>"ORDER BY `{$this->prefix}pid` ASC,`{$this->prefix}position` ASC",
             "columnmaps"=>array(
                 

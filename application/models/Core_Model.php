@@ -297,7 +297,7 @@ class Core_Model extends CI_Model {
             $SQLquery = "$FstrSQL $where $strgroupby $orderby $limit";
         }
         $query = $this->db->query($SQLquery);
-        // $result['query'] =$SQLquery;
+        $result['query'] =$SQLquery;
         $errordb = $this->db->error();
         $error_message = $errordb['message'];
         if($errordb['code']==0){

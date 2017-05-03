@@ -16,14 +16,14 @@ $this->CI =& get_instance();
                     <a href="/dashboard/cp">Content Provider</a>
                 </li>
                 <li>
-                    <a href="#">Category</a>
+                    <a href="#"><?php echo $entry_setting->title; ?></a>
                 </li>
             </ul>
         </div>
         <div class="secondary-box" >
             <div class="modal-header">
                 <h4>
-                    Category <small>Function</small>
+                    <?php echo $entry_setting->title; ?> <small>List</small>
                 </h4>
                 <div class="modal-action">
                     <div><a href="JavaScript:App.Category.ShowDetailDialog()" class="icon-plus" title="Add new entry"></a></div>
@@ -51,8 +51,8 @@ $this->CI =& get_instance();
 <script type="text/javascript">
     $(document).ready(function(){
         setTimeout(function(){
-            App.Category.sid = '<?php echo $setting_detail->id; ?>';
-            App.Category.entry_setting = <?php echo json_encode($setting_detail); ?>;
+            App.Category.sid = '<?php echo $entry_setting->id; ?>';
+            App.Category.entry_setting = <?php echo json_encode($entry_setting); ?>;
             App.Category.Grid()
         }, 300)
     })

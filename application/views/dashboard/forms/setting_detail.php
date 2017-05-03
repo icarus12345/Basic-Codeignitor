@@ -146,7 +146,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xs-6 half">
+        <div class="col-xs-4 half">
             <div class="pull-bottom">
                 <div>Category Type :</div>
                 <div class="control-group">
@@ -155,6 +155,26 @@
                         class="form-control validate[maxSize[50]]" 
                         placeholder="" name="data[catetype]" 
                         value="<?php echo $entry_detail->data['catetype']; ?>" >
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-2 half">
+            <div class="pull-bottom">
+                <div>View :</div>
+                <div class="control-group">
+                    <div>
+                        <select 
+                            name="data[cateviewer]" 
+                            class="form-control selectpicker validate[required]"
+                            data-putto="#frm-err-data-cateviewer"
+                            >
+                            <option value="list">List</option>
+                            <option value="tree" 
+                                <?php echo $entry_detail->data['cateviewer'] == 'tree'?'selected="1"':''; ?>
+                                >Tree</option>
+                        </select>
+                    </div>
+                    <div id="frm-err-data-cateviewer"></div>
                 </div>
             </div>
         </div>
@@ -171,35 +191,31 @@
 <div style="display: none" id="column-detail-dialog">
     <form name="column-detail-frm" id="column-detail-frm" target="integration_asynchronous" class="validation-frm">
         <div class="row half">
-            <div class="col-xs-9 half">
-                <div class="row half">
-                    <div class="col-xs-6 half">
-                        <div class="pull-bottom">
-                            <div>Field name :(*)</div>
-                            <div class="control-group">
-                                <input 
-                                    type="text" 
-                                    class="form-control validate[required,maxSize[50]]" 
-                                    placeholder="" name="name" 
-                                    value="" >
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-6 half">
-                        <div class="pull-bottom">
-                            <div>Display text :(*)</div>
-                            <div class="control-group">
-                                <input 
-                                    type="text" 
-                                    class="form-control validate[required,maxSize[50]]" 
-                                    placeholder="" name="title" 
-                                    value="" >
-                            </div>
-                        </div>
+            <div class="col-xs-6 half">
+                <div class="pull-bottom">
+                    <div>Field name :(*)</div>
+                    <div class="control-group">
+                        <input 
+                            type="text" 
+                            class="form-control validate[required,maxSize[50]]" 
+                            placeholder="" name="name" 
+                            value="" >
                     </div>
                 </div>
             </div>
-            <div class="col-xs-3 half">
+            <div class="col-xs-6 half">
+                <div class="pull-bottom">
+                    <div>Display text :(*)</div>
+                    <div class="control-group">
+                        <input 
+                            type="text" 
+                            class="form-control validate[required,maxSize[50]]" 
+                            placeholder="" name="title" 
+                            value="" >
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6 half">
                 <div class="pull-bottom">
                     <div>Field type :</div>
                     <div class="">
@@ -217,8 +233,23 @@
                             <option value="checklist">Check List</option>
                             <option value="list">List</option>
 
+                            <option value="catelist">List Category</option>
+                            <option value="catetree">Tree Category</option>
+
                             <option value="grid">Grid</option>
                         </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6 half">
+                <div class="pull-bottom">
+                    <div>Col :</div>
+                    <div class="">
+                        <input 
+                            type="number" 
+                            class="form-control validate[required,min[1],max[12]]" 
+                            placeholder="" name="col" 
+                            value="" >
                     </div>
                 </div>
             </div>
