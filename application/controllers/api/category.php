@@ -12,13 +12,23 @@ class category extends Api_Controller {
     function index(){
         echo 'Welcome API';
     }
-    
+    public function title_check($str){
+        if ($str == 'test')
+        {
+                $this->form_validation->set_message('username_check', 'The {field} field can not be the word "test"');
+                return FALSE;
+        }
+        else
+        {
+                return TRUE;
+        }
+    }
     public $rules = array(
         'insert' => array(
                 'title' => array(
                     'field'=>'title',
                     'label'=>'Title',
-                    'rules'=>'trim|required|min_length[4]|max_length[255]|is_unique[tbl_category.title]'
+                    'rules'=>'trim|required|min_length[4]|max_length[255]|callback_title_check'
                     ),
                 'alias' => array(
                     'field'=>'alias',

@@ -4,16 +4,13 @@ $this->CI =& get_instance();
 <div class=" fluid">
     <div class="modal-body">
         <h3 class="page-title">
-            Dashboard <small>Content</small>
+            Dashboard <small><?php echo $entry_setting->title; ?></small>
         </h3>
         <div class="page-bar">
             <ul class="breadcrumb">
                 <li>
                     <i class="icon-home"></i>
                     <a href="/dashboard">Dashboard</a>
-                </li>
-                <li>
-                    <a href="/dashboard/cp">Content Provider</a>
                 </li>
                 <li>
                     <a href="#"><?php echo $entry_setting->title; ?></a>

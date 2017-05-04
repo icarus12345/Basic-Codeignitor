@@ -139,7 +139,7 @@ Forms
 .form-control,.input-group-addon{border-radius: 0;border: 1px solid #bdc7d8;border: 1px solid #ddd;background-color:#FFF}
 .form-control:focus{border-color: #bdc7d8;box-shadow: none;}
 .input-group-addon{background: #fafafa}
-.control-group{margin-bottom: 1px}
+.control-group{}
 .control-group .input-group label.input-group-addon {min-width: 100px;text-align: left;}
 .input-append{padding-right: 28px;position: relative}
 .input-prepend{padding-left: 28px;position: relative}

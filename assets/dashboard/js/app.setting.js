@@ -188,9 +188,11 @@ $(document).ready(function(){
                             // get the clicked row's data and initialize the input fields.
                             selectedColumnLocalData = columnLocalData;
                             editrow = row;
-                            var dataRecord = $("#columnsGrid").jqxGrid('getrowdata', row);
+                            var rowID = $("#columnsGrid").jqxGrid('getrowid', editrow);
+                            var dataRecord = selectedColumnLocalData[editrow];
+                            console.log(dataRecord)
                             var frm = $('#column-detail-frm');
-                            App.Setting.ShowColumnDetailDialog()
+                            
                             frm.find('input[name="name"]').val(dataRecord.name);
                             frm.find('input[name="title"]').val(dataRecord.title);
                             frm.find('select[name="type"]').val(dataRecord.type).change();
@@ -198,8 +200,8 @@ $(document).ready(function(){
                             frm.find('input[name="server"]').val(dataRecord.server);
                             frm.find('input[name="col"]').val(dataRecord.col);
                             frm.find('select[name="type"]').selectpicker('refresh');
-                            if(selectedColumnLocalData[dataRecord.uid].data){
-                                var html = selectedColumnLocalData[dataRecord.uid].data.map(function(item){
+                            if(dataRecord.data){
+                                var html = dataRecord.data.map(function(item){
                                         return [
                                         '<tr>',
                                             '<td data-field="value">',
@@ -219,6 +221,7 @@ $(document).ready(function(){
                             }else{
                                 frm.find('[data-box="data"] table tbody').html('')
                             }
+                            App.Setting.ShowColumnDetailDialog()
                         }
                     }
                 ],
@@ -234,7 +237,6 @@ $(document).ready(function(){
                         editrow = undefined;
                         selectedColumnLocalData = columnLocalData;
                         // show the popup window.
-                        App.Setting.ShowColumnDetailDialog()
                         var frm = $('#column-detail-frm');
                         frm.find('input[name="name"]').val('');
                         frm.find('input[name="title"]').val('');
@@ -244,6 +246,7 @@ $(document).ready(function(){
                         frm.find('input[name="col"]').val('12');
                         frm.find('select[name="type"]').selectpicker('refresh');
                         frm.find('[data-box="data"] table tbody').empty();
+                        App.Setting.ShowColumnDetailDialog()
                     });
                     // // create new rows.
                     $("#deleterowbutton").on('click', function () {
@@ -270,6 +273,7 @@ $(document).ready(function(){
                     { name: 'name', type: 'string' },
                     { name: 'title', type: 'string' },
                     { name: 'type', type: 'string' },
+                    { name: 'col', type: 'string' },
                     { name: 'client', type: 'string' },
                     { name: 'server', type: 'string' },
                 ],
@@ -300,9 +304,10 @@ $(document).ready(function(){
                             // get the clicked row's data and initialize the input fields.
                             selectedColumnLocalData = columnLocalDataBig;
                             editrow = row;
-                            var dataRecord = $("#columnsGrid_b").jqxGrid('getrowdata', row);
+                            var rowID = $("#columnsGrid_b").jqxGrid('getrowid', editrow);
+                            var dataRecord = selectedColumnLocalData[editrow];
+                            console.log(dataRecord)
                             var frm = $('#column-detail-frm');
-                            App.Setting.ShowColumnDetailDialog()
                             frm.find('input[name="name"]').val(dataRecord.name);
                             frm.find('input[name="title"]').val(dataRecord.title);
                             frm.find('select[name="type"]').val(dataRecord.type).change();
@@ -310,8 +315,8 @@ $(document).ready(function(){
                             frm.find('input[name="server"]').val(dataRecord.server);
                             frm.find('input[name="col"]').val(dataRecord.col);
                             frm.find('select[name="type"]').selectpicker('refresh');
-                            if(selectedColumnLocalData[dataRecord.uid].data){
-                                var html = selectedColumnLocalData[dataRecord.uid].data.map(function(item){
+                            if(dataRecord.data){
+                                var html = dataRecord.data.map(function(item){
                                         return [
                                         '<tr>',
                                             '<td data-field="value">',
@@ -331,6 +336,7 @@ $(document).ready(function(){
                             }else{
                                 frm.find('[data-box="data"] table tbody').html('')
                             }
+                            App.Setting.ShowColumnDetailDialog()
                         }
                     }
                 ],
@@ -348,7 +354,6 @@ $(document).ready(function(){
                         editrow = undefined;
                         selectedColumnLocalData = columnLocalDataBig;
                         // show the popup window.
-                        App.Setting.ShowColumnDetailDialog()
                         var frm = $('#column-detail-frm');
                         frm.find('input[name="name"]').val('');
                         frm.find('input[name="title"]').val('');
@@ -358,6 +363,7 @@ $(document).ready(function(){
                         frm.find('input[name="col"]').val('12');
                         frm.find('select[name="type"]').selectpicker('refresh');
                         frm.find('[data-box="data"] table tbody').empty();
+                        App.Setting.ShowColumnDetailDialog()
                     });
                     // // create new rows.
                     deleteToolbar.on('click', function () {
@@ -595,6 +601,7 @@ $(document).ready(function(){
                                         value: $(tr).find('td[data-field="value"]').html(),
                                     }
                                 });
+                            console.log(selectedColumnLocalData,columnLocalData,selectedColumnLocalData==columnLocalData)
                             if (editrow >= 0) {
                                 var rowID;
                                 if(selectedColumnLocalData == columnLocalData){
