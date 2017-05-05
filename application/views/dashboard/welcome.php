@@ -1,7 +1,7 @@
 <?php 
 $this->CI =& get_instance();
 ?>
-<div class=" fluid">
+<!-- <div class=" fluid"> -->
     <div class="modal-body">
         <h3 class="page-title">
             Dashboard <small><?php echo $entry_setting->title; ?></small>
@@ -17,6 +17,8 @@ $this->CI =& get_instance();
                 </li>
             </ul>
         </div>
+        <!-- 
+         -->
         <div class="secondary-box" id="entrys-list">
             <div class="modal-header">
                 <h4>
@@ -50,7 +52,7 @@ $this->CI =& get_instance();
 
         </div>
     </div>
-</div>
+<!-- </div> -->
 <script type="text/javascript">
     $(document).ready(function(){
         setTimeout(function(){

@@ -146,243 +146,65 @@ $(document).ready(function(){
                 },
             })
         }
-        var dialog,editrow,columnLocalData = [],columnLocalDataBig;
-        var selectedColumnLocalData;
-        function createColumnsGrid(){
-            var columnSource = {
-                localdata: columnLocalData,
-                datatype: "array",
-                datafields:
-                [
-                    { name: 'name', type: 'string' },
-                    { name: 'title', type: 'string' },
-                    { name: 'type', type: 'string' },
-                    { name: 'col', type: 'string' },
-                    { name: 'client', type: 'string' },
-                    { name: 'server', type: 'string' },
-                ],
-                updaterow: function (rowid, rowdata, commit) {
-                    // synchronize with the server - send update command
-                    // call commit with parameter true if the synchronization with the server is successful 
-                    // and with parameter false if the synchronization failder.
-                    commit(true);
-                }
-            };
-            $("#columnsGrid").jqxGrid(
-            {
-                theme: 'metro',
-                width: '100%',
-                height: 180,
-                source: new $.jqx.dataAdapter(columnSource),
-                pageable: false,
-                // autoheight: true,
-                columns: [
-                    { text: 'Title', datafield: 'title', minWidth: 120 },
-                    { text: 'Type', datafield: 'type', width: 60 },
-                    { 
-                        text: 'Edit', datafield: 'Edit', columntype: 'button', 
-                        width: 40,
-                        cellsrenderer: function () {
-                            return "Edit";
-                        }, buttonclick: function (row) {
-                            // get the clicked row's data and initialize the input fields.
-                            selectedColumnLocalData = columnLocalData;
-                            editrow = row;
-                            var rowID = $("#columnsGrid").jqxGrid('getrowid', editrow);
-                            var dataRecord = selectedColumnLocalData[editrow];
-                            console.log(dataRecord)
-                            var frm = $('#column-detail-frm');
-                            
-                            frm.find('input[name="name"]').val(dataRecord.name);
-                            frm.find('input[name="title"]').val(dataRecord.title);
-                            frm.find('select[name="type"]').val(dataRecord.type).change();
-                            frm.find('input[name="client"]').val(dataRecord.client);
-                            frm.find('input[name="server"]').val(dataRecord.server);
-                            frm.find('input[name="col"]').val(dataRecord.col);
-                            frm.find('select[name="type"]').selectpicker('refresh');
-                            if(dataRecord.data){
-                                var html = dataRecord.data.map(function(item){
-                                        return [
-                                        '<tr>',
-                                            '<td data-field="value">',
-                                                item.value,
-                                            '</td>',
-                                            '<td data-field="display">',
-                                                item.display,
-                                            '</td>',
-                                            '<td>',
-                                                '<a href="JavaScript:" onclick="$(this).parents(\'tr\').remove()" class="icon-close"></span>',
-                                            '</td>',
-                                        '</tr>'
-                                        ].join('');
-                                    }).join('')
-                                //.join('');
-                                frm.find('div[data-box="data"] table tbody').html(html)
-                            }else{
-                                frm.find('[data-box="data"] table tbody').html('')
-                            }
-                            App.Setting.ShowColumnDetailDialog()
-                        }
-                    }
-                ],
-                showtoolbar: true,
-                toolbarheight: 30,
-                rendertoolbar: function (toolbar) {
-                    var me = this;
-                    var container = $("<div style='padding: 4px;line-height:20px;'></div>");
-                    toolbar.append(container);
-                    container.append('<a href="JavaScript:" id="addrowbutton" ><span class="fa fa-plus" title="Edit column"></span> Add new item</a>');
-                    container.append('<a href="JavaScript:" id="deleterowbutton" ><span class="fa fa-trash-o" title="Delete selected item"></span> Delete selected item</a>');
-                    $("#addrowbutton").on('click', function () {
-                        editrow = undefined;
-                        selectedColumnLocalData = columnLocalData;
-                        // show the popup window.
-                        var frm = $('#column-detail-frm');
-                        frm.find('input[name="name"]').val('');
-                        frm.find('input[name="title"]').val('');
-                        frm.find('select[name="type"]').val('string').change();
-                        frm.find('input[name="client"]').val('');
-                        frm.find('input[name="server"]').val('');
-                        frm.find('input[name="col"]').val('12');
-                        frm.find('select[name="type"]').selectpicker('refresh');
-                        frm.find('[data-box="data"] table tbody').empty();
-                        App.Setting.ShowColumnDetailDialog()
-                    });
-                    // // create new rows.
-                    $("#deleterowbutton").on('click', function () {
-                        var selectedrowindex = $("#columnsGrid").jqxGrid('getselectedrowindex');
-                        var rowscount = $("#columnsGrid").jqxGrid('getdatainformation').rowscount;
-                        if (selectedrowindex >= 0 && selectedrowindex < rowscount) {
-                            var id = $("#columnsGrid").jqxGrid('getrowid', selectedrowindex);
-                            // var commit = $("#columnsGrid").jqxGrid('deleterow', id);
-                            columnLocalData.splice(selectedrowindex, 1);
-                            $("#columnsGrid").jqxGrid('updatebounddata');
-                        } else {
-                            toastr.warning('Please select item.','Warning');
-                        }
-                    });
-                },
-            });
-        }
-        function createColumnsGrid_b(){
-            var columnSource = {
-                localdata: columnLocalDataBig,
-                datatype: "array",
-                datafields:
-                [
-                    { name: 'name', type: 'string' },
-                    { name: 'title', type: 'string' },
-                    { name: 'type', type: 'string' },
-                    { name: 'col', type: 'string' },
-                    { name: 'client', type: 'string' },
-                    { name: 'server', type: 'string' },
-                ],
-                updaterow: function (rowid, rowdata, commit) {
-                    // synchronize with the server - send update command
-                    // call commit with parameter true if the synchronization with the server is successful 
-                    // and with parameter false if the synchronization failder.
-                    commit(true);
-                }
-            };
-            $("#columnsGrid_b").jqxGrid(
-            {
-                theme: 'metro',
-                width: '100%',
-                height: 180,
-                source: new $.jqx.dataAdapter(columnSource),
-                pageable: false,
-                // autoheight: true,
-                columns: [
-                    { text: 'Title', datafield: 'title', minWidth: 120 },
-                    { text: 'Type', datafield: 'type', width: 60 },
-                    { 
-                        text: 'Edit', datafield: 'Edit', columntype: 'button', 
-                        width: 40,
-                        cellsrenderer: function () {
-                            return "Edit";
-                        }, buttonclick: function (row) {
-                            // get the clicked row's data and initialize the input fields.
-                            selectedColumnLocalData = columnLocalDataBig;
-                            editrow = row;
-                            var rowID = $("#columnsGrid_b").jqxGrid('getrowid', editrow);
-                            var dataRecord = selectedColumnLocalData[editrow];
-                            console.log(dataRecord)
-                            var frm = $('#column-detail-frm');
-                            frm.find('input[name="name"]').val(dataRecord.name);
-                            frm.find('input[name="title"]').val(dataRecord.title);
-                            frm.find('select[name="type"]').val(dataRecord.type).change();
-                            frm.find('input[name="client"]').val(dataRecord.client);
-                            frm.find('input[name="server"]').val(dataRecord.server);
-                            frm.find('input[name="col"]').val(dataRecord.col);
-                            frm.find('select[name="type"]').selectpicker('refresh');
-                            if(dataRecord.data){
-                                var html = dataRecord.data.map(function(item){
-                                        return [
-                                        '<tr>',
-                                            '<td data-field="value">',
-                                                item.value,
-                                            '</td>',
-                                            '<td data-field="display">',
-                                                item.display,
-                                            '</td>',
-                                            '<td>',
-                                                '<a href="JavaScript:" onclick="$(this).parents(\'tr\').remove()" class="icon-close"></span>',
-                                            '</td>',
-                                        '</tr>'
-                                        ].join('');
-                                    }).join('')
-                                //.join('');
-                                frm.find('div[data-box="data"] table tbody').html(html)
-                            }else{
-                                frm.find('[data-box="data"] table tbody').html('')
-                            }
-                            App.Setting.ShowColumnDetailDialog()
-                        }
-                    }
-                ],
-                showtoolbar: true,
-                toolbarheight: 30,
-                rendertoolbar: function (toolbar) {
-                    var me = this;
-                    var container = $("<div style='padding: 4px;line-height:20px;'></div>");
-                    toolbar.append(container);
-                    var addToolbar = $('<a href="JavaScript:"><span class="fa fa-plus" title="Edit column"></span> Add new item</a>')
-                    container.append(addToolbar);
-                    var deleteToolbar = $('<a href="JavaScript:"><span class="fa fa-trash-o" title="Delete selected item"></span> Delete selected item</a>');
-                    container.append(deleteToolbar);
-                    addToolbar.on('click', function () {
-                        editrow = undefined;
-                        selectedColumnLocalData = columnLocalDataBig;
-                        // show the popup window.
-                        var frm = $('#column-detail-frm');
-                        frm.find('input[name="name"]').val('');
-                        frm.find('input[name="title"]').val('');
-                        frm.find('select[name="type"]').val('string').change();
-                        frm.find('input[name="client"]').val('');
-                        frm.find('input[name="server"]').val('');
-                        frm.find('input[name="col"]').val('12');
-                        frm.find('select[name="type"]').selectpicker('refresh');
-                        frm.find('[data-box="data"] table tbody').empty();
-                        App.Setting.ShowColumnDetailDialog()
-                    });
-                    // // create new rows.
-                    deleteToolbar.on('click', function () {
-                        var selectedrowindex = $("#columnsGrid_b").jqxGrid('getselectedrowindex');
-                        var rowscount = $("#columnsGrid_b").jqxGrid('getdatainformation').rowscount;
-                        if (selectedrowindex >= 0 && selectedrowindex < rowscount) {
-                            var id = $("#columnsGrid_b").jqxGrid('getrowid', selectedrowindex);
-                            var commit = $("#columnsGrid_b").jqxGrid('deleterow', id);
-                            $("#columnsGrid_b").jqxGrid('updatebounddata');
-                            columnLocalDataBig.splice(selectedrowindex, 1);
-                        } else {
-                            toastr.warning('Please select item.','Warning');
-                        }
-                    });
-                },
-            });
-        }
+        var dialog;
         var columnDialog;
-
+        var editingItem;
+        function addItem(c){
+            var li = $('<li/>')
+                .addClass('col-xs-'+ (c.col||'12'))
+                .html('<div><span>'+c.title+'</span></div>')
+                .data('cdata',c)
+            $( "#sortable" ).append(li)
+            li.find('>div').append([
+                '<div class="dropdown pull-right">',
+                    '<a href="JavaScript:" class="icon-options-vertical" data-toggle="dropdown" title="Show more action"></a>',
+                    '<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">',
+                        '<li><a data-action="edit" href="JavaScript:"><span class="fa fa-pencil"></span> Edit</a></li>',
+                        '<li><a data-action="delete" href="JavaScript:"><span class="fa fa-trash-o"></span> Delete</a></li>',
+                    '</ul>',
+                '</div>'
+                ].join(''))
+            li.find('a[data-action="edit"]').click(function(){
+                editingItem = li;
+                var dataRecord = li.data('cdata')
+                console.log(dataRecord)
+                var frm = $('#column-detail-frm');
+                
+                frm.find('input[name="name"]').val(dataRecord.name);
+                frm.find('input[name="title"]').val(dataRecord.title);
+                frm.find('select[name="type"]').val(dataRecord.type).change();
+                frm.find('input[name="client"]').val(dataRecord.client);
+                frm.find('input[name="server"]').val(dataRecord.server);
+                frm.find('input[name="biz"]').prop('checked', dataRecord.biz);
+                frm.find('input[name="col"]').val(dataRecord.col);
+                frm.find('select[name="type"]').selectpicker('refresh');
+                if(dataRecord.data){
+                    var html = dataRecord.data.map(function(item){
+                            return [
+                            '<tr>',
+                                '<td data-field="value">',
+                                    item.value,
+                                '</td>',
+                                '<td data-field="display">',
+                                    item.display,
+                                '</td>',
+                                '<td>',
+                                    '<a href="JavaScript:" onclick="$(this).parents(\'tr\').remove()" class="icon-close"></span>',
+                                '</td>',
+                            '</tr>'
+                            ].join('');
+                        }).join('')
+                    //.join('');
+                    frm.find('div[data-box="data"] table tbody').html(html)
+                }else{
+                    frm.find('[data-box="data"] table tbody').html('')
+                }
+                App.Setting.ShowColumnDetailDialog()
+            })
+            li.find('a[data-action="delete"]').click(function(){
+                li.remove();
+            })
+        }
         return {
             Grid: function(){
                 createGrid();
@@ -434,8 +256,10 @@ $(document).ready(function(){
                 }
                 
                 var data = $('#detail-setting-frm').serializeObject();
-                data.data.columns = columnLocalData;
-                data.data.bigcolumns = columnLocalDataBig;
+                var columns = $( "#sortable>li").get().map(function(c){
+                    return $(c).data('cdata')
+                }) 
+                data.data.columns = columns;
                 data.data.add = !!data.data.add;
                 data.data.edit = !!data.data.edit;
                 data.data.delete = !!data.data.delete;
@@ -516,21 +340,41 @@ $(document).ready(function(){
                         toastr.warning(res.message,'Warning');
                     } else {
                         $('#detail-setting-dialog').html(res.html);
-                        if(res.data){
-                            columnLocalData = res.data.data.columns || [];
-                            columnLocalDataBig = res.data.data.bigcolumns || [];
-                        }
-                        else {
-                            columnLocalData = [];
-                            columnLocalDataBig = [];
-                        }
-                        dialog.close();
-                        dialog.open();
+                        
+                        
                         App.InitForm($('#detail-setting-frm'));
 
                         var frm = $('#column-detail-frm');
-                        createColumnsGrid();
-                        createColumnsGrid_b();
+
+
+                        res.data.data.columns.map(function(c){
+                            addItem(c)
+                        })
+
+                        $( "#sortable" ).sortable({
+                          placeholder: "placeholder",
+                          start: function(e, ui){
+                            console.log(ui)
+                            ui.placeholder.addClass(ui.item.attr('class'))
+                          }
+                        });
+
+                        $('.add-sortable-item').click(function(){
+                            editingItem = null;
+                            // show the popup window.
+                            var frm = $('#column-detail-frm');
+                            frm.find('input[name="name"]').val('');
+                            frm.find('input[name="title"]').val('');
+                            frm.find('select[name="type"]').val('string').change();
+                            frm.find('input[name="client"]').val('');
+                            frm.find('input[name="server"]').val('');
+                            frm.find('input[name="col"]').val('12');
+                            frm.find('input[name="biz"]').prop('checked', false);
+                            frm.find('select[name="type"]').selectpicker('refresh');
+                            frm.find('[data-box="data"] table tbody').empty();
+                            App.Setting.ShowColumnDetailDialog()
+                        })
+
                         App.InitForm(frm);
                         columnDialog = null;
                         frm.find('select[name="type"]').change(function(){
@@ -553,6 +397,8 @@ $(document).ready(function(){
 
                             }
                         })
+                        dialog.close();
+                        dialog.open();
                     }
                 })
             },
@@ -593,6 +439,7 @@ $(document).ready(function(){
                                 return;
                             }
                             var data = $('#column-detail-frm').serializeObject();
+                            data.biz = !!data.biz
                             data.data = frm.find('[data-box="data"] table tbody tr')
                                 .get()
                                 .map(function(tr){
@@ -601,22 +448,15 @@ $(document).ready(function(){
                                         value: $(tr).find('td[data-field="value"]').html(),
                                     }
                                 });
-                            console.log(selectedColumnLocalData,columnLocalData,selectedColumnLocalData==columnLocalData)
-                            if (editrow >= 0) {
-                                var rowID;
-                                if(selectedColumnLocalData == columnLocalData){
-                                    rowID = $("#columnsGrid").jqxGrid('getrowid', editrow);
-                                } else {
-                                    rowID = $("#columnsGrid_b").jqxGrid('getrowid', editrow);
-                                }
-                                // $("#columnsGrid").jqxGrid('updaterow', rowID, data);
-                                selectedColumnLocalData[rowID] = data;
+                            if (editingItem) {
+                                editingItem.data('cdata',data);
+                                editingItem.attr('class', '');
+                                editingItem.addClass('col-xs-'+data.col);
+                                editingItem.find('>div>span').html(data.display)
                             }else{
-                                // var commit = $("#columnsGrid").jqxGrid('addrow', null, data);
-                                selectedColumnLocalData.push(data)
+                                addItem(data);
+                                $("#sortable").sortable('refresh');
                             }
-                            $("#columnsGrid").jqxGrid('updatebounddata');
-                            $("#columnsGrid_b").jqxGrid('updatebounddata');
                             $(this).dialog("close");
                         }
                     },{

@@ -179,13 +179,13 @@
             </div>
         </div>
     </div>
-    <div class="row half">
-        <div class="col-xs-6 half">
-            <div id="columnsGrid" style="height: 180px"></div>
-        </div>
-        <div class="col-xs-6 half">
-            <div id="columnsGrid_b" style="height: 180px"></div>
-        </div>
+
+    <div>
+        <ul id="sortable" class="sortable "></ul>
+        <div class="clearfix"></div>
+    </div>
+    <div class="add-sortable-item">
+        <span class="icon-plus"></span> Add
     </div>
 </form>
 <div style="display: none" id="column-detail-dialog">
@@ -241,7 +241,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs-6 half">
+            <div class="col-xs-3 half">
                 <div class="pull-bottom">
                     <div>Col :</div>
                     <div class="">
@@ -250,6 +250,19 @@
                             class="form-control validate[required,min[1],max[12]]" 
                             placeholder="" name="col" 
                             value="" >
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-3 half">
+                <div class="pull-bottom">
+                    <div>Biz :</div>
+                    <div class="">
+                        <div class="chks">
+                            <label class="chk">
+                                <input type="checkbox" name="biz">
+                                <span></span>
+                            </label>
+                        </div>
                     </div>
                 </div>
             </div>

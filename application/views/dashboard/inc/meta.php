@@ -35,6 +35,7 @@
         <script type="text/javascript" src="<?php echo base_url() ?>lib/serialize-object.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>lib/validation-engine/jquery.validationEngine.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>lib/validation-engine/jquery.validationEngine-en.js"></script>
+        <script type="text/javascript" src="<?php echo base_url() ?>lib/ckeditor/ckeditor.js"></script>
 
         <!--[if IE]>
             <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.js"></script>

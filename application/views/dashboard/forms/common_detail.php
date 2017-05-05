@@ -4,9 +4,9 @@
         <?php echo $entry_setting->title; ?> <small><?php echo $entry_detail?'Edit':'Add'; ?></small>
     </h4>
 </div>
-<?php endif; ?>
 
 <div class="modal-body">
+<?php endif; ?>
 <form name="entry-detail-frm" id="entry-detail-frm" target="integration_asynchronous" class="validation-frm">
     <input 
         type="hidden" 
@@ -119,6 +119,23 @@
                             <div>
                                 <textarea 
                                     type="text"
+                                    class="form-control <?php echo $column['client']; ?>" 
+                                    data-putto="#frm-err-data-<?php echo $column['name']; ?>"
+                                    name="data[<?php echo $column['name']; ?>]"
+                                    ><?php echo $entry_detail->data[$column['name']]; ?></textarea>
+                            </div>
+                            <div id="frm-err-data-<?php echo $column['name']; ?>"></div>
+                        </div>
+                    </div>
+                </div>
+            <?php elseif ($column['type'] == 'html'): ?>
+                <div class="col-xs-<?php echo $column['col']; ?> half">
+                    <div class="pull-bottom">
+                        <div><?php echo $column['title']; ?> :(*)</div>
+                        <div class="control-group">
+                            <div>
+                                <textarea 
+                                    type="text" row="4"
                                     class="form-control <?php echo $column['client']; ?>" 
                                     data-putto="#frm-err-data-<?php echo $column['name']; ?>"
                                     name="data[<?php echo $column['name']; ?>]"
@@ -265,6 +282,25 @@
                         </div>
                     </div>
                 </div>
+            <?php elseif ($column['type'] == 'html'): ?>
+                <div class="col-xs-<?php echo $column['col']; ?> half">
+                    <div class="pull-bottom">
+                        <div><?php echo $column['title']; ?> :(*)</div>
+                        <div class="control-group">
+                            <div>
+                                <textarea 
+                                    type="text" row="4" 
+                                    id="longdata-<?php echo $column['name']; ?>"
+                                    data-editor=1
+                                    class="form-control <?php echo $column['client']; ?>" 
+                                    data-putto="#frm-err-longdata-<?php echo $column['name']; ?>"
+                                    name="longdata[<?php echo $column['name']; ?>]"
+                                    ><?php echo $entry_detail->longdata[$column['name']]; ?></textarea>
+                            </div>
+                            <div id="frm-err-longdata-<?php echo $column['name']; ?>"></div>
+                        </div>
+                    </div>
+                </div>
             <?php elseif ($column['type'] == 'image'): ?>
                 <div class="col-xs-<?php echo $column['col']; ?> half">
                     <div class="pull-bottom">
@@ -343,9 +379,9 @@
     </div>
     
 </form>
+<?php if(empty($entry_setting->data['size'])) : ?>
 </div>
 
-<?php if(empty($entry_setting->data['size'])) : ?>
 <div class="modal-footer">
     <?php if($entry_detail) : ?>
     <button class="btn btn-outline-secondary" onclick="App.Common.Duplicate()">Duplicate</button>

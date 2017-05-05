@@ -275,10 +275,10 @@ App.InitForm = function(frm){
     });
     frm.find('.selectpicker').selectpicker();
     
-    if(frm.find('textarea[data-isEditor="true"]').length>0){
-        frm.find('textarea[data-isEditor="true"]').each(function(){
+    if(frm.find('textarea[data-editor]').length>0){
+        frm.find('textarea[data-editor]').each(function(){
                 // addEditorBasic($(this).attr('id'),160);
-                // addEditorFeature($(this).attr('id'),320);
+                App.Editor.addEditorFeature($(this).attr('id'),200);
         })
         
     }

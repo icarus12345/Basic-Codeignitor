@@ -121,11 +121,12 @@ $(document).ready(function(){
                     toastr.error("<b>Status</b>:" + xhr.status + "<br/><b>ThrownError</b>:" + error + "<br/>",'Error');
                 }
             });
+            var w = $(window).height() - 12*2 - 120 - 46 - 30;
             $(gridElm).jqxGrid({
                 width               : '100%', //
                 //autoheight:true,
                 rowsheight:28,
-                height              : '400px',
+                height              : Math.max(240, w),
                 source              : dataAdapter,
                 theme               : theme,
                 columns             : columns,
@@ -304,12 +305,12 @@ $(document).ready(function(){
                         toastr.warning(res.message,'Warning');
                     } else {
                         $('#entry-detail').html(res.html);
+
+                        App.InitForm($('#entry-detail-frm'));
                         if(!!App.Common.entry_setting.data.size){
                             dialog.close();
                             dialog.open();
                         }
-
-                        App.InitForm($('#entry-detail-frm'));
                         
                     }
                 })

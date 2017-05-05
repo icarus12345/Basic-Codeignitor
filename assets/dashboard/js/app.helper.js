@@ -47,3 +47,87 @@ App.QueryString = (function () {
   } 
   return query_string;
 }())
+//////
+//// CKEDITOR START
+//
+
+App.Editor = {}
+App.Editor.addRedactorEditor = function(Element) {
+    Element.redactor({
+        //air: true,
+        //wym: true,
+        'buttons': ['html', 'formatting', '|', 'bold', 'italic', 'deleted', '|', 'unorderedlist', 'orderedlist', 'outdent', 'indent', 'alignment', '|', 'video', 'link', '|', 'fontcolor', 'backcolor']
+        //plugins: ['advanced']
+    });
+}
+
+App.Editor.addEditorFeature = function(ElementID, height) {
+//    var instance = CKEDITOR.instances[ElementID];
+//    if (instance) {
+//        return;
+//    }
+    if(typeof height == 'undefined') height = 320
+    try {
+        CKEDITOR.config.startupFocus = false;
+        CKEDITOR.replace(ElementID, {
+            'height': height,
+            'toolbar': [
+                ['Source'], ['Preview', 'Templates'],
+                ['Image', 'Youtube','Video'], ['Flash', 'Table'],
+                ['HorizontalRule', 'Smiley', 'SpecialChar'], ['PageBreak', 'Iframe'],
+                ['Bold', 'Italic'], ['Underline', 'Strike'],
+                ['Subscript', 'Superscript'],
+                ['NumberedList', 'BulletedList'], ['Outdent', 'Indent'],
+                ['Blockquote', 'CreateDiv'],
+                ['JustifyLeft', 'JustifyCenter'], ['JustifyRight', 'JustifyBlock'],
+                ['BidiLtr', 'BidiRtl', 'Language'],
+                ['Link', 'Unlink'],
+                /*['Styles'], */
+                ['Format'], ['Font'], ['FontSize'],
+                ['TextColor', 'BGColor'],['RemoveFormat'],
+                ['Maximize', 'ShowBlocks']
+                
+            ],
+            'removePlugins': 'magicline'
+
+        });
+    } catch (e) {
+        addNotice(e.message,'error');
+    }
+
+}
+
+App.Editor.addEditorBasic = function (ElementID, height) {
+//    var instance = CKEDITOR.instances[ElementID];
+//    if (instance) {
+//        return;
+//    }
+    if(typeof height == 'undefined') height = 320
+    try {
+        CKEDITOR.config.startupFocus = false;
+        CKEDITOR.replace(ElementID, {
+            'height': height,
+            'toolbar': [
+                ['ShowBlocks', 'Image'],
+                ['NumberedList', 'BulletedList'],['Outdent', 'Indent'],['Link', 'Unlink'],
+                ['JustifyLeft', 'JustifyCenter'], ['JustifyRight', 'JustifyBlock'],
+                ['Format'], ['TextColor', 'BGColor']
+            ],
+            'removePlugins': 'magicline'
+        });
+    } catch (e) {
+        addNotice(e.message,'error');
+    }
+}
+
+App.Editor.removeEditor = function (EId) {
+    var instance = CKEDITOR.instances[EId];
+    if (instance) {
+        //CKEDITOR.remove(instance);
+        instance.destroy(true);
+    }
+    //CKEDITOR.replace(EId);
+}
+//////
+//// END
+//
