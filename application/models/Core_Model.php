@@ -10,7 +10,10 @@ class Core_Model extends CI_Model {
         $this->colid = $colid;
         $this->status = $status;
     }
-
+    function select($fields){
+        $this->db->select($fields);
+        return $this;
+    }
     function get_last_insert_id() {
         $query = $this->db->query("SELECT LAST_INSERT_ID() as last_insert_id ;");
         $row = $query->row();
@@ -27,7 +30,9 @@ class Core_Model extends CI_Model {
         $row = $query->row();
         if($row) {
             $data = $this->prefix.'data';
+            $longdata = $this->prefix.'longdata';
             $row->$data = unserialize($row->$data);
+            if(!empty($row->$longdata)) $row->$longdata = unserialize($row->$longdata);
         }
         return $row;
     }
@@ -41,7 +46,9 @@ class Core_Model extends CI_Model {
         $row = $query->row();
         if($row) {
             $data = $this->prefix.'data';
+            $longdata = $this->prefix.'longdata';
             $row->$data = unserialize($row->$data);
+            if(!empty($row->$longdata)) $row->$longdata = unserialize($row->$longdata);
         }
         return $row;
     }

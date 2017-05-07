@@ -91,6 +91,7 @@ App.Editor.addEditorFeature = function(ElementID, height) {
             'removePlugins': 'magicline'
 
         });
+        CKEDITOR.instances[ElementID].on('change', function() { CKEDITOR.instances[ElementID].updateElement() });
     } catch (e) {
         addNotice(e.message,'error');
     }
@@ -115,6 +116,7 @@ App.Editor.addEditorBasic = function (ElementID, height) {
             ],
             'removePlugins': 'magicline'
         });
+        CKEDITOR.instances[ElementID].on('change', function() { CKEDITOR.instances[ElementID].updateElement() });
     } catch (e) {
         addNotice(e.message,'error');
     }

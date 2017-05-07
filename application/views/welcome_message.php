@@ -10,7 +10,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	::selection { background-color: #E13300; color: white; }
 	::-moz-selection { background-color: #E13300; color: white; }
-
+    *,*::after,*::before{
+          -webkit-box-sizing: border-box;
+          -webkit-box-sizing: border-box;
+         -moz-box-sizing: border-box;
+              box-sizing: border-box;
+        padding: 0;margin: 0;
+    }
 	body {
 		background-color: #fff;
 		margin: 40px;
@@ -47,6 +53,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	#body {
 		margin: 0 15px 0 15px;
+
 	}
 
 	p.footer {
@@ -62,7 +69,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		margin: 10px;
 		border: 1px solid #D0D0D0;
 		box-shadow: 0 0 8px #D0D0D0;
+        margin: auto;
+        max-width: 320px;
 	}
+    input{
+        border:1px solid #ccc;line-height: 20px;padding: 5px 10px;display: block;width: 100%
+    }
+    button{
+        border: 0px solid #ccc;line-height: 20px;padding: 3px 12px;
+        border-radius: 3px;
+    }
 	</style>
 </head>
 <body>
@@ -71,15 +87,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<h1>Welcome to CodeIgniter!</h1>
 
 	<div id="body">
-		<p>The page you are looking at is being generated dynamically by CodeIgniter.</p>
-
-		<p>If you would like to edit this page you'll find it located at:</p>
-		<code>application/views/welcome_message.php</code>
-
-		<p>The corresponding controller for this page is found at:</p>
-		<code>application/controllers/Welcome.php</code>
-
-		<p>If you are exploring CodeIgniter for the very first time, you should start by reading the <a href="user_guide/">User Guide</a>.</p>
+        <form method="POST">
+            <div>Email:</div>
+            <div style="padding-bottom:10px">
+                <input type="email" name="email" />
+            </div>
+            <button type="submit">SEND</button>
+        </form>
 	</div>
 
 	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>

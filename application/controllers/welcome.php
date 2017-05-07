@@ -20,6 +20,10 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
+        $email = $this->input->post('email');
+        $code  = md5($email);
 		$this->load->view('welcome_message');
 	}
+
+
 }

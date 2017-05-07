@@ -86,6 +86,13 @@ class setting extends Api_Controller {
                 ));
             $output['data'] = $entry_detail;
         }
+        $setting_list = $this->Core_Model
+            ->select('id,title')
+            ->gets();
+        $this->load->vars(array(
+            'setting_list' => $setting_list
+            ));
+
         $output['html'] = $this->load->view('dashboard/forms/setting_detail',null,true);
         return $this->output
             ->set_content_type('application/json')

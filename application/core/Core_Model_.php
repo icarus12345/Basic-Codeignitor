@@ -10,7 +10,10 @@ class Core_Model extends CI_Model {
         $this->colid = $colid;
         $this->status = $status;
     }
-
+    function select($fields){
+        $this->db->select($fields);
+        return $this;
+    }
     function get_last_insert_id() {
         $query = $this->db->query("SELECT LAST_INSERT_ID() as last_insert_id ;");
         $row = $query->row();

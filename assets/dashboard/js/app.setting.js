@@ -151,7 +151,7 @@ $(document).ready(function(){
         var editingItem;
         function addItem(c){
             var li = $('<li/>')
-                .addClass('col-xs-'+ (c.col||'12'))
+                .addClass('col-xs-'+ (c.col||'12') + (!!+c.biz?' biz':''))
                 .html('<div><span>'+c.title+'</span></div>')
                 .data('cdata',c)
             $( "#sortable" ).append(li)
@@ -169,15 +169,17 @@ $(document).ready(function(){
                 var dataRecord = li.data('cdata')
                 console.log(dataRecord)
                 var frm = $('#column-detail-frm');
-                
+                console.log('dataRecord.biz',dataRecord.biz,!!+dataRecord.biz)
                 frm.find('input[name="name"]').val(dataRecord.name);
                 frm.find('input[name="title"]').val(dataRecord.title);
                 frm.find('select[name="type"]').val(dataRecord.type).change();
+                frm.find('select[name="sid"]').val(dataRecord.sid||'').change();
                 frm.find('input[name="client"]').val(dataRecord.client);
                 frm.find('input[name="server"]').val(dataRecord.server);
-                frm.find('input[name="biz"]').prop('checked', dataRecord.biz);
-                frm.find('input[name="col"]').val(dataRecord.col);
+                frm.find('input[name="biz"]').prop('checked', !!+dataRecord.biz);
+                frm.find('input[name="col"]').val(dataRecord.col || '12');
                 frm.find('select[name="type"]').selectpicker('refresh');
+                frm.find('select[name="sid"]').selectpicker('refresh');
                 if(dataRecord.data){
                     var html = dataRecord.data.map(function(item){
                             return [
@@ -257,13 +259,41 @@ $(document).ready(function(){
                 
                 var data = $('#detail-setting-frm').serializeObject();
                 var columns = $( "#sortable>li").get().map(function(c){
-                    return $(c).data('cdata')
+                    var cdata = $(c).data('cdata');
+                    // cdata.biz = +!!cdata.biz;
+                    if(
+                        !(
+                            cdata.type == 'multidropdown' || 
+                            cdata.type == 'dropdown' ||
+                            cdata.type == 'radio'
+                        )
+                        ){
+                        delete cdata.data;
+                    }
+                    if(
+                        cdata.type == 'grid' || 
+                        // cdata.type == 'checkbox' ||
+                        cdata.type == 'list'
+                        ){
+                        delete cdata.client;
+                        delete cdata.client;
+                    }
+                    if(
+                        !(
+                            cdata.type == 'grid' || 
+                            cdata.type == 'list'
+                        )
+                        ){
+                        delete cdata.sid;
+                    }
+                    return cdata;
                 }) 
                 data.data.columns = columns;
                 data.data.add = !!data.data.add;
                 data.data.edit = !!data.data.edit;
                 data.data.delete = !!data.data.delete;
-                console.log(data);
+                console.log('Data:',data);
+                // return;
 
                 new App.Request({
                     url: URI.commit,
@@ -346,8 +376,7 @@ $(document).ready(function(){
 
                         var frm = $('#column-detail-frm');
 
-
-                        res.data.data.columns.map(function(c){
+                        if(res.data) res.data.data.columns.map(function(c){
                             addItem(c)
                         })
 
@@ -366,11 +395,13 @@ $(document).ready(function(){
                             frm.find('input[name="name"]').val('');
                             frm.find('input[name="title"]').val('');
                             frm.find('select[name="type"]').val('string').change();
+                            frm.find('select[name="sid"]').val('').change();
                             frm.find('input[name="client"]').val('');
                             frm.find('input[name="server"]').val('');
                             frm.find('input[name="col"]').val('12');
                             frm.find('input[name="biz"]').prop('checked', false);
                             frm.find('select[name="type"]').selectpicker('refresh');
+                            frm.find('select[name="sid"]').selectpicker('refresh');
                             frm.find('[data-box="data"] table tbody').empty();
                             App.Setting.ShowColumnDetailDialog()
                         })
@@ -380,12 +411,13 @@ $(document).ready(function(){
                         frm.find('select[name="type"]').change(function(){
                             var type = this.value;
                             frm.find('[data-box]').hide();
-                            console.log('HEEE',type)
                             switch(type) {
-                                case 'checklist':
-                                case 'list':
+                                case 'multidropdown':
+                                case 'dropdown':
                                 case 'radio':
                                     frm.find('[data-box="data"]').show();
+                            }
+                            switch(type) {
                                 case 'string':
                                 case 'catelist':
                                 case 'catetree':
@@ -393,7 +425,12 @@ $(document).ready(function(){
                                 case 'html':
                                 case 'image':
                                     frm.find('[data-box="valid"]').show();
+                            }
+                            switch(type) {
+                                case 'list':
                                 case 'grid':
+                                    frm.find('[data-box="sid"]').show();
+                                    console.log('sid',type)
 
                             }
                         })
@@ -439,7 +476,7 @@ $(document).ready(function(){
                                 return;
                             }
                             var data = $('#column-detail-frm').serializeObject();
-                            data.biz = !!data.biz
+                            data.biz = +!!data.biz
                             data.data = frm.find('[data-box="data"] table tbody tr')
                                 .get()
                                 .map(function(tr){
@@ -448,11 +485,12 @@ $(document).ready(function(){
                                         value: $(tr).find('td[data-field="value"]').html(),
                                     }
                                 });
+                            console.log('CData:',data);
                             if (editingItem) {
                                 editingItem.data('cdata',data);
                                 editingItem.attr('class', '');
                                 editingItem.addClass('col-xs-'+data.col);
-                                editingItem.find('>div>span').html(data.display)
+                                editingItem.find('>div>span').html(data.title)
                             }else{
                                 addItem(data);
                                 $("#sortable").sortable('refresh');
