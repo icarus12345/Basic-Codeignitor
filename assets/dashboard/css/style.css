@@ -208,7 +208,7 @@ body{
     padding: 40px 0;text-align: center;
 }
 .ui-widget-overlay{position: fixed;}
-.sortable{list-style: none;margin-left: -2px;margin-right: -2px}
+.sortable{list-style: none;margin-left: -2px;margin-right: -2px;margin-bottom: 0;}
 .sortable>li{
     margin-bottom: 4px;padding: 0 2px
 }

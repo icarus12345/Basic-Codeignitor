@@ -43,7 +43,7 @@ $this->CI =& get_instance();
             </div>
         </div>
 
-        <div class="secondary-box" id="entry-detail">
+        <div class="-secondary-box" id="entry-detail">
             <div class="modal-header">
                 <h4>
                     <?php echo $settings[$sid]->title; ?> <small>Add/Edit</small>

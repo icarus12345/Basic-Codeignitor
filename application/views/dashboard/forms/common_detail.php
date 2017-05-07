@@ -1,11 +1,11 @@
 <?php if(empty($entry_setting->data['size'])) : ?>
-<div class="modal-header">
+<div class="-modal-header pull-top pull-bottom">
     <h4>
         <?php echo $entry_setting->title; ?> <small><?php echo $entry_detail?'Edit':'Add'; ?></small>
     </h4>
 </div>
 
-<div class="modal-body">
+<div class="-modal-body pull-top">
 <?php endif; ?>
 <form name="entry-detail-frm" id="entry-detail-frm" target="integration_asynchronous" class="validation-frm">
     <input 
@@ -301,11 +301,11 @@
 <?php if(empty($entry_setting->data['size'])) : ?>
 </div>
 
-<div class="modal-footer">
+<div class="-modal-footer pull-top text-center">
     <?php if($entry_detail) : ?>
     <button class="btn btn-outline-secondary" onclick="App.Common.Duplicate()">Duplicate</button>
     <?php endif; ?>
-    <button class="btn btn-ui" onclick="App.Common.Save()">Save</button>
+    <button class="btn btn-default" onclick="App.Common.Save()">Save</button>
     <button class="btn btn-link" onclick="App.Common.Back()">Back</button>
 </div>
 <?php endif; ?>

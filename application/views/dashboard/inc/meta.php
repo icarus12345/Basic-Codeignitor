@@ -22,8 +22,9 @@
         <script type="text/javascript" src="<?php echo base_url() ?>lib/jqwidgets/jqx-all.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>assets/bootstrap/js/bootstrap-select.min.js"></script>
 
-
-        <script type="text/javascript" src="<?php echo base_url() ?>lib/toastr/toastr.min.js"></script>
+        <script type="text/javascript" src="<?php echo base_url() ?>lib/toastr/toastr.js"></script>
+        <!--
+        -->
         <script type="text/javascript" src="<?php echo base_url() ?>lib/jquery.routes.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>assets/dashboard/js/main.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>assets/dashboard/js/route.js"></script>
