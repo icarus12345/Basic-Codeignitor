@@ -1,7 +1,7 @@
 @import url('../../bootstrap/css/bootstrap.css');
 @import url('../../bootstrap/css/font-awesome.min.css');
 @import url('../../bootstrap/css/simple-line-icons.css');
-@import url('../../../lib/toastr/toastr.css');
+@import url('../../toastr/toastr.css');
 @import url('style.css');
 @import url('dialog.css');
 @import url('form.css');

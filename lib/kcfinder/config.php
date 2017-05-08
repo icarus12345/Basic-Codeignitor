@@ -14,6 +14,18 @@
 // IMPORTANT!!! Do not remove uncommented settings in this file even if
 // you are using session configuration.
 // See http://kcfinder.sunhater.com/install for setting descriptions
+ob_start();
+define("REQUEST", "external");
+$temp_system_path = '../../system';
+$temp_application_folder = '../../application';
+include('../../index.php');
+ob_end_clean();
+$CI =& get_instance();
+
+if(!empty($CI->session->userdata('KCFINDER'))) {
+    $KCFINDER = $CI->session->userdata('KCFINDER');
+    // echo '<pre>',print_r($KCFINDER),'</pre>';die;
+}
 
 $_CONFIG = array(
     'disabled' => true,
@@ -81,7 +93,7 @@ $_CONFIG = array(
     // THE FOLLOWING SETTINGS CANNOT BE OVERRIDED WITH SESSION CONFIGURATION
     '_check4htaccess' => true,
     '_tinyMCEPath' => "../tiny_mce",
-    '_sessionVar' => &$_SESSION['KCFINDER'],
+    '_sessionVar' => &$KCFINDER,
     '_sessionLifetime' => 30,
         //'_sessionDir' => "/full/directory/path",
         //'_sessionDomain' => ".mysite.com",

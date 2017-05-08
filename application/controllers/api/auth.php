@@ -89,13 +89,14 @@ class auth extends CI_Controller {
             ->set_output(json_encode($output));
     }
     private function fileverify($authoritys) {
-        unset($_SESSION['KCFINDER']);
+        $this->session->unset_userdata('KCFINDER');
+        $KCFINDER = array();
         if (
                 !!array_intersect(array('Administrator', 'Admin', 'User'), $authoritys)
         ) {
-            $_SESSION['KCFINDER']['disabled'] = false;
-            $_SESSION['KCFINDER']['uploadURL'] = ('/data');
-            $_SESSION['KCFINDER']['uploadDir'] = BASEPATH.'../data';
+             $KCFINDER['disabled'] = false;
+             $KCFINDER['uploadURL'] = ('/data');
+             $KCFINDER['uploadDir'] = BASEPATH.'../data';
             $files = array(
                 'upload' => true,
                 'delete' => true,
@@ -112,9 +113,9 @@ class auth extends CI_Controller {
         } elseif (
                 !!array_intersect(array('View'), $authoritys)
         ) {
-            $_SESSION['KCFINDER']['uploadURL'] = ('/data'); //base_url("data");
-            $_SESSION['KCFINDER']['uploadDir'] = BASEPATH.'../data';
-            $_SESSION['KCFINDER']['disabled'] = false;
+             $KCFINDER['uploadURL'] = ('/data'); //base_url("data");
+             $KCFINDER['uploadDir'] = BASEPATH.'../data';
+             $KCFINDER['disabled'] = false;
             $files = array(
                 'upload' => false,
                 'delete' => false,
@@ -129,9 +130,9 @@ class auth extends CI_Controller {
                 'rename' => false
             );
         } else {
-            $_SESSION['KCFINDER']['uploadURL'] = ('/data'); //base_url("data");
-            $_SESSION['KCFINDER']['uploadDir'] = BASEPATH.'../data';
-            $_SESSION['KCFINDER']['disabled'] = true;
+             $KCFINDER['uploadURL'] = ('/data'); //base_url("data");
+             $KCFINDER['uploadDir'] = BASEPATH.'../data';
+             $KCFINDER['disabled'] = true;
 
             $files = array(
                 'upload' => false,
@@ -146,10 +147,11 @@ class auth extends CI_Controller {
                 'rename' => false
             );
         }
-        $_SESSION['KCFINDER']['access'] = array(
+        $KCFINDER['access'] = array(
             'files' => $files,
             'dirs' => $dirs
         );
+        $this->session->set_userdata('KCFINDER',$KCFINDER);
     }
     public $rules = array(
         'insert' => array(

@@ -9,29 +9,29 @@
         <meta name="keywords" content=""/>
 
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>lib/ui/themes/base/jquery.ui.all.css">
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/dashboard/css/main.css"/>
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>lib/dashboard/css/main.css"/>
 
         <link rel='stylesheet' type='text/css' href='<?php echo base_url() ?>lib/jqwidgets/styles/jqx.base.css'>
         <link rel='stylesheet' type='text/css' href='<?php echo base_url() ?>lib/jqwidgets/styles/jqx.metro.css'>
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/bootstrap/css/bootstrap-select.min.css"/>
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>lib/bootstrap/css/bootstrap-select.min.css"/>
 
 
         <script type="text/javascript" src="<?php echo base_url() ?>lib/jquery-1.9.1.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>lib/ui/js/jquery-ui-1.9.2.custom.min.js"></script>
-        <script type="text/javascript" src="<?php echo base_url() ?>assets/bootstrap/js/bootstrap.js"></script>
+        <script type="text/javascript" src="<?php echo base_url() ?>lib/bootstrap/js/bootstrap.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>lib/jqwidgets/jqx-all.js"></script>
-        <script type="text/javascript" src="<?php echo base_url() ?>assets/bootstrap/js/bootstrap-select.min.js"></script>
+        <script type="text/javascript" src="<?php echo base_url() ?>lib/bootstrap/js/bootstrap-select.min.js"></script>
 
         <script type="text/javascript" src="<?php echo base_url() ?>lib/toastr/toastr.js"></script>
         <!--
         -->
         <script type="text/javascript" src="<?php echo base_url() ?>lib/jquery.routes.js"></script>
-        <script type="text/javascript" src="<?php echo base_url() ?>assets/dashboard/js/main.js"></script>
-        <script type="text/javascript" src="<?php echo base_url() ?>assets/dashboard/js/route.js"></script>
-        <script type="text/javascript" src="<?php echo base_url() ?>assets/dashboard/js/app.helper.js"></script>
-        <script type="text/javascript" src="<?php echo base_url() ?>assets/dashboard/js/app.setting.js"></script>
-        <script type="text/javascript" src="<?php echo base_url() ?>assets/dashboard/js/app.category.js"></script>
-        <script type="text/javascript" src="<?php echo base_url() ?>assets/dashboard/js/app.common.js"></script>
+        <script type="text/javascript" src="<?php echo base_url() ?>lib/dashboard/js/main.js"></script>
+        <script type="text/javascript" src="<?php echo base_url() ?>lib/dashboard/js/route.js"></script>
+        <script type="text/javascript" src="<?php echo base_url() ?>lib/dashboard/js/app.helper.js"></script>
+        <script type="text/javascript" src="<?php echo base_url() ?>lib/dashboard/js/app.setting.js"></script>
+        <script type="text/javascript" src="<?php echo base_url() ?>lib/dashboard/js/app.category.js"></script>
+        <script type="text/javascript" src="<?php echo base_url() ?>lib/dashboard/js/app.common.js"></script>
 
         <script type="text/javascript" src="<?php echo base_url() ?>lib/serialize-object.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>lib/validation-engine/jquery.validationEngine.js"></script>

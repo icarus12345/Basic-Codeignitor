@@ -54,12 +54,12 @@ class category extends Api_Controller {
                 'title' => array(
                     'field'=>'title',
                     'label'=>'Title',
-                    'rules'=>'trim|required|min_length[4]|max_length[255]'
+                    'rules'=>'trim|max_length[255]'
                     ),
                 'alias' => array(
                     'field'=>'alias',
                     'label'=>'Alias',
-                    'rules'=>'trim|required|min_length[4]|max_length[255]'
+                    'rules'=>'trim|max_length[255]'
                     ),
                 'type' => array(
                     'field'=>'type',
@@ -177,19 +177,20 @@ class category extends Api_Controller {
             $output['message'] = validation_errors();
             // $output['code'] = -1;
         } else {
-            $data = $this->input->post('data');
+            $params = array();
             $id = $this->input->post('id');
             $pid = $this->input->post('pid');
+            if(isset($pid)) $params['pid'] = $pid;
             $title = $this->input->post('title');
-            $type = $this->input->post('type');
+            if(isset($title)) $params['title'] = $title;
             $alias = $this->input->post('alias');
-            $params = array(
-                'title' => $title,
-                'alias' => $alias,
-                'pid' => $pid,
-                'type' => $type,
-                'data' => serialize($data),
-                );
+            if(isset($alias)) $params['alias'] = $alias;
+            $type = $this->input->post('type');
+            if(isset($type)) $params['type'] = $type;
+            $status = $this->input->post('status');
+            if(isset($status)) $params['status'] = $status;
+            $data = $this->input->post('data');
+            if(isset($data)) $params['data'] = serialize($data);
             $rs = $this->Core_Model->onUpdate($id, $params);
             if ($rs === true) {
                 $output["code"] = 1;

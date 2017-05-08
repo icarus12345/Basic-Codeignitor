@@ -98,7 +98,7 @@ switch (ENVIRONMENT)
  * This variable must contain the name of your "system" directory.
  * Set the path if it is not in the same directory as this file.
  */
-	$system_path = 'system';
+	$system_path = isset($temp_system_path) ? $temp_system_path : 'system';
 
 /*
  *---------------------------------------------------------------
@@ -115,7 +115,7 @@ switch (ENVIRONMENT)
  *
  * NO TRAILING SLASH!
  */
-	$application_folder = 'application';
+	$application_folder = isset($temp_application_folder) ? $temp_application_folder : 'application';
 
 /*
  *---------------------------------------------------------------

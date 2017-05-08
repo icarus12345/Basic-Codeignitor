@@ -16,17 +16,17 @@ class common extends Api_Controller {
             'data[title]' => array(
                 'field'=>'data[title]',
                 'label'=>'Title',
-                'rules'=>'trim|required|min_length[4]|max_length[255]'
+                'rules'=>'trim|required|max_length[255]'
                 ),
             'data[alias]' => array(
                 'field'=>'data[alias]',
                 'label'=>'Alias',
-                'rules'=>'trim|required|min_length[4]|max_length[255]'
+                'rules'=>'trim|required|max_length[255]'
                 ),
             'data[type]' => array(
                 'field'=>'data[type]',
                 'label'=>'Type',
-                'rules'=>'trim|required|min_length[4]|max_length[50]'
+                'rules'=>'trim|required|max_length[50]'
                 ),
             'data[category]' => array(
                 'field'=>'data[category]',
@@ -47,17 +47,17 @@ class common extends Api_Controller {
             'data[title]' => array(
                 'field'=>'data[title]',
                 'label'=>'Title',
-                'rules'=>'trim|required|min_length[4]|max_length[255]'
+                'rules'=>'trim|required|max_length[255]'
                 ),
             'data[alias]' => array(
                 'field'=>'data[alias]',
                 'label'=>'Alias',
-                'rules'=>'trim|required|min_length[4]|max_length[255]'
+                'rules'=>'trim|required|max_length[255]'
                 ),
             'data[type]' => array(
                 'field'=>'data[type]',
                 'label'=>'Type',
-                'rules'=>'trim|required|min_length[4]|max_length[50]'
+                'rules'=>'trim|required|max_length[50]'
                 ),
             'data[category]' => array(
                 'field'=>'data[category]',
@@ -217,13 +217,72 @@ class common extends Api_Controller {
         else $this->oncreate();
     }
 
+    function update(){
+        $output = array(
+            'text' => 'fail',
+            'code' => -1,
+            'data' => null
+        );
+        $id = $this->input->post('id');
+        $sid = $this->input->post('sid');
+        $entry_setting = $this->Setting_Model->get($sid);
+        if($entry_setting){
+            if($entry_setting->data['columns']) foreach ($entry_setting->data['columns'] as $key => $column) {
+                if(!empty($column['server'])){
+                    $field = 'data[data]['.$column['name'].']';
+                    if($column['biz'] == '1'){
+                        $field = 'data[longdata]['.$column['name'].']';
+                    }
+                    $label = $column['title'];
+                    $rule = $column['server'];
+                    // $this->form_validation->set_rules($field,$label,$rule);
+                }
+            }
+        } else {
+
+        }
+
+        // $this->form_validation->set_rules($this->rules['insert']);
+        // if ($this->form_validation->run() == FALSE) {
+            // $output['validation'] = validation_errors_array();
+            // $output['message'] = validation_errors();
+            // $output['code'] = -1;
+        // } else {
+
+            
+            $this->Core_Model = new Core_Model($this->table);
+            $rs = $this->Core_Model->onUpdate($id, $params);
+            if ($rs === true) {
+                $output["code"] = 1;
+                $output["text"] = 'ok';
+                $output["message"] = 'Register record to database.';
+            } else {
+                $output["code"] = -1;
+                $output["message"] = "Record faily to insert. Please check data input and try again.";
+            }
+        // }
+        return $this->output
+            ->set_content_type('application/json')
+            ->set_status_header(200)
+            ->set_output(json_encode($output));
+    }
+
     public function onupdate(){
         $output = array(
             'text' => 'fail',
             'code' => -1,
             'data' => null
         );
+        $id = $this->input->post('id');
         $sid = $this->input->post('sid');
+        $title = $this->input->post('data[title]');
+        $alias = $this->input->post('data[alias]');
+        $type = $this->input->post('data[type]');
+        $status = $this->input->post('data[status]');
+        $category = $this->input->post('data[category]');
+        $data = $this->input->post('data[data]');
+        $longdata = $this->input->post('data[longdata]');
+
         $entry_setting = $this->Setting_Model->get($sid);
         if($entry_setting){
             if($entry_setting->data['columns']) foreach ($entry_setting->data['columns'] as $key => $column) {
@@ -241,31 +300,26 @@ class common extends Api_Controller {
 
         }
 
-        $this->form_validation->set_rules($this->rules['insert']);
+        $this->form_validation->set_rules($this->rules['update']);
         if ($this->form_validation->run() == FALSE) {
             $output['validation'] = validation_errors_array();
             $output['message'] = validation_errors();
             // $output['code'] = -1;
         } else {
 
-            $data = $this->input->post('data[data]');
-            $longdata = $this->input->post('data[longdata]');
-            $id = $this->input->post('id');
-            $title = $this->input->post('data[title]');
-            $type = $this->input->post('data[type]');
-            $alias = $this->input->post('data[alias]');
-            $category = $this->input->post('data[category]');
+            $params = array();
+            
+            if(isset($data)) $params['data'] = serialize($data);
+            if(isset($longdata)) $params['longdata'] = serialize($longdata);
+
+            if(isset($category)) $params['category'] = $category;
+
+            if(isset($title)) $params['title'] = $title;
+            if(isset($alias)) $params['alias'] = $alias;
+            if(isset($type)) $params['type'] = $type;
+            if(isset($status)) $params['status'] = $status;;
 
             $table = $entry_setting->data['storage'];
-            $params = array(
-                'category' => $category,
-                'title' => $title,
-                'alias' => $alias,
-                'type' => $type,
-                'pid' => $pid,
-                'data' => serialize($data),
-                'longdata' => serialize($longdata),
-                );
             $this->Core_Model = new Core_Model($this->table);
             $rs = $this->Core_Model->onUpdate($id, $params);
             if ($rs === true) {
