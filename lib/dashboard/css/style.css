@@ -260,8 +260,12 @@ body{
     }
     .page-content{
         overflow-y: auto;
+        min-height: 70vh;
     }
-    .page-content>.fluid{position: relative;height: auto}
+    .page-content>.fluid{
+        position: relative;height: auto;
+        min-height: 80vh;
+    }
 }
 @media (max-width: 991px){
 }
