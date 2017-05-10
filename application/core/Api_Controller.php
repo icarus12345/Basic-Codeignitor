@@ -48,19 +48,21 @@ class Api_Controller extends CI_Controller {
                     {$this->table}.{$this->prefix}id,
                     {$this->table}.{$this->prefix}title,
                     {$this->table}.{$this->prefix}created,
+                    {$this->table}.{$this->prefix}category,
+                    tbl_category.title as cattitle,
                     {$this->table}.{$this->prefix}modified,
                     {$this->table}.{$this->prefix}status
                 ",
             "from"      => "
                 FROM `{$this->table}` 
+                LEFT JOIN tbl_category ON(tbl_category.id = {$this->table}.category)
             ",
-            "where"     => !empty($type)?"WHERE `{$this->prefix}type` = '$type'":'',
-            "order_by"  => "ORDER BY `{$this->prefix}created` DESC",
+            "where"     => !empty($type)?"WHERE {$this->table}.`{$this->prefix}type` = '$type'":'',
+            "order_by"  => "ORDER BY {$this->table}.`{$this->prefix}created` DESC",
             "columnmaps"=>array(
-                
+                'cattitle'=>'tbl_category.title'
             ),
             "filterfields"=>array(
-
             )
         );
         $output = $this->Core_Model->jqxBinding();

@@ -1,3 +1,7 @@
+a[disabled] {
+  pointer-events: none;
+  opacity: .5
+}
 .input-append {
     padding-right: 28px;
     position: relative;
