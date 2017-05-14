@@ -26,6 +26,15 @@ class auth_model extends CI_Model {
         }
         return $query->row();
     }
+    function onUpdate($id, $params) {
+        $this->db->set('ause_update', 'NOW()', FALSE);
+        $this->db->where('ause_id', $id);
+        @$this->db->update('auth_users', $params);
+        @$count = $this->db->affected_rows(); //should return the number of rows affected by the last query
+        if ($count == 1)
+            return true;
+        return false;
+    }
     function getprivileges($_userid){
         $query=$this->db
                 ->select("`apri_id`,`apri_name`,`apri_key`,`apri_position`,`aupr_permission`")

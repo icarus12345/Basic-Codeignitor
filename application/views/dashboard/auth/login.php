@@ -2,11 +2,11 @@
 $this->CI =& get_instance();
 $this->load->view('dashboard/inc/meta');
 ?>
-    <body class="full-page">
-        <?php $this->load->view('dashboard/inc/header'); ?>
-        <div class="container page-container">
+    <body class="full-page" style="padding:0">
+        <!-- <?php $this->load->view('dashboard/inc/header'); ?> -->
+        <!-- <div class="container page-container"> -->
             <?php // $this->load->view('dashboard/inc/nav'); ?>
-            <div class="page-content">
+            <!-- <div class="page-content"> -->
                 <div class="flex fluid">
                     <div class="modal-overlay open"></div>
                     <div class="login-box secondary-box" >
@@ -44,8 +44,8 @@ $this->load->view('dashboard/inc/meta');
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            <!-- </div> -->
+        <!-- </div> -->
         <?php $this->load->view('dashboard/inc/footer'); ?>
         <script type="text/javascript">
             $(document).ready(function(){

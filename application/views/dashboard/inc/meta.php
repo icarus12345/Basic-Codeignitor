@@ -7,7 +7,7 @@
         <title>Dashboard</title>
         <meta name="description" content=""/>
         <meta name="keywords" content=""/>
-
+        
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>lib/ui/themes/base/jquery.ui.all.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>lib/dashboard/css/main.css"/>
 
@@ -28,6 +28,7 @@
         <script type="text/javascript" src="<?php echo base_url() ?>lib/jquery.routes.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>lib/dashboard/js/main.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>lib/dashboard/js/route.js"></script>
+        <script type="text/javascript" src="<?php echo base_url() ?>lib/dashboard/js/app.auth.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>lib/dashboard/js/app.helper.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>lib/dashboard/js/app.setting.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>lib/dashboard/js/app.category.js"></script>
