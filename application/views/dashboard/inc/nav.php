@@ -63,7 +63,7 @@
                     <a href="<?php echo base_url('dashboard/category/view/4'); ?>"><i class="fa fa-sitemap"></i> Dashboard Menu</a>
                 </li>
                 <li>
-                    <a href="<?php echo base_url('dashboard/setting'); ?>"><i class="fa fa-sliders"></i> Dashboard Setting</a>
+                    <a href="<?php echo base_url('dashboard/setting'); ?>"><i class="fa fa-sliders"></i> Dashboard Module</a>
                 </li>
             </ul>
         </li>

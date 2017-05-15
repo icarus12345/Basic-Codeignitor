@@ -292,7 +292,7 @@ class common extends Api_Controller {
                 if(isset($title)) $params['title'] = $title;
                 if(isset($alias)) $params['alias'] = $alias;
                 if(isset($type)) $params['type'] = $type;
-                if(isset($status)) $params['status'] = $status;;
+                if(isset($status)) $params['status'] = $status;
                 if(isset($data)) $params['data'] = serialize($data);
                 if(isset($longdata)) $params['longdata'] = serialize($longdata);
                 $entry_detail = $this->Core_Model->get($id);

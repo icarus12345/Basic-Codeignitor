@@ -12,23 +12,19 @@ class category extends Api_Controller {
     function index(){
         echo 'Welcome API';
     }
-    public function title_check($str){
-        if ($str == 'test')
-        {
-                $this->form_validation->set_message('username_check', 'The {field} field can not be the word "test"');
-                return FALSE;
-        }
-        else
-        {
-                return TRUE;
-        }
-    }
     public $rules = array(
+        'unique' => array(
+            'title' => array(
+                'field'=>'title',
+                'label'=>'Title',
+                'rules'=>'callback_title_check'
+            ),
+        ),
         'insert' => array(
                 'title' => array(
                     'field'=>'title',
                     'label'=>'Title',
-                    'rules'=>'trim|required|min_length[4]|max_length[255]|callback_title_check'
+                    'rules'=>'trim|required|min_length[4]|max_length[255]'
                     ),
                 'alias' => array(
                     'field'=>'alias',
@@ -82,6 +78,20 @@ class category extends Api_Controller {
                 ),
         )                    
     );
+    public function title_check($str){
+        $alias = $this->input->post('alias');
+        $type = $this->input->post('type');
+        $id = $this->input->post('id');
+        $sid = $this->input->post('sid');
+        $row = $this->Core_Model
+            ->set_type($type)
+            ->get_by_alias($alias);
+        if($row && $row->id!=$id){
+            $this->form_validation->set_message('title_check', 'The {field} field are already inserted');
+            return FALSE;
+        }
+        return TRUE;
+    }
     function detail(){
         $output = array(
             'text' => 'ok',
@@ -172,6 +182,9 @@ class category extends Api_Controller {
             'data' => null
         );
         $this->form_validation->set_rules($this->rules['update']);
+        // if($entry_setting->data['unique'] == 'true'){
+            $this->form_validation->set_rules($this->rules['unique']);
+        // }
         if ($this->form_validation->run() == FALSE) {
             $output['validation'] = validation_errors_array();
             $output['message'] = validation_errors();
@@ -213,6 +226,9 @@ class category extends Api_Controller {
             'data' => null
         );
         $this->form_validation->set_rules($this->rules['insert']);
+        // if($entry_setting->data['unique'] == 'true'){
+                $this->form_validation->set_rules($this->rules['unique']);
+        // }
         if ($this->form_validation->run() == FALSE) {
             $output['validation'] = validation_errors_array();
             $output['message'] = validation_errors();
@@ -228,10 +244,11 @@ class category extends Api_Controller {
                 'title' => $title,
                 'alias' => $alias,
                 'type' => $type,
+                'status' => 1,
                 'pid' => $pid,
                 'data' => serialize($data),
                 );
-            $this->Core_Model = new Core_Model($this->table);
+            
             $rs = $this->Core_Model->onInsert($params);
             if ($rs === true) {
                 $output["code"] = 1;

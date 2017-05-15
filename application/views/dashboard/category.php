@@ -39,9 +39,6 @@ $this->CI =& get_instance();
             <div class="jqxGrid" id="jqxGrid" style="border:0">
                 
             </div>
-            <div class="modal-body" id="login-dialog">
-                
-            </div>
         </div>
     </div>
 <!-- </div> -->

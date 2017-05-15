@@ -87,7 +87,7 @@ class setting extends Api_Controller {
             $output['data'] = $entry_detail;
         }
         $setting_list = $this->Core_Model
-            ->select('id,title')
+            ->select('id,title,data')
             ->gets();
         $this->load->vars(array(
             'setting_list' => $setting_list
@@ -210,5 +210,37 @@ class setting extends Api_Controller {
             ->set_content_type('application/json')
             ->set_status_header(200)
             ->set_output(json_encode($output));
+    }
+    function bind(){
+        $type = $this->input->post('type');
+        $this->Core_Model->table_config=array(
+            "table"     =>"{$this->table}",
+            "select"    =>"
+                SELECT SQL_CALC_FOUND_ROWS 
+                    {$this->table}.{$this->prefix}id,
+                    {$this->table}.{$this->prefix}title,
+                    {$this->table}.{$this->prefix}created,
+                    {$this->table}.{$this->prefix}modified,
+                    {$this->table}.{$this->prefix}status,
+                    {$this->table}.{$this->prefix}data
+                ",
+            "from"      =>" FROM `{$this->table}` ",
+            "where"     =>!empty($type)?"WHERE `{$this->prefix}type` = '$type'":'',
+            "order_by"  =>"ORDER BY `{$this->prefix}created` ASC",
+            "columnmaps"=>array(
+                
+            ),
+            "filterfields"=>array(
+
+            )
+        );
+        $output = $this->Core_Model->jqxBinding();
+        foreach ($output['rows'] as $key => $value) {
+            $data = unserialize($value->data);
+            unset($output['rows'][$key]->data);
+            $output['rows'][$key]->title = $output['rows'][$key]->title . ' - <small><i>' . $data['site'] .'</i></small>';
+        }
+        $this->output->set_header('Content-type: application/json');
+        $this->output->set_output(json_encode($output));
     }
 }

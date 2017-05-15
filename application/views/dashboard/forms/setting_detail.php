@@ -27,27 +27,21 @@
         </div>
         <div class="col-xs-6 half">
             <div class="pull-bottom">
-                <div>Storage at :(*)</div>
+                <div>Site :(*)</div>
                 <div class="control-group">
-                    <div>
-                        <select 
-                            name="data[storage]" 
-                            class="form-control selectpicker validate[required]"
-                            data-putto="#frm-err-data-storage"
-                            >
-                            <option value="tbl_data" <?php echo $entry_detail->data['storage'] == 'tbl_data'?'selected="1"':''; ?>>Storage 01</option>
-                            <option value="tbl_data2" <?php echo $entry_detail->data['storage2'] == 'tbl_data'?'selected="1"':''; ?>>Storage 02</option>
-                            <option value="tbl_data3" <?php echo $entry_detail->data['storage3'] == 'tbl_data'?'selected="1"':''; ?>>Storage 03</option>
-                            <option value="tbl_data4" <?php echo $entry_detail->data['storage4'] == 'tbl_data'?'selected="1"':''; ?>>Storage 04</option>
-                        </select>
-                    </div>
-                    <div id="frm-err-data-storage"></div>
+                    <input 
+                        type="text"
+                        class="form-control validate[required,minSize[4],maxSize[50]]" 
+                        placeholder=""
+                        id="detail-setting-site"
+                        name="data[site]"
+                        value="<?php echo $entry_detail->data['site']; ?>" >
                 </div>
             </div>
         </div>
     </div>
     <div class="row half">
-        <div class="col-xs-6 half">
+        <div class="col-xs-3 half">
             <div class="pull-bottom">
                 <div>Size :(*)</div>
                 <div class="control-group">
@@ -94,6 +88,26 @@
                         </select>
                     </div>
                     <div id="frm-err-data-size"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-3 half">
+            <div class="pull-bottom">
+                <div>Storage at :(*)</div>
+                <div class="control-group">
+                    <div>
+                        <select 
+                            name="data[storage]" 
+                            class="form-control selectpicker validate[required]"
+                            data-putto="#frm-err-data-storage"
+                            >
+                            <option value="tbl_data" <?php echo $entry_detail->data['storage'] == 'tbl_data'?'selected="1"':''; ?>>Storage 01</option>
+                            <option value="tbl_data2" <?php echo $entry_detail->data['storage2'] == 'tbl_data'?'selected="1"':''; ?>>Storage 02</option>
+                            <option value="tbl_data3" <?php echo $entry_detail->data['storage3'] == 'tbl_data'?'selected="1"':''; ?>>Storage 03</option>
+                            <option value="tbl_data4" <?php echo $entry_detail->data['storage4'] == 'tbl_data'?'selected="1"':''; ?>>Storage 04</option>
+                        </select>
+                    </div>
+                    <div id="frm-err-data-storage"></div>
                 </div>
             </div>
         </div>
@@ -324,7 +338,10 @@
                     >
                     <option value="">[   Nothing   ]</option>
                     <?php foreach($setting_list as $foo): ?>
-                    <option value="<?php echo $foo->id; ?>"><?php echo $foo->title; ?></option>
+                    <option 
+                        data-content="<?php echo $foo->title; ?> - <small><i><?php echo $foo->data['site']; ?></i></small>"
+                        value="<?php echo $foo->id; ?>"
+                        ><?php echo $foo->title; ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
