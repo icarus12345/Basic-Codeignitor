@@ -12,11 +12,18 @@ class common extends Api_Controller {
         echo 'Welcome API';
     }
     public $rules = array(
+        'unique' => array(
+            'data[title]' => array(
+                'field'=>'data[title]',
+                'label'=>'Title',
+                'rules'=>'callback_title_check'
+            ),
+        ),
         'insert' => array(
             'data[title]' => array(
                 'field'=>'data[title]',
                 'label'=>'Title',
-                'rules'=>'trim|required|max_length[255]|callback_title_check'
+                'rules'=>'trim|required|max_length[255]'
                 ),
             'data[alias]' => array(
                 'field'=>'data[alias]',
@@ -47,7 +54,7 @@ class common extends Api_Controller {
             'data[title]' => array(
                 'field'=>'data[title]',
                 'label'=>'Title',
-                'rules'=>'trim|required|max_length[255]|callback_title_check'
+                'rules'=>'trim|required|max_length[255]'
                 ),
             'data[alias]' => array(
                 'field'=>'data[alias]',
@@ -357,11 +364,9 @@ class common extends Api_Controller {
                 }
             }
             $this->form_validation->set_rules($this->rules['update']);
-            $this->form_validation->set_rules('data[key]',array(
-                'field'=>'data[key]',
-                'label'=>'Title',
-                'rules'=>"trim|required|is_unique[{$storage}.key]"
-                ));
+            if($entry_setting->data['unique'] == 'true'){
+                $this->form_validation->set_rules($this->rules['unique']);
+            }
             if ($this->form_validation->run() == FALSE) {
                 $output['validation'] = validation_errors_array();
                 $output['message'] = validation_errors();
@@ -440,6 +445,9 @@ class common extends Api_Controller {
                 }
             }
             $this->form_validation->set_rules($this->rules['insert']);
+            if($entry_setting->data['unique'] == 'true'){
+                $this->form_validation->set_rules($this->rules['unique']);
+            }
             if ($this->form_validation->run() == FALSE) {
                 $output['validation'] = validation_errors_array();
                 $output['message'] = validation_errors();
@@ -459,6 +467,7 @@ class common extends Api_Controller {
                     'alias' => $alias,
                     'type' => $type,
                     'pid' => $pid,
+                    'status' => 1,
                     'data' => serialize($data),
                     'longdata' => serialize($longdata),
                     );
@@ -472,6 +481,84 @@ class common extends Api_Controller {
                     $output["code"] = -1;
                     $output["message"] = "Record faily to insert. Please check data input and try again.";
                 }
+            }
+        } else {
+            $output["message"] = 'Setting Entry doest exists.';
+        }
+
+        return $this->output
+            ->set_content_type('application/json')
+            ->set_status_header(200)
+            ->set_output(json_encode($output));
+    }
+
+    public function sendlatest(){
+        $output = array(
+            'text' => 'fail',
+            'code' => -1,
+            'data' => null
+        );
+        $id = $this->input->post('id');
+        $sid = $this->input->post('sid');
+        $entry_setting = $this->Setting_Model->get($sid);
+        $this->entry_setting = $entry_setting;
+        if($entry_setting){
+            $storage = $entry_setting->data['storage'];
+            $this->Core_Model = new Core_Model($storage);
+            
+            $entry_detail = $this->Core_Model->get($id);
+            if($entry_detail){
+                
+                $rs = $this->Core_Model->onSendLatest($id);
+                if ($rs === true) {
+                    $output["code"] = 1;
+                    $output["text"] = 'ok';
+                    $output["message"] = 'Success.';
+                } else {
+                    $output["code"] = -1;
+                    $output["message"] = "Entry faily to update. Please check data input and try again.";
+                }
+            }else{
+                $output["message"] = 'Entry doest exists.';
+            }
+        } else {
+            $output["message"] = 'Setting Entry doest exists.';
+        }
+
+        return $this->output
+            ->set_content_type('application/json')
+            ->set_status_header(200)
+            ->set_output(json_encode($output));
+    }
+
+    public function sendoldest(){
+        $output = array(
+            'text' => 'fail',
+            'code' => -1,
+            'data' => null
+        );
+        $id = $this->input->post('id');
+        $sid = $this->input->post('sid');
+        $entry_setting = $this->Setting_Model->get($sid);
+        $this->entry_setting = $entry_setting;
+        if($entry_setting){
+            $storage = $entry_setting->data['storage'];
+            $this->Core_Model = new Core_Model($storage);
+            
+            $entry_detail = $this->Core_Model->get($id);
+            if($entry_detail){
+                
+                $rs = $this->Core_Model->onSendOldest($id);
+                if ($rs === true) {
+                    $output["code"] = 1;
+                    $output["text"] = 'ok';
+                    $output["message"] = 'Success.';
+                } else {
+                    $output["code"] = -1;
+                    $output["message"] = "Entry faily to update. Please check data input and try again.";
+                }
+            }else{
+                $output["message"] = 'Entry doest exists.';
             }
         } else {
             $output["message"] = 'Setting Entry doest exists.';

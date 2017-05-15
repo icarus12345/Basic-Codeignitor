@@ -49,6 +49,7 @@ class Api_Controller extends CI_Controller {
                     {$this->table}.{$this->prefix}title,
                     {$this->table}.{$this->prefix}created,
                     {$this->table}.{$this->prefix}category,
+                    {$this->table}.{$this->prefix}sorting,
                     tbl_category.title as cattitle,
                     {$this->table}.{$this->prefix}modified,
                     {$this->table}.{$this->prefix}status
@@ -58,7 +59,7 @@ class Api_Controller extends CI_Controller {
                 LEFT JOIN tbl_category ON(tbl_category.id = {$this->table}.category)
             ",
             "where"     => !empty($type)?"WHERE {$this->table}.`{$this->prefix}type` = '$type'":'',
-            "order_by"  => "ORDER BY {$this->table}.`{$this->prefix}created` DESC",
+            "order_by"  => "ORDER BY {$this->table}.`{$this->prefix}sorting` DESC",
             "columnmaps"=>array(
                 'cattitle'=>'tbl_category.title'
             ),

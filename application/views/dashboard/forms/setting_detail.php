@@ -129,6 +129,13 @@
                             >
                         <span>Delete</span>
                     </label>
+                    <label class="chk">
+                        <input 
+                            type="checkbox" name="data[unique]"
+                            <?php echo $entry_detail->data['unique']=="true"?'checked':''; ?>
+                            >
+                        <span>Unique</span>
+                    </label>
                 </div>
             </div>
         </div>

@@ -84,14 +84,59 @@ class Core_Model extends CI_Model {
         }
         return $entrys;
     }
+    function get_max_sort_index(){
+        $query = $this->db
+            ->select('MAX(sorting) as sorting',false)
+            ->get($this->table);
+        $row = $query->row();
+        if($row) {
+            return $row->sorting;
+        }
+        return 0;
+    }
+    function get_min_sort_index(){
+        $query = $this->db
+            ->select('MIN(sorting) as sorting',false)
+            ->get($this->table);
+        $row = $query->row();
+        if($row) {
+            return $row->sorting;
+        }
+        return 0;
+    }
     function onInsert($params) {
         $this->db->set($this->prefix . 'created', 'NOW()', FALSE);
+        $max_sort = $this->get_max_sort_index();
+        $this->db->set($this->prefix . 'sorting', $max_sort + 1);
         @$this->db->insert($this->table, $params);
         @$count = $this->db->affected_rows(); //should return the number of rows affected by the last query
         if ($count == 1)
             return true;
         return false;
     }
+    
+    function onSendLatest($id) {
+        $max_sort = $this->get_max_sort_index();
+        $this->db->set($this->prefix . 'sorting', $max_sort + 1);
+        $this->db->where("$this->prefix$this->colid", $id);
+        @$this->db->update($this->table);
+        @$count = $this->db->affected_rows(); //should return the number of rows affected by the last query
+        if ($count == 1)
+            return true;
+        return false;
+    }
+    
+    function onSendoOldest($id) {
+        $min_sort = $this->get_max_sort_index();
+        $this->db->set($this->prefix . 'sorting', $min_sort - 1);
+        $this->db->where("$this->prefix$this->colid", $id);
+        @$this->db->update($this->table);
+        @$count = $this->db->affected_rows(); //should return the number of rows affected by the last query
+        if ($count == 1)
+            return true;
+        return false;
+    }
+
     function onDelete($id) {
         $where = array("$this->prefix$this->colid" => $id);
         $this->db->delete($this->table, $where);

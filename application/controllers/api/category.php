@@ -269,7 +269,7 @@ class category extends Api_Controller {
                 ",
             "from"      =>" FROM `{$this->table}` ",
             "where"     =>!empty($type)?"WHERE `{$this->prefix}type` = '$type'":'',
-            "order_by"  =>"ORDER BY `{$this->prefix}pid` ASC,`{$this->prefix}position` ASC",
+            "order_by"  =>"ORDER BY `{$this->prefix}pid` ASC,`{$this->prefix}sorting` ASC",
             "columnmaps"=>array(
                 
             ),
