@@ -126,8 +126,8 @@ class Core_Model extends CI_Model {
         return false;
     }
     
-    function onSendoOldest($id) {
-        $min_sort = $this->get_max_sort_index();
+    function onSendOldest($id) {
+        $min_sort = $this->get_min_sort_index();
         $this->db->set($this->prefix . 'sorting', $min_sort - 1);
         $this->db->where("$this->prefix$this->colid", $id);
         @$this->db->update($this->table);
@@ -162,7 +162,7 @@ class Core_Model extends CI_Model {
             }
             $this->table_config=array(
                 "table"=>$this->table,
-                "order_by"=>"ORDER BY `{$this->prefix}created` DESC",
+                "order_by"=>"ORDER BY `{$this->prefix}sorting` DESC",
                 "columnmaps"=>array(
                 )
             );

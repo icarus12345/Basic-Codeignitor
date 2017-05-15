@@ -3,9 +3,9 @@ $this->CI =& get_instance();
 ?>
 <!-- <div class=" fluid"> -->
     <div class="modal-body">
-        <h3 class="page-title">
+        <!-- <h3 class="page-title">
             Dashboard <small><?php echo $settings[$sid]->title; ?></small>
-        </h3>
+        </h3> -->
         <div class="page-bar">
             <ul class="breadcrumb">
                 <li>

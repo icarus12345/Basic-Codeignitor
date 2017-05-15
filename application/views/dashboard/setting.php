@@ -3,9 +3,9 @@ $this->CI =& get_instance();
 ?>
 <!-- <div class=" fluid"> -->
     <div class="modal-body">
-        <h3 class="page-title">
+        <!-- <h3 class="page-title">
             Dashboard <small>Content</small>
-        </h3>
+        </h3> -->
         <div class="page-bar">
             <ul class="breadcrumb">
                 <li>
@@ -13,7 +13,7 @@ $this->CI =& get_instance();
                     <a href="/dashboard">Dashboard</a>
                 </li>
                 <li>
-                    <a href="/dashboard/cp">Content Provider</a>
+                    <a href="/dashboard/cp" id = "dropdownMenu1">Content Provider</a>
                 </li>
                 <li>
                     <a href="#">Setting</a>
@@ -40,9 +40,6 @@ $this->CI =& get_instance();
                 </div>
             </div>
             <div class="jqxGrid" id="jqxGrid" style="border:0">
-                
-            </div>
-            <div class="modal-body" id="login-dialog">
                 
             </div>
         </div>
