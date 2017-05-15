@@ -16,7 +16,7 @@ class common extends Api_Controller {
             'data[title]' => array(
                 'field'=>'data[title]',
                 'label'=>'Title',
-                'rules'=>'trim|required|max_length[255]'
+                'rules'=>'trim|required|max_length[255]|callback_title_check'
                 ),
             'data[alias]' => array(
                 'field'=>'data[alias]',
@@ -47,7 +47,7 @@ class common extends Api_Controller {
             'data[title]' => array(
                 'field'=>'data[title]',
                 'label'=>'Title',
-                'rules'=>'trim|required|max_length[255]'
+                'rules'=>'trim|required|max_length[255]|callback_title_check'
                 ),
             'data[alias]' => array(
                 'field'=>'data[alias]',
@@ -64,6 +64,7 @@ class common extends Api_Controller {
                 'label'=>'Category',
                 'rules'=>'trim|integer'
                 ),
+
             'sid' => array(
                 'field'=>'sid',
                 'label'=>'Setting Entry',
@@ -80,6 +81,20 @@ class common extends Api_Controller {
             ),
         )
     );
+    public function title_check($str){
+        $alias = $this->input->post('data[alias]');
+        $type = $this->input->post('data[type]');
+        $id = $this->input->post('id');
+        $sid = $this->input->post('sid');
+        $row = $this->Core_Model
+            ->set_type($type)
+            ->get_by_alias($alias);
+        if($row && $row->id!=$id){
+            $this->form_validation->set_message('title_check', 'The {field} field are already inserted');
+            return FALSE;
+        }
+        return TRUE;
+    }
     function detail(){
         $output = array(
             'text' => 'ok',
@@ -325,8 +340,8 @@ class common extends Api_Controller {
         $category = $this->input->post('data[category]');
         $data = $this->input->post('data[data]');
         $longdata = $this->input->post('data[longdata]');
-
         $entry_setting = $this->Setting_Model->get($sid);
+        $this->entry_setting = $entry_setting;
         if($entry_setting){
             $storage = $entry_setting->data['storage'];
             $this->Core_Model = new Core_Model($storage);
@@ -342,6 +357,11 @@ class common extends Api_Controller {
                 }
             }
             $this->form_validation->set_rules($this->rules['update']);
+            $this->form_validation->set_rules('data[key]',array(
+                'field'=>'data[key]',
+                'label'=>'Title',
+                'rules'=>"trim|required|is_unique[{$storage}.key]"
+                ));
             if ($this->form_validation->run() == FALSE) {
                 $output['validation'] = validation_errors_array();
                 $output['message'] = validation_errors();
@@ -404,7 +424,10 @@ class common extends Api_Controller {
         );
         $sid = $this->input->post('sid');
         $entry_setting = $this->Setting_Model->get($sid);
+        $this->entry_setting = $entry_setting;
         if($entry_setting){
+            $storage = $entry_setting->data['storage'];
+            $this->Core_Model = new Core_Model($storage);
             if($entry_setting->data['columns']) foreach ($entry_setting->data['columns'] as $key => $column) {
                 if(!empty($column['server'])){
                     $field = 'data[data]['.$column['name'].']';
@@ -416,44 +439,44 @@ class common extends Api_Controller {
                     $this->form_validation->set_rules($field,$label,$rule);
                 }
             }
-        } else {
-
-        }
-
-        $this->form_validation->set_rules($this->rules['insert']);
-        if ($this->form_validation->run() == FALSE) {
-            $output['validation'] = validation_errors_array();
-            $output['message'] = validation_errors();
-            // $output['code'] = -1;
-        } else {
-
-            $data = $this->input->post('data[data]');
-            $longdata = $this->input->post('data[longdata]');
-            $id = $this->input->post('id');
-            $title = $this->input->post('data[title]');
-            $type = $this->input->post('data[type]');
-            $alias = $this->input->post('data[alias]');
-
-            $table = $entry_setting->data['storage'];
-            $params = array(
-                'title' => $title,
-                'alias' => $alias,
-                'type' => $type,
-                'pid' => $pid,
-                'data' => serialize($data),
-                'longdata' => serialize($longdata),
-                );
-            $this->Core_Model = new Core_Model($this->table);
-            $rs = $this->Core_Model->onInsert($params);
-            if ($rs === true) {
-                $output["code"] = 1;
-                $output["text"] = 'ok';
-                $output["message"] = 'Register record to database.';
+            $this->form_validation->set_rules($this->rules['insert']);
+            if ($this->form_validation->run() == FALSE) {
+                $output['validation'] = validation_errors_array();
+                $output['message'] = validation_errors();
+                // $output['code'] = -1;
             } else {
-                $output["code"] = -1;
-                $output["message"] = "Record faily to insert. Please check data input and try again.";
+
+                $data = $this->input->post('data[data]');
+                $longdata = $this->input->post('data[longdata]');
+                $id = $this->input->post('id');
+                $title = $this->input->post('data[title]');
+                $type = $this->input->post('data[type]');
+                $alias = $this->input->post('data[alias]');
+
+                
+                $params = array(
+                    'title' => $title,
+                    'alias' => $alias,
+                    'type' => $type,
+                    'pid' => $pid,
+                    'data' => serialize($data),
+                    'longdata' => serialize($longdata),
+                    );
+                
+                $rs = $this->Core_Model->onInsert($params);
+                if ($rs === true) {
+                    $output["code"] = 1;
+                    $output["text"] = 'ok';
+                    $output["message"] = 'Register record to database.';
+                } else {
+                    $output["code"] = -1;
+                    $output["message"] = "Record faily to insert. Please check data input and try again.";
+                }
             }
+        } else {
+            $output["message"] = 'Setting Entry doest exists.';
         }
+
         return $this->output
             ->set_content_type('application/json')
             ->set_status_header(200)
