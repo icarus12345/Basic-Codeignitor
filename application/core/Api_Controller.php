@@ -40,6 +40,7 @@ class Api_Controller extends CI_Controller {
             $this->table = $this->input->get_post('table');
         }
         $type = $this->input->get_post('type');
+        $showthumb = $this->input->get_post('showthumb');
         $this->Core_Model = new Core_Model($this->table);
         $this->Core_Model->table_config=array(
             "table"     => "{$this->table}",
@@ -52,7 +53,8 @@ class Api_Controller extends CI_Controller {
                     {$this->table}.{$this->prefix}sorting,
                     tbl_category.title as cattitle,
                     {$this->table}.{$this->prefix}modified,
-                    {$this->table}.{$this->prefix}status
+                    {$this->table}.{$this->prefix}status,
+                    {$this->table}.{$this->prefix}data
                 ",
             "from"      => "
                 FROM `{$this->table}` 
@@ -67,6 +69,9 @@ class Api_Controller extends CI_Controller {
             )
         );
         $output = $this->Core_Model->jqxBinding();
+        foreach ($output['rows'] as $key => $value) {
+            $output['rows'][$key]->data = unserialize($output['rows'][$key]->data);
+        }
         $this->output
             ->set_content_type('application/json')
             ->set_status_header(200)

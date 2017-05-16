@@ -324,7 +324,7 @@ $config['cache_query_string'] = FALSE;
 | https://codeigniter.com/user_guide/libraries/encryption.html
 |
 */
-$config['encryption_key'] = '';
+$config['encryption_key'] = "asdfghjkl;'";
 
 /*
 |--------------------------------------------------------------------------
@@ -524,3 +524,6 @@ $config['proxy_ips'] = '';
 
 $config['sess_table_name'] = 'ci_sessions';
 $config['sess_use_database'] = TRUE;
+$config['modules_locations'] = array(
+    APPPATH.'modules/' => '../modules/',
+);

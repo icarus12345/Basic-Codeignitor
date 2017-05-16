@@ -20,9 +20,10 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-        $email = $this->input->post('email');
-        $code  = md5($email);
-		$this->load->view('welcome_message');
+        // $this->load->controller('../controllers/creative/home','creative_controller');
+        require_once('creative/home.php');
+        $this->creative_controller = new home();
+        $this->creative_controller->index();
 	}
 
 

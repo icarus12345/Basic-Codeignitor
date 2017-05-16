@@ -18,6 +18,22 @@ body{
     padding-bottom: 30px;
     min-height: 100vh;
 }
+.cover{
+    background-repeat: no-repeat;
+    background-position: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+.contain{
+    background-repeat: no-repeat;
+    background-position: center;
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
+    -o-background-size: contain;
+    background-size: contain;
+}
 .full-page{position: relative;height: 100%;display: block;}
 .footer{
     position: fixed;bottom: 0;width: 100%;

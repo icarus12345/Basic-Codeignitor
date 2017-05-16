@@ -1,0 +1,66 @@
+.form-control.light{
+    background: #fafafa;border-radius: 2px;
+    border-color: #ddd;
+    line-height: 20px;padding: 12px;
+    height: 46px;
+    font-style: italic;
+}
+textarea.form-control.light{height: auto}
+.form-control.light:hover,
+.form-control.light:focus{
+    box-shadow: none;border-color: #ccc
+}
+.form-control.dark{
+    border:0;box-shadow: none;
+    border-bottom:1px solid #ddd;
+    border-radius: 0;
+    padding-left: 0;padding-right: 0;
+    width: 100%;
+    /*font-family: 'Roboto','Roboto Condensed', sans-serif;*/
+    font-weight: 300;
+}
+.form-control.dark:focus{
+    border-bottom:1px solid #ffe800;
+    box-shadow: none;
+    background: rgba(3, 169, 244, 0.08)
+}
+textarea.form-control.dark{border-top:1px solid transparent;}
+.formErrorPopup{
+    color: #fff;
+    position: absolute;
+    /*border: 1px solid red;*/
+    top: auto !important;right: 0px;
+    font-size: 13px;
+    width: auto;
+    margin:0;
+    background: rgba(255,10,10,.7);
+    padding: 2px 10px;
+    border-radius: 2px;
+    left: auto !important;
+    margin-top: -1px !important;
+    bottom: 100%;
+    margin-bottom: 0;
+}
+.formErrorPopup::after{
+    content: "\f06a";
+    display: block;
+    position: absolute;
+    right: 5px;
+    bottom: -26px;
+    font-family: FontAwesome;
+    color: rgba(255,10,10,.7);
+    height: 20px;
+    width: 20px;
+    font-size: 14px;
+    text-align: center;
+    line-height: 20px;
+}
+.formErrorPopup::before{
+    content: '';display: block;
+    position: absolute;right: 10px;
+    bottom: 0;margin-bottom: -6px;
+    border-top: 6px solid rgba(255,10,10,.7);
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+}
+.formErrorPopup .formErrorContent{white-space: nowrap;}

@@ -41,7 +41,7 @@
         </div>
     </div>
     <div class="row half">
-        <div class="col-xs-3 half">
+        <div class="col-xs-6 half">
             <div class="pull-bottom">
                 <div>Size :(*)</div>
                 <div class="control-group">
@@ -91,7 +91,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xs-3 half">
+        <div class="col-xs-6 half">
             <div class="pull-bottom">
                 <div>Storage at :(*)</div>
                 <div class="control-group">
@@ -111,7 +111,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xs-6 half">
+        <div class="col-xs-12 half">
             <div class="pull-bottom">
                 <div>Functions :</div>
                 <div class="chks">
@@ -149,6 +149,13 @@
                             <?php echo $entry_detail->data['unique']=="true"?'checked':''; ?>
                             >
                         <span>Unique</span>
+                    </label>
+                    <label class="chk">
+                        <input 
+                            type="checkbox" name="data[showthumb]"
+                            <?php echo $entry_detail->data['showthumb']=="true"?'checked':''; ?>
+                            >
+                        <span>Show Thumb</span>
                     </label>
                 </div>
             </div>

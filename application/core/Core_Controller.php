@@ -211,37 +211,8 @@ class Core_Controller extends CI_Controller {
         $this->output->set_header('Content-type: application/json');
         $this->output->set_output(json_encode($result));
     }
-    function sqlLog($name=''){
-        $_error_number = $this->db->_error_number();
-        if($_error_number!=0){
-            $_error_message =  $this->db->_error_message();
-            $sQuery = $this->db->last_query();
-            $log="<div class='sql-message'>$_error_number - $_error_message</div>";
-            $log.="<div class='sql-query'>$sQuery</div>";
-            $this->writelog($log,$name);
-        }
-    }
-    function writelog($data,$title='',$file=''){
-        $username = 'Unknown';
-        if(isset($_SESSION["auth"]["user"])){
-            $username = $_SESSION["auth"]["user"]->ause_name;
-        }
-        $logtime = date('Y/m/d');
-        $time=  date('Y-m-d H:i:s');
-        $log = "
-            <div class=\"inbox-item clearfix\">
-                <div class=\"media\"> 
-                    <div class=\"media-body\">
-                        <div class=\"media-heading name\">$title</div>
-                        <div class=\"text\">$data</div>
-                        <span class=\"timestamp\">$time - $username</span> 
-                    </div>
-                </div> 
-            </div>";
-        write_file(APPPATH."logs/$logtime$file.txt", $log, 'a+');
-    }
 
 }
 
 include 'Api_Controller.php';
-// include 'CP_Controller.php';
+include 'Front_Controller.php';
