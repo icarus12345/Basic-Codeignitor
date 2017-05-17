@@ -298,6 +298,11 @@
     </div>
     
 </form>
+<div class="pre">
+Author:<br/>
+Created:<br/>
+Modified:
+</div>
 <?php if(empty($entry_setting->data['size'])) : ?>
 </div>
 
