@@ -50,8 +50,8 @@ body{
     line-height: 16px;
     padding: 5px 5px 5px 10px;
     margin: 5px 0;
-    background-color: #e4f4d4;
-    border-left: solid 5px #9EC45F;
+    background-color: #f6f6f6;
+    border-left: solid 5px #ddd;
     overflow: auto;
     tab-size: 4;
     -moz-tab-size: 4;

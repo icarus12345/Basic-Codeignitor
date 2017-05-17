@@ -19,7 +19,7 @@
 
         <script type="text/javascript" src="<?php echo base_url() ?>lib/jquery-1.9.1.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>lib/bootstrap/js/bootstrap.js"></script>
-        <!-- <script type="text/javascript" src="<?php echo base_url() ?>lib/owl-carousel/owl.carousel.js"></script> -->
+        <script type="text/javascript" src="<?php echo base_url() ?>lib/owl-carousel/owl.carousel.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>lib/jquery.nailthumb.1.1.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>lib/jquery.lazyload.min.js"></script>
         <!-- <script type="text/javascript" src="<?php echo base_url() ?>lib/wow.min.js"></script> -->
