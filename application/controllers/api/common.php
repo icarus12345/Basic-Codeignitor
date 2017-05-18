@@ -110,6 +110,7 @@ class common extends Api_Controller {
         );
         $id = $this->input->post('id');
         $sid = $this->input->post('sid');
+        $onlysave = $this->input->post('onlysave');
         if(!empty($sid)) {
             $entry_setting = $this->Setting_Model->get($sid);
             if($entry_setting){
@@ -146,7 +147,8 @@ class common extends Api_Controller {
                         $this->Core_Model = new Core_Model($storage);
                         $entry_detail = $this->Core_Model->get($id);
                         $this->load->vars(array(
-                            'entry_detail' => $entry_detail
+                            'entry_detail' => $entry_detail,
+                            'onlysave'=>$onlysave
                             ));
                         $output['data'] = $entry_detail;
                     }

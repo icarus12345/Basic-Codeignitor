@@ -34,18 +34,18 @@ var jssorTabSliderInit = function() {
     }
     function init(){
         var w = 1920;
-        var h = w/2;//$(window).height();
+        var h = w/100*60;//$(window).height();
         if(jssorSlider){
             StartIndex = jssorSlider.$CurrentIndex();
         }
         $('#tab-jssor').html(strHtml)
             .css({
                 width: w/2,
-                height: w/4,
+                height: w/2/100*60,
             })
         $('#tab-jssor .slider-content,#tab-jssor .slider-content>div').css({
             width: w/2,
-            height: w/4,
+            height: w/2/100*60,
         })
         var thumbWidth = (w/2-40)/3;
         var thumbHeight = thumbWidth/2;

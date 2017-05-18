@@ -4,7 +4,15 @@ if ( ! function_exists('get_image_url'))
 {
     function get_image_url($url = '')
     {
-        if(startsWith($url,'/data/')){
+        if(
+            startsWith($url,'/assets/') ||
+            startsWith($url,'/lib/')
+            ){
+            return base_url($url);
+        }
+        if(
+            startsWith($url,'/data/')
+            ){
             return base_url(str_replace_first('/data','data',$url));
         }
         return $url;
@@ -14,7 +22,15 @@ if ( ! function_exists('get_thumb_url'))
 {
     function get_thumb_url($url = '')
     {
-        if(startsWith($url,'/data/')){
+        if(
+            startsWith($url,'/assets/') ||
+            startsWith($url,'/lib/')
+            ){
+            return base_url($url);
+        }
+        if(
+            startsWith($url,'/data/')
+            ){
             return base_url(str_replace_first('/data','data/thumbs',$url));
         }
         return $url;

@@ -21,9 +21,9 @@ class Welcome extends CI_Controller {
 	public function index()
 	{
         // $this->load->controller('../controllers/creative/home','creative_controller');
-        require_once('creative/home.php');
-        $this->creative_controller = new home();
-        $this->creative_controller->index();
+        // require_once('creative/home.php');
+        // $this->creative_controller = new home();
+        // $this->creative_controller->index();
 	}
 
 

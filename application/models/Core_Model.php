@@ -14,6 +14,7 @@ class Core_Model extends CI_Model {
         $this->db->select($fields);
         return $this;
     }
+
     function set_type($type = null){
         $this->db
             ->where("{$this->prefix}type", $type);
@@ -84,6 +85,7 @@ class Core_Model extends CI_Model {
         }
         return $entrys;
     }
+    
     function get_max_sort_index(){
         $query = $this->db
             ->select('MAX(sorting) as sorting',false)

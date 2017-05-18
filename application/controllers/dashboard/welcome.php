@@ -3,15 +3,14 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class welcome extends Core_Controller {
     function __construct() {
         parent::__construct();
+        $this->Setting_Model = new Core_Model('tbl_setting');
     }
     
     function index(){
         // $this->Core_Model = new Core_Model($this->table, $this->prefix, $this->colid);
-        $this->render('dashboard/welcome',null);
+        $this->render('dashboard/main',null);
     }
-    
-    function view($sid){
-        $this->Setting_Model = new Core_Model('tbl_setting');
+    function load_setting($sid){
         $entry_setting = $this->Setting_Model->get($sid);
         if($entry_setting) $settings[$entry_setting->id] = $entry_setting;
         if($entry_setting->data['columns'])
@@ -35,6 +34,14 @@ class welcome extends Core_Controller {
             'settings' => $settings,
             'sid'=>$sid
         ));
+        
+    }
+    function view($sid){
+        $this->load_setting($sid);
         $this->index();
+    }
+    function detail($sid,$id){
+        $this->load_setting($sid);
+        $this->render('dashboard/detail',array('id'=>$id));
     }
 }

@@ -359,13 +359,24 @@ $(document).ready(function(){
             });
     }
     if(typeof WOW == 'function') new WOW().init();
+    rs();
 });
-
-$(window).resize(function(){
+function rs(){
+    $('body').css({
+        'max-width': '100%',
+        'margin':'auto'
+    })
+    var w = $('body').width()
+    $('body').css({
+        'max-width': w%4==0?w:(w-w%4) + 'px',
+        'margin':'auto'
+    })
 	$('.nailthumb-image').each(function(){
 		$(this.parentNode).nailthumb();
 	});
-});
+    
+}
+$(window).resize(rs);
 function sendRequest(){
     if( $('#sendRequestFrm').validationEngine('validate') === false){
         toastr['warning']('Please complete input data.', 'Warning !');

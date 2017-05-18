@@ -33,6 +33,10 @@ class home extends Front_Controller {
     }
     public function projects(){
         $this->layout='main';
+        $this->assigns['abouts'] = $this->model->get('15');
+        $this->assigns['staffs'] = $this->model
+            ->set_type('staff')
+            ->gets();
         $this->render('creative/page/project',null);
     }
 

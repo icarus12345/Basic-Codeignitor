@@ -309,10 +309,14 @@ Modified: <?php echo $entry_detail->modified; ?>
 </div>
 
 <div class="-modal-footer pull-top text-center">
-    <?php if($entry_detail) : ?>
+    <?php if($entry_detail && !$onlysave) : ?>
     <button class="btn btn-outline-secondary" onclick="App.Common.Duplicate()">Duplicate</button>
     <?php endif; ?>
+    <?php if(!$onlysave) : ?>
     <button class="btn btn-default" onclick="App.Common.Save()">Save</button>
     <button class="btn btn-link" onclick="App.Common.Back()">Back</button>
+    <?php else: ?>
+    <button class="btn btn-block" onclick="App.Common.Save(true)">Save</button>
+    <?php endif; ?>
 </div>
 <?php endif; ?>

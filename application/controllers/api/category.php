@@ -286,7 +286,7 @@ class category extends Api_Controller {
                 ",
             "from"      =>" FROM `{$this->table}` ",
             "where"     =>!empty($type)?"WHERE `{$this->prefix}type` = '$type'":'',
-            "order_by"  =>"ORDER BY `{$this->prefix}pid` ASC,`{$this->prefix}sorting` ASC",
+            "order_by"  =>"ORDER BY `{$this->prefix}pid` ASC,`{$this->prefix}sorting` DESC",
             "columnmaps"=>array(
                 
             ),
@@ -299,5 +299,63 @@ class category extends Api_Controller {
         $this->updateBatch($output['rows']);
         $this->output->set_header('Content-type: application/json');
         $this->output->set_output(json_encode($output));
+    }
+
+    public function sendlatest(){
+        $output = array(
+            'text' => 'fail',
+            'code' => -1,
+            'data' => null
+        );
+        $id = $this->input->post('id');
+        $entry_detail = $this->category_model->get($id);
+        if($entry_detail){
+            
+            $rs = $this->category_model->onSendLatest($id);
+            if ($rs === true) {
+                $output["code"] = 1;
+                $output["text"] = 'ok';
+                $output["message"] = 'Success.';
+            } else {
+                $output["code"] = -1;
+                $output["message"] = "Entry faily to update. Please check data input and try again.";
+            }
+        }else{
+            $output["message"] = 'Entry doest exists.';
+        }
+
+        return $this->output
+            ->set_content_type('application/json')
+            ->set_status_header(200)
+            ->set_output(json_encode($output));
+    }
+
+    public function sendoldest(){
+        $output = array(
+            'text' => 'fail',
+            'code' => -1,
+            'data' => null
+        );
+        $id = $this->input->post('id');
+        $entry_detail = $this->category_model->get($id);
+        if($entry_detail){
+            
+            $rs = $this->category_model->onSendOldest($id);
+            if ($rs === true) {
+                $output["code"] = 1;
+                $output["text"] = 'ok';
+                $output["message"] = 'Success.';
+            } else {
+                $output["code"] = -1;
+                $output["message"] = "Entry faily to update. Please check data input and try again.";
+            }
+        }else{
+            $output["message"] = 'Entry doest exists.';
+        }
+
+        return $this->output
+            ->set_content_type('application/json')
+            ->set_status_header(200)
+            ->set_output(json_encode($output));
     }
 }

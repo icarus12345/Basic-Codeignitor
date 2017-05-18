@@ -70,6 +70,11 @@
         </div>
         <?php endif; ?>
         <?php if($entry_setting->data['columns']) foreach($entry_setting->data['columns'] as $column): ?>
+            <?php
+                $value = $entry_detail->data[$column['name']];
+                $name = 'data['.$column['name'].']';
+                $id = 'data-'.$column['name'];
+                ?>
             <?php if ($column['type'] == 'catetree'): ?>
                 <div class="col-xs-<?php echo $column['col']; ?> half">
                     <div class="pull-bottom">
@@ -93,20 +98,177 @@
                         </div>
                     </div>
                 </div>
-            <?php elseif ($column['type'] == 'string'): ?>
+            <?php elseif ($column['type'] == 'radio'): ?>
+                
                 <div class="col-xs-<?php echo $column['col']; ?> half">
                     <div class="pull-bottom">
-                        <div><?php echo $column['title']; ?> :(*)</div>
+                        <div><?php echo $column['title']; ?> :</div>
+                        <div class="control-group">
+                            <div class="rdbs">
+                                <?php foreach($column['data'] as $c): ?>
+                                <label class="rdb">
+                                    <input 
+                                        type="radio" 
+                                        class="<?php echo $column['client']; ?>"
+                                        data-putto="#frm-err-data-<?php echo $column['name']; ?>"
+                                        name="<?php echo $name; ?>" 
+                                        <?php if ($c['value'] == $value){echo 'checked="1"';} ?>
+                                        value="<?php echo $c['value']; ?>"
+                                        >
+                                    <span><?php echo $c['display']; ?></span>
+                                </label>
+                                <?php endforeach; ?>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div id="frm-err-data-<?php echo $column['name']; ?>"></div>
+                        </div>
+                    </div>
+                </div>
+            <?php elseif ($column['type'] == 'checkbox'): ?>
+                
+                <div class="col-xs-<?php echo $column['col']; ?> half">
+                    <div class="pull-bottom">
+                        <div><?php echo $column['title']; ?> :</div>
+                        <div class="chks">
+                            <label class="chk">
+                                <input 
+                                    type="checkbox" 
+                                    name="<?php echo $name; ?>" 
+                                    <?php if ($value){echo 'checked="1"';} ?>
+                                    value="1"
+                                    >
+                                <span>&nbsp;</span>
+                            </label>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            <?php elseif ($column['type'] == 'string'): ?>
+                
+                <div class="col-xs-<?php echo $column['col']; ?> half">
+                    <div class="pull-bottom">
+                        <div><?php echo $column['title']; ?> :</div>
                         <div class="control-group">
                             <div>
                                 <input 
                                     type="text"
                                     class="form-control <?php echo $column['client']; ?>" 
                                     data-putto="#frm-err-data-<?php echo $column['name']; ?>"
-                                    name="data[<?php echo $column['name']; ?>]"
-                                    value="<?php echo $entry_detail->data[$column['name']]; ?>" >
+                                    name="<?php echo $name; ?>"
+                                    value="<?php echo $value; ?>" >
                             </div>
                             <div id="frm-err-data-<?php echo $column['name']; ?>"></div>
+                        </div>
+                    </div>
+                </div>
+            <?php elseif ($column['type'] == 'text'): ?>
+                <div class="col-xs-<?php echo $column['col']; ?> half">
+                    <div class="pull-bottom">
+                        <div><?php echo $column['title']; ?> :</div>
+                        <div class="control-group">
+                            <div>
+                                <textarea 
+                                    type="text"
+                                    class="form-control <?php echo $column['client']; ?>" 
+                                    data-putto="#frm-err-data-<?php echo $column['name']; ?>"
+                                    name="<?php echo $name; ?>"
+                                    ><?php echo $value; ?></textarea>
+                            </div>
+                            <div id="frm-err-data-<?php echo $column['name']; ?>"></div>
+                        </div>
+                    </div>
+                </div>
+            <?php elseif ($column['type'] == 'html'): ?>
+                <div class="col-xs-<?php echo $column['col']; ?> half">
+                    <div class="pull-bottom">
+                        <div><?php echo $column['title']; ?> :</div>
+                        <div class="control-group">
+                            <div>
+                                <textarea 
+                                    type="text" row="4" 
+                                    id="<?php echo $id; ?>"
+                                    data-editor=1
+                                    class="form-control <?php echo $column['client']; ?>" 
+                                    data-putto="#frm-err-<?php echo $column['biz']?'long':'';?>data-<?php echo $column['name']; ?>"
+                                    name="<?php echo $name; ?>"
+                                    ><?php echo $value; ?></textarea>
+                            </div>
+                            <div id="frm-err-<?php echo $id; ?>"></div>
+                        </div>
+                    </div>
+                </div>
+            <?php elseif ($column['type'] == 'image'): ?>
+                <div class="col-xs-<?php echo $column['col']; ?> half">
+                    <div class="pull-bottom">
+                        <div><?php echo $column['title']; ?> :</div>
+                        <div class="control-group">
+                            <div class="input-append">
+                                <input type="text" 
+                                    class="form-control <?php echo $column['client']; ?>" 
+                                    data-putto="#frm-err-<?php echo $id; ?>"
+                                    name="<?php echo $name; ?>"
+                                    id="<?php echo $id; ?>"
+                                    value="<?php echo $value; ?>"
+                                    >
+                                <span class="add-on" onclick="App.KCFinder.BrowseServer('#<?php echo $id; ?>')">
+                                    <i class="fa fa-image"></i>
+                                </span>
+                            </div>
+                            <div id="frm-err-<?php echo $id; ?>"></div>
+                        </div>
+                    </div>
+                </div>
+            <?php elseif ($column['type'] == 'multidropdown'): ?>
+                <div class="col-xs-<?php echo $column['col']; ?> half">
+                    <div class="pull-bottom">
+                        <div><?php echo $column['title']; ?> :</div>
+                        <div class="control-group">
+                            <div>
+                                <select 
+                                    name="<?php echo $name; ?>" 
+                                    class="form-control selectpicker <?php echo $column['client']; ?>"
+                                    data-putto="#frm-err-<?php echo $id; ?>"
+                                    -data-live-search="true"
+                                    multiple=1
+                                    data-size="10"
+                                    >
+                                    <?php foreach($column['data'] as $c): ?>
+                                        <option value="<?php echo $c['value']; ?>"
+                                            <?php if (in_array($c['value'],$value)){echo 'selected="1"';} ?>
+                                            >
+                                            <?php echo $c['display']; ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div id="frm-err-<?php echo $id; ?>"></div>
+                        </div>
+                    </div>
+                </div>
+            <?php elseif ($column['type'] == 'dropdown'): ?>
+                <div class="col-xs-<?php echo $column['col']; ?> half">
+                    <div class="pull-bottom">
+                        <div><?php echo $column['title']; ?> :</div>
+                        <div class="control-group">
+                            <div>
+                                <select 
+                                    name="<?php echo $name; ?>" 
+                                    class="form-control selectpicker <?php echo $column['client']; ?>"
+                                    data-putto="#frm-err-<?php echo $id; ?>"
+                                    -data-live-search="true"
+                                    data-size="10"
+                                    >
+                                    <option value="">Nothing Selected</option>
+                                    <?php foreach($column['data'] as $c): ?>
+                                        <option value="<?php echo $c['value']; ?>"
+                                            <?php if ($c['value'] == $value){echo 'selected="1"';} ?>
+                                            >
+                                            <?php echo $c['display']; ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div id="frm-err-<?php echo $id; ?>"></div>
                         </div>
                     </div>
                 </div>

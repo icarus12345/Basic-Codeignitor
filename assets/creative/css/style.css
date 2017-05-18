@@ -757,7 +757,7 @@ footer .socials{float: right;}
 .staff-box{background: #fff}
 .staff-box>.slider{width: 50%;position: relative;float: left;}
 .staff-box>.info{width: 50%;float: left;}
-.staff-box>.info>div{padding-bottom: 50%;background: #fff;display: none;position: relative;}
+.staff-box>.info>div{padding-bottom: 60%;background: #fff;display: none;position: relative;}
 .staff-box>.info>div.actived{display: block;}
 /*.staff-box>.info>div:nth-child(1){background: #00BCD4}*/
 /*.staff-box>.info>div:nth-child(2){background: #8BC34A}*/
