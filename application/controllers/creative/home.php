@@ -31,13 +31,21 @@ class home extends Front_Controller {
         $this->assigns['slider'] = $slider;
         $this->render(null,null);
     }
-    public function projects(){
+    public function about(){
         $this->layout='main';
         $this->assigns['abouts'] = $this->model->get('15');
         $this->assigns['staffs'] = $this->model
             ->set_type('staff')
             ->gets();
-        $this->render('creative/page/project',null);
+        $this->render('creative/page/about',null);
+    }
+    public function services(){
+        $this->layout='main';
+        // $this->assigns['abouts'] = $this->model->get('15');
+        // $this->assigns['staffs'] = $this->model
+        //     ->set_type('staff')
+        //     ->gets();
+        $this->render('creative/page/services',null);
     }
 
 }
