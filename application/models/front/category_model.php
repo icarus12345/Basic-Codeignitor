@@ -8,7 +8,7 @@
   Purpose of the stylesheet follows.
  */
 
-class category_model extends Core_Model {
+class Category_Model extends Core_Model {
 
     function __construct()
     {

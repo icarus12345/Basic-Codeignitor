@@ -49,7 +49,7 @@ function projectMasonry(){
             '</div>'
         ].join('\n'))
     }
-    $(elem).html(boxs.join('\n'));
+    // $(elem).html(boxs.join('\n'));
     var msnry;
     function init(){
         if(msnry) msnry.destroy();

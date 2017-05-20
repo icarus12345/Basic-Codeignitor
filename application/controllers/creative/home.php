@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class home extends Front_Controller {
+class Home extends Front_Controller {
 
     /**
      * Index Page for this controller.
@@ -39,13 +39,123 @@ class home extends Front_Controller {
             ->gets();
         $this->render('creative/page/about',null);
     }
-    public function services(){
+    public function services($alias = null){
+        if($alias){
+            $this->service_detail($alias);
+        }else{
+            $this->layout='main';
+            // $this->assigns['abouts'] = $this->model->get('15');
+            // $this->assigns['staffs'] = $this->model
+            //     ->set_type('staff')
+            //     ->gets();
+            $this->render('creative/page/services',null);
+        }
+    }
+    public function service_detail($alias = null){
         $this->layout='main';
         // $this->assigns['abouts'] = $this->model->get('15');
-        // $this->assigns['staffs'] = $this->model
-        //     ->set_type('staff')
-        //     ->gets();
-        $this->render('creative/page/services',null);
+        $category_detail = $this->Category_Model
+            ->set_type('services')
+            ->get_by_alias($alias);
+        if($category_detail){
+            $this->assigns['category_detail'] = $category_detail;
+            $this->assigns['services'] = $this->model
+                ->set_type('services')
+                ->get_by_category($category_detail->id);
+            $this->render('creative/page/service_detail',null);
+        } else {
+            show_404();
+        }
+    }
+    public function events($alias = null){
+        $this->layout='main';
+        // $this->assigns['abouts'] = $this->model->get('15');
+        if($alias){
+            $category_detail = $this->Category_Model
+                ->set_type('events')
+                ->get_by_alias($alias);
+            if($category_detail){
+                $this->assigns['category_detail'] = $category_detail;
+                $this->assigns['events'] = $this->model
+                    ->set_type('events')
+                    ->get_by_category($category_detail->id);
+                $this->render('creative/page/events',null);
+            } else {
+                $this->event_detail($alias);
+            }
+        } else {
+            $this->assigns['events'] = $this->model
+                ->set_type('events')
+                ->gets();
+            $this->render('creative/page/events',null);
+        }
+    }
+    public function event_detail($alias = null){
+        $this->layout='main';
+        $event_detail = $this->model
+            ->set_type('events')
+            ->get_by_alias($alias);
+        if($event_detail){
+            $this->assigns['event_detail'] = $event_detail;
+            $category_detail = $this->Category_Model
+                ->set_type('events')
+                ->get($event_detail->category);
+            $this->assigns['category_detail'] = $category_detail;
+
+            $this->assigns['related_events'] = $this->model
+                ->limit(4)
+                ->random()
+                ->get_related($event_detail);
+            $this->render('creative/page/event_detail',null);
+        } else {
+            show_404();
+        }
+    }
+
+    public function projects($alias = null){
+        $this->layout='main';
+        // $this->assigns['abouts'] = $this->model->get('15');
+        if($alias){
+            $category_detail = $this->Category_Model
+                ->set_type('services')
+                ->get_by_alias($alias);
+            if($category_detail){
+                $this->assigns['category_detail'] = $category_detail;
+                $this->assigns['projects'] = $this->model
+                    ->set_type('projects')
+                    ->get_by_category($category_detail->id);
+                $this->render('creative/page/projects',null);
+            } else {
+                $this->project_detail($alias);
+            }
+        } else {
+            $this->assigns['projects'] = $this->model
+                ->set_type('projects')
+                ->asc()
+                ->gets();
+            $this->render('creative/page/projects',null);
+        }
+    }
+    public function project_detail($alias = null){
+        $this->layout='main';
+        $project_detail = $this->model
+            ->set_type('projects')
+            ->get_by_alias($alias);
+        if($project_detail){
+            $this->assigns['project_detail'] = $project_detail;
+            $category_detail = $this->Category_Model
+                ->set_type('services')
+                ->get($project_detail->category);
+            $this->assigns['category_detail'] = $category_detail;
+
+            $this->assigns['related_projects'] = $this->model
+                ->limit(4)
+                ->random()
+                ->get_related($project_detail);
+            $this->render('creative/page/project_detail',null);
+        } else {
+            show_404();
+        }
     }
 
 }

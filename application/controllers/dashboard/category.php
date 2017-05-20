@@ -1,9 +1,9 @@
 <?php
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class category extends Core_Controller {
+class Category extends Core_Controller {
     function __construct() {
         parent::__construct();
-        $this->load->model("dashboard/category_model");
+        $this->load->model("dashboard/Category_Model");
     }
     
     function index(){
@@ -17,12 +17,12 @@ class category extends Core_Controller {
         foreach ($entry_setting->data['columns'] as $key => $column) {
             if($column['type'] == 'catetree'){
                 $cat_type = $column['name'];
-                $cate_data = $this->category_model->get_by_type($cat_type);
-                $entry_setting->data['columns'][$key]['categories'] = $this->category_model
+                $cate_data = $this->Category_Model->get_by_type($cat_type);
+                $entry_setting->data['columns'][$key]['categories'] = $this->Category_Model
                     ->buildTreeArray($cate_data);
             } else if($column['type'] == 'catelist'){
                 $cat_type = $column['name'];
-                $cate_data = $this->category_model->get_by_type($cat_type);
+                $cate_data = $this->Category_Model->get_by_type($cat_type);
                 $entry_setting->data['columns'][$key]['categories'] = $cate_data;
             }
         }

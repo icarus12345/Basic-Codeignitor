@@ -52,6 +52,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['dashboard/(:num)'] = 'dashboard/welcome/view/$1';
 $route['dashboard/detail/(:num)/(:num)'] = 'dashboard/welcome/detail/$1/$2';
 
+$route['ve-chung-toi'] = 'creative/home/about';
+$route['about'] = 'creative/home/about';
+
+$route['dich-vu'] = 'creative/home/services';
+$route['services'] = 'creative/home/services';
+$route['dich-vu/(:any)'] = 'creative/home/service_detail/$1';
+$route['services/(:any)'] = 'creative/home/service_detail/$1';
+
+$route['su-kien'] = 'creative/home/events';
+$route['events'] = 'creative/home/events';
+$route['su-kien/(:any)'] = 'creative/home/events/$1';
+$route['events/(:any)'] = 'creative/home/events/$1';
+
+$route['du-an'] = 'creative/home/projects';
+$route['projects'] = 'creative/home/projects';
+$route['du-an/(:any)'] = 'creative/home/projects/$1';
+$route['projects/(:any)'] = 'creative/home/projects/$1';
+
 $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

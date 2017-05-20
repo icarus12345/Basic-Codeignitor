@@ -1,9 +1,9 @@
 <?php
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class user extends Core_Controller {
+class User extends Core_Controller {
     function __construct() {
         parent::__construct();
-        $this->load->model("dashboard/auth_model");
+        $this->load->model("dashboard/Auth_Model");
     }
     
     function index(){
@@ -104,7 +104,7 @@ class user extends Core_Controller {
             $output['message'] = validation_errors();
             // $output['code'] = -1;
         } else {
-            $user = $this->auth_model->getuser($username);
+            $user = $this->Auth_Model->getuser($username);
             if (!$user) {
                 $output['message'] = 'User does\'t exists !';
             } else {
@@ -116,7 +116,7 @@ class user extends Core_Controller {
                         'ause_email'=>$email,
                         'ause_password'=> md5($username . $password . $user->ause_secretkey),
                         );
-                    $rs = $this->auth_model->onUpdate($user->ause_id, $params);
+                    $rs = $this->Auth_Model->onUpdate($user->ause_id, $params);
                     if ($rs === true) {
                         $output["code"] = 1;
                         $output["text"] = 'ok';

@@ -9,11 +9,11 @@
                     <div>
                         <div class="breardcum">
                             <span data-wow-delay="0.5s" class="wow fadeInUp">Trang Chủ</span>
-                            <span data-wow-delay="0.5s" class="wow fadeInUp"><?php echo $abouts->title; ?></span>
+                            <span data-wow-delay="0.5s" class="wow fadeInUp">Dịch vụ</span>
                         </div>
                     </div>
                     <div data-wow-delay="1s" class="wow fadeInUp">
-                        <div class="title"><?php echo $abouts->title; ?></div>
+                        <div class="title">Dịch vụ</div>
                     </div>
                     <div class="line">
                         <span class="before-line"></span>
@@ -30,7 +30,7 @@
             <div class="boxs">
                 <div class="box-thumb">
                     <div class="nailthumb" >
-                        <a href="service-detail.html" class="nailthumb-container wow fadeInUp" data-wow-delay="0.5s">
+                        <a href="<?php echo base_url('services/'.$foo->alias); ?>.html" class="nailthumb-container wow fadeInUp" data-wow-delay="0.5s">
                             <img class="lazy" data-original="<?php echo get_image_url($foo->data['cover']); ?>"/>
                         </a>
                     </div>

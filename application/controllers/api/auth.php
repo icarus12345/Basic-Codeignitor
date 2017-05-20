@@ -1,9 +1,9 @@
 <?php
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class auth extends CI_Controller {
+class Auth extends CI_Controller {
     function __construct() {
         parent::__construct();
-        $this->load->model("dashboard/auth_model");
+        $this->load->model("dashboard/Auth_Model");
     }
     
     function index(){
@@ -50,7 +50,7 @@ class auth extends CI_Controller {
 
             $nlogin = (int)$this->session->userdata('nlogin');
             $this->session->set_userdata('nlogin', ++$nlogin);
-            $user = $this->auth_model->getuser($username);
+            $user = $this->Auth_Model->getuser($username);
             if (!$user) {
                 $output['message'] = 'Username or Password don\'t match.';
             } else {

@@ -1,11 +1,11 @@
 <?php
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class common extends Api_Controller {
+class Common extends Api_Controller {
     function __construct() {
         parent::__construct();
-        $this->load->model("dashboard/auth_model");
+        $this->load->model("dashboard/Auth_Model");
         $this->Setting_Model = new Core_Model('tbl_setting');
-        $this->load->model("dashboard/category_model");
+        $this->load->model("dashboard/Category_Model");
     }
     
     function index(){
@@ -122,19 +122,19 @@ class common extends Api_Controller {
                     )
                     ){
                     $cat_type = $entry_setting->data['catetype'];
-                    $cate_data = $this->category_model->get_by_type($cat_type);
-                    $entry_setting->data['categories'] = $this->category_model
+                    $cate_data = $this->Category_Model->get_by_type($cat_type);
+                    $entry_setting->data['categories'] = $this->Category_Model
                         ->buildTreeArray($cate_data);
                 }
                 if(!empty($entry_setting->data['columns'])) foreach ($entry_setting->data['columns'] as $key => $column) {
                     if($column['type'] == 'catetree'){
                         $cat_type = $column['name'];
-                        $cate_data = $this->category_model->get_by_type($cat_type);
-                        $entry_setting->data['columns'][$key]['categories'] = $this->category_model
+                        $cate_data = $this->Category_Model->get_by_type($cat_type);
+                        $entry_setting->data['columns'][$key]['categories'] = $this->Category_Model
                             ->buildTreeArray($cate_data);
                     } else if($column['type'] == 'catelist'){
                         $cat_type = $column['name'];
-                        $cate_data = $this->category_model->get_by_type($cat_type);
+                        $cate_data = $this->Category_Model->get_by_type($cat_type);
                         $entry_setting->data['columns'][$key]['categories'] = $cate_data;
                     }
                 }
@@ -189,19 +189,19 @@ class common extends Api_Controller {
                     )
                     ){
                     $cat_type = $entry_setting->data['catetype'];
-                    $cate_data = $this->category_model->get_by_type($cat_type);
-                    $entry_setting->data['categories'] = $this->category_model
+                    $cate_data = $this->Category_Model->get_by_type($cat_type);
+                    $entry_setting->data['categories'] = $this->Category_Model
                         ->buildTreeArray($cate_data);
                 }
                 if(!empty($entry_setting->data['columns'])) foreach ($entry_setting->data['columns'] as $key => $column) {
                     if($column['type'] == 'catetree'){
                         $cat_type = $column['name'];
-                        $cate_data = $this->category_model->get_by_type($cat_type);
-                        $entry_setting->data['columns'][$key]['categories'] = $this->category_model
+                        $cate_data = $this->Category_Model->get_by_type($cat_type);
+                        $entry_setting->data['columns'][$key]['categories'] = $this->Category_Model
                             ->buildTreeArray($cate_data);
                     } else if($column['type'] == 'catelist'){
                         $cat_type = $column['name'];
-                        $cate_data = $this->category_model->get_by_type($cat_type);
+                        $cate_data = $this->Category_Model->get_by_type($cat_type);
                         $entry_setting->data['columns'][$key]['categories'] = $cate_data;
                     }
                 }
@@ -349,6 +349,7 @@ class common extends Api_Controller {
         $category = $this->input->post('data[category]');
         $data = $this->input->post('data[data]');
         $longdata = $this->input->post('data[longdata]');
+
         $entry_setting = $this->Setting_Model->get($sid);
         $this->entry_setting = $entry_setting;
         if($entry_setting){
@@ -430,6 +431,13 @@ class common extends Api_Controller {
             'data' => null
         );
         $sid = $this->input->post('sid');
+        $title = $this->input->post('data[title]');
+        $alias = $this->input->post('data[alias]');
+        $type = $this->input->post('data[type]');
+        $category = $this->input->post('data[category]');
+        $data = $this->input->post('data[data]');
+        $longdata = $this->input->post('data[longdata]');
+
         $entry_setting = $this->Setting_Model->get($sid);
         $this->entry_setting = $entry_setting;
         if($entry_setting){
@@ -456,23 +464,16 @@ class common extends Api_Controller {
                 // $output['code'] = -1;
             } else {
 
-                $data = $this->input->post('data[data]');
-                $longdata = $this->input->post('data[longdata]');
-                $id = $this->input->post('id');
-                $title = $this->input->post('data[title]');
-                $type = $this->input->post('data[type]');
-                $alias = $this->input->post('data[alias]');
-
+                $params = array();
                 
-                $params = array(
-                    'title' => $title,
-                    'alias' => $alias,
-                    'type' => $type,
-                    'pid' => $pid,
-                    'status' => 1,
-                    'data' => serialize($data),
-                    'longdata' => serialize($longdata),
-                    );
+                if(isset($category)) $params['category'] = $category;
+                if(isset($title)) $params['title'] = $title;
+                if(isset($alias)) $params['alias'] = $alias;
+                if(isset($type)) $params['type'] = $type;
+                $params['status'] = 1;
+                if(isset($data)) $params['data'] = serialize($data);
+                if(isset($longdata)) $params['longdata'] = serialize($longdata);
+
                 
                 $rs = $this->Core_Model->onInsert($params);
                 if ($rs === true) {

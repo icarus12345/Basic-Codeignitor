@@ -7,19 +7,19 @@ class Front_Controller extends CI_Controller {
         parent::__construct();
         $this->CI =& get_instance();
         $this->assigns = array();
-        $this->load->model('front/front_model');
-        $this->load->model('front/category_model');
-        $this->model= new front_model('tbl_data');
+        $this->load->model('front/Front_Model');
+        $this->load->model('front/Category_Model');
+        $this->model= new Front_Model('tbl_data');
         
-        $this->assigns['service_category'] = $this->category_model
+        $this->assigns['service_category'] = $this->Category_Model
             ->set_type('services')
             ->desc()
             ->gets();
-        $this->assigns['project_category'] = $this->category_model
+        $this->assigns['project_category'] = $this->Category_Model
             ->set_type('projects')
             ->desc()
             ->gets();
-        $this->assigns['event_category'] = $this->category_model
+        $this->assigns['event_category'] = $this->Category_Model
             ->set_type('events')
             ->desc()
             ->gets();

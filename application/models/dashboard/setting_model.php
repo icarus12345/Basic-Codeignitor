@@ -8,7 +8,7 @@
   Purpose of the stylesheet follows.
  */
 
-class setting_model extends CI_Model {
+class Setting_Model extends CI_Model {
 
     function __construct()
     {

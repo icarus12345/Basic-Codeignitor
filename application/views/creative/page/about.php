@@ -3,7 +3,7 @@
         <script src="<?php echo base_url() ?>lib/jssor/jssor-transitions.js" type="text/javascript"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>assets/creative/js/about-jssor.js"></script>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/creative/css/jssor-theme.css"/>
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>lib/owl-carousel/owl.carousel.css"/>
+        
 
 
         <div class="banner mask light">

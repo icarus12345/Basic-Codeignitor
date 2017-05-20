@@ -1,9 +1,9 @@
 <?php
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class setting extends Api_Controller {
+class Setting extends Api_Controller {
     function __construct() {
         parent::__construct();
-        $this->load->model("dashboard/category_model");
+        $this->load->model("dashboard/Category_Model");
         $this->table = 'tbl_setting';
         $this->Core_Model = new Core_Model($this->table);
     }

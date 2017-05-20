@@ -71,6 +71,20 @@ class Core_Model extends CI_Model {
         }
         return $entrys;
     }
+
+    function get_by_category($catid=''){
+        if($this->status){
+            $this->db->where("{$this->prefix}status",$this->status);
+        }
+        $query = $this->db
+            ->where("{$this->prefix}category", $catid)
+            ->get($this->table);
+        $entrys = $query->result();
+        if($entrys) foreach ($entrys as $key => $value) {
+            $entrys[$key]->data = unserialize($entrys[$key]->data);
+        }
+        return $entrys;
+    }
     function gets() {
         if($this->status){
             $this->db->where("{$this->prefix}status",$this->status);

@@ -1,9 +1,9 @@
 <?php
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class category extends Api_Controller {
+class Category extends Api_Controller {
     function __construct() {
         parent::__construct();
-        $this->load->model("dashboard/category_model");
+        $this->load->model("dashboard/Category_Model");
         $this->table = 'tbl_category';
         $this->Core_Model = new Core_Model($this->table);
         $this->Setting_Model = new Core_Model('tbl_setting');
@@ -107,20 +107,20 @@ class category extends Api_Controller {
                 $entry_setting->data['cateviewer'] == 'tree'
                 ){
                 $cat_type = $entry_setting->data['catetype'];
-                $cate_data = $this->category_model->get_by_type($cat_type);
-                $entry_setting->data['categories'] = $this->category_model
+                $cate_data = $this->Category_Model->get_by_type($cat_type);
+                $entry_setting->data['categories'] = $this->Category_Model
                     ->buildTreeArray($cate_data);
             }
             if($entry_setting->data['columns'])
             foreach ($entry_setting->data['columns'] as $key => $column) {
                 if($column['type'] == 'catetree'){
                     $cat_type = $column['name'];
-                    $cate_data = $this->category_model->get_by_type($cat_type);
-                    $entry_setting->data['columns'][$key]['categories'] = $this->category_model
+                    $cate_data = $this->Category_Model->get_by_type($cat_type);
+                    $entry_setting->data['columns'][$key]['categories'] = $this->Category_Model
                         ->buildTreeArray($cate_data);
                 } else if($column['type'] == 'catelist'){
                     $cat_type = $column['name'];
-                    $cate_data = $this->category_model->get_by_type($cat_type);
+                    $cate_data = $this->Category_Model->get_by_type($cat_type);
                     $entry_setting->data['columns'][$key]['categories'] = $cate_data;
                 }
             }
@@ -273,7 +273,7 @@ class category extends Api_Controller {
     }
     function bind(){
         $type = $this->input->post('type');
-        $this->category_model->table_config=array(
+        $this->Category_Model->table_config=array(
             "table"     =>"{$this->table}",
             "select"    =>"
                 SELECT SQL_CALC_FOUND_ROWS 
@@ -294,8 +294,8 @@ class category extends Api_Controller {
 
             )
         );
-        $output = $this->category_model->jqxBinding();
-        $output['rows']=$this->category_model->buildTreeArray($output['rows']);
+        $output = $this->Category_Model->jqxBinding();
+        $output['rows']=$this->Category_Model->buildTreeArray($output['rows']);
         $this->updateBatch($output['rows']);
         $this->output->set_header('Content-type: application/json');
         $this->output->set_output(json_encode($output));
@@ -308,10 +308,10 @@ class category extends Api_Controller {
             'data' => null
         );
         $id = $this->input->post('id');
-        $entry_detail = $this->category_model->get($id);
+        $entry_detail = $this->Category_Model->get($id);
         if($entry_detail){
             
-            $rs = $this->category_model->onSendLatest($id);
+            $rs = $this->Category_Model->onSendLatest($id);
             if ($rs === true) {
                 $output["code"] = 1;
                 $output["text"] = 'ok';
@@ -337,10 +337,10 @@ class category extends Api_Controller {
             'data' => null
         );
         $id = $this->input->post('id');
-        $entry_detail = $this->category_model->get($id);
+        $entry_detail = $this->Category_Model->get($id);
         if($entry_detail){
             
-            $rs = $this->category_model->onSendOldest($id);
+            $rs = $this->Category_Model->onSendOldest($id);
             if ($rs === true) {
                 $output["code"] = 1;
                 $output["text"] = 'ok';

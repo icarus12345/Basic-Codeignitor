@@ -2,7 +2,7 @@
             <!-- Menu [ -->
             <div class="">
                 <div class="navbar-header">
-                    <a href="index.html" class="navbar-brand"></a>
+                    <a href="<?php echo base_url(''); ?>" class="navbar-brand"></a>
                     <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#navigation">
                         <span>
                             <span class="icon-bar line-1"></span>
@@ -29,35 +29,35 @@
                 </div>
                 <nav id="navigation" class="navbar-collapse bs-navbar-collapse collapse" role="navigation">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href='home.html'>HOME</a></li>
-                        <li><a href='about.html'>ABOUT</a></li>
+                        <li class="active"><a href='home.html'>Trang Chủ</a></li>
+                        <li><a href='<?php echo base_url('ve-chung-toi'); ?>.html'>Về Chúng Tôi</a></li>
                         <li>
-                            <a href="service.html" -data-toggle="dropdown">SERVICE</a>
+                            <a href="<?php echo base_url('dich-vu'); ?>.html" -data-toggle="dropdown">Dịch Vụ</a>
                             <ul class="dropdown-menu">
                                 <?php if($service_category) foreach ($service_category as $key => $foo) : ?>
-                                <li><a href='<?php echo base_url('services/'.$foo->alias); ?>'><?php echo $foo->title; ?></a></li>
+                                <li><a href='<?php echo base_url('dich-vu/'.$foo->alias); ?>.html'><?php echo $foo->title; ?></a></li>
                                 <?php endforeach; ?>
                             </ul>
                         </li>
                         <li>
-                            <a href="event.html" -data-toggle="dropdown">EVENTS</a>
+                            <a href="<?php echo base_url('su-kien'); ?>.html" -data-toggle="dropdown">Trò Chơi - Sự Kiện</a>
                             <ul class="dropdown-menu">
-                                <?php if($event_category) foreach ($service_category as $key => $foo) : ?>
-                                <li><a href='<?php echo base_url('services/'.$foo->alias); ?>'><?php echo $foo->title; ?></a></li>
+                                <?php if($event_category) foreach ($event_category as $key => $foo) : ?>
+                                <li><a href='<?php echo base_url('su-kien/'.$foo->alias); ?>'><?php echo $foo->title; ?></a></li>
                                 <?php endforeach; ?>
                             </ul>
                         </li>
                         <li>
-                            <a href="project.html" -data-toggle="dropdown">PROJECT</a>
+                            <a href="<?php echo base_url('du-an'); ?>.html" -data-toggle="dropdown">PROJECT</a>
                             <ul class="dropdown-menu">
-                                <?php if($project_category) foreach ($service_category as $key => $foo) : ?>
-                                <li><a href='<?php echo base_url('projects/'.$foo->alias); ?>'><?php echo $foo->title; ?></a></li>
+                                <?php if($service_category) foreach ($service_category as $key => $foo) : ?>
+                                <li><a href='<?php echo base_url('du-an/'.$foo->alias); ?>'><?php echo $foo->title; ?></a></li>
                                 <?php endforeach; ?>
                             </ul>
                         </li>
-                        <li><a href='news.html'>NEWS</a></li>
-                        <li><a href='recruitment.html'>TUYỂN DỤNG</a></li>
-                        <li><a href='contact.html'>CONTACT</a></li>
+                        <li><a href='<?php echo base_url('tin-tuc'); ?>.html'>NEWS</a></li>
+                        <li><a href='<?php echo base_url('tuyen-dung'); ?>.html'>TUYỂN DỤNG</a></li>
+                        <li><a href='<?php echo base_url('lien-he'); ?>.html'>CONTACT</a></li>
                     </ul>
                 </nav>
             </div>
