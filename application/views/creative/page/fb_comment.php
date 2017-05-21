@@ -1,0 +1,1 @@
+<div class="fb-comments" data-width="100%" data-href="[{current_url()}]" data-numposts="5"></div>

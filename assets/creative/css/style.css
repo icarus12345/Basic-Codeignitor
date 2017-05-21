@@ -189,6 +189,10 @@ h1,h2,h3,h4,h5,p{margin: 0}
     white-space: -o-pre-wrap; /* Opera 7 */ 
     word-wrap: break-word; /* Internet Explorer 5.5+ */
 }
+.a{color: #FF9800}
+.a:hover{color: #FF9800}
+.a:link{color: #FF9800}
+.a:hover{}
 a,a:link,a:active{}
 .space-line{display: block;height: 10px;}
 .space-line1{display: block;height: 20px;}
@@ -926,6 +930,34 @@ footer .socials{float: right;}
     height: 46px;
     border-color: #333
 }
+
+.blog-thumb{height: 280px;display: block;position: relative;}
+.blog-thumb > span{
+    position: absolute;left: 20px;bottom: 0;background-color: #ffcc00;color: #fff;text-align: center;padding: 10px;display: block;opacity: .93;
+}
+.gray-box{background: #f7f8f9}
+.pagination{text-align: center;margin: auto;padding-bottom: 20px;padding-top: 10px}
+.pagination>li>span,
+.pagination>li>a{
+    margin-left: 2px;margin-right: 2px;min-width: 32px;height: 32px;line-height: 20px;padding: 5px;
+    box-shadow: none;border-color: #fff;
+    background-color: #fff;border-radius: 3px !important;
+    color: #000;
+    box-shadow: 0 0 10px rgba(0,0,0,.1)
+}
+.pagination>li>a:hover,
+.pagination>li>span:hover{border-color: #ffcc00;background: #FFEB3B;color: #111}
+.pagination>li.active>a,
+.pagination>li.active>span,
+.pagination>li.active>a:hover,
+.pagination>li.active>span:hover{background: #FFEB3B;border-color: #ffcc00;color: #111}
+.pagination>li .fa{line-height: 20px}
+
+.blog-tags{font-size: small}
+.blog-tags > span{
+    background-color: orange;color: #fff;font-size: 13px;margin-right: 10px;padding: 2px 5px;border-radius: 2px;
+}
+.h3{font-size: 20px;color: #333;padding: 10px 0}
 @media (min-width: 769px) {
     .navbar-toggle{margin-top: 15px;}
     .events .box-thumb{position: relative;padding-right: 33.333333333%;height: auto;width: 100%}

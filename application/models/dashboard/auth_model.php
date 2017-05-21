@@ -53,6 +53,16 @@ class Auth_Model extends CI_Model {
         $rs = $query->result();
         return $rs;
     }
+    function get_all(){
+        $query=$this->db
+            ->select("ause_name,ause_id,ause_email,ause_picture")
+            ->get("auth_users");
+        $data = array();
+        foreach ($query->result() as $key => $row) {
+            $data[$row->ause_id] = $row;
+        }
+        return $data;
+    }
 }
 
 ?>

@@ -14,6 +14,7 @@ class Core_Controller extends CI_Controller {
         $this->checklogin();
         
         $this->load->model('dashboard/Category_Model');
+        $this->load->model('dashboard/Auth_Model');
         $cat_type = 'dashboard';
         $cate_data = $this->Category_Model
             ->get_by_type($cat_type);
@@ -21,6 +22,10 @@ class Core_Controller extends CI_Controller {
             ->buildTree($cate_data);
         $this->load->vars(array(
             'dashboard_menus' => $dashboard_menus
+        ));
+        $this->load->vars(array(
+            'users' => $this->Auth_Model
+            ->get_all()
         ));
     }
 

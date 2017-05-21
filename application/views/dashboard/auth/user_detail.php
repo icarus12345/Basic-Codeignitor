@@ -31,6 +31,26 @@ $CI =& get_instance();
         </div>
         <div class="col-xs-12 half">
             <div class="pull-bottom">
+                <div>Avatar :(*)</div>
+                <div class="control-group">
+                    <div class="input-append">
+                        <input type="text" 
+                            class="form-control" 
+                            data-putto="#frm-err-avatar"
+                            name="avatar"
+                            id="avatar"
+                            value="<?php echo $CI->session->userdata('dasbboard_user')->ause_picture ; ?>"
+                            >
+                        <span class="add-on" onclick="App.KCFinder.BrowseServer('#avatar')">
+                            <i class="fa fa-image"></i>
+                        </span>
+                    </div>
+                    <div id="frm-err-avatar"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 half">
+            <div class="pull-bottom">
                 <div>Current Password :(*)</div>
                 <div class="control-group">
                     <input 

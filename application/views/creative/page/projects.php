@@ -9,10 +9,13 @@
                         <div class="breardcum">
                             <span data-wow-delay="0.5s" class="wow fadeInUp">Trang Chủ</span>
                             <span data-wow-delay="0.5s" class="wow fadeInUp">Dự Án</span>
+                            <?php if($category_detail): ?>
+                            <span data-wow-delay="0.5s" class="wow fadeInUp"><?php echo $category_detail->title; ?></span>
+                            <?php endif; ?>
                         </div>
                     </div>
                     <div data-wow-delay="1s" class="wow fadeInUp">
-                        <div class="title">Dự Án</div>
+                        <div class="title"><?php echo $category_detail?$category_detail->title:'Dự Án'; ?></div>
                     </div>
                     <div class="line">
                         <span class="before-line"></span>

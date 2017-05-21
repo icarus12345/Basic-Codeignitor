@@ -158,4 +158,63 @@ class Home extends Front_Controller {
         }
     }
 
+    public function blogs($alias = null,$page = 1){
+        if($alias=='all') $alias = null;
+        $this->layout='main';
+        $perpage = 2;
+        if($alias){
+            $category_detail = $this->Category_Model
+                ->set_type('services')
+                ->get_by_alias($alias);
+            if($category_detail){
+                $this->assigns['category_detail'] = $category_detail;
+                $this->assigns['blogs'] = $this->model
+                    ->CALC_FOUND_ROWS()
+                    ->set_type('news-blogs')
+                    ->join_category()
+                    ->limit($page,$perpage)
+                    ->get_by_category($category_detail->id);
+                $this->assigns['paging'] = $this->paging($page,$perpage,base_url("tin-tuc/{$category_detail->alias}/page"));
+                $this->render('creative/page/blogs',null);
+            } else {
+                $this->blog_detail($alias);
+            }
+        } else {
+            $this->assigns['blogs'] = $this->model
+                ->CALC_FOUND_ROWS()
+                ->set_type('news-blogs')
+                ->asc()
+                ->join_category()
+                ->limit($page,$perpage)
+                ->gets();
+            $this->assigns['paging'] = $this->paging($page,$perpage,base_url('tin-tuc/page'));
+            $this->render('creative/page/blogs',null);
+        }
+    }
+    public function blog_detail($alias = null){
+        $this->layout='main';
+        $blog_detail = $this->model
+            ->set_type('news-blogs')
+            ->get_by_alias($alias);
+        if($blog_detail){
+            $this->assigns['blog_detail'] = $blog_detail;
+            $category_detail = $this->Category_Model
+                ->set_type('services')
+                ->get($blog_detail->category);
+            $this->assigns['category_detail'] = $category_detail;
+
+            $this->assigns['related_blogs'] = $this->model
+                ->limit(4)
+                ->random()
+                ->get_related($blog_detail);
+            $this->render('creative/page/blog_detail',null);
+        } else {
+            show_404();
+        }
+    }
+    function contact(){
+        $this->layout='main';
+        $this->render('creative/page/contact',null);
+    }
+
 }

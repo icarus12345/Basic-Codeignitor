@@ -30,7 +30,7 @@
             <div class="boxs">
                 <div class="box-thumb">
                     <div class="nailthumb" >
-                        <a href="<?php echo base_url('services/'.$foo->alias); ?>.html" class="nailthumb-container wow fadeInUp" data-wow-delay="0.5s">
+                        <a href="<?php echo base_url('dich-vu/'.$foo->alias); ?>.html" class="nailthumb-container wow fadeInUp" data-wow-delay="0.5s">
                             <img class="lazy" data-original="<?php echo get_image_url($foo->data['cover']); ?>"/>
                         </a>
                     </div>

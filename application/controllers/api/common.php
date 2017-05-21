@@ -3,7 +3,6 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Common extends Api_Controller {
     function __construct() {
         parent::__construct();
-        $this->load->model("dashboard/Auth_Model");
         $this->Setting_Model = new Core_Model('tbl_setting');
         $this->load->model("dashboard/Category_Model");
     }
@@ -340,6 +339,7 @@ class Common extends Api_Controller {
             'code' => -1,
             'data' => null
         );
+        $user = $this->session->userdata('dasbboard_user');
         $id = $this->input->post('id');
         $sid = $this->input->post('sid');
         $title = $this->input->post('data[title]');
@@ -389,6 +389,8 @@ class Common extends Api_Controller {
                 
                 $entry_detail = $this->Core_Model->get($id);
                 if($entry_detail){
+                    // if(empty($entry_detail->author)) 
+                        $params['author'] = $user->ause_id;
                     if(isset($data)){
                         foreach ($data as $key => $value) {
                             $entry_detail->data[$key] = $value;
@@ -430,6 +432,7 @@ class Common extends Api_Controller {
             'code' => -1,
             'data' => null
         );
+        $user = $this->session->userdata('dasbboard_user');
         $sid = $this->input->post('sid');
         $title = $this->input->post('data[title]');
         $alias = $this->input->post('data[alias]');
@@ -470,9 +473,10 @@ class Common extends Api_Controller {
                 if(isset($title)) $params['title'] = $title;
                 if(isset($alias)) $params['alias'] = $alias;
                 if(isset($type)) $params['type'] = $type;
-                $params['status'] = 1;
                 if(isset($data)) $params['data'] = serialize($data);
                 if(isset($longdata)) $params['longdata'] = serialize($longdata);
+                $params['status'] = 1;
+                $params['author'] = $user->ause_id;
 
                 
                 $rs = $this->Core_Model->onInsert($params);

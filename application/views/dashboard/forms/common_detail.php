@@ -300,7 +300,7 @@
 </form>
 <?php if($entry_detail): ?>
 <div class="pre">
-Author:<?php echo $entry_detail->data['author']; ?><br/>
+Author:<?php echo $users[$entry_detail->author]->ause_name; ?><br/>
 Created: <?php echo $entry_detail->created; ?><br/>
 Modified: <?php echo $entry_detail->modified; ?>
 </div>

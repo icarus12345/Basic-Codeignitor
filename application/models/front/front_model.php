@@ -19,16 +19,26 @@ class Front_Model extends CI_Model {
 
     function set_type($type = null){
         $this->db
-            ->where("{$this->prefix}type", $type);
+            ->where("{$this->table}.{$this->prefix}type", $type);
+        return $this;
+    }
+    function CALC_FOUND_ROWS(){
+        $this->db->select("SQL_CALC_FOUND_ROWS {$this->table}.id as uid",false);
+        return $this;
+    }
+
+    function limit($page=1,$perpage = 10){
+        
+        $this->db->limit($perpage, ($page - 1) * $perpage);
         return $this;
     }
     
     function get($id) {
         if($this->status){
-            $this->db->where("{$this->prefix}status",$this->status);
+            $this->db->where("{$this->table}.{$this->prefix}status",$this->status);
         }
         $query = $this->db
-            ->where("{$this->prefix}{$this->colid}", $id)
+            ->where("{$this->table}.{$this->prefix}{$this->colid}", $id)
             ->get($this->table);
         $row = $query->row();
         if($row) {
@@ -41,10 +51,10 @@ class Front_Model extends CI_Model {
     }
     function get_by_alias($alias) {
         if($this->status){
-            $this->db->where("{$this->prefix}status",$this->status);
+            $this->db->where("{$this->table}.{$this->prefix}status",$this->status);
         }
         $query = $this->db
-            ->where("{$this->prefix}alias", $alias)
+            ->where("{$this->table}.{$this->prefix}alias", $alias)
             ->get($this->table);
         $row = $query->row();
         if($row) {
@@ -57,10 +67,10 @@ class Front_Model extends CI_Model {
     }
     function get_by_type($type=''){
         if($this->status){
-            $this->db->where("{$this->prefix}status",$this->status);
+            $this->db->where("{$this->table}.{$this->prefix}status",$this->status);
         }
         $query = $this->db
-            ->where("{$this->prefix}type", $type)
+            ->where("{$this->table}.{$this->prefix}type", $type)
             ->get($this->table);
         $entrys = $query->result();
         if($entrys) foreach ($entrys as $key => $value) {
@@ -73,10 +83,10 @@ class Front_Model extends CI_Model {
     }
     function get_by_category($catid=''){
         if($this->status){
-            $this->db->where("{$this->prefix}status",$this->status);
+            $this->db->where("{$this->table}.{$this->prefix}status",$this->status);
         }
         $query = $this->db
-            ->where("{$this->prefix}category", $catid)
+            ->where("{$this->table}.{$this->prefix}category", $catid)
             ->get($this->table);
         $entrys = $query->result();
         if($entrys) foreach ($entrys as $key => $value) {
@@ -86,11 +96,11 @@ class Front_Model extends CI_Model {
     }
     function gets() {
         if($this->status){
-            $this->db->where("{$this->prefix}status",$this->status);
+            $this->db->where("{$this->table}.{$this->prefix}status",$this->status);
         }
         $query = $this->db
             ->from($this->table)
-            ->order_by($this->prefix . 'created', 'DESC')
+            ->order_by("{$this->table}.created", 'DESC')
             ->get();
         $entrys = $query->result();
         if($entrys) foreach ($entrys as $key => $value) {
@@ -102,12 +112,12 @@ class Front_Model extends CI_Model {
     }
 
     function asc(){
-        $this->db->order_by('sorting','ASC');
+        $this->db->order_by("{$this->table}.sorting",'ASC');
         return $this;
     }
 
     function desc(){
-        $this->db->order_by('sorting','DESC');
+        $this->db->order_by("{$this->table}.sorting",'DESC');
         return $this;
     }
 
@@ -115,20 +125,20 @@ class Front_Model extends CI_Model {
         $this->db->order_by('rand()');
         return $this;
     }
-
-    function limit($n = 1){
-        $this->db->limit($n);
+    function join_category(){
+        $this->db->select('tbl_category.title as ctitle',false);
+        $this->db->select("$this->table.*",false);
+        $this->db->join('tbl_category', 'category = tbl_category.id', 'left');
         return $this;
     }
-
     function get_related($row){
         if(!$row) return null;
         if($this->status){
-            $this->db->where("{$this->prefix}status",$this->status);
+            $this->db->where("{$this->table}.{$this->prefix}status",$this->status);
         }
         $query = $this->db
-            ->where("{$this->prefix}type", $row->type)
-            ->where("{$this->prefix}id !=", $row->id)
+            ->where("{$this->table}.{$this->prefix}type", $row->type)
+            ->where("{$this->table}.{$this->prefix}id !=", $row->id)
             ->get($this->table);
         $entrys = $query->result();
         if($entrys) foreach ($entrys as $key => $value) {

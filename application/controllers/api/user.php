@@ -98,6 +98,7 @@ class User extends Core_Controller {
         $name = $this->input->post('name');
         $email = $this->input->post('email');
         $password = $this->input->post('password');
+        $avatar = $this->input->post('avatar');
         $oldpassword = $this->input->post('oldpassword');
         if ($this->form_validation->run() == FALSE) {
             $output['validation'] = validation_errors_array();
@@ -114,6 +115,7 @@ class User extends Core_Controller {
                     $params = array(
                         'ause_name'=>$name,
                         'ause_email'=>$email,
+                        'ause_picture'=>$avatar,
                         'ause_password'=> md5($username . $password . $user->ause_secretkey),
                         );
                     $rs = $this->Auth_Model->onUpdate($user->ause_id, $params);

@@ -10,6 +10,11 @@ class Api_Controller extends CI_Controller {
         $this->table = 'tbl_data';
         $this->prefix = '';
         $this->colid = 'id';
+        $this->load->model('dashboard/Auth_Model');
+        $this->load->vars(array(
+            'users' => $this->Auth_Model
+            ->get_all()
+        ));
     }
 
     function checklogin() {
