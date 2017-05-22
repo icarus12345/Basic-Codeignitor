@@ -4,7 +4,7 @@ class Setting extends Api_Controller {
     function __construct() {
         parent::__construct();
         $this->load->model("dashboard/Category_Model");
-        $this->table = 'tbl_setting';
+        $this->table = 'tbl_module';
         $this->Core_Model = new Core_Model($this->table);
     }
     
@@ -93,7 +93,7 @@ class Setting extends Api_Controller {
             'setting_list' => $setting_list
             ));
 
-        $output['html'] = $this->load->view('dashboard/forms/setting_detail',null,true);
+        $output['html'] = $this->load->view('dashboard/forms/module_detail',null,true);
         return $this->output
             ->set_content_type('application/json')
             ->set_status_header(200)

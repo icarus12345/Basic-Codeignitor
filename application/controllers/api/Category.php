@@ -6,7 +6,7 @@ class Category extends Api_Controller {
         $this->load->model("dashboard/Category_Model");
         $this->table = 'tbl_category';
         $this->Core_Model = new Core_Model($this->table);
-        $this->Setting_Model = new Core_Model('tbl_setting');
+        $this->Setting_Model = new Core_Model('tbl_module');
     }
     
     function index(){
