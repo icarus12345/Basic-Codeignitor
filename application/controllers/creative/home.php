@@ -161,7 +161,7 @@ class Home extends Front_Controller {
     public function blogs($alias = null,$page = 1){
         if($alias=='all') $alias = null;
         $this->layout='main';
-        $perpage = 2;
+        $perpage = 6;
         if($alias){
             $category_detail = $this->Category_Model
                 ->set_type('services')

@@ -48,16 +48,16 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="<?php echo base_url('du-an'); ?>.html" -data-toggle="dropdown">PROJECT</a>
+                            <a href="<?php echo base_url('du-an'); ?>.html" -data-toggle="dropdown">Dự Án</a>
                             <ul class="dropdown-menu">
                                 <?php if($service_category) foreach ($service_category as $key => $foo) : ?>
                                 <li><a href='<?php echo base_url('du-an/'.$foo->alias); ?>'><?php echo $foo->title; ?></a></li>
                                 <?php endforeach; ?>
                             </ul>
                         </li>
-                        <li><a href='<?php echo base_url('tin-tuc'); ?>.html'>NEWS</a></li>
-                        <li><a href='<?php echo base_url('tuyen-dung'); ?>.html'>TUYỂN DỤNG</a></li>
-                        <li><a href='<?php echo base_url('lien-he'); ?>.html'>CONTACT</a></li>
+                        <li><a href='<?php echo base_url('tin-tuc'); ?>.html'>BLOGS</a></li>
+                        <li><a href='<?php echo base_url('tuyen-dung'); ?>.html'>Tuyển Dụng</a></li>
+                        <li><a href='<?php echo base_url('lien-he'); ?>.html'>Liên Hệ</a></li>
                     </ul>
                 </nav>
             </div>

@@ -97,11 +97,11 @@
         <div class="boxs contact-box">
             <div class="box-thumb">
                 <div class="nailthumb" >
-                    <div class="nailthumb-container cover" style="background-image:url(<?php echo base_url() ?>assets/creative/images/map.jpg)" data-anijs="if: scroll, on: window, do: fadeIn animated, before: scrollReveal">
+                    <div class="nailthumb-container cover wow fadeIn" style="background-image:url(<?php echo base_url() ?>assets/creative/images/map.jpg)" >
                     </div>
                     <div class="text-content">
-                        <div class="title" data-fz="big" data-anijs="if: scroll, on: window, do: slideInUp animated, before: scrollReveal, after: removeAnim">-- CREATIVE DESIGN --</div>
-                        <div class="desc" data-fz="medium" data-anijs="if: scroll, on: window, do: slideInUp animated, before: scrollReveal, after: removeAnim">
+                        <div class="title slideInUp wow" data-fz="big" >-- CREATIVE DESIGN --</div>
+                        <div class="desc slideInUp wow" data-fz="medium">
                             <p><span class="fa fa-home"></span> Địa chỉ : Lorem Ipsum is simply dummy text</p>
                             <p><span class="fa fa-phone"></span> Hotline : Lorem Ipsum is simply dummy text</p>
                             <p><span class="fa fa-envelope"></span> Email : Lorem Ipsum is simply dummy text</p>
@@ -112,8 +112,8 @@
             <div class="box-text" >
                 <div>
                     <div class="text-content">
-                        <div class="title" data-fz="big" data-anijs="if: scroll, on: window, do: slideInUp animated, before: scrollReveal, after: removeAnim">-- LIÊN HỆ VỚI CHÚNG TÔI --</div>
-                        <div class="desc" data-fz="medium" data-anijs="if: scroll, on: window, do: slideInUp animated, before: scrollReveal, after: removeAnim">Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</div>
+                        <div class="title slideInUp wow" data-fz="big" >-- LIÊN HỆ VỚI CHÚNG TÔI --</div>
+                        <div class="desc wow slideInUp text-justify" data-fz="medium" >Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</div>
                         <form name="contactForm" id="contactForm" target="integration_asynchronous">
                             <div>
                                 <div class="row half">

@@ -25,8 +25,8 @@
             </div>
         </div>
         <div class="slogan">
-            <div class="title" data-fz="bigger" data-anijs="if: load, on: window, do: zoomInDown animated, before: scrollReveal">Những dự án đã và đang thực hiện cho đối tác & khách hàng của chúng tôi.</div>
-            <div class="btns" data-anijs="if: load, on: window, do: zoomInDown animated, before: scrollReveal">
+            <div class="title wow zoomInDown" data-fz="bigger" >Những dự án đã và đang thực hiện cho đối tác & khách hàng của chúng tôi.</div>
+            <div class="btns btn-list wow zoomInDown" >
                 <a href="<?php echo base_url('du-an'); ?>.html" class="btn btn-default <?php echo $category_detail?'':'active'; ?>">Tất Cả</a>
                 <?php if($service_category) foreach ($service_category as $key => $foo) : ?>
                 <a href='<?php echo base_url('du-an/'.$foo->alias); ?>.html' class="btn btn-default <?php echo $category_detail->id==$foo->id?'active':''; ?>"><?php echo $foo->title; ?></a></button>
