@@ -216,5 +216,12 @@ class Home extends Front_Controller {
         $this->layout='main';
         $this->render('creative/page/contact',null);
     }
+    function recruitment(){
+        $this->layout='main';
+        $this->assigns['recruitments'] = $this->model
+                    ->set_type('recruitment')
+                    ->gets();
+        $this->render('creative/page/recruitment',null);
+    }
 
 }

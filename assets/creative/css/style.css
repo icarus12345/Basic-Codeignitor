@@ -304,11 +304,11 @@ table,td{font: inherit;}
 header{background: #232323;padding: 10px 0}
 .full-page header{background: transparent;}
 
-body.nav-collapsed{overflow:hidden;}
-.nav-collapsed .icon-bar{
+body.head-collapsed{overflow:hidden;}
+.head-collapsed .icon-bar{
     opacity: 0;
 }
-.nav-collapsed .navbar-toggle{
+.head-collapsed .navbar-toggle{
     background-image: url(../images/close.png);
     border-color: rgba(255,255,255,.1)
 }

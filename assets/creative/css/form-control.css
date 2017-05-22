@@ -64,3 +64,16 @@ textarea.form-control.dark{border-top:1px solid transparent;}
     border-right: 6px solid transparent;
 }
 .formErrorPopup .formErrorContent{white-space: nowrap;}
+@media (max-width: 767px){
+    .form-control.light{
+        background: #fafafa;border-radius: 2px;
+        border-color: #ddd;
+        line-height: 20px;padding: 4px 10px;
+        height: 30px;
+        font-style: italic;
+    }
+    .upload>button{
+        height: 30px;padding: 4px 20px;
+        width: auto;
+    }
+}

@@ -76,8 +76,8 @@ class Front_Model extends CI_Model {
         if($entrys) foreach ($entrys as $key => $value) {
             $data = $this->prefix.'data';
             $longdata = $this->prefix.'longdata';
-            if(!empty($entrys[$key]->$data)) $entrys[$key]->data = unserialize($entrys[$key]->data);
-            // if(!empty($entrys->$longdata)) $entrys->$longdata = unserialize($entrys->$longdata);
+            if(!empty($entrys[$key]->$data)) $entrys[$key]->$data = unserialize($entrys[$key]->$data);
+            if(!empty($entrys[$key]->$longdata)) $entrys[$key]->$longdata = unserialize($entrys[$key]->$longdata);
         }
         return $entrys;
     }
@@ -90,7 +90,10 @@ class Front_Model extends CI_Model {
             ->get($this->table);
         $entrys = $query->result();
         if($entrys) foreach ($entrys as $key => $value) {
-            $entrys[$key]->data = unserialize($entrys[$key]->data);
+            $data = $this->prefix.'data';
+            $longdata = $this->prefix.'longdata';
+            if(!empty($entrys[$key]->$data)) $entrys[$key]->$data = unserialize($entrys[$key]->$data);
+            if(!empty($entrys[$key]->$longdata)) $entrys[$key]->$longdata = unserialize($entrys[$key]->$longdata);
         }
         return $entrys;
     }
@@ -106,7 +109,8 @@ class Front_Model extends CI_Model {
         if($entrys) foreach ($entrys as $key => $value) {
             $data = $this->prefix.'data';
             $longdata = $this->prefix.'longdata';
-            if(!empty($entrys[$key]->$data)) $entrys[$key]->data = unserialize($entrys[$key]->data);
+            if(!empty($entrys[$key]->$data)) $entrys[$key]->$data = unserialize($entrys[$key]->$data);
+            if(!empty($entrys[$key]->$longdata)) $entrys[$key]->$longdata = unserialize($entrys[$key]->$longdata);
         }
         return $entrys;
     }
