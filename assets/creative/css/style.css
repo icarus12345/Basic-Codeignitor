@@ -304,11 +304,11 @@ table,td{font: inherit;}
 header{background: #232323;padding: 10px 0}
 .full-page header{background: transparent;}
 
-
-.nav-collapsed .icon-bar{
+body.head-collapsed{overflow:hidden;}
+.head-collapsed .icon-bar{
     opacity: 0;
 }
-.nav-collapsed .navbar-toggle{
+.head-collapsed .navbar-toggle{
     background-image: url(../images/close.png);
     border-color: rgba(255,255,255,.1)
 }
@@ -1278,6 +1278,14 @@ footer .socials{float: right;}
         padding: 5px 10px;
         height: 32px;
     }
+    .slogan{padding-left: 0;padding-right: 0}
+    .slogan > .btn-list > .btn{
+        margin:0;display: block;width: 100%;
+        border-radius: 0;
+        border-width: 0;
+    }
+    footer{font-size: 13px}
+    footer .socials{width: 100%;text-align: center;}
 }
 @media (max-width: 560px) {
     body{padding-bottom: 100px}

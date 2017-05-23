@@ -30,7 +30,7 @@
         </div>
         <div data-wow-delay="0.2s" class="slogan wow zoomInDown">
             <div class="title" data-fz="bigger"><?php echo $abouts->data['slogan']; ?></div>
-            <div class="btns">
+            <div class="btns btn-list">
                 <button class="btn btn-dark">XEM THÀNH VIÊN</button>
                 <button class="btn btn-dark">XEM CÔNG VIỆC</button>
             </div>

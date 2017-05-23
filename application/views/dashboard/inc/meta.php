@@ -31,6 +31,7 @@
         <script type="text/javascript" src="<?php echo base_url() ?>lib/dashboard/js/app.auth.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>lib/dashboard/js/app.helper.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>lib/dashboard/js/app.setting.js"></script>
+        <script type="text/javascript" src="<?php echo base_url() ?>lib/dashboard/js/app.module.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>lib/dashboard/js/app.category.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>lib/dashboard/js/app.common.js"></script>
 

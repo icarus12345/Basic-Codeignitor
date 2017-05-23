@@ -58,6 +58,9 @@ $route['about'] = 'creative/home/about';
 $route['lien-he'] = 'creative/home/contact';
 $route['contact-us'] = 'creative/home/contact';
 
+$route['tuyen-dung'] = 'creative/home/recruitment';
+$route['recruitment'] = 'creative/home/recruitment';
+
 $route['dich-vu'] = 'creative/home/services';
 $route['services'] = 'creative/home/services';
 $route['dich-vu/(:any)'] = 'creative/home/service_detail/$1';

@@ -102,9 +102,10 @@
                             data-putto="#frm-err-data-storage"
                             >
                             <option value="tbl_data" <?php echo $entry_detail->data['storage'] == 'tbl_data'?'selected="1"':''; ?>>Storage 01</option>
-                            <option value="tbl_data2" <?php echo $entry_detail->data['storage2'] == 'tbl_data'?'selected="1"':''; ?>>Storage 02</option>
-                            <option value="tbl_data3" <?php echo $entry_detail->data['storage3'] == 'tbl_data'?'selected="1"':''; ?>>Storage 03</option>
-                            <option value="tbl_data4" <?php echo $entry_detail->data['storage4'] == 'tbl_data'?'selected="1"':''; ?>>Storage 04</option>
+                            <option value="tbl_data2" <?php echo $entry_detail->data['storage'] == 'tbl_data2'?'selected="1"':''; ?>>Storage 02</option>
+                            <option value="tbl_data3" <?php echo $entry_detail->data['storage'] == 'tbl_data3'?'selected="1"':''; ?>>Storage 03</option>
+                            <option value="tbl_data4" <?php echo $entry_detail->data['storage'] == 'tbl_data4'?'selected="1"':''; ?>>Storage 04</option>
+                            <option value="tbl_setting" <?php echo $entry_detail->data['storage'] == 'tbl_setting'?'selected="1"':''; ?>>Storage Setting</option>
                         </select>
                     </div>
                     <div id="frm-err-data-storage"></div>

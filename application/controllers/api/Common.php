@@ -3,7 +3,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Common extends Api_Controller {
     function __construct() {
         parent::__construct();
-        $this->Setting_Model = new Core_Model('tbl_setting');
+        $this->Setting_Model = new Core_Model('tbl_module');
         $this->load->model("dashboard/Category_Model");
     }
     
