@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Welcome extends CI_Controller {
+class Welcome extends Front_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -19,12 +19,15 @@ class Welcome extends CI_Controller {
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
 	public function index()
-	{
-        // $this->load->controller('../controllers/creative/home','creative_controller');
-        // require_once('creative/home.php');
-        // $this->creative_controller = new home();
-        // $this->creative_controller->index();
-	}
+    {
+        $this->layout='home';
+        $slider = $this->model
+            ->set_type('slider')
+            ->desc()
+            ->gets();
+        $this->assigns['slider'] = $slider;
+        $this->render(null,null);
+    }
 
 
 }
