@@ -11,8 +11,8 @@ class Category extends Core_Controller {
     }
 
     function view($sid = 0){
-        $this->Setting_Model = new Core_Model('tbl_module');
-        $entry_setting = $this->Setting_Model->get($sid);
+        $this->Module_Model = new Core_Model('tbl_module');
+        $entry_setting = $this->Module_Model->get($sid);
         if($entry_setting->data['columns'])
         foreach ($entry_setting->data['columns'] as $key => $column) {
             if($column['type'] == 'catetree'){

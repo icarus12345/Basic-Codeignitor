@@ -4,7 +4,7 @@ $this->CI =& get_instance();
 <!-- <div class=" fluid"> -->
     <div class="modal-body">
         <!-- <h3 class="page-title">
-            Dashboard <small><?php echo $settings[$sid]->title; ?></small>
+            Dashboard <small>Setting</small>
         </h3> -->
         <div class="page-bar">
             <ul class="breadcrumb">
@@ -13,17 +13,14 @@ $this->CI =& get_instance();
                     <a href="<?php echo base_url('dashboard') ?>">Dashboard</a>
                 </li>
                 <li>
-                    <a href="#"><?php echo $settings[$sid]->title; ?></a>
+                    <a href="#">Setting</a>
                 </li>
             </ul>
         </div>
-        <!-- 
-         -->
-         <?php if($settings): ?>
         <div class="secondary-box" id="entrys-list">
             <div class="modal-header">
                 <h4>
-                    <?php echo $settings[$sid]->title; ?> <small>List</small>
+                    Setting <small>List</small>
                 </h4>
                 <div class="modal-action">
                     <div><a <?php $settings[$sid]->data['add'] != 'true'?'disabled':'' ?> href="JavaScript:App.Setting.ShowDetailDialog()" class="icon-plus" title="Add new entry"></a></div>
@@ -47,21 +44,17 @@ $this->CI =& get_instance();
         <div class="-secondary-box" id="entry-detail">
             <div class="modal-header">
                 <h4>
-                    <?php echo $settings[$sid]->title; ?> <small>Add/Edit</small>
+                    Setting <small>Add/Edit</small>
                 </h4>
             </div>
 
         </div>
-        <?php else: ?>
-            
-        <?php endif; ?>
     </div>
 <!-- </div> -->
 <script type="text/javascript">
     $(document).ready(function(){
         setTimeout(function(){
-            App.Setting.sid = '<?php echo $sid; ?>';
-            App.Setting.settings = <?php echo json_encode($settings); ?>;
+            App.Setting.type = '<?php echo $type; ?>';
             App.Setting.Grid()
         }, 300)
     })

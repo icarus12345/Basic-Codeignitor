@@ -3,7 +3,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Common extends Api_Controller {
     function __construct() {
         parent::__construct();
-        $this->Setting_Model = new Core_Model('tbl_module');
+        $this->Module_Model = new Core_Model('tbl_module');
         $this->load->model("dashboard/Category_Model");
     }
     
@@ -111,7 +111,7 @@ class Common extends Api_Controller {
         $sid = $this->input->post('sid');
         $onlysave = $this->input->post('onlysave');
         if(!empty($sid)) {
-            $entry_setting = $this->Setting_Model->get($sid);
+            $entry_setting = $this->Module_Model->get($sid);
             if($entry_setting){
                 if(
                     !empty($entry_setting->data['catetype']) &&
@@ -178,7 +178,7 @@ class Common extends Api_Controller {
         $data = $this->input->post('data');
         $sid = $this->input->post('sid');
         if(!empty($sid)) {
-            $entry_setting = $this->Setting_Model->get($sid);
+            $entry_setting = $this->Module_Model->get($sid);
             if($entry_setting){
                 if(
                     !empty($entry_setting->data['catetype']) &&
@@ -256,7 +256,7 @@ class Common extends Api_Controller {
         $data = $this->input->post('data[data]');
         $longdata = $this->input->post('data[longdata]');
 
-        $entry_setting = $this->Setting_Model->get($sid);
+        $entry_setting = $this->Module_Model->get($sid);
         if($entry_setting){
             $storage = $entry_setting->data['storage'];
             $this->Core_Model = new Core_Model($storage);
@@ -350,7 +350,7 @@ class Common extends Api_Controller {
         $data = $this->input->post('data[data]');
         $longdata = $this->input->post('data[longdata]');
 
-        $entry_setting = $this->Setting_Model->get($sid);
+        $entry_setting = $this->Module_Model->get($sid);
         $this->entry_setting = $entry_setting;
         if($entry_setting){
             $storage = $entry_setting->data['storage'];
@@ -441,7 +441,7 @@ class Common extends Api_Controller {
         $data = $this->input->post('data[data]');
         $longdata = $this->input->post('data[longdata]');
 
-        $entry_setting = $this->Setting_Model->get($sid);
+        $entry_setting = $this->Module_Model->get($sid);
         $this->entry_setting = $entry_setting;
         if($entry_setting){
             $storage = $entry_setting->data['storage'];
@@ -507,7 +507,7 @@ class Common extends Api_Controller {
         );
         $id = $this->input->post('id');
         $sid = $this->input->post('sid');
-        $entry_setting = $this->Setting_Model->get($sid);
+        $entry_setting = $this->Module_Model->get($sid);
         $this->entry_setting = $entry_setting;
         if($entry_setting){
             $storage = $entry_setting->data['storage'];
@@ -546,7 +546,7 @@ class Common extends Api_Controller {
         );
         $id = $this->input->post('id');
         $sid = $this->input->post('sid');
-        $entry_setting = $this->Setting_Model->get($sid);
+        $entry_setting = $this->Module_Model->get($sid);
         $this->entry_setting = $entry_setting;
         if($entry_setting){
             $storage = $entry_setting->data['storage'];

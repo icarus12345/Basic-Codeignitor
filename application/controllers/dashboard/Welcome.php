@@ -3,7 +3,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Welcome extends Core_Controller {
     function __construct() {
         parent::__construct();
-        $this->Setting_Model = new Core_Model('tbl_module');
+        $this->Module_Model = new Core_Model('tbl_module');
     }
     
     function index(){
@@ -11,7 +11,7 @@ class Welcome extends Core_Controller {
         $this->render('dashboard/main',null);
     }
     function load_setting($sid){
-        $entry_setting = $this->Setting_Model->get($sid);
+        $entry_setting = $this->Module_Model->get($sid);
         if($entry_setting) $settings[$entry_setting->id] = $entry_setting;
         if($entry_setting->data['columns'])
         foreach ($entry_setting->data['columns'] as $key => $column) {
@@ -25,7 +25,7 @@ class Welcome extends Core_Controller {
                 $cate_data = $this->Category_Model->get_by_type($cat_type);
                 $entry_setting->data['columns'][$key]['categories'] = $cate_data;
             } else if($column['type'] == 'list') {
-                $setting = $this->Setting_Model->get($column['sid']);
+                $setting = $this->Module_Model->get($column['sid']);
                 if($setting) $settings[$setting->id] = $setting;
             }
         }
