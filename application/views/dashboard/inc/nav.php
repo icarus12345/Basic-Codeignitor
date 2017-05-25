@@ -28,14 +28,14 @@
                     <ul>
                     <?php foreach ($sm->children as $ssm) : ?>
                         <li>
-                            <a href="<?php echo !empty($ssm->data['link'])?base_url($ssm->data['link']):'#';?>">
+                            <a href="<?php echo !empty($ssm->data['link'])? get_url($ssm->data['link']):'#';?>">
                                 <i class="<?php echo !empty($ssm->data['icon'])?$ssm->data['icon']:'icon-folder'; ?>"></i> <span class="title"><?php echo $ssm->title; ?></span>
                             </a>
                         </li>
                     <?php endforeach; ?>
                     </ul>
                     <?php else: ?>
-                    <a href="<?php echo !empty($sm->data['link'])?base_url($sm->data['link']):'#';?>">
+                    <a href="<?php echo !empty($sm->data['link'])? get_url($sm->data['link']):'#';?>">
                         <i class="<?php echo !empty($sm->data['icon'])?$sm->data['icon']:'icon-folder'; ?>"></i> <span class="title"><?php echo $sm->title; ?></span>
                     </a>
                     <?php endif; ?>
@@ -43,7 +43,7 @@
             <?php endforeach; ?>
             </ul>
             <?php else: ?>
-            <a href="<?php echo !empty($m->data['link'])?base_url($m->data['link']):'#';?>">
+            <a href="<?php echo !empty($m->data['link'])? get_url($m->data['link']):'#';?>">
                 <i class="<?php echo !empty($m->data['icon'])?$m->data['icon']:'icon-home'; ?>"></i> <span class="title"><?php echo $m->title; ?></span>
             </a>
             <?php endif; ?>

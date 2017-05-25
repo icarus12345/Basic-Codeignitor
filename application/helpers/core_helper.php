@@ -1,5 +1,17 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+if ( ! function_exists('get_url'))
+{
+    function get_url($url = '')
+    {
+        if(
+            startsWith($url,'//') ||
+            startsWith($url,'http')
+            ){
+            return $url;
+        }
+        return base_url($url);
+    }   
+}
 if ( ! function_exists('get_image_url'))
 {
     function get_image_url($url = '')
