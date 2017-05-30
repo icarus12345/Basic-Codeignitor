@@ -136,11 +136,13 @@ class Setting extends Api_Controller {
             $data = $this->input->post('data[data]');
             $id = $this->input->post('id');
             $title = $this->input->post('data[title]');
+            $category = $this->input->post('data[category]');
             $type = $this->input->post('type');
             $alias = $this->input->post('data[alias]');
             $params = array(
                 'title' => $title,
                 'alias' => $alias,
+                'category' => $category,
                 // 'type' => $type,
                 'data' => serialize($data),
                 );
@@ -174,11 +176,13 @@ class Setting extends Api_Controller {
             $data = $this->input->post('data[data]');
             $id = $this->input->post('id');
             $title = $this->input->post('data[title]');
+            $category = $this->input->post('data[category]');
             $type = $this->input->post('type');
             $alias = $this->input->post('data[alias]');
             $params = array(
                 'title' => $title,
                 'alias' => $alias,
+                'category' => $category,
                 'type' => $type,
                 'data' => serialize($data),
                 );
@@ -204,18 +208,22 @@ class Setting extends Api_Controller {
             "table"     =>"{$this->table}",
             "select"    =>"
                 SELECT SQL_CALC_FOUND_ROWS 
-                    {$this->table}.{$this->prefix}id,
-                    {$this->table}.{$this->prefix}title,
-                    {$this->table}.{$this->prefix}created,
-                    {$this->table}.{$this->prefix}modified,
-                    {$this->table}.{$this->prefix}status,
-                    {$this->table}.{$this->prefix}data
+                    `{$this->table}`.`{$this->prefix}id`,
+                    `{$this->table}`.`{$this->prefix}title`,
+                    `{$this->table}`.`{$this->prefix}created`,
+                    `{$this->table}`.`{$this->prefix}modified`,
+                    `{$this->table}`.`{$this->prefix}status`,
+                    `{$this->table}`.`{$this->prefix}data`,
+                    `tbl_category`.`title` as cattitle
                 ",
-            "from"      =>" FROM `{$this->table}` ",
-            "where"     =>!empty($type)?"WHERE `{$this->prefix}type` = '$type'":'',
-            "order_by"  =>"ORDER BY `{$this->prefix}created` ASC",
+            "from"      => "
+                FROM `{$this->table}` 
+                LEFT JOIN `tbl_category` ON(`tbl_category`.`id` = `{$this->table}`.`category`)
+            ",
+            "where"     => !empty($type)?"WHERE `{$this->table}`.`{$this->prefix}type` = '$type'":'',
+            "order_by"  => "ORDER BY `{$this->table}`.`{$this->prefix}sorting` DESC",
             "columnmaps"=>array(
-                
+                'cattitle'=>'tbl_category.title'
             ),
             "filterfields"=>array(
 
