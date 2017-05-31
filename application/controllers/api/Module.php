@@ -238,6 +238,7 @@ class Module extends Api_Controller {
         foreach ($output['rows'] as $key => $value) {
             $data = unserialize($value->data);
             unset($output['rows'][$key]->data);
+            $output['rows'][$key]->site = $data['site'];
             $output['rows'][$key]->title = $output['rows'][$key]->title . ' - <small><i>' . $data['site'] .'</i></small>';
         }
         $this->output->set_header('Content-type: application/json');

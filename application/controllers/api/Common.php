@@ -143,6 +143,10 @@ class Common extends Api_Controller {
                 $storage = $entry_setting->data['storage'];
                 if(!empty($storage)){
                     if(!empty($id)) {
+                        if($entry_setting->data['add']=='false'){
+                            $output['code'] = -1;
+                            $output['message'] = 'Access Denied .';
+                        }
                         $this->Core_Model = new Core_Model($storage);
                         $entry_detail = $this->Core_Model->get($id);
                         $this->load->vars(array(
@@ -150,6 +154,11 @@ class Common extends Api_Controller {
                             'onlysave'=>$onlysave
                             ));
                         $output['data'] = $entry_detail;
+                    } else{
+                        if($entry_setting->data['add']=='false'){
+                            $output['code'] = -1;
+                            $output['message'] = 'Access Denied .';
+                        }
                     }
                     $output['html'] = $this->load->view('dashboard/forms/common_detail',null,true);
                 } else {
@@ -162,8 +171,7 @@ class Common extends Api_Controller {
                 $output['code'] = -1;
                 $output['message'] = 'Setting does\'t exitst.';
             }
-        }
-        ;
+        };
         return $this->output
             ->set_content_type('application/json')
             ->set_status_header(200)
