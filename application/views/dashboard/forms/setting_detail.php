@@ -48,24 +48,24 @@
                 <div>Data type :</div>
                 <div class="">
                     <select 
-                        name="type" 
+                        name="data[type]" 
                         class="form-control selectpicker validate[required]"
                         >
-                        <option value="string">String</option>
-                        <option value="text">Text</option>
-                        <option value="html">HTML</option>
-                        <option value="image">Image</option>
-                        <option value="radio">Radio</option>
+                        <option value="string" <?php echo $entry_detail->data['type'] == "string"?'selected=1':'' ?>>String</option>
+                        <option value="text" <?php echo $entry_detail->data['type'] == "text"?'selected=1':'' ?>>Text</option>
+                        <option value="html" <?php echo $entry_detail->data['type'] == "html"?'selected=1':'' ?>>HTML</option>
+                        <option value="image" <?php echo $entry_detail->data['type'] == "image"?'selected=1':'' ?>>Image</option>
+                        <option value="radio" <?php echo $entry_detail->data['type'] == "radio"?'selected=1':'' ?>>Radio</option>
 
-                        <option value="checkbox">Checkbox</option>
-                        <option value="multidropdown">Multi Dropdown</option>
-                        <option value="dropdown">Dropdown</option>
+                        <option value="checkbox" <?php echo $entry_detail->data['type'] == "checkbox"?'selected=1':'' ?>>Checkbox</option>
+                        <option value="multidropdown" <?php echo $entry_detail->data['type'] == "multidropdown"?'selected=1':'' ?>>Multi Dropdown</option>
+                        <option value="dropdown" <?php echo $entry_detail->data['type'] == "dropdown"?'selected=1':'' ?>>Dropdown</option>
 
-                        <option value="catelist">List Category</option>
-                        <option value="catetree">Tree Category</option>
+                        <option value="catelist" <?php echo $entry_detail->data['type'] == "catelist"?'selected=1':'' ?>>List Category</option>
+                        <option value="catetree" <?php echo $entry_detail->data['type'] == "catetree"?'selected=1':'' ?>>Tree Category</option>
 
-                        <option value="list">List</option>
-                        <option value="grid">Grid</option>
+                        <option value="list" <?php echo $entry_detail->data['type'] == "list"?'selected=1':'' ?>>List</option>
+                        <option value="grid" <?php echo $entry_detail->data['type'] == "grid"?'selected=1':'' ?>>Grid</option>
                     </select>
                 </div>
             </div>
