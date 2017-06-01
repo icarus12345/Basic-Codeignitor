@@ -139,7 +139,7 @@
             <div class="info wow fadeInUp">
                 <?php if($staffs) foreach ($staffs as $key => $foo) : ?>
                 <?php 
-                    $skills = unserialize($foo->longdata)['skills'];
+                    $skills = $foo->longdata['skills'];
                 ?>
                 <div>
                     <div class="box-center">
