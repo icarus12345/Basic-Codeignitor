@@ -45,7 +45,7 @@ class Setting extends Api_Controller {
                 'type' => array(
                     'field'=>'type',
                     'label'=>'Type',
-                    'rules'=>'trim|required|min_length[4]|max_length[55]'
+                    'rules'=>'trim|min_length[4]|max_length[55]'
                     ),
                 'id' => array(
                     'field'=>'id',

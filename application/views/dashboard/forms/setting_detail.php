@@ -1,4 +1,6 @@
-
+<?php 
+$CI =& get_instance();
+?>
 <form name="entry-detail-frm" id="entry-detail-frm" target="integration_asynchronous" class="validation-frm">
 <input 
     type="hidden" 
@@ -12,7 +14,13 @@
     >
 <div class="-modal-body pull-top">
     <div class="row half">
-        <?php if(!$entry_detail) : ?>
+        <?php 
+        if(
+            $CI->session->userdata('dasbboard_user')->ause_authority == 'Administrator' ||
+            $CI->session->userdata('dasbboard_user')->ause_authority == 'Admin' ||
+            !$entry_detail
+        ) : 
+    ?>
         <div class="col-xs-6 half">
             <div class="pull-bottom">
                 <div>Category :(*)</div>
@@ -83,6 +91,13 @@
         </div>
     <?php endif; ?>
     <?php if($entry_detail) : ?>
+        <?php 
+        if (
+            $CI->session->userdata('dasbboard_user')->ause_authority == 'Administrator' ||
+            $CI->session->userdata('dasbboard_user')->ause_authority == 'Admin'
+            ): 
+        ?>
+    <?php endif; ?>
         <?php if($entry_setting->data['columns']) foreach($entry_setting->data['columns'] as $i => $column): ?>
             <?php 
                 $value = $entry_detail->data[$column['name']];

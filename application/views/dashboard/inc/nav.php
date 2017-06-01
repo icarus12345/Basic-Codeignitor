@@ -1,3 +1,6 @@
+<?php 
+$CI =& get_instance();
+?>
 <!-- Menu [ -->
 <nav id="navigation" class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
     <ul >
@@ -49,7 +52,12 @@
             <?php endif; ?>
         </li>
         <?php endforeach; ?>
-        
+        <?php 
+        if (
+            $CI->session->userdata('dasbboard_user')->ause_authority == 'Administrator' ||
+            $CI->session->userdata('dasbboard_user')->ause_authority == 'Admin'
+            ): 
+        ?>
         <li class="heading">
             <h3 class="uppercase">More</h3>
         </li>
@@ -67,5 +75,6 @@
                 </li>
             </ul>
         </li>
+        <?php endif; ?>
     </ul>
 </nav>
