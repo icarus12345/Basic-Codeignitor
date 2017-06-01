@@ -80,6 +80,7 @@ class Module extends Api_Controller {
         );
         $id = $this->input->post('id');
         $type = $this->input->post('type');
+        $basic_module = $this->input->post('basic_module');
         if(!empty($id)) {
             $entry_detail = $this->Core_Model->get($id);
             $this->load->vars(array(
@@ -92,10 +93,16 @@ class Module extends Api_Controller {
             ->gets();
         $this->load->vars(array(
             'setting_list' => $setting_list,
-            'type' => $type
+            'type' => $type,
+            'basic_module' => $basic_module,
             ));
+        if($basic_module == 1){
+            $output['html'] = $this->load->view('dashboard/forms/basic_module_detail',null,true);
 
-        $output['html'] = $this->load->view('dashboard/forms/module_detail',null,true);
+        }else{
+            $output['html'] = $this->load->view('dashboard/forms/module_detail',null,true);
+            
+        }
         return $this->output
             ->set_content_type('application/json')
             ->set_status_header(200)

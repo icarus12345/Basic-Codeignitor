@@ -14,4 +14,10 @@ class Module extends Core_Controller {
         $this->assigns['type'] = $type;
         $this->render('dashboard/module',null);
     }
+
+    function basic($type=null){
+        $this->assigns['basic_module'] = 1;
+        $this->assigns['type'] = $type;
+        $this->render('dashboard/module',null);
+    }
 }
