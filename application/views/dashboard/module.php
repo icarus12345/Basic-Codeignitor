@@ -47,6 +47,9 @@ $this->CI =& get_instance();
 <!-- </div> -->
 <script type="text/javascript">
     $(document).ready(function(){
-        setTimeout(App.Module.Grid, 300)
+        setTimeout(function(){
+            App.Module.type = <?php echo json_encode($type); ?>;
+            App.Module.Grid()
+        }, 300)
     })
 </script>

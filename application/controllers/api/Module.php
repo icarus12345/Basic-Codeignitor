@@ -79,6 +79,7 @@ class Module extends Api_Controller {
             'data' => null
         );
         $id = $this->input->post('id');
+        $type = $this->input->post('type');
         if(!empty($id)) {
             $entry_detail = $this->Core_Model->get($id);
             $this->load->vars(array(
@@ -90,7 +91,8 @@ class Module extends Api_Controller {
             ->select('id,title,data')
             ->gets();
         $this->load->vars(array(
-            'setting_list' => $setting_list
+            'setting_list' => $setting_list,
+            'type' => $type
             ));
 
         $output['html'] = $this->load->view('dashboard/forms/module_detail',null,true);
@@ -154,7 +156,7 @@ class Module extends Api_Controller {
             $params = array(
                 'title' => $title,
                 'alias' => $alias,
-                // 'type' => $type,
+                'type' => $type,
                 'data' => serialize($data),
                 );
             $rs = $this->Core_Model->onUpdate($id, $params);
@@ -192,7 +194,7 @@ class Module extends Api_Controller {
             $params = array(
                 'title' => $title,
                 'alias' => $alias,
-                // 'type' => $type,
+                'type' => $type,
                 'data' => serialize($data),
                 );
             $this->Core_Model = new Core_Model($this->table);

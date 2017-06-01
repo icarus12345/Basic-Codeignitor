@@ -7,8 +7,11 @@ class Module extends Core_Controller {
     }
     
     function index(){
-        $this->render('dashboard/module',null);
+        $this->view(null);
     }
 
-    
+    function view($type=null){
+        $this->assigns['type'] = $type;
+        $this->render('dashboard/module',null);
+    }
 }

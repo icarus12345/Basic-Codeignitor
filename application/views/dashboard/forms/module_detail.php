@@ -9,6 +9,10 @@
         name="alias" 
         value="<?php echo $entry_detail->alias; ?>" 
         id="detail-setting-alias">
+    <input 
+        type="hidden" 
+        name="type" 
+        value="<?php echo $type; ?>" >
     <div class="row half">
         <div class="col-xs-6 half">
             <div class="pull-bottom">

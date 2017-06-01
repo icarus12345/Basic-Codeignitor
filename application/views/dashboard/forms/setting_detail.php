@@ -1,8 +1,4 @@
-<div class="-modal-header pull-top pull-bottom">
-    <h4>
-        <?php echo $entry_setting->title; ?> <small><?php echo $entry_detail?'Edit':'Add'; ?></small>
-    </h4>
-</div>
+
 <form name="entry-detail-frm" id="entry-detail-frm" target="integration_asynchronous" class="validation-frm">
 <input 
     type="hidden" 
@@ -48,24 +44,12 @@
                 <div>Data type :</div>
                 <div class="">
                     <select 
-                        name="data[type]" 
+                        name="data[sid]" 
                         class="form-control selectpicker validate[required]"
                         >
-                        <option value="string" <?php echo $entry_detail->data['type'] == "string"?'selected=1':'' ?>>String</option>
-                        <option value="text" <?php echo $entry_detail->data['type'] == "text"?'selected=1':'' ?>>Text</option>
-                        <option value="html" <?php echo $entry_detail->data['type'] == "html"?'selected=1':'' ?>>HTML</option>
-                        <option value="image" <?php echo $entry_detail->data['type'] == "image"?'selected=1':'' ?>>Image</option>
-                        <option value="radio" <?php echo $entry_detail->data['type'] == "radio"?'selected=1':'' ?>>Radio</option>
-
-                        <option value="checkbox" <?php echo $entry_detail->data['type'] == "checkbox"?'selected=1':'' ?>>Checkbox</option>
-                        <option value="multidropdown" <?php echo $entry_detail->data['type'] == "multidropdown"?'selected=1':'' ?>>Multi Dropdown</option>
-                        <option value="dropdown" <?php echo $entry_detail->data['type'] == "dropdown"?'selected=1':'' ?>>Dropdown</option>
-
-                        <option value="catelist" <?php echo $entry_detail->data['type'] == "catelist"?'selected=1':'' ?>>List Category</option>
-                        <option value="catetree" <?php echo $entry_detail->data['type'] == "catetree"?'selected=1':'' ?>>Tree Category</option>
-
-                        <option value="list" <?php echo $entry_detail->data['type'] == "list"?'selected=1':'' ?>>List</option>
-                        <option value="grid" <?php echo $entry_detail->data['type'] == "grid"?'selected=1':'' ?>>Grid</option>
+                        <?php foreach ($setting_list as $key => $value): ?>
+                        <option value="<?php echo $value->id; ?>" <?php echo $entry_detail->data['sid'] == $value->id?'selected=1':'' ?>><?php echo $value->title; ?></option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
             </div>
@@ -76,7 +60,7 @@
                 <div class="control-group">
                     <input 
                         type="text"
-                        class="form-control validate[required,minSize[4],maxSize[250]]" 
+                        class="form-control validate[required,minSize[2],maxSize[250]]" 
                         placeholder=""
                         name="title"
                         onblur="App.Helper.Alias(this)"
@@ -84,88 +68,155 @@
                 </div>
             </div>
         </div>
+        <div class="col-xs-12 half">
+            <div class="pull-bottom">
+                <div>Desc :(*)</div>
+                <div class="control-group">
+                    <textarea 
+                        type="text"
+                        class="form-control validate[required,minSize[2],maxSize[250]]" 
+                        placeholder=""
+                        name="data[desc]"
+                        ><?php echo $entry_detail->data['desc']; ?></textarea>
+                </div>
+            </div>
+        </div>
     <?php endif; ?>
-        <?php if($entry_detail) : ?>
-            
-            <?php if ($entry_detail->data['type'] == 'string'): ?>
+    <?php if($entry_detail) : ?>
+        <?php if($entry_setting->data['columns']) foreach($entry_setting->data['columns'] as $i => $column): ?>
+            <?php 
+                $value = $entry_detail->data[$column['name']];
+                $name = 'data['.$column['name'].']';
+                $id = 'data-'.$column['name'];
+                if($column['biz'] == '1'):
+                    $value = $entry_detail->longdata[$column['name']];
+                    $name = 'longdata['.$column['name'].']';
+                endif; 
+                ?>
+            <?php if ($column['type'] == 'radio'): ?>
                 
-                <div class="col-xs-12 half">
+                <div class="col-xs-<?php echo $column['col']; ?> half">
                     <div class="pull-bottom">
-                        <div><?php echo $entry_detail->title; ?> :</div>
+                        <div><?php echo $column['title']; ?> :</div>
+                        <div class="control-group">
+                            <div class="rdbs">
+                                <?php foreach($column['data'] as $c): ?>
+                                <label class="rdb">
+                                    <input 
+                                        type="radio" 
+                                        class="<?php echo $column['client']; ?>"
+                                        data-putto="#frm-err-data-<?php echo $column['name']; ?>"
+                                        name="<?php echo $name; ?>" 
+                                        <?php if ($c['value'] == $value){echo 'checked="1"';} ?>
+                                        value="<?php echo $c['value']; ?>"
+                                        >
+                                    <span><?php echo $c['display']; ?></span>
+                                </label>
+                                <?php endforeach; ?>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div id="frm-err-data-<?php echo $column['name']; ?>"></div>
+                        </div>
+                    </div>
+                </div>
+            <?php elseif ($column['type'] == 'checkbox'): ?>
+                
+                <div class="col-xs-<?php echo $column['col']; ?> half">
+                    <div class="pull-bottom">
+                        <div><?php echo $column['title']; ?> :</div>
+                        <div class="chks">
+                            <label class="chk">
+                                <input 
+                                    type="checkbox" 
+                                    name="<?php echo $name; ?>" 
+                                    <?php if ($value){echo 'checked="1"';} ?>
+                                    value="1"
+                                    >
+                                <span>&nbsp;</span>
+                            </label>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            <?php elseif ($column['type'] == 'string'): ?>
+                
+                <div class="col-xs-<?php echo $column['col']; ?> half">
+                    <div class="pull-bottom">
+                        <div><?php echo $column['title']; ?> :</div>
                         <div class="control-group">
                             <div>
                                 <input 
                                     type="text"
-                                    class="form-control " 
-                                    data-putto="#frm-err-data-value"
-                                    name="data[value]"
-                                    value="<?php echo $entry_detail->data['value']; ?>" >
+                                    class="form-control <?php echo $column['client']; ?>" 
+                                    data-putto="#frm-err-data-<?php echo $column['name']; ?>"
+                                    name="<?php echo $name; ?>"
+                                    value="<?php echo $value; ?>" >
                             </div>
-                            <div id="frm-err-data-value"></div>
+                            <div id="frm-err-data-<?php echo $column['name']; ?>"></div>
                         </div>
                     </div>
                 </div>
-            <?php elseif ($entry_detail->data['type'] == 'text'): ?>
-                <div class="col-xs-12 half">
+            <?php elseif ($column['type'] == 'text'): ?>
+                <div class="col-xs-<?php echo $column['col']; ?> half">
                     <div class="pull-bottom">
-                        <div><?php echo $entry_detail->title; ?> :</div>
+                        <div><?php echo $column['title']; ?> :</div>
                         <div class="control-group">
                             <div>
                                 <textarea 
                                     type="text"
-                                    class="form-control " 
-                                    data-putto="#frm-err-data-value"
-                                    name="data[value]"
-                                    ><?php echo $entry_detail->data['value']; ?></textarea>
+                                    class="form-control <?php echo $column['client']; ?>" 
+                                    data-putto="#frm-err-data-<?php echo $column['name']; ?>"
+                                    name="<?php echo $name; ?>"
+                                    ><?php echo $value; ?></textarea>
                             </div>
-                            <div id="frm-err-data-value"></div>
+                            <div id="frm-err-data-<?php echo $column['name']; ?>"></div>
                         </div>
                     </div>
                 </div>
-            <?php elseif ($entry_detail->data['type'] == 'html'): ?>
-                <div class="col-xs-12 half">
+            <?php elseif ($column['type'] == 'html'): ?>
+                <div class="col-xs-<?php echo $column['col']; ?> half">
                     <div class="pull-bottom">
-                        <div><?php echo $entry_detail->title; ?> :</div>
+                        <div><?php echo $column['title']; ?> :</div>
                         <div class="control-group">
                             <div>
                                 <textarea 
                                     type="text" row="4" 
-                                    id="value"
+                                    id="<?php echo $id; ?>"
                                     data-editor=1
-                                    class="form-control " 
-                                    data-putto="#frm-err-data-value"
-                                    name="data[value]"
-                                    ><?php echo $entry_detail->data['value']; ?></textarea>
+                                    class="form-control <?php echo $column['client']; ?>" 
+                                    data-putto="#frm-err-<?php echo $column['biz']?'long':'';?>data-<?php echo $column['name']; ?>"
+                                    name="<?php echo $name; ?>"
+                                    ><?php echo $value; ?></textarea>
                             </div>
-                            <div id="frm-err-data-value"></div>
+                            <div id="frm-err-<?php echo $id; ?>"></div>
                         </div>
                     </div>
                 </div>
-            <?php elseif ($entry_detail->data['type'] == 'image'): ?>
+            <?php elseif ($column['type'] == 'image'): ?>
                 <div class="col-xs-<?php echo $column['col']; ?> half">
                     <div class="pull-bottom">
-                        <div><?php echo $entry_detail->title; ?> :</div>
+                        <div><?php echo $column['title']; ?> :</div>
                         <div class="control-group">
                             <div class="input-append">
                                 <input type="text" 
-                                    class="form-control " 
-                                    data-putto="#frm-err-data-value"
-                                    name="data[value]"
-                                    id="value"
-                                    value="<?php echo $entry_detail->data['value']; ?>"
+                                    class="form-control <?php echo $column['client']; ?>" 
+                                    data-putto="#frm-err-<?php echo $id; ?>"
+                                    name="<?php echo $name; ?>"
+                                    id="<?php echo $id; ?>"
+                                    value="<?php echo $value; ?>"
                                     >
-                                <span class="add-on" onclick="App.KCFinder.BrowseServer('#value')">
+                                <span class="add-on" onclick="App.KCFinder.BrowseServer('#<?php echo $id; ?>')">
                                     <i class="fa fa-image"></i>
                                 </span>
                             </div>
-                            <div id="frm-err-data-value"></div>
+                            <div id="frm-err-<?php echo $id; ?>"></div>
                         </div>
                     </div>
                 </div>
-            <?php elseif ($entry_detail->data['type'] == 'multidropdown'): ?>
+            <?php elseif ($column['type'] == 'multidropdown'): ?>
                 <div class="col-xs-<?php echo $column['col']; ?> half">
                     <div class="pull-bottom">
-                        <div><?php echo $entry_detail->title; ?> :</div>
+                        <div><?php echo $column['title']; ?> :</div>
                         <div class="control-group">
                             <div>
                                 <select 
@@ -189,10 +240,10 @@
                         </div>
                     </div>
                 </div>
-            <?php elseif ($entry_detail->data['type'] == 'dropdown'): ?>
+            <?php elseif ($column['type'] == 'dropdown'): ?>
                 <div class="col-xs-<?php echo $column['col']; ?> half">
                     <div class="pull-bottom">
-                        <div><?php echo $entry_detail->title; ?> :</div>
+                        <div><?php echo $column['title']; ?> :</div>
                         <div class="control-group">
                             <div>
                                 <select 
@@ -216,10 +267,10 @@
                         </div>
                     </div>
                 </div>
-            <?php elseif ($entry_detail->data['type'] == 'list'): ?>
+            <?php elseif ($column['type'] == 'list'): ?>
                 <div class="col-xs-<?php echo $column['col']; ?> half">
                     <div class="pull-bottom">
-                        <div><?php echo $entry_detail->title; ?> :</div>
+                        <div><?php echo $column['title']; ?> :</div>
                         
                         <div>
                             <ul id="<?php echo $id; ?>" class="sortable" data-column="<?php echo $column['name']; ?>" data-sid="<?php echo $column['sid']; ?>"></ul>
@@ -231,12 +282,9 @@
                     </div>
                 </div>
             <?php endif; ?>
-        <?php endif; ?>
+        <?php endforeach; ?>
+        <div class="col-xs-12 half"><div class="pre"><?php echo $entry_detail->data['desc']; ?></div></div>
+    <?php endif; ?>
     </div>
 </div>
 </form>
-<div class="-modal-footer pull-top text-center">
-    <button class="btn btn-outline-secondary" onclick="App.Setting.Duplicate()">Duplicate</button>
-    <button class="btn btn-default" onclick="App.Setting.Save()">Save</button>
-    <button class="btn btn-link" onclick="App.Setting.Back()">Back</button>
-</div>
