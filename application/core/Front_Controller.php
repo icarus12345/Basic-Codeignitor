@@ -12,7 +12,10 @@ class Front_Controller extends CI_Controller {
         $this->load->model('dashboard/Auth_Model');
         $this->load->model('front/Category_Model');
         $this->model= new Front_Model('tbl_data');
-        
+        $this->load->model('front/Setting_Model');
+        $this->assigns['settings'] = $this->Setting_Model
+            ->set_type('creative')
+            ->get_list();
         $this->assigns['service_category'] = $this->Category_Model
             ->set_type('services')
             ->desc()
@@ -84,6 +87,26 @@ class Front_Controller extends CI_Controller {
         return $this->pagination->create_links();
     }
 
-    
+    function get_seo_tags($item = null){
+        $this->assigns['seo'] = array();
+        if(!empty($item)){
+            $this->assigns['seo']['title'] = $item->title;
+        }
+        if(!empty($item) && !empty($item->data['desc'])){
+            $this->assigns['seo']['desc'] = $item->data['desc'];
+        }
+        if(!empty($item) && !empty($item->data['cover'])){
+            $this->assigns['seo']['image'] = $item->data['cover'];
+        }
+        if(!empty($item) && !empty($item->data['image'])){
+            $this->assigns['seo']['image'] = $item->data['image'];
+        }
+        if(!empty($item) && !empty($item->data['tag'])){
+            $this->assigns['seo']['keywords'] = $item->data['tag'];
+        }
+        if(!empty($item) && !empty($item->data['keyword'])){
+            $this->assigns['seo']['keywords'] = $item->data['keywords'];
+        }
+    }
 
 }

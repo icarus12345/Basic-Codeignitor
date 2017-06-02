@@ -340,6 +340,7 @@ body.head-collapsed{overflow:hidden;}
 .navbar-nav{width: 100%}
 .navbar-nav > li{display: block;float: none;}
 .navbar-nav  li > a{color: #fff;font-weight: 100}
+.navbar-nav  li.active>a,
 .navbar-nav  li > a:focus,
 .navbar-nav  li > a:hover{color: orange;background: transparent;text-decoration: line-through;}
 .navbar-nav > li > a{padding-left: 30px;text-transform: uppercase;background: transparent;}

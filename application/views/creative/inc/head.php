@@ -29,9 +29,9 @@
                 </div>
                 <nav id="navigation" class="navbar-collapse bs-navbar-collapse collapse" role="navigation">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href='home.html'>Trang Chủ</a></li>
+                        <li data-menu="home"><a href='home.html'>Trang Chủ</a></li>
                         <li><a href='<?php echo base_url('ve-chung-toi'); ?>.html'>Về Chúng Tôi</a></li>
-                        <li>
+                        <li data-menu="service">
                             <a href="<?php echo base_url('dich-vu'); ?>.html" -data-toggle="dropdown">Dịch Vụ</a>
                             <ul class="dropdown-menu">
                                 <?php if($service_category) foreach ($service_category as $key => $foo) : ?>
@@ -39,7 +39,7 @@
                                 <?php endforeach; ?>
                             </ul>
                         </li>
-                        <li>
+                        <li data-menu="event">
                             <a href="<?php echo base_url('su-kien'); ?>.html" -data-toggle="dropdown">Trò Chơi - Sự Kiện</a>
                             <ul class="dropdown-menu">
                                 <?php if($event_category) foreach ($event_category as $key => $foo) : ?>
@@ -47,7 +47,7 @@
                                 <?php endforeach; ?>
                             </ul>
                         </li>
-                        <li>
+                        <li data-menu="project">
                             <a href="<?php echo base_url('du-an'); ?>.html" -data-toggle="dropdown">Dự Án</a>
                             <ul class="dropdown-menu">
                                 <?php if($service_category) foreach ($service_category as $key => $foo) : ?>
@@ -55,11 +55,16 @@
                                 <?php endforeach; ?>
                             </ul>
                         </li>
-                        <li><a href='<?php echo base_url('tin-tuc'); ?>.html'>BLOGS</a></li>
-                        <li><a href='<?php echo base_url('tuyen-dung'); ?>.html'>Tuyển Dụng</a></li>
-                        <li><a href='<?php echo base_url('lien-he'); ?>.html'>Liên Hệ</a></li>
+                        <li data-menu="news"><a href='<?php echo base_url('tin-tuc'); ?>.html'>BLOGS</a></li>
+                        <li data-menu="recruitment"><a href='<?php echo base_url('tuyen-dung'); ?>.html'>Tuyển Dụng</a></li>
+                        <li data-menu="contact"><a href='<?php echo base_url('lien-he'); ?>.html'>Liên Hệ</a></li>
                     </ul>
                 </nav>
             </div>
             <!-- Menu ] -->
+            <script type="text/javascript">
+                $(document).ready(function(){
+                    $('li[data-menu="<?php echo $actived_menu;?>"]').addClass('active')
+                })
+            </script>
         </header>

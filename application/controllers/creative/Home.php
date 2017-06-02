@@ -24,6 +24,7 @@ class Home extends Front_Controller {
     public function index()
     {
         $this->layout='home';
+        $this->assigns['actived_menu'] = 'home';
         $slider = $this->model
             ->set_type('slider')
             ->desc()
@@ -32,6 +33,7 @@ class Home extends Front_Controller {
         $this->render(null,null);
     }
     public function about(){
+        $this->assigns['actived_menu'] = 'about';
         $this->layout='main';
         $this->assigns['abouts'] = $this->model->get('15');
         $this->assigns['staffs'] = $this->model
@@ -40,6 +42,7 @@ class Home extends Front_Controller {
         $this->render('creative/page/about',null);
     }
     public function services($alias = null){
+        $this->assigns['actived_menu'] = 'service';
         if($alias){
             $this->service_detail($alias);
         }else{
@@ -53,6 +56,7 @@ class Home extends Front_Controller {
     }
     public function service_detail($alias = null){
         $this->layout='main';
+        $this->assigns['actived_menu'] = 'service';
         // $this->assigns['abouts'] = $this->model->get('15');
         $category_detail = $this->Category_Model
             ->set_type('services')
@@ -69,6 +73,7 @@ class Home extends Front_Controller {
     }
     public function events($alias = null){
         $this->layout='main';
+        $this->assigns['actived_menu'] = 'event';
         // $this->assigns['abouts'] = $this->model->get('15');
         if($alias){
             $category_detail = $this->Category_Model
@@ -92,10 +97,12 @@ class Home extends Front_Controller {
     }
     public function event_detail($alias = null){
         $this->layout='main';
+        $this->assigns['actived_menu'] = 'event';
         $event_detail = $this->model
             ->set_type('events')
             ->get_by_alias($alias);
         if($event_detail){
+            $this->get_seo_tags($event_detail);
             $this->assigns['event_detail'] = $event_detail;
             $category_detail = $this->Category_Model
                 ->set_type('events')
@@ -114,6 +121,7 @@ class Home extends Front_Controller {
 
     public function projects($alias = null){
         $this->layout='main';
+        $this->assigns['actived_menu'] = 'project';
         // $this->assigns['abouts'] = $this->model->get('15');
         if($alias){
             $category_detail = $this->Category_Model
@@ -138,10 +146,12 @@ class Home extends Front_Controller {
     }
     public function project_detail($alias = null){
         $this->layout='main';
+        $this->assigns['actived_menu'] = 'project';
         $project_detail = $this->model
             ->set_type('projects')
             ->get_by_alias($alias);
         if($project_detail){
+            $this->get_seo_tags($project_detail);
             $this->assigns['project_detail'] = $project_detail;
             $category_detail = $this->Category_Model
                 ->set_type('services')
@@ -161,12 +171,14 @@ class Home extends Front_Controller {
     public function blogs($alias = null,$page = 1){
         if($alias=='all') $alias = null;
         $this->layout='main';
+        $this->assigns['actived_menu'] = 'news';
         $perpage = 6;
         if($alias){
             $category_detail = $this->Category_Model
                 ->set_type('services')
                 ->get_by_alias($alias);
             if($category_detail){
+                $this->get_seo_tags($category_detail);
                 $this->assigns['category_detail'] = $category_detail;
                 $this->assigns['blogs'] = $this->model
                     ->CALC_FOUND_ROWS()
@@ -193,10 +205,13 @@ class Home extends Front_Controller {
     }
     public function blog_detail($alias = null){
         $this->layout='main';
+        $this->assigns['actived_menu'] = 'news';
         $blog_detail = $this->model
             ->set_type('news-blogs')
             ->get_by_alias($alias);
         if($blog_detail){
+            $this->get_seo_tags($blog_detail);
+
             $this->assigns['blog_detail'] = $blog_detail;
             $category_detail = $this->Category_Model
                 ->set_type('services')
@@ -218,6 +233,7 @@ class Home extends Front_Controller {
     }
     function recruitment(){
         $this->layout='main';
+        $this->assigns['actived_menu'] = 'recruitment';
         $this->assigns['recruitments'] = $this->model
                     ->set_type('recruitment')
                     ->gets();

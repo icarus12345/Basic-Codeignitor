@@ -71,7 +71,9 @@ $CI =& get_instance();
                         class="form-control validate[required,minSize[2],maxSize[250]]" 
                         placeholder=""
                         name="title"
+                        <?php if(!$entry_detail) : ?>
                         onblur="App.Helper.Alias(this)"
+                        <?php endif; ?>
                         value="<?php echo $entry_detail->title; ?>" >
                 </div>
             </div>

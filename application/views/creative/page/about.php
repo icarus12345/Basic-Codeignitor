@@ -59,8 +59,8 @@
             <div class="container">
                 <div class="row">
                     <div class="slogan wow rollIn">
-                        <div class="title" data-fz="bigger" >-- Công việc của chúng tôi --</div>
-                        <div class="desc" data-fz="medium">Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</div>
+                        <div class="title" data-fz="bigger" >-- <?php echo $settings['cong-viec-cua-chung-toi']->title;?> --</div>
+                        <div class="desc" data-fz="medium"><?php echo $settings['cong-viec-cua-chung-toi']->data['value'];?></div>
                     </div>
                     <div class="jobs cls">
                         <?php if($service_category) foreach ($service_category as $key => $foo) : ?>
@@ -143,12 +143,12 @@
                 ?>
                 <div>
                     <div class="box-center">
-                        <div class="title text-center text-thin" data-fz="big" data-anijs="if: scroll, on: window, do: slideInUp animated, before: scrollReveal, after: removeAnim">-- KỸ NĂNG --</div>
+                        <div class="title text-center text-thin wow slideInUp" data-fz="big" >-- KỸ NĂNG --</div>
                         <?php if($skills) foreach ($skills as $skey => $sfoo) : ?>
-                        <div class="desc skill-box a1" data-fz="" data-anijs="if: scroll, on: window, do: slideInUp animated, before: scrollReveal, after: removeAnim">
+                        <div class="desc skill-box a1 wow slideInUp" data-fz="">
                             <div data-fz="medium"><?php echo $sfoo['title']; ?></div>
                             <div class="skill">
-                                <div class="a11" style="width:<?php echo $sfoo['process']; ?>%" data-anijs="if: animationend, on:.a1, do: slideInLeft animated, after: removeAnim"></div>
+                                <div class="a11 wow slideInLeft" style="width:<?php echo $sfoo['process']; ?>%" ></div>
                             </div>
                         </div>
                         <?php endforeach; ?>
@@ -161,12 +161,12 @@
         <div class="customer-box boxs invert">
             <div class="box-thumb">
                 <div class="nailthumb" >
-                    <div class="nailthumb-container has-mask" data-anijs="if: scroll, on: window, do: fadeIn animated, before: scrollReveal">
+                    <div class="nailthumb-container has-mask wow fadeIn">
                         <img class="lazy" data-original="<?php echo base_url() ?>assets/creative/images/5.jpg"/>
                     </div>
                     <div class="text-content">
-                        <div class="title" data-fz="big" data-anijs="if: scroll, on: window, do: slideInUp animated, before: scrollReveal, after: removeAnim">-- KHACH HANG HAI LONG --</div>
-                        <div class="desc" data-fz="medium" data-anijs="if: scroll, on: window, do: slideInUp animated, before: scrollReveal, after: removeAnim">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</div>
+                        <div class="title  wow slideInUp" data-fz="big" >-- <?php echo $settings['testimonial']->title;?> --</div>
+                        <div class="desc wow slideInUp" data-fz="medium"><?php echo $settings['testimonial']->data['value'];?></div>
                     </div>
                 </div>
             </div>

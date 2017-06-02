@@ -3,21 +3,38 @@
         <title>Creative</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+        <title><?php echo $seo['title']; ?></title>
+        <meta name="description" content="<?php echo $seo['desc']; ?>">
+        <meta name="keywords" content="<?php echo $seo['keywords']; ?>">
+        <meta itemprop="name" content="<?php echo $seo['title']; ?>"/>
 
- <!--        <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>lib/bootstrap/css/bootstrap.css"/>
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>lib/bootstrap/css/hover.css"/>
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>lib/bootstrap/css/font-awesome.min.css?t=1">
-        
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>lib/scrollreveal/animate.css"/>
+        <meta itemprop="description" content="<?php echo $seo['desc']; ?>"/>
+        <meta itemprop="image" content="<?php echo base_url($seo['image']) ?>"/>
+        <meta name="twitter:card" content="summary"/><!-- Card type -->
+        <meta name="twitter:site" content="<?php echo $seo['title']; ?>"/>
+        <meta name="twitter:title" content="<?php echo $seo['title']; ?>">
+        <meta name="twitter:description" content="<?php echo $seo['desc']; ?>"/>
+        <meta name="twitter:creator" content="Dụng Cụ Làm Bánh An Phú"/>
+        <meta name="twitter:image:src" content="<?php echo base_url($seo['image']) ?>"/>
+        <meta name="twitter:domain" content="<?php echo base_url() ?>"/>
 
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/creative/css/style.css"/>
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/creative/css/font-size.css"/>
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/creative/css/button.css"/>
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/creative/css/home.css"/>
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>lib/owl-carousel/owl.carousel.css"/> -->
+        <!--<meta property="fb:admins" content="579622216,709634581">-->
+        <!--<meta property="fb:app_id" content="368469929920029">-->
+        <meta property="og:url" content="<?php echo base_url() ?>">
+        <meta property="og:type" content="article">
+        <meta property="og:title" content="<?php echo $seo['title']; ?>">
+        <meta property="og:image" content="<?php echo base_url($seo['image']) ?>"/>
+        <meta property="og:description" content="<?php echo $seo['desc']; ?>">
+        <meta property="og:site_name" content="<?php echo $seo['title']; ?>">
+        <meta property="article:author" content="https://www.facebook.com/dungculambanhanphu/">
+        <meta property="article:publisher" content="https://www.facebook.com/dungculambanhanphu/">
+
+        <meta name="geo.region" content="VN" />
+        <meta name="geo.placename" content="HCM" />
+        <meta name="geo.position" content="10.792048;106.679982" />
+        <meta name="ICBM" content="10.792048,106.679982"/>
 
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/creative/css/main.css"/>
-
 
 
 

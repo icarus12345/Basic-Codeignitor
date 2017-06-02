@@ -30,7 +30,7 @@
                 // When the window has finished loading create our google map below
                 google.maps.event.addDomListener(window, 'load', init);
                 function init() {
-                    var latlon = [10.792048, 106.679982];
+                    var latlon = [<?php echo $settings['map']->data['value'];?>];
                     var lat  = latlon[0], lon = latlon[1];
 
                     // Basic options for a simple Google Map
@@ -74,9 +74,9 @@
                     var content_info ='\
                           <div style="width:360px;font-size:13px;">\
                               <img src="<?php echo base_url() ?>assets/creative/images/logo-black.png" style="float:left;margin-right:10px"/>\
-                              <div><h4 style="margin:0;padding:4px 0;color:#ee4034;font-weight:100">CREATIVE DESIGN STUDIO</h4></div>\
-                              <div>Phone : +61 8 8274 7000 - 1800 809 991<br/>Email: cds@gmail.com</div>\
-                              <div>Address : <i>215 Greenhill Rd, Eastwood SA 5063, Australia</i></div>\
+                              <div><h4 style="margin:0;padding:4px 0;color:#ee4034;font-weight:100"><?php echo $settings['title']->data['value'];?></h4></div>\
+                              <div><?php echo $settings['mobile-phone']->title;?>: <?php echo $settings['mobile-phone']->data['value'];?><br/><?php echo $settings['email']->title;?>: <?php echo $settings['email']->data['value'];?></div>\
+                              <div><?php echo $settings['address']->title;?> : <i><?php echo $settings['address']->data['value'];?></i></div>\
                           </div>';
                     infowindow.setPosition(new google.maps.LatLng(lat, lon));
                     infowindow.setContent(content_info);
@@ -100,11 +100,11 @@
                     <div class="nailthumb-container cover wow fadeIn" style="background-image:url(<?php echo base_url() ?>assets/creative/images/map.jpg)" >
                     </div>
                     <div class="text-content">
-                        <div class="title slideInUp wow" data-fz="big" >-- CREATIVE DESIGN --</div>
+                        <div class="title slideInUp wow" data-fz="big" >-- <?php echo $settings['title']->data['value'];?> --</div>
                         <div class="desc slideInUp wow" data-fz="medium">
-                            <p><span class="fa fa-home"></span> Địa chỉ : Lorem Ipsum is simply dummy text</p>
-                            <p><span class="fa fa-phone"></span> Hotline : Lorem Ipsum is simply dummy text</p>
-                            <p><span class="fa fa-envelope"></span> Email : Lorem Ipsum is simply dummy text</p>
+                            <p><span class="fa fa-home"></span> <?php echo $settings['address']->title;?> : <i><?php echo $settings['address']->data['value'];?></i></p>
+                            <p><span class="fa fa-phone"></span> Hotline : <?php echo $settings['mobile-phone']->data['value'];?></p>
+                            <p><span class="fa fa-envelope"></span> Email : <?php echo $settings['email']->data['value'];?></p>
                         </div>
                     </div>
                 </div>
@@ -113,7 +113,7 @@
                 <div>
                     <div class="text-content">
                         <div class="title slideInUp wow" data-fz="big" >-- LIÊN HỆ VỚI CHÚNG TÔI --</div>
-                        <div class="desc wow slideInUp text-justify" data-fz="medium" >Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</div>
+                        <div class="desc wow slideInUp text-justify" data-fz="medium" ><?php echo $settings['lien-he-voi-chung-toi']->data['value'];?></div>
                         <form name="contactForm" id="contactForm" target="integration_asynchronous">
                             <div>
                                 <div class="row half">
