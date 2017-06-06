@@ -14,7 +14,7 @@
         <meta name="twitter:site" content="<?php echo $seo['title']; ?>"/>
         <meta name="twitter:title" content="<?php echo $seo['title']; ?>">
         <meta name="twitter:description" content="<?php echo $seo['desc']; ?>"/>
-        <meta name="twitter:creator" content="Dụng Cụ Làm Bánh An Phú"/>
+        <meta name="twitter:creator" content="<?php echo $seo['title']; ?>"/>
         <meta name="twitter:image:src" content="<?php echo base_url($seo['image']) ?>"/>
         <meta name="twitter:domain" content="<?php echo base_url() ?>"/>
 

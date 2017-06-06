@@ -291,6 +291,91 @@ body{
 .dropdown-user>a:hover{
     background-color:#111;
 }
+
+.lang-tabs{
+    border: 1px solid #dadada;
+    border-bottom: 0;border-left: 0;
+    color: #999;
+}
+.lang-tabs span,.lang-tabs a{
+    float: left;cursor: pointer;
+    padding: 0 12px;
+    border-left: 1px solid #dadada;
+}
+.lang-tabs span.active,.lang-tabs span:hover,
+.lang-tabs a.active,.lang-tabs a:hover{
+    color:#E03D22;
+}
+.lang-tabs .nav-tabs{border: 0;background: #fff;margin: 0;padding: 0}
+.lang-tabs .nav-tabs > li{border: none;list-style: none}
+.lang-tabs .nav-tabs > li{border-left: 1px solid #ddd;}
+.lang-tabs .nav-tabs > li a,
+.lang-tabs .nav-tabs > li.active a{
+        top:0;padding: 0 12px;float: left;
+        color: #bababa;
+        cursor: pointer;margin: 0;border:0
+    }
+.lang-tabs .nav-tabs > li.active a,
+.lang-tabs .nav-tabs > li:hover a{color:#E03D22}
+.nav-tabs{border-bottom: 1px solid #f0f0f0;}
+.nav-tabs > li > a{
+    padding:4px 8px;
+    border:0;
+    border-bottom: 0px solid #FFF;
+}
+.nav-tabs > li > a:focus,
+.nav-tabs > li > a:hover{
+    border:0;
+    border-bottom: 1px solid #E03D22;
+    background-color:#FFF;
+}
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus{
+    border:0;color:#E03D22;
+    border-bottom: 1px solid #E03D22;
+}
+.nav-tabs.g-tap{border-bottom:0}
+.nav-tabs.g-tap+.tab-content{
+  border:1px solid #ddd; 
+  padding:5px;
+  background:#fff;
+}
+.metronic-modal.ui-dialog .ui-dialog-content .nav-tabs.g-tap{
+  border:0
+}
+.metronic-modal.ui-dialog .ui-dialog-content .nav-tabs.g-tap+.tab-content{border-left:0;border-right:0;border-bottom:0;}
+.nav-tabs.g-tap+.tab-content > .active{background:transparent;}
+.nav-tabs.g-tap > li{
+    border-right: 1px solid #ddd;
+    background: #fff;
+    height:30px;
+    margin: 0;
+}
+.nav-tabs.g-tap > li > a{
+    padding: 0px 10px;
+    border:0;margin: 0;
+    border-radius:0;
+    height:30px;
+    line-height:30px;
+}
+.nav-tabs.g-tap > li > a:focus,
+.nav-tabs.g-tap > li > a:hover{
+   color:#000;
+}
+.nav-tabs.g-tap > li.active{
+    border-right: 1px solid #ddd;
+    background:#fff;
+    padding-top:0
+}
+.nav-tabs.g-tap > li.active > a,
+.nav-tabs.g-tap > li.active > a:hover,
+.nav-tabs.g-tap > li.active > a:focus{
+    color:#000;
+    background:#fff;
+    border:0;
+    height:32px
+}
 @media (max-width: 768px){
     .navbar-collapse.collapse{
         height: 0px !important;
