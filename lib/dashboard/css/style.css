@@ -318,22 +318,53 @@ body{
 .lang-tabs .nav-tabs > li.active a,
 .lang-tabs .nav-tabs > li:hover a{color:#E03D22}
 .nav-tabs{border-bottom: 1px solid #f0f0f0;}
+/*.nav-tabs > li:first-child > a{padding-left: 0}*/
 .nav-tabs > li > a{
     padding:4px 8px;
     border:0;
     border-bottom: 0px solid #FFF;
+    color: #888
 }
 .nav-tabs > li > a:focus,
 .nav-tabs > li > a:hover{
     border:0;
-    border-bottom: 1px solid #E03D22;
-    background-color:#FFF;
+    /*border-bottom: 1px solid #E03D22;*/
+    /*background-color:#FFF;*/
+    background: transparent;
+    outline: none;
+}
+.nav-tabs > li.active > a:before,
+.nav-tabs > li > a:focus:before,
+.nav-tabs > li > a:hover:before{
+    content: '';display: block;
+    position: absolute;
+    bottom: -6px;left: 50%;margin-left: -6px;
+    width: 12px;height: 6px;
+    border-top:6px solid #ddd;
+    border-left:6px solid transparent;
+    border-right:6px solid transparent;
+}
+.nav-tabs > li.active > a:after,
+.nav-tabs > li > a:focus:after,
+.nav-tabs > li > a:hover:after{
+    content: '';display: block;
+    position: absolute;
+    bottom: -5px;left: 50%;margin-left: -6px;
+    width: 12px;height: 6px;
+    border-top:6px solid #fff;
+    border-left:6px solid transparent;
+    border-right:6px solid transparent;
 }
 .nav-tabs > li.active > a,
 .nav-tabs > li.active > a:hover,
 .nav-tabs > li.active > a:focus{
-    border:0;color:#E03D22;
-    border-bottom: 1px solid #E03D22;
+    border:0;
+    /*color:#E03D22;*/
+    /*border-bottom: 1px solid #E03D22;*/
+    color: #111;
+    background: transparent;
+    outline: none;
+
 }
 .nav-tabs.g-tap{border-bottom:0}
 .nav-tabs.g-tap+.tab-content{
