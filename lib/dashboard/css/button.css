@@ -83,7 +83,7 @@ button{
 
 .dropdown-menu {
     font-size: 13px;
-    min-width: 175px;
+    /*min-width: 175px;*/
     position: absolute;
     top: 100%;
     left: 0;

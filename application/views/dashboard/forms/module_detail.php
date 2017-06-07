@@ -212,14 +212,13 @@
             </div>
         </div>
     </div>
-
-    <div>
-        <ul id="sortable" class="sortable "></ul>
-        <div class="clearfix"></div>
-    </div>
-    <div class="add-sortable-item">
-        <span class="icon-plus"></span> Add
-    </div>
+    <ul class="nav nav-tabs tabs-actions nav-tabs-up" role="tablist" id="tabs-for-group">
+        <li role="presentation">
+            <a href="JavaScript:void(0)" id="click-to-add-new-tab"><span class="icon-plus"></span> Add</a></a>
+        </li>
+    </ul>
+    <!-- Tab panes -->
+    <div class="tab-content" id="tabcontents-for-group"></div>
 </form>
 <div style="display: none" id="column-detail-dialog">
     <form name="column-detail-frm" id="column-detail-frm" target="integration_asynchronous" class="validation-frm">
