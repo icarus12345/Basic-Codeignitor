@@ -102,7 +102,7 @@ class Core_Model extends CI_Model {
     
     function get_max_sort_index(){
         $query = $this->db
-            ->select('MAX(sorting) as sorting',false)
+            ->select("MAX({$this->prefix}sorting) as sorting",false)
             ->get($this->table);
         $row = $query->row();
         if($row) {
@@ -112,7 +112,7 @@ class Core_Model extends CI_Model {
     }
     function get_min_sort_index(){
         $query = $this->db
-            ->select('MIN(sorting) as sorting',false)
+            ->select("MIN({$this->prefix}sorting) as sorting",false)
             ->get($this->table);
         $row = $query->row();
         if($row) {

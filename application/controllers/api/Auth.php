@@ -58,10 +58,10 @@ class Auth extends CI_Controller {
                     $name = $user->ause_name;
                     $output['code'] = -906;
                     $output['message'] = "Login failed for user '$name'.";
-                }elseif ($user->ause_delete !== null) {
+                }elseif ($user->ause_deleted !== null) {
                     $output['code'] = -901;
                     $output['message'] = "Valid login but user have been deleted.";
-                }elseif ($user->ause_status === "true") {
+                }elseif ($user->ause_status == 1) {
                     unset($user->ause_password);
                     unset($user->ause_salt);
                     unset($user->ause_secretkey);

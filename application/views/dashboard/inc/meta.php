@@ -34,6 +34,7 @@
         <script type="text/javascript" src="<?php echo base_url() ?>lib/dashboard/js/app.module.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>lib/dashboard/js/app.category.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>lib/dashboard/js/app.common.js"></script>
+        <script type="text/javascript" src="<?php echo base_url() ?>lib/dashboard/js/app.user.js"></script>
 
         <script type="text/javascript" src="<?php echo base_url() ?>lib/serialize-object.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>lib/validation-engine/jquery.validationEngine.js"></script>

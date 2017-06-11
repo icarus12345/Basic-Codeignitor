@@ -27,7 +27,7 @@ class Auth_Model extends CI_Model {
         return $query->row();
     }
     function onUpdate($id, $params) {
-        $this->db->set('ause_update', 'NOW()', FALSE);
+        $this->db->set('ause_modified', 'NOW()', FALSE);
         $this->db->where('ause_id', $id);
         @$this->db->update('auth_users', $params);
         @$count = $this->db->affected_rows(); //should return the number of rows affected by the last query
