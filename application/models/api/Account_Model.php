@@ -42,6 +42,16 @@ class Account_Model extends CI_Model {
         $row = $query->row();
         return $row;
     }
+
+    function update($ac_id,$params){
+        @$this->db
+            ->where('ac_id',$ac_id)
+            ->update('auth_account',$params);
+        @$count = $this->db->affected_rows(); //should return the number of rows affected by the last query
+        if ($count == 1)
+            return true;
+        return false;
+    }
 }
 
 ?>

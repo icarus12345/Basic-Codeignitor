@@ -120,7 +120,8 @@ class Auth extends CI_Controller {
     function get_client(){
         $code = 403;
         $output = array(
-            'text' => 'Access Denied.',
+            'text' => 'fail',
+            'message' => 'Access Denied.',
             'code' => -1,
         );
         $app_id = $this->input->post('app_id');
@@ -128,8 +129,8 @@ class Auth extends CI_Controller {
         $tok = $this->Token_Model->get($app_id,$token);
         if($tok){
             $code = 200;
-            $output['code'] = 1;
-            $output['text'] = 'Success';
+            // $output['code'] = -201;
+            // $output['message'] = 'Have Another Device Access To Your Account';
             $output['data'] = $tok;
         } else {
             $code = 403;
@@ -218,28 +219,36 @@ class Auth extends CI_Controller {
                     $user = $this->Account_Model->get_by_username($username);
                     if($user){
                         if($user->ac_password == md5($password)){
-                            unset($user->ac_password);
-                            // $output['code'] = 1;
-                            // $output['text'] = 'Success.';
-                            $tok = $this->Token_Model->create($user->ac_id);
-                            if($tok){
-                                $output['code'] = 1;
-                                $output['text'] = 'Success';
-                                $token = array(
-                                    'token' => $tok->token_id,
-                                    'expried' => $tok->token_expried,
-                                    );
-                                $output['data'] = array(
-                                    'user_info' => $user,
-                                    // 'token_info' => $token,
-                                    'token' => $tok->token_id,
-                                    'app_id' => $user->ac_id,
-                                    );
-                                // $this->session->set_userdata('api_token', $tok);
+                            if($user->ac_status==1){
+                                unset($user->ac_password);
+                                // $output['code'] = 1;
+                                // $output['text'] = 'Success.';
+                                $tok = $this->Token_Model->create($user->ac_id);
+                                if($tok){
+                                    $output['code'] = 1;
+                                    $output['text'] = 'Success';
+                                    $token = array(
+                                        'token' => $tok->token_id,
+                                        'expried' => $tok->token_expried,
+                                        );
+                                    $output['data'] = array(
+                                        'user_info' => $user,
+                                        // 'token_info' => $token,
+                                        'token' => $tok->token_id,
+                                        'app_id' => $user->ac_id,
+                                        );
+                                    $this->Account_Model->update($user->ac_id,array(
+                                        'ac_token' => $tok->token_id,
+                                        'ac_last_login' => date('Y-m-d H:i:s')
+                                        ));
+                                    $user->ac_token = $tok->token_id;
+                                } else {
+                                    $output['message'] = 'Fail to generator token.';
+                                }
+                                $this->session->set_userdata('api_user', $user);
                             } else {
-                                $output['message'] = 'Fail to generator token.';
+                                $output['message'] = 'Your account have been deleted.';
                             }
-                            $this->session->set_userdata('api_user', $user);
                         } else {
                             $output['message'] = 'Login failed password did not match that for the login provided.';
                             
@@ -261,21 +270,30 @@ class Auth extends CI_Controller {
 
     function get_user_info(){
         $code = 200;
-        $user = $this->session->userdata('api_user');
-        if($user){
-            $tok = $this->Token_Model->create($user->ac_id);
-            $data = array(
-                'user_info' => $user,
-                // 'token_info' => $token,
-                'token' => $tok->token_id,
-                'app_id' => $user->ac_id,
-                );
-        }
         $output = array(
-            'text' => 'Success.',
+            'text' => 'ok',
             'code' => 1,
             'data' => $data
         );
+        $user = $this->session->userdata('api_user');
+        if($user){
+            $u = $this->Account_Model->get_by_username($user->ac_username);
+            if($u->ac_token == $user->ac_token){
+                // $tok = $this->Token_Model->create($user->ac_id);
+                $data = array(
+                    'user_info' => $user,
+                    // 'token_info' => $token,
+                    'token' => $user->ac_token,
+                    'app_id' => $user->ac_id,
+                    );
+                $output['data'] = $data;
+            } else {
+                $output['code'] = -201;
+                $output['text'] = 'fail';
+                $output['message'] = 'Have Another Device Access To Your Account';
+                
+            }
+        }
         $this->output
             ->set_content_type('application/json')
             ->set_status_header($code)
