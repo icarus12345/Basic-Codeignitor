@@ -220,4 +220,5 @@ class Core_Controller extends CI_Controller {
 }
 
 include 'Api_Controller.php';
+include 'DApi_Controller.php';
 include 'Front_Controller.php';

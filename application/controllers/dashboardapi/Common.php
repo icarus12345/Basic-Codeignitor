@@ -1,6 +1,6 @@
 <?php
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class Common extends Api_Controller {
+class Common extends DApi_Controller {
     function __construct() {
         parent::__construct();
         $this->Module_Model = new Core_Model('tbl_module');

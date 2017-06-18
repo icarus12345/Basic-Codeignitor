@@ -1,0 +1,47 @@
+<div class="modal modal-overlay" ui-if="IsShowLogin" ui-shared-state='IsShowLogin'>
+  <div class="modal-dialog full-screen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!-- <button class="close" ui-turn-off="IsShowLogin">&times;</button> -->
+        <h4 class="modal-title">Login</h4>
+      </div>
+      <div class="modal-body" ng-scrollbar>
+          <form role="form" ng-submit='doAuthLogin()' name="signin" id="signin">
+                <div class="form-group">
+                  <label>Username</label>
+                  <input type="text"
+                        required ng-minlength=4 ng-maxlength=50
+                        name="username" 
+                        ng-model="auth_singin_info.username"
+                        class="form-control"
+                        placeholder="Enter username">
+                </div>
+
+                <div class="form-group">
+                  <label>Password</label>
+                  <input type="password" 
+                        class="form-control"
+                        required ng-minlength=4 ng-maxlength=50
+                        name="password" 
+                        ng-model="auth_singin_info.password"
+                        placeholder="Password">
+                </div>
+
+                <div class="form-group">
+                  <label>Remember Me</label>
+                  <ui-switch ng-model='rememberMe'></ui-switch>
+                </div>
+                <button class="btn btn-primary btn-block">
+                  Login
+                </button>
+
+          </form>
+      </div>
+      <div class="modal-footer navbar-fixed-bottom">
+        <button ui-turn-off="IsShowLogin" ui-turn-on="IsShowRegister" class="btn btn-link">Register</button>
+        <button form="signin" type="submit" class="btn btn-primary">Login</button>
+      </div>
+
+    </div>
+  </div>
+</div>

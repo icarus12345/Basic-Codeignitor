@@ -1,0 +1,90 @@
+<div class="modal modal-overlay" ui-if="IsShowRegister" ui-shared-state='IsShowRegister'>
+  <div class="modal-dialog full-screen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Register</h4>
+      </div>
+      <div class="modal-body" ng-scrollbar>
+
+          <form role="form" ng-submit='doAuthRegister()' name="register" id="register">
+                <div class="form-group">
+                  <label>Fist name</label>
+                  <input type="text" 
+                        name="first_name" 
+                        required ng-minlength=2 ng-maxlength=50
+                        ng-model="auth_reg_info.first_name"
+                        class="form-control"
+                        placeholder="First name">
+                    <div ng-messages="register.first_name.$error" ng-show="register.$submitted || register.first_name.$touched">
+                        <div ng-show="register.first_name.$error.required">Please enter First name.</div>
+                        <div ng-show="register.first_name.$error.minlength">Should be great than 2 chars</div>
+                        <div ng-show="register.first_name.$error.maxlength">Should be less than 50 chars</div>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                  <label>Last name</label>
+                  <input type="text" required ng-minlength=2 ng-maxlength=50
+                         ng-model="auth_reg_info.last_name"
+                         class="form-control"
+                         placeholder="Last name">
+                </div>
+                <div class="form-group">
+                  <label>Email</label>
+                  <input type="text" 
+                        name="email"
+                        required ng-minlength=4 ng-maxlength=120
+                        ng-model="auth_reg_info.email"
+                        class="form-control"
+                        placeholder="Enter email">
+                </div>
+                <div class="form-group">
+                  <label>Username</label>
+                    <input type="text" 
+                        name="username" 
+                        required ng-minlength=4 ng-maxlength=50
+                        ng-model="auth_reg_info.username"
+                        class="form-control"
+                        placeholder="Enter username">
+                    <div ng-messages="register.username.$error" ng-show="register.$submitted || register.username.$touched">
+                        <div ng-show="register.username.$error.required">Please enter First name.</div>
+                        <div ng-show="register.username.$error.minlength">Should be great than 4 chars</div>
+                        <div ng-show="register.username.$error.maxlength">Should be less than 50 chars</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                  <label>Password</label>
+                  <input type="password" 
+                        required ng-minlength=4 ng-maxlength=50
+                        name="password" 
+                        ng-model="auth_reg_info.password" password-verify="confirm_password"
+                        class="form-control"
+                        placeholder="Password">
+                </div>
+
+                <div class="form-group">
+                    <label>Confirm password</label>
+                    <input type="password" 
+                        required ng-minlength=4 ng-maxlength=50
+                        name="confirm_password" 
+                        ng-model="auth_reg_info.confirm_password"
+                        class="form-control"
+                        ng-required="password && !confirm_password" password-verify="password"
+                        placeholder="Confirm password">
+                </div>
+
+                <button class="btn btn-primary btn-block">
+                  Register
+                </button>
+
+          </form>
+      </div>
+      <div class="modal-footer -navbar-fixed-bottom">
+        <button ui-turn-off="IsShowRegister" ui-turn-on="IsShowLogin" class="btn btn-link">Login</button>
+        <button type="submit" form="register" class="btn btn-primary">Register</button>
+      </div>
+
+    </div>
+  </div>
+</div>

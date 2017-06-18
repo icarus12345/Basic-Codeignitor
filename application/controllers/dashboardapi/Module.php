@@ -1,25 +1,18 @@
 <?php
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class Category extends Api_Controller {
+class Module extends DApi_Controller {
     function __construct() {
         parent::__construct();
         $this->load->model("dashboard/Category_Model");
-        $this->table = 'tbl_category';
+        $this->table = 'tbl_module';
         $this->Core_Model = new Core_Model($this->table);
-        $this->Module_Model = new Core_Model('tbl_module');
     }
     
     function index(){
         echo 'Welcome API';
     }
+    
     public $rules = array(
-        'unique' => array(
-            'title' => array(
-                'field'=>'title',
-                'label'=>'Title',
-                'rules'=>'callback_title_check'
-            ),
-        ),
         'insert' => array(
                 'title' => array(
                     'field'=>'title',
@@ -31,6 +24,11 @@ class Category extends Api_Controller {
                     'label'=>'Alias',
                     'rules'=>'trim|required|min_length[4]|max_length[255]'
                     ),
+                'data[type]' => array(
+                    'field'=>'data[type]',
+                    'label'=>'Type',
+                    'rules'=>'trim|required|min_length[4]|max_length[50]'
+                    ),
                 'type' => array(
                     'field'=>'type',
                     'label'=>'TypeKey',
@@ -40,22 +38,22 @@ class Category extends Api_Controller {
                         // 'trim' => 'Error message for rule "trim" for field email',
                     )
                 ),
-                'pid' => array(
-                    'field'=>'pid',
-                    'label'=>'Parent ID',
-                    'rules'=>'trim|integer'
-                ),
         ),
         'update' => array(
                 'title' => array(
                     'field'=>'title',
                     'label'=>'Title',
-                    'rules'=>'trim|max_length[255]'
+                    'rules'=>'trim|required|min_length[4]|max_length[255]'
                     ),
                 'alias' => array(
                     'field'=>'alias',
                     'label'=>'Alias',
-                    'rules'=>'trim|max_length[255]'
+                    'rules'=>'trim|required|min_length[4]|max_length[255]'
+                    ),
+                'data[type]' => array(
+                    'field'=>'data[type]',
+                    'label'=>'Type',
+                    'rules'=>'trim|required|min_length[4]|max_length[50]'
                     ),
                 'type' => array(
                     'field'=>'type',
@@ -71,27 +69,9 @@ class Category extends Api_Controller {
                     'label'=>'ID',
                     'rules'=>'trim|is_natural_no_zero|required'
                 ),
-                'pid' => array(
-                    'field'=>'pid',
-                    'label'=>'Parent ID',
-                    'rules'=>'trim|integer'
-                ),
         )                    
     );
-    public function title_check($str){
-        $alias = $this->input->post('alias');
-        $type = $this->input->post('type');
-        $id = $this->input->post('id');
-        $sid = $this->input->post('sid');
-        $row = $this->Core_Model
-            ->set_type($type)
-            ->get_by_alias($alias);
-        if($row && $row->id!=$id){
-            $this->form_validation->set_message('title_check', 'The {field} field are already inserted');
-            return FALSE;
-        }
-        return TRUE;
-    }
+
     function detail(){
         $output = array(
             'text' => 'ok',
@@ -99,35 +79,8 @@ class Category extends Api_Controller {
             'data' => null
         );
         $id = $this->input->post('id');
-        $sid = $this->input->post('sid');
-        if(!empty($sid)) {
-            $entry_setting = $this->Module_Model->get($sid);
-            if(
-                !empty($entry_setting->data['catetype']) &&
-                $entry_setting->data['cateviewer'] == 'tree'
-                ){
-                $cat_type = $entry_setting->data['catetype'];
-                $cate_data = $this->Category_Model->get_by_type($cat_type);
-                $entry_setting->data['categories'] = $this->Category_Model
-                    ->buildTreeArray($cate_data);
-            }
-            if($entry_setting->data['columns'])
-            foreach ($entry_setting->data['columns'] as $key => $column) {
-                if($column['type'] == 'catetree'){
-                    $cat_type = $column['name'];
-                    $cate_data = $this->Category_Model->get_by_type($cat_type);
-                    $entry_setting->data['columns'][$key]['categories'] = $this->Category_Model
-                        ->buildTreeArray($cate_data);
-                } else if($column['type'] == 'catelist'){
-                    $cat_type = $column['name'];
-                    $cate_data = $this->Category_Model->get_by_type($cat_type);
-                    $entry_setting->data['columns'][$key]['categories'] = $cate_data;
-                }
-            }
-            $this->load->vars(array(
-                'entry_setting' => $entry_setting
-            ));
-        }
+        $type = $this->input->post('type');
+        $basic_module = $this->input->post('basic_module');
         if(!empty($id)) {
             $entry_detail = $this->Core_Model->get($id);
             $this->load->vars(array(
@@ -135,12 +88,27 @@ class Category extends Api_Controller {
                 ));
             $output['data'] = $entry_detail;
         }
-        $output['html'] = $this->load->view('dashboard/forms/category_detail',null,true);
+        $setting_list = $this->Core_Model
+            ->select('id,title,data')
+            ->gets();
+        $this->load->vars(array(
+            'setting_list' => $setting_list,
+            'type' => $type,
+            'basic_module' => $basic_module,
+            ));
+        if($basic_module == 1){
+            $output['html'] = $this->load->view('dashboard/forms/basic_module_detail',null,true);
+
+        }else{
+            $output['html'] = $this->load->view('dashboard/forms/module_detail',null,true);
+            
+        }
         return $this->output
             ->set_content_type('application/json')
             ->set_status_header(200)
             ->set_output(json_encode($output));
     }
+
     function commit(){
         $id = $this->input->post('id');
         if(!empty($id)) $this->onupdate();
@@ -182,28 +150,22 @@ class Category extends Api_Controller {
             'data' => null
         );
         $this->form_validation->set_rules($this->rules['update']);
-        // if($entry_setting->data['unique'] == 'true'){
-            $this->form_validation->set_rules($this->rules['unique']);
-        // }
         if ($this->form_validation->run() == FALSE) {
             $output['validation'] = validation_errors_array();
             $output['message'] = validation_errors();
             // $output['code'] = -1;
         } else {
-            $params = array();
-            $id = $this->input->post('id');
-            $pid = $this->input->post('pid');
-            if(isset($pid)) $params['pid'] = $pid;
-            $title = $this->input->post('title');
-            if(isset($title)) $params['title'] = $title;
-            $alias = $this->input->post('alias');
-            if(isset($alias)) $params['alias'] = $alias;
-            $type = $this->input->post('type');
-            if(isset($type)) $params['type'] = $type;
-            $status = $this->input->post('status');
-            if(isset($status)) $params['status'] = $status;
             $data = $this->input->post('data');
-            if(isset($data)) $params['data'] = serialize($data);
+            $id = $this->input->post('id');
+            $title = $this->input->post('title');
+            $type = $this->input->post('type');
+            $alias = $this->input->post('alias');
+            $params = array(
+                'title' => $title,
+                'alias' => $alias,
+                'type' => $type,
+                'data' => serialize($data),
+                );
             $rs = $this->Core_Model->onUpdate($id, $params);
             if ($rs === true) {
                 $output["code"] = 1;
@@ -226,9 +188,6 @@ class Category extends Api_Controller {
             'data' => null
         );
         $this->form_validation->set_rules($this->rules['insert']);
-        // if($entry_setting->data['unique'] == 'true'){
-                $this->form_validation->set_rules($this->rules['unique']);
-        // }
         if ($this->form_validation->run() == FALSE) {
             $output['validation'] = validation_errors_array();
             $output['message'] = validation_errors();
@@ -236,7 +195,6 @@ class Category extends Api_Controller {
         } else {
             $data = $this->input->post('data');
             $id = $this->input->post('id');
-            $pid = $this->input->post('pid');
             $title = $this->input->post('title');
             $type = $this->input->post('type');
             $alias = $this->input->post('alias');
@@ -244,11 +202,9 @@ class Category extends Api_Controller {
                 'title' => $title,
                 'alias' => $alias,
                 'type' => $type,
-                'status' => 1,
-                'pid' => $pid,
                 'data' => serialize($data),
                 );
-            
+            $this->Core_Model = new Core_Model($this->table);
             $rs = $this->Core_Model->onInsert($params);
             if ($rs === true) {
                 $output["code"] = 1;
@@ -264,29 +220,22 @@ class Category extends Api_Controller {
             ->set_status_header(200)
             ->set_output(json_encode($output));
     }
-    function updateBatch($aaData){
-        if(!empty($aaData)) foreach ($aaData as $c){
-            if($c->value!=$c->cat_value){
-                $this->cate_model->onUpdate($c->cat_id,array('cat_value'=>$c->value));
-            }
-        }
-    }
     function bind(){
         $type = $this->input->post('type');
-        $this->Category_Model->table_config=array(
+        $this->Core_Model->table_config=array(
             "table"     =>"{$this->table}",
             "select"    =>"
                 SELECT SQL_CALC_FOUND_ROWS 
                     {$this->table}.{$this->prefix}id,
                     {$this->table}.{$this->prefix}title,
-                    {$this->table}.{$this->prefix}pid,
                     {$this->table}.{$this->prefix}created,
                     {$this->table}.{$this->prefix}modified,
-                    {$this->table}.{$this->prefix}status
+                    {$this->table}.{$this->prefix}status,
+                    {$this->table}.{$this->prefix}data
                 ",
             "from"      =>" FROM `{$this->table}` ",
             "where"     =>!empty($type)?"WHERE `{$this->prefix}type` = '$type'":'',
-            "order_by"  =>"ORDER BY `{$this->prefix}pid` ASC,`{$this->prefix}sorting` DESC",
+            "order_by"  =>"ORDER BY `{$this->prefix}created` ASC",
             "columnmaps"=>array(
                 
             ),
@@ -294,68 +243,14 @@ class Category extends Api_Controller {
 
             )
         );
-        $output = $this->Category_Model->jqxBinding();
-        $output['rows']=$this->Category_Model->buildTreeArray($output['rows']);
-        $this->updateBatch($output['rows']);
+        $output = $this->Core_Model->jqxBinding();
+        foreach ($output['rows'] as $key => $value) {
+            $data = unserialize($value->data);
+            unset($output['rows'][$key]->data);
+            $output['rows'][$key]->site = $data['site'];
+            $output['rows'][$key]->title = $output['rows'][$key]->title . ' - <small><i>' . $data['site'] .'</i></small>';
+        }
         $this->output->set_header('Content-type: application/json');
         $this->output->set_output(json_encode($output));
-    }
-
-    public function sendlatest(){
-        $output = array(
-            'text' => 'fail',
-            'code' => -1,
-            'data' => null
-        );
-        $id = $this->input->post('id');
-        $entry_detail = $this->Category_Model->get($id);
-        if($entry_detail){
-            
-            $rs = $this->Category_Model->onSendLatest($id);
-            if ($rs === true) {
-                $output["code"] = 1;
-                $output["text"] = 'ok';
-                $output["message"] = 'Success.';
-            } else {
-                $output["code"] = -1;
-                $output["message"] = "Entry faily to update. Please check data input and try again.";
-            }
-        }else{
-            $output["message"] = 'Entry doest exists.';
-        }
-
-        return $this->output
-            ->set_content_type('application/json')
-            ->set_status_header(200)
-            ->set_output(json_encode($output));
-    }
-
-    public function sendoldest(){
-        $output = array(
-            'text' => 'fail',
-            'code' => -1,
-            'data' => null
-        );
-        $id = $this->input->post('id');
-        $entry_detail = $this->Category_Model->get($id);
-        if($entry_detail){
-            
-            $rs = $this->Category_Model->onSendOldest($id);
-            if ($rs === true) {
-                $output["code"] = 1;
-                $output["text"] = 'ok';
-                $output["message"] = 'Success.';
-            } else {
-                $output["code"] = -1;
-                $output["message"] = "Entry faily to update. Please check data input and try again.";
-            }
-        }else{
-            $output["message"] = 'Entry doest exists.';
-        }
-
-        return $this->output
-            ->set_content_type('application/json')
-            ->set_status_header(200)
-            ->set_output(json_encode($output));
     }
 }
