@@ -277,8 +277,8 @@ class Auth extends CI_Controller {
         );
         $user = $this->session->userdata('api_user');
         if($user){
-            $u = $this->Account_Model->get_by_username($user->ac_username);
-            if($u->ac_token == $user->ac_token){
+            // $u = $this->Account_Model->get_by_username($user->ac_username);
+            // if($u->ac_token == $user->ac_token){
                 // $tok = $this->Token_Model->create($user->ac_id);
                 $data = array(
                     'user_info' => $user,
@@ -287,12 +287,11 @@ class Auth extends CI_Controller {
                     'app_id' => $user->ac_id,
                     );
                 $output['data'] = $data;
-            } else {
-                $output['code'] = -201;
-                $output['text'] = 'fail';
-                $output['message'] = 'Have Another Device Access To Your Account';
-                
-            }
+            // } else {
+                // $output['code'] = -201;
+                // $output['text'] = 'fail';
+                // $output['message'] = 'Have Another Device Access To Your Account';
+            // }
         }
         $this->output
             ->set_content_type('application/json')
