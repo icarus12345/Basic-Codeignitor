@@ -23,17 +23,7 @@ class Project extends Api_Controller {
                     ),
         ),
         'get_list' => array(
-                'app_id' => array(
-                    'field'=>'app_id',
-                    'label'=>'App ID',
-                    'rules'=>'trim|required'
-                ),
-                        
-                'app_secret' => array(
-                    'field'=>'app_secret',
-                    'label'=>'App Secret',
-                    'rules'=>'trim|required'
-                )
+                
         )
     );
 
@@ -50,7 +40,31 @@ class Project extends Api_Controller {
         }
     }
 
-    
+    function gets(){
+        $code = 200;
+        $output = array(
+            'text' => 'fail',
+            'message' => 'Bad request.',
+            'code' => -1,
+        );
+        $title = $this->input->post('title');
+        // $this->form_validation->set_rules($this->rules['get_list']);
+        // if ($this->form_validation->run() == FALSE) {
+        //     $output['text'] = 'Fail.';
+        //     $output['validation'] = validation_errors_array();
+        //     $output['message'] = validation_errors();
+        // } else {
+            $rs = $this->Project_Model->get_list($this->user->ac_id);
+            $output['code'] = 1;
+            $output['text'] = 'Success.';
+            $output['message'] = 'Get list project success.';
+            $output['data'] = $rs;
+        // }
+        $this->output
+            ->set_content_type('application/json')
+            ->set_status_header($code)
+            ->set_output(json_encode($output,JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+    }
 
     function create(){
         $code = 200;
