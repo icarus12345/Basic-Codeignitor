@@ -29,15 +29,6 @@ class Project extends Api_Controller {
 
     function index(){
         echo 'Welcome API';
-        $list = json_decode('{"id":"f5f7ee41d8766edb1a3a67da05f057ac","name":"Trading Spouses"},{"id":"631b550716c21bcb342fb18e129a3e8e","name":"Torchwood"},{"id":"39c0b25a55e3a405b322125c1f220d3f","name":"Top Design"},{"id":"bf62e98997138b1e9bebdfe51a52af9f","name":"Tom and Jerry"},{"id":"f0edf0f1a3017872c083da14bb4211e8","name":"Tom and Jerry Kids Show"},{"id":"eba3ebf72f89f57a3ec123a3d3048d85","name":"Til Death"},{"id":"bf4889ad3cc6f59c9046054c8beb5f1d","name":"Tim Gunns Guide to Style"},{"id":"36c8756de16467610a6634fd5b3cf18e","name":"The Black Donnellys"},{"id":"51820269b397f5d0b7aa26507b9776d0","name":"Secret Diary of a Call Girl"},{"id":"3d594614f445f6b00014e9b77730b833","name":"Friends"},{"id":"f681eda96fbfadbe01f903da7ccf07e1","name":"Free Ride"}]');
-        foreach ($list as $key => $value) {
-            # code...
-            $params = array(
-                'title' => $value->name,
-                'uid' => $this->user->ac_id
-                );
-            $rs = $this->Project_Model->insert($params);
-        }
     }
 
     function gets(){
@@ -47,14 +38,18 @@ class Project extends Api_Controller {
             'message' => 'Bad request.',
             'code' => -1,
         );
-        $title = $this->input->post('title');
+        $perpage = 20;
+        $page = $this->input->post('page');
+        $perpage = $this->input->post('perpage');
+        if($page<=0) $page = 1;
+        if($perpage<=0) $perpage = 10;
         // $this->form_validation->set_rules($this->rules['get_list']);
         // if ($this->form_validation->run() == FALSE) {
         //     $output['text'] = 'Fail.';
         //     $output['validation'] = validation_errors_array();
         //     $output['message'] = validation_errors();
         // } else {
-            $rs = $this->Project_Model->get_list($this->user->ac_id);
+            $rs = $this->Project_Model->get_list($this->user->ac_id,$page,$perpage);
             $output['code'] = 1;
             $output['text'] = 'Success.';
             $output['message'] = 'Get list project success.';

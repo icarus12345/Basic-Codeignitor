@@ -37,11 +37,12 @@ class Project_Model extends CI_Model {
         return false;
     }
 
-    function get_list($uid){
+    function get_list($uid,$page=1,$perpage=10){
         $query = $this->db
             ->where(array(
                 'uid' => $uid
                 ))
+            ->limit($perpage, ($page - 1) * $perpage)
             ->get('tbl_project');
         $result = $query->result();
         return $result;

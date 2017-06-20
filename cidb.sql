@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50625
 File Encoding         : 65001
 
-Date: 2017-06-19 22:41:20
+Date: 2017-06-20 22:56:16
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -38,7 +38,7 @@ CREATE TABLE `auth_account` (
 -- Records of auth_account
 -- ----------------------------
 INSERT INTO `auth_account` VALUES ('1', 'icarus12345', 'khuongxuantruong@gmail.com', 'dfcd89dd382770db6acfa0781b9ef680', '2017-06-17 22:54:44', null, '0', 'Truong', 'Khuong', null, null);
-INSERT INTO `auth_account` VALUES ('2', 'user1', 'khuongxuantruong2@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', '2017-06-18 17:40:17', null, '1', 'Khuong', 'Truong', 'NiOElMh6IP80Xj1AKUWwFr5qLCGktbxB', '2017-06-19 19:27:29');
+INSERT INTO `auth_account` VALUES ('2', 'user1', 'khuongxuantruong2@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', '2017-06-18 17:40:17', null, '1', 'Khuong', 'Truong', 'ZsEH0D1xSojYM8z7Rl4U3QyghdVmkabf', '2017-06-20 21:22:06');
 
 -- ----------------------------
 -- Table structure for auth_client
@@ -75,7 +75,7 @@ CREATE TABLE `auth_token` (
 -- Records of auth_token
 -- ----------------------------
 INSERT INTO `auth_token` VALUES ('11111111111111111111111111111111', '12345', '2017-06-17 15:01:27', null, '2017-06-24 15:26:22');
-INSERT INTO `auth_token` VALUES ('NiOElMh6IP80Xj1AKUWwFr5qLCGktbxB', '2', '2017-06-19 19:27:29', null, '2017-06-19 21:27:29');
+INSERT INTO `auth_token` VALUES ('ZsEH0D1xSojYM8z7Rl4U3QyghdVmkabf', '2', '2017-06-20 21:22:06', null, '2017-06-20 23:22:06');
 
 -- ----------------------------
 -- Table structure for auth_users
@@ -133,9 +133,11 @@ INSERT INTO `ci_sessions` VALUES ('0cnf6po7iaon32r341lan0q70eo818ed', '::1', '14
 INSERT INTO `ci_sessions` VALUES ('1sujp8e9uvj7u1tl82o9ekho623s8pme', '::1', '1497770574', 0x5F5F63695F6C6173745F726567656E65726174657C693A313439373737303537343B);
 INSERT INTO `ci_sessions` VALUES ('3ektvbnpnosjq04jf1tv0j89qogbvkgb', '::1', '1497751742', 0x5F5F63695F6C6173745F726567656E65726174657C693A313439373735313734323B);
 INSERT INTO `ci_sessions` VALUES ('40qbubcf50uq512a2sgkd8k9k8oatto8', '::1', '1497753838', 0x5F5F63695F6C6173745F726567656E65726174657C693A313439373735333833383B);
+INSERT INTO `ci_sessions` VALUES ('46f1fr6dlhussjdu2f9655rpec2amrij', '::1', '1497974029', 0x5F5F63695F6C6173745F726567656E65726174657C693A313439373937333739313B6170695F757365727C4F3A383A22737464436C617373223A31303A7B733A353A2261635F6964223B733A313A2232223B733A31313A2261635F757365726E616D65223B733A353A227573657231223B733A383A2261635F656D61696C223B733A32373A226B68756F6E677875616E7472756F6E673240676D61696C2E636F6D223B733A31303A2261635F63726561746564223B733A31393A22323031372D30362D31382031373A34303A3137223B733A31313A2261635F6D6F646966696564223B4E3B733A393A2261635F737461747573223B733A313A2231223B733A31333A2261635F66697273745F6E616D65223B733A363A224B68756F6E67223B733A31323A2261635F6C6173745F6E616D65223B733A363A225472756F6E67223B733A383A2261635F746F6B656E223B733A33323A225A73454830443178536F6A594D387A37526C3455335179676864566D6B616266223B733A31333A2261635F6C6173745F6C6F67696E223B733A31393A22323031372D30362D32302030363A30303A3331223B7D);
 INSERT INTO `ci_sessions` VALUES ('4fbpl1a4s2mc6runbmc81nrsprh0ic7p', '::1', '1497754724', 0x5F5F63695F6C6173745F726567656E65726174657C693A313439373735343732343B);
 INSERT INTO `ci_sessions` VALUES ('4lrjlcnc9ks0m3cb7441ag98a7ubtss5', '::1', '1497792104', 0x5F5F63695F6C6173745F726567656E65726174657C693A313439373739323038363B6170695F757365727C4F3A383A22737464436C617373223A31303A7B733A353A2261635F6964223B733A313A2232223B733A31313A2261635F757365726E616D65223B733A353A227573657231223B733A383A2261635F656D61696C223B733A32373A226B68756F6E677875616E7472756F6E673240676D61696C2E636F6D223B733A31303A2261635F63726561746564223B733A31393A22323031372D30362D31382031373A34303A3137223B733A31313A2261635F6D6F646966696564223B4E3B733A393A2261635F737461747573223B733A313A2231223B733A31333A2261635F66697273745F6E616D65223B733A363A224B68756F6E67223B733A31323A2261635F6C6173745F6E616D65223B733A363A225472756F6E67223B733A383A2261635F746F6B656E223B733A33323A22707978304A334D447A454B583967375977546D76354F4E625651685765415361223B733A31333A2261635F6C6173745F6C6F67696E223B733A31393A22323031372D30362D31382032303A31363A3338223B7D6170695F746F6B656E7C4F3A383A22737464436C617373223A353A7B733A383A22746F6B656E5F6964223B733A33323A226653784D4E6D5954576E624634614A6A6B55427035694458483251776F7A3976223B733A31323A22746F6B656E5F6170705F6964223B733A313A2232223B733A31333A22746F6B656E5F63726561746564223B733A31393A22323031372D30362D31382031393A30333A3533223B733A31343A22746F6B656E5F6D6F646966696564223B4E3B733A31333A22746F6B656E5F65787072696564223B733A31393A22323031372D30362D31382032313A30333A3533223B7D);
 INSERT INTO `ci_sessions` VALUES ('50fk02v3q840a5rk30hhbg1o9g4aj5s8', '::1', '1497778773', 0x5F5F63695F6C6173745F726567656E65726174657C693A313439373737383737333B);
+INSERT INTO `ci_sessions` VALUES ('67iji2bk19kpmqur9t4rn96ks7q09jmb', '::1', '1497913520', 0x5F5F63695F6C6173745F726567656E65726174657C693A313439373931333531393B6170695F757365727C4F3A383A22737464436C617373223A31303A7B733A353A2261635F6964223B733A313A2232223B733A31313A2261635F757365726E616D65223B733A353A227573657231223B733A383A2261635F656D61696C223B733A32373A226B68756F6E677875616E7472756F6E673240676D61696C2E636F6D223B733A31303A2261635F63726561746564223B733A31393A22323031372D30362D31382031373A34303A3137223B733A31313A2261635F6D6F646966696564223B4E3B733A393A2261635F737461747573223B733A313A2231223B733A31333A2261635F66697273745F6E616D65223B733A363A224B68756F6E67223B733A31323A2261635F6C6173745F6E616D65223B733A363A225472756F6E67223B733A383A2261635F746F6B656E223B733A33323A224D714F48474A426B4E704C636739736D365A786E5358334950467A7937627257223B733A31333A2261635F6C6173745F6C6F67696E223B733A31393A22323031372D30362D31392031393A32373A3239223B7D);
 INSERT INTO `ci_sessions` VALUES ('6fpqj2t19p2fd8l7uojegap9ss2bqb3h', '::1', '1497778471', 0x5F5F63695F6C6173745F726567656E65726174657C693A313439373737383437313B);
 INSERT INTO `ci_sessions` VALUES ('6uv8f13b19kmvcth5qcvu7gffbcjgcro', '::1', '1497785209', 0x5F5F63695F6C6173745F726567656E65726174657C693A313439373738353230393B);
 INSERT INTO `ci_sessions` VALUES ('82ifq3cl4bg1q5sr1aca9sa6c1rr65ue', '::1', '1497768872', 0x5F5F63695F6C6173745F726567656E65726174657C693A313439373736383837323B);
@@ -392,7 +394,7 @@ CREATE TABLE `tbl_project` (
   `uid` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `ptitle` (`title`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_project
@@ -410,6 +412,76 @@ INSERT INTO `tbl_project` VALUES ('10', 'Tom and Jerry Kids Show', '1', null, nu
 INSERT INTO `tbl_project` VALUES ('11', 'Tin Man', '1', null, null, '2017-06-19 22:37:31', null, null, '2');
 INSERT INTO `tbl_project` VALUES ('12', 'TNA iMPACT!', '1', null, null, '2017-06-19 22:37:32', null, null, '2');
 INSERT INTO `tbl_project` VALUES ('13', 'TNA Pay-Per-View', '1', null, null, '2017-06-19 22:37:32', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('14', 'ActionScript', '1', null, null, '2017-06-20 21:33:20', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('15', 'AppleScript', '1', null, null, '2017-06-20 21:33:20', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('16', 'Asp', '1', null, null, '2017-06-20 21:33:20', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('17', 'BASIC', '1', null, null, '2017-06-20 21:33:20', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('18', 'C', '1', null, null, '2017-06-20 21:33:21', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('19', 'C++', '1', null, null, '2017-06-20 21:33:21', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('20', 'Clojure', '1', null, null, '2017-06-20 21:33:21', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('21', 'COBOL', '1', null, null, '2017-06-20 21:33:21', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('22', 'ColdFusion', '1', null, null, '2017-06-20 21:33:21', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('23', 'Erlang', '1', null, null, '2017-06-20 21:33:21', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('24', 'Fortran', '1', null, null, '2017-06-20 21:33:21', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('25', 'Groovy', '1', null, null, '2017-06-20 21:33:21', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('26', 'Haskell', '1', null, null, '2017-06-20 21:33:21', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('27', 'Java', '1', null, null, '2017-06-20 21:33:21', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('28', 'JavaScript', '1', null, null, '2017-06-20 21:33:21', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('29', 'Lisp', '1', null, null, '2017-06-20 21:33:21', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('30', 'Perl', '1', null, null, '2017-06-20 21:33:21', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('31', 'PHP', '1', null, null, '2017-06-20 21:33:21', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('32', 'Python', '1', null, null, '2017-06-20 21:33:21', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('33', 'Ruby', '1', null, null, '2017-06-20 21:33:21', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('34', 'Scala', '1', null, null, '2017-06-20 21:33:21', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('35', 'Scheme', '1', null, null, '2017-06-20 21:33:21', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('36', 'Tyto alba', '1', null, null, '2017-06-20 21:36:06', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('37', 'Lanius collurio', '1', null, null, '2017-06-20 21:36:06', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('38', 'Hirundo rustica', '1', null, null, '2017-06-20 21:36:06', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('39', 'Branta leucopsis', '1', null, null, '2017-06-20 21:36:06', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('40', 'Larus marinus', '1', null, null, '2017-06-20 21:36:06', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('41', 'Larus fuscus', '1', null, null, '2017-06-20 21:36:06', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('42', 'Limosa lapponica', '1', null, null, '2017-06-20 21:36:06', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('43', 'Puffinus mauretanicus', '1', null, null, '2017-06-20 21:36:06', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('44', 'Porzana pusilla', '1', null, null, '2017-06-20 21:36:06', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('45', 'Chlamydotis undulata', '1', null, null, '2017-06-20 21:36:06', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('46', 'Loxia leucoptera', '1', null, null, '2017-06-20 21:36:06', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('47', 'Sylvia nisoria', '1', null, null, '2017-06-20 21:36:06', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('48', 'Barn Owl', '1', null, null, '2017-06-20 21:36:34', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('49', 'Red-backed Shrike', '1', null, null, '2017-06-20 21:36:34', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('50', 'Barn Swallow', '1', null, null, '2017-06-20 21:36:34', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('51', 'Barnacle Goose', '1', null, null, '2017-06-20 21:36:34', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('52', 'Great Black-backed Gull', '1', null, null, '2017-06-20 21:36:34', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('53', 'Lesser Black-backed Gull', '1', null, null, '2017-06-20 21:36:34', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('54', 'Bar-tailed Godwit', '1', null, null, '2017-06-20 21:36:34', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('55', 'Balearic Shearwater', '1', null, null, '2017-06-20 21:36:34', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('56', 'Baillon`s Crake', '1', null, null, '2017-06-20 21:36:34', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('57', 'Houbara Bustard', '1', null, null, '2017-06-20 21:36:35', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('58', 'Two-barred Crossbill', '1', null, null, '2017-06-20 21:36:35', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('59', 'Barred Warbler', '1', null, null, '2017-06-20 21:36:35', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('60', 'Common Eider', '1', null, null, '2017-06-20 21:37:05', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('61', 'White-headed Duck', '1', null, null, '2017-06-20 21:37:05', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('62', 'Bearded Reedling', '1', null, null, '2017-06-20 21:37:05', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('63', 'Hooded Crow', '1', null, null, '2017-06-20 21:37:05', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('64', 'Common Goldeneye', '1', null, null, '2017-06-20 21:37:05', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('65', 'Sanderling', '1', null, null, '2017-06-20 21:37:05', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('66', 'Blue-headed Wagtail', '1', null, null, '2017-06-20 21:37:05', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('67', 'European Golden Plover', '1', null, null, '2017-06-20 21:37:05', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('68', 'Goosander', '1', null, null, '2017-06-20 21:37:05', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('69', 'Black-headed Gull', '1', null, null, '2017-06-20 21:37:05', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('70', 'Garden Warbler', '1', null, null, '2017-06-20 21:37:05', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('71', 'King Eider', '1', null, null, '2017-06-20 21:37:05', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('72', 'Kentish Plover', '1', null, null, '2017-06-20 21:37:37', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('73', 'Arctic Tern', '1', null, null, '2017-06-20 21:37:37', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('74', 'Ortolan Bunting', '1', null, null, '2017-06-20 21:37:37', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('75', 'Corn Bunting', '1', null, null, '2017-06-20 21:37:37', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('76', 'Marsh Tit', '1', null, null, '2017-06-20 21:37:37', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('77', 'Common House Martin', '1', null, null, '2017-06-20 21:37:37', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('78', 'Little Stint', '1', null, null, '2017-06-20 21:37:37', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('79', 'Great Tit', '1', null, null, '2017-06-20 21:37:37', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('80', 'Crested Tit', '1', null, null, '2017-06-20 21:37:37', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('81', 'Willow Tit', '1', null, null, '2017-06-20 21:37:37', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('82', 'Sand Martin', '1', null, null, '2017-06-20 21:37:37', null, null, '2');
+INSERT INTO `tbl_project` VALUES ('83', 'Blue Tit', '1', null, null, '2017-06-20 21:37:37', null, null, '2');
 
 -- ----------------------------
 -- Table structure for tbl_setting
