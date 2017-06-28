@@ -1,0 +1,42 @@
+<div ui-content-for="title">
+  <span>Category</span>
+</div>
+
+
+
+<div ui-content-for="slidebar">
+    <div ng-include="'template/sidebar.html'"
+        ui-track-as-search-param="true"
+        class="sidebar sidebar-left"></div>
+    <div ng-include="'template/sidebarRight.html'"
+        class="sidebar sidebar-right"></div>
+</div>
+
+<div ui-content-for="navbarTop">
+    <div class="navbar navbar-app navbar-absolute-top">
+        <div class="navbar-brand navbar-brand-center">
+            Project Risk Evaluation Profile(PREP)
+        </div>
+        <div class="btn-group pull-left">
+            <div class="btn" ng-click="goBack()">
+                <i class="fa fa-bars"></i>
+            </div>
+        </div>
+        <!-- <div class="btn-group pull-right" ui-yield-to="navbarAction">
+            <div ui-toggle="uiSidebarRight" class="btn">
+                <i class="fa fa-user"></i>
+            </div>
+        </div> -->
+        <div class="btn-group pull-right" ui-yield-to="navbarAction">
+            <div class="btn">
+                <i class="fa fa-user"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="scrollable viewer ng-enter actived" ng-class="">
+<div class="scrollable-content" style="background:red">
+
+</div>
+</div>

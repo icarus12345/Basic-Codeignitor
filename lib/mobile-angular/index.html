@@ -16,8 +16,10 @@
         <link rel="stylesheet" href="../angular-1.5.6/angular-fancy-modal/angular-fancy-modal.css" />
         <link rel="stylesheet" href="../angular-1.5.6/angular-fancy-modal/angular-fancy-modal-theme-classic.css" />
         <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="css/animation.css" />
         <script src="../angular-1.5.6/angular.min.js"></script>
         <script src="../angular-1.5.6/angular-route.min.js"></script>
+        <script src="../angular-1.5.6/angular-animate.js"></script>
         <script src="js/mobile-angular-ui.min.js"></script>
         <script src="js/mobile-angular-ui.gestures.min.js"></script>
         <script src="../angular-1.5.6/angular-fancy-modal/angular-fancy-modal.js"></script>
@@ -27,6 +29,7 @@
         <script src="app.js"></script>
         <script src="controller/main-controller.js"></script>
         <script src="controller/touch-controller.js"></script>
+        <script src="controller/project-controller.js"></script>
     </head>
 
     <body
@@ -53,7 +56,7 @@
                     <i class="fa fa-spinner fa-spin loading-spinner"></i>
                 </div>
                 <div class="app-content" ng-class="loading?'loading-blur':''">
-                    <ng-view></ng-view>
+                    <ng-view ng-class="[effect]"></ng-view>
                     <div ng-include="'view/home.html'"></div>
                     <div ng-include="'view/touch.html'"></div>
                 </div>
