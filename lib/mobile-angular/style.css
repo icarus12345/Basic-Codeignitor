@@ -23,11 +23,14 @@ h1,h2,h3,h4,h5,h6{margin: 0}
     -ms-filter: blur(5px);
     filter: blur(5px);
 }
-.app-content .viewer,
+div[ng-view]{
+    background: #fff;
+}
+/*.app-content .viewer,*/
 .hidden-view{
     display: none;
 }
-.app-content .viewer.actived,
+/*.app-content .viewer.actived,*/
 .actived-view{
     display: block;
 }
