@@ -1,4 +1,4 @@
-.left-to-screen-animation{}
+/*.left-to-screen-animation{}
 .right-to-screen-animation{}
 .screen-to-left-animation{}
 .screen-to-right-animation{}
@@ -21,6 +21,14 @@
 }
 .page-back{
     z-index: 2;
+}
+*/
+.page-animation{
+    z-index: 1;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0%;top: 0;
 }
 .page-actived{
     z-index: 3;
