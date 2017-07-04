@@ -92,8 +92,14 @@ class Front_Controller extends CI_Controller {
         if(!empty($item)){
             $this->assigns['seo']['title'] = $item->title;
         }
+        if(!empty($item) && !empty($item->data['stitle'])){
+            $this->assigns['seo']['desc'] = $item->data['stitle'];
+        }
         if(!empty($item) && !empty($item->data['desc'])){
             $this->assigns['seo']['desc'] = $item->data['desc'];
+        }
+        if(!empty($item) && !empty($item->data['sdesc'])){
+            $this->assigns['seo']['desc'] = $item->data['sdesc'];
         }
         if(!empty($item) && !empty($item->data['cover'])){
             $this->assigns['seo']['image'] = $item->data['cover'];
@@ -101,11 +107,11 @@ class Front_Controller extends CI_Controller {
         if(!empty($item) && !empty($item->data['image'])){
             $this->assigns['seo']['image'] = $item->data['image'];
         }
-        if(!empty($item) && !empty($item->data['tag'])){
-            $this->assigns['seo']['keywords'] = $item->data['tag'];
+        if(!empty($item) && !empty($item->data['simage'])){
+            $this->assigns['seo']['image'] = $item->data['simage'];
         }
-        if(!empty($item) && !empty($item->data['keyword'])){
-            $this->assigns['seo']['keywords'] = $item->data['keywords'];
+        if(!empty($item) && !empty($item->data['skeyword'])){
+            $this->assigns['seo']['keywords'] = $item->data['skeywords'];
         }
     }
 
