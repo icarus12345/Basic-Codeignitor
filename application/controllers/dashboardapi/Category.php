@@ -266,8 +266,8 @@ class Category extends DApi_Controller {
     }
     function updateBatch($aaData){
         if(!empty($aaData)) foreach ($aaData as $c){
-            if($c->value!=$c->cat_value){
-                $this->cate_model->onUpdate($c->cat_id,array('cat_value'=>$c->value));
+            if($c->value!=$c->_value){
+                $this->Category_Model->onUpdate($c->id,array("{$this->prefix}value"=>$c->_value));
             }
         }
     }

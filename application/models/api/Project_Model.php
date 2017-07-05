@@ -25,7 +25,15 @@ class Project_Model extends CI_Model {
         return false;
     }
     
-
+    function get($id){
+        $query = $this->db
+            ->where(array(
+                'id' => $id
+                ))
+            ->get('tbl_project');
+        $row = $query->row();
+        return $row;
+    }
     function update($id,$params){
         $this->db->set('modified', 'NOW()', FALSE);
         @$this->db

@@ -8,17 +8,19 @@
   Purpose of the stylesheet follows.
  */
 
-class Category_Model extends Core_Model {
+class Category_Model extends CI_Model {
 
     function __construct()
     {
-        parent::__construct('tbl_category','','id');
+        parent::__construct();
     }
-    function get_common(){
+    function gets($pid=0){
         $query=$this->db
-            ->select('id,title')
-            ->where("type", '-1')
-            ->get($this->table);
+            ->select('id,title,pid,created,modified,status,value')
+            ->where("pid", $pid)
+            ->where("status", '1')
+            ->where("type", 'risk')
+            ->get('tbl_category');
 
         $errordb = $this->db->error();
         $error_message = $errordb['message'];
@@ -96,15 +98,7 @@ class Category_Model extends Core_Model {
         return $branch;
     }
 
-    function updateNodeByParent($Parent=0,$NewParent=0){
-        // $this->db->set('update', 'NOW()', FALSE);
-        $this->db->where('pid', $Parent);
-        @$this->db->update($this->table, array('pid'=>$NewParent));
-        @$count = $this->db->affected_rows(); //should return the number of rows affected by the last query
-        if ($count > 0)
-            return true;
-        return false;
-    }
+    
 }
 
 ?>
