@@ -69,6 +69,7 @@ class Project extends Api_Controller {
             'code' => -1,
         );
         $title = $this->input->post('title');
+        $desc = $this->input->post('desc');
         $this->form_validation->set_rules($this->rules['create']);
         if ($this->form_validation->run() == FALSE) {
             $output['text'] = 'Fail.';
@@ -77,6 +78,7 @@ class Project extends Api_Controller {
         } else {
             $params = array(
                 'title' => $title,
+                'desc' => $desc,
                 'uid' => $this->user->ac_id
                 );
             $rs = $this->Project_Model->insert($params);

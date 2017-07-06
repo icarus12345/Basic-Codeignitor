@@ -182,9 +182,9 @@ class Category extends DApi_Controller {
             'data' => null
         );
         $this->form_validation->set_rules($this->rules['update']);
-        // if($entry_setting->data['unique'] == 'true'){
+        if($entry_setting->data['unique'] == 'true'){
             $this->form_validation->set_rules($this->rules['unique']);
-        // }
+        }
         if ($this->form_validation->run() == FALSE) {
             $output['validation'] = validation_errors_array();
             $output['message'] = validation_errors();
@@ -226,9 +226,9 @@ class Category extends DApi_Controller {
             'data' => null
         );
         $this->form_validation->set_rules($this->rules['insert']);
-        // if($entry_setting->data['unique'] == 'true'){
+        if($entry_setting->data['unique'] == 'true'){
                 $this->form_validation->set_rules($this->rules['unique']);
-        // }
+        }
         if ($this->form_validation->run() == FALSE) {
             $output['validation'] = validation_errors_array();
             $output['message'] = validation_errors();

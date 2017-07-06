@@ -5,13 +5,13 @@
             <div>
                 <div class="modal-header">
                     <button class="close" 
-                            ui-turn-off="modalAddProject">&times;</button>
+                        ui-turn-off="modalAddProject">&times;</button>
                     <h4 class="modal-title">Create new Project</h4>
                 </div>
                 <div class="modal-body">
                     <form role="form" ng-submit='onCreateProject()' name="addProjectFrm" id="addProjectFrm">
                         <div class="form-group">
-                          <input type="text" 
+                            <input type="text" 
                                 name="title" 
                                 required ng-minlength=2 ng-maxlength=50
                                 ng-model="addProjectInfo.title"
@@ -21,6 +21,19 @@
                                 <div ng-show="addProjectFrm.title.$error.required">Please enter Project name.</div>
                                 <div ng-show="addProjectFrm.title.$error.minlength">Should be great than 2 chars</div>
                                 <div ng-show="addProjectFrm.title.$error.maxlength">Should be less than 50 chars</div>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <textarea type="text" 
+                                name="desc" 
+                                required ng-maxlength=255
+                                ng-model="addProjectInfo.desc"
+                                class="form-control"
+                                placeholder="Description"></textarea>
+                            <div ng-messages="addProjectFrm.desc.$error" ng-show="addProjectFrm.$submitted || addProjectFrm.desc.$touched">
+                                <div ng-show="addProjectFrm.desc.$error.required">Please enter Description.</div>
+                                <div ng-show="addProjectFrm.desc.$error.maxlength">Should be less than 255 chars</div>
                             </div>
 
                         </div>

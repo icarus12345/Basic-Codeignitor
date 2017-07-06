@@ -584,5 +584,41 @@ class Common extends DApi_Controller {
             ->set_status_header(200)
             ->set_output(json_encode($output));
     }
-    
+    public function delete(){
+        $output = array(
+            'text' => 'fail',
+            'code' => -1,
+            'data' => null
+        );
+        $id = $this->input->post('id');
+        $sid = $this->input->post('sid');
+        $entry_setting = $this->Module_Model->get($sid);
+        $this->entry_setting = $entry_setting;
+        if($entry_setting){
+            $storage = $entry_setting->data['storage'];
+            $this->Core_Model = new Core_Model($storage);
+            
+            $entry_detail = $this->Core_Model->get($id);
+            if($entry_detail){
+                
+                $rs = $this->Core_Model->onDelete($id);
+                if ($rs === true) {
+                    $output["code"] = 1;
+                    $output["text"] = 'ok';
+                    $output["message"] = 'Deleted record on database.';
+                } else {
+                    $output["code"] = -1;
+                    $output["message"] = "Record faily to delete. Please check data input and try again.";
+                }
+            }else{
+                $output["message"] = 'Record doest exists.';
+            }
+        } else {
+            $output["message"] = 'Setting Entry doest exists.';
+        }
+        return $this->output
+            ->set_content_type('application/json')
+            ->set_status_header(200)
+            ->set_output(json_encode($output));
+    }
 }

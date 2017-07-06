@@ -1,0 +1,44 @@
+<div ui-content-for="title">
+  <span>Category</span>
+</div>
+
+
+
+
+<div ui-content-for="navbarTop">
+    <div class="navbar navbar-app navbar-absolute-top">
+        <div class="navbar-brand navbar-brand-center">
+            Detail
+        </div>
+        <div class="btn-group pull-left">
+            <div class="btn" ng-click="goBack()">
+                <i class="fa fa-arrow-left"></i>
+            </div>
+        </div>
+        <!-- <div class="btn-group pull-right" ui-yield-to="navbarAction">
+            <div ui-toggle="uiSidebarRight" class="btn">
+                <i class="fa fa-user"></i>
+            </div>
+        </div> -->
+        <!-- <div class="btn-group pull-right" ui-yield-to="navbarAction">
+            <div class="btn">
+                <i class="fa fa-user"></i>
+            </div>
+        </div> -->
+    </div>
+</div>
+
+<div class="scrollable viewer" ng-class="">
+    <div class="scrollable-content">
+        <div class="list-group text-center">
+          <div class="list-group-item list-group-item-home">
+            <h3>Project List<small>1.3</small></h3>
+          </div>
+          <a href="#/{{foo.id}}" class="list-group-item list-group-item-home" >
+            <div class="text-left">
+                Detail
+            </div>
+          </a>
+        </div>
+    </div>
+</div>
