@@ -28,6 +28,7 @@ class Token_Model extends CI_Model {
             return $this->get($app_id,$token);
         return false;
     }
+
     function get($app_id='',$token=''){
         $query = $this->db
             ->where(array(
@@ -38,7 +39,15 @@ class Token_Model extends CI_Model {
         $row = $query->row();
         return $row;
     }
-
+    function get_by_token($token){
+        $query = $this->db
+            ->where(array(
+                'token_id' => $token,
+                ))
+            ->get('auth_token');
+        $row = $query->row();
+        return $row;
+    }
     function delete_expried_token(){
         @$this->db
             ->where('token_expried <','NOW()',FALSE)

@@ -10,10 +10,10 @@ class Api_Controller extends CI_Controller {
         parent::__construct();
         $this->CI =& get_instance();
         $this->assigns = array();
-        $this->valid_token();
         $this->load->model('api/Token_Model');
         $this->load->model('api/Client_Model');
         $this->load->model('api/Account_Model');
+        $this->valid_token();
 
     }
 
@@ -26,18 +26,17 @@ class Api_Controller extends CI_Controller {
         );
         $app_id = $this->input->post('app_id');
         $token = $_SERVER['HTTP_X_CSRF_TOKEN'];
-        $user = $this->session->userdata('api_user');
+        $tok = $this->Token_Model->get_by_token($token);
         $valid = false;
-        if($user){
+        if($tok){
+            $valid = true;
+            $user = $this->session->userdata('api_user');
+            if(!$user){
+
+                $user = $this->Account_Model->get_by_id($tok->token_app_id);
+                $this->session->set_userdata('api_user', $user);
+            }
             $this->user = $user;
-            // $u = $this->Account_Model->get_by_username($user->ac_username);
-            // if($u->ac_token == $user->ac_token){
-                $valid = true;
-            // } else {
-            //     $output['code'] = -201;
-            //     $output['text'] = 'fail';
-            //     $output['message'] = 'Have Another Device Access To Your Account';
-            // }
         }
         if(!$valid){
             $this->output

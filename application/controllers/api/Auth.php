@@ -275,15 +275,16 @@ class Auth extends CI_Controller {
             'code' => 1,
             'data' => $data
         );
-        $user = $this->session->userdata('api_user');
-        if($user){
-            // $u = $this->Account_Model->get_by_username($user->ac_username);
+        // $user = $this->session->userdata('api_user');
+        $token = $this->input->post('token');
+        $tok = $this->Token_Model->get_by_token($token);
+        if($tok){
+            $user = $this->Account_Model->get_by_id($tok->token_app_id);
             // if($u->ac_token == $user->ac_token){
                 // $tok = $this->Token_Model->create($user->ac_id);
                 $data = array(
                     'user_info' => $user,
-                    // 'token_info' => $token,
-                    'token' => $user->ac_token,
+                    'token' => $token,
                     'app_id' => $user->ac_id,
                     );
                 $output['data'] = $data;

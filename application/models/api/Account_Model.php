@@ -28,6 +28,7 @@ class Account_Model extends CI_Model {
         $query = $this->db
             ->where(array(
                 'ac_username' => $username,
+                'ac_status' => 1
                 ))
             ->get('auth_account');
         $row = $query->row();
@@ -37,12 +38,22 @@ class Account_Model extends CI_Model {
         $query = $this->db
             ->where(array(
                 'ac_email' => $email,
+                'ac_status' => 1
                 ))
             ->get('auth_account');
         $row = $query->row();
         return $row;
     }
-
+    function get_by_id($id){
+        $query = $this->db
+            ->where(array(
+                'ac_id' => $id,
+                'ac_status' => 1
+                ))
+            ->get('auth_account');
+        $row = $query->row();
+        return $row;
+    }
     function update($ac_id,$params){
         @$this->db
             ->where('ac_id',$ac_id)
