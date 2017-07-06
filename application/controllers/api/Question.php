@@ -1,10 +1,10 @@
 <?php
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Category extends Api_Controller {
+class Question extends Api_Controller {
     function __construct() {
         parent::__construct();
-        $this->load->model("api/Category_Model");
+        $this->load->model("api/Question_Model");
     }
 
     public $rules = array(
@@ -31,51 +31,25 @@ class Category extends Api_Controller {
         echo 'Welcome API';
     }
 
-    function get_by_pid(){
+    function get_by_cid(){
         $code = 200;
         $output = array(
             'text' => 'fail',
             'message' => 'Bad request.',
             'code' => -1,
         );
-        $pid = $this->input->post('pid');
-        if($pid<=0) $pid = 0;
+        $cid = $this->input->post('cid');
+        if($cid<=0) $cid = 0;
         // $this->form_validation->set_rules($this->rules['get_list']);
         // if ($this->form_validation->run() == FALSE) {
         //     $output['text'] = 'Fail.';
         //     $output['validation'] = validation_errors_array();
         //     $output['message'] = validation_errors();
         // } else {
-            $rs = $this->Category_Model->gets($pid);
+            $rs = $this->Question_Model->get_by_cid($cid);
             $output['code'] = 1;
             $output['text'] = 'Success.';
-            $output['message'] = 'Get list category success.';
-            $output['data'] = $rs;
-        // }
-        $this->output
-            ->set_content_type('application/json')
-            ->set_status_header($code)
-            ->set_output(json_encode($output,JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
-    }
-
-    function get(){
-        $code = 200;
-        $output = array(
-            'text' => 'fail',
-            'message' => 'Bad request.',
-            'code' => -1,
-        );
-        $id = $this->input->post('id');
-        // $this->form_validation->set_rules($this->rules['get_list']);
-        // if ($this->form_validation->run() == FALSE) {
-        //     $output['text'] = 'Fail.';
-        //     $output['validation'] = validation_errors_array();
-        //     $output['message'] = validation_errors();
-        // } else {
-            $rs = $this->Project_Model->get($id);
-            $output['code'] = 1;
-            $output['text'] = 'Success.';
-            $output['message'] = 'Get category success.';
+            $output['message'] = 'Get list question success.';
             $output['data'] = $rs;
         // }
         $this->output

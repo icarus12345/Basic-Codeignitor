@@ -23,6 +23,9 @@ h1,h2,h3,h4,h5,h6{margin: 0}
     -ms-filter: blur(5px);
     filter: blur(5px);
 }
+.list-group-item:last-child, a.list-group-item:last-child{
+    border-bottom: 0
+}
 .list-group:last-child{margin-bottom: 0}
 div[ng-view]{
     background: #fff;
@@ -219,3 +222,7 @@ textarea.form-control.ng-invalid.ng-touched{
         max-height: calc(100vh - (20px + 65px + 55px));
     }
 }
+.question{}
+.question-content{padding-bottom: 10px;text-align: left;}
+.answers .btn{white-space: normal;}
+.answers .btn.selected{}

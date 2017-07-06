@@ -12,7 +12,7 @@
                 <div class="control-group">
                     <input 
                         type="text"
-                        class="form-control validate[required,minSize[4],maxSize[50]]" 
+                        class="form-control validate[required,minSize[4],maxSize[250]]" 
                         placeholder=""
                         id="detail-setting-title"
                         name="title"

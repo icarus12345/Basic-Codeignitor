@@ -17,11 +17,20 @@
           <div class="list-group-item list-group-item-home" style="min-height:calc(100vh - 50px - {{listCategory.length*41}}px);min-height:-webkit-calc(100vh - 51px - {{listCategory.length*41}}px)">
             <p >{{projectData.desc}}</p>
           </div>
-          <a ng-tap="go(foo)" class="list-group-item list-group-item-home" ng-repeat="foo in listCategory">
-            <div class="text-left">
-                {{foo.title}}
+          <div class="list-group-item" ng-repeat="foo in listQuestion">
+            <div class="question">
+                <div class="question-content">{{foo.title}}</div>
+                <div class="answers">
+                    <button 
+                        ng-repeat="ans in foo.data.answers" 
+                        class="btn btn-block"
+                        ng-class="{'selected btn-info':ans.selected}" 
+                        ng-click="answer_the_question(foo,ans)">
+                        {{ans.title}}
+                    </button>
+                </div>
             </div>
-          </a>
+          </div>
         </div>
     </div>
 </div>

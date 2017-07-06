@@ -16,11 +16,10 @@ class Category_Model extends CI_Model {
     }
     function gets($pid=0){
         $query=$this->db
-            ->select('id,title,pid,created,modified,status,value')
+            ->select('id,title,pid,created,modified,status,value,childNum,questNum')
             ->where("pid", $pid)
             ->where("status", '1')
-            ->where("type", 'risk')
-            ->get('tbl_category');
+            ->get('risk_cate');
 
         $errordb = $this->db->error();
         $error_message = $errordb['message'];
