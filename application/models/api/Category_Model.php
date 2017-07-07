@@ -16,7 +16,7 @@ class Category_Model extends CI_Model {
     }
     function get_by_pid($pid=0){
         $query=$this->db
-            ->select('id,title,pid,created,modified,status,value,child_num,quest_num')
+            ->select('id,title,pid,created,modified,status,value,child_num,quest_num,total_num')
             ->where("pid", $pid)
             ->where("status", '1')
             ->get('risk_cate');

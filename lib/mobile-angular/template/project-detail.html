@@ -17,7 +17,8 @@
           <div class="list-group-item" style="min-height:calc(100vh - 51px - {{category_info.items.length*41}}px);min-height:-webkit-calc(100vh - 51px - {{category_info.items.length*41}}px)">
             <p >{{category_info.desc||projectData.desc}}</p>
           </div>
-          <a ng-tap="go(foo)" class="list-group-item list-group-item-risk" ng-repeat="foo in category_info.items">
+          <a ng-tap="go(foo)" class="list-group-item list-group-item-risk" ng-repeat="(i,foo) in category_info.items">
+            <span class="num">{{i+1}}</span>
             <span class="process-bar" style="width:{{(+foo.answered_num||0)/(+foo.total_num||+foo.quest_num||1)*100}}%"></span>
             <div class="">
                 {{foo.title}}

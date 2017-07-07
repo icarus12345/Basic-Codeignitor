@@ -240,3 +240,10 @@ textarea.form-control.ng-invalid.ng-touched{
     padding: 10px 10px 10px 0;
     position: relative;z-index: 2;
 }
+.list-group-item-risk>.num{
+    position: absolute;left: 4px;top:50%;
+    height: 32px;width: 32px;margin-top: -16px;
+    text-align: center;line-height: 30px;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+}
