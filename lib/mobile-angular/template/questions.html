@@ -1,7 +1,7 @@
 <div ui-content-for="navbarTop">
     <div class="navbar navbar-app navbar-absolute-top">
         <div class="navbar-brand navbar-brand-center">
-            {{projectData.title}}
+            {{question_info.title||projectData.title}}
         </div>
         <div class="btn-group pull-left">
             <div class="btn" ng-click="goBack()">
@@ -14,18 +14,18 @@
 <div class="scrollable viewer" ng-class="">
     <div class="scrollable-content">
         <div class="list-group text-center">
-          <div class="list-group-item list-group-item-home" style="min-height:calc(100vh - 50px - {{listCategory.length*41}}px);min-height:-webkit-calc(100vh - 51px - {{listCategory.length*41}}px)">
-            <p >{{projectData.desc}}</p>
+          <div class="list-group-item list-group-item-home">
+            <p >{{question_info.desc||projectData.desc}}</p>
           </div>
-          <div class="list-group-item" ng-repeat="foo in listQuestion">
+          <div class="list-group-item" ng-repeat="foo in question_info.items">
             <div class="question">
                 <div class="question-content">{{foo.title}}</div>
                 <div class="answers">
                     <button 
-                        ng-repeat="ans in foo.data.answers" 
+                        ng-repeat="ans in foo.answers" 
                         class="btn btn-block"
                         ng-class="{'selected btn-info':ans.selected}" 
-                        ng-click="answer_the_question(foo,ans)">
+                        ng-tap="answer_the_question(foo,ans)">
                         {{ans.title}}
                     </button>
                 </div>

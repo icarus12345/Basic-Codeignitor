@@ -1,7 +1,7 @@
 <div ui-content-for="navbarTop">
     <div class="navbar navbar-app navbar-absolute-top">
         <div class="navbar-brand navbar-brand-center">
-            {{projectData.title}}
+            {{category_info.title||projectData.title}}
         </div>
         <div class="btn-group pull-left">
             <div class="btn" ng-click="goBack()">
@@ -14,11 +14,12 @@
 <div class="scrollable viewer" ng-class="">
     <div class="scrollable-content">
         <div class="list-group text-center">
-          <div class="list-group-item list-group-item-home" style="min-height:calc(100vh - 50px - {{listCategory.length*41}}px);min-height:-webkit-calc(100vh - 51px - {{listCategory.length*41}}px)">
-            <p >{{projectData.desc}}</p>
+          <div class="list-group-item" style="min-height:calc(100vh - 51px - {{category_info.items.length*41}}px);min-height:-webkit-calc(100vh - 51px - {{category_info.items.length*41}}px)">
+            <p >{{category_info.desc||projectData.desc}}</p>
           </div>
-          <a ng-tap="go(foo)" class="list-group-item list-group-item-home" ng-repeat="foo in listCategory">
-            <div class="text-left">
+          <a ng-tap="go(foo)" class="list-group-item list-group-item-risk" ng-repeat="foo in category_info.items">
+            <span class="process-bar" style="width:{{(+foo.answered_num||0)/(+foo.total_num||+foo.quest_num||1)*100}}%"></span>
+            <div class="">
                 {{foo.title}}
             </div>
           </a>

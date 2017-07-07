@@ -14,6 +14,11 @@ class Project extends Api_Controller {
                     'label'=>'Project Name',
                     'rules'=>'trim|required|min_length[2]|max_length[50]|is_unique[tbl_project.title]'
                     ),
+                'desc' => array(
+                    'field'=>'desc',
+                    'label'=>'Description',
+                    'rules'=>'trim|max_length[255]'
+                    ),
         ),
         'update' => array(
                 'title' => array(

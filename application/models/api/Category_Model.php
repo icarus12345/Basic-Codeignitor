@@ -14,9 +14,9 @@ class Category_Model extends CI_Model {
     {
         parent::__construct();
     }
-    function gets($pid=0){
+    function get_by_pid($pid=0){
         $query=$this->db
-            ->select('id,title,pid,created,modified,status,value,childNum,questNum')
+            ->select('id,title,pid,created,modified,status,value,child_num,quest_num')
             ->where("pid", $pid)
             ->where("status", '1')
             ->get('risk_cate');
@@ -28,7 +28,42 @@ class Category_Model extends CI_Model {
         }
         return $query->result();
     }
+    function get_by_id($id=0){
+        $query=$this->db
+            ->select('id,title,data')
+            ->where("id", $id)
+            ->where("status", '1')
+            ->get('tbl_category');
 
+        $errordb = $this->db->error();
+        $error_message = $errordb['message'];
+        if($errordb['code']!==0){
+            return null;
+        }
+        $row = $query->row();
+        if($row){
+            $row->data = unserialize($row->data);
+        }
+        return $query->row();
+    }
+    function get_answer_number($uid,$pid){
+        $query=$this->db
+            ->select('tbl_category.id,tbl_category.title,tbl_category.value,tbl_category.pid,sum(risk_answer.num) AS answered_num')
+            ->from('tbl_category')
+            ->join('risk_answer','CONCAT(`risk_answer`.`value`, ">") LIKE CONCAT("%>", `tbl_category`.`id`, ">%")','left')
+            ->where("tbl_category.type", 'risk')
+            ->where("risk_answer.uid", $uid)
+            ->where("risk_answer.pid", $pid)
+            ->group_by(array('tbl_category.id','tbl_category.title','tbl_category.value','tbl_category.pid'))
+            ->get();
+
+        $errordb = $this->db->error();
+        $error_message = $errordb['message'];
+        if($errordb['code']!==0){
+            return null;
+        }
+        return $query->result();
+    }
     function buildTree(array $elements, $pid = 0,$parents=array(0)) {
         $branch = array();
         foreach ($elements as $element) {
