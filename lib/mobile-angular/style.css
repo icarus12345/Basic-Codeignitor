@@ -237,7 +237,7 @@ textarea.form-control.ng-invalid.ng-touched{
     z-index: 1;
 }
 .list-group-item-risk>div{
-    padding: 10px 10px 10px 0;
+    padding: 14px 10px 14px 0;
     position: relative;z-index: 2;
 }
 .list-group-item-risk>.num{
