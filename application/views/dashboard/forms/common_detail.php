@@ -253,7 +253,7 @@
         value="<?php echo $entry_detail->alias; ?>" 
         id="detail-setting-alias">
     <?php if($entry_setting->data['groups']): ?>
-    <ul class="nav nav-tabs" role="tablist">
+    <ul class="nav nav-tabs" role="tablist" <?php if(count($entry_setting->data['groups'])<=1) echo 'style="display:none"'; ?>>
         <?php 
         $num = 0;
         foreach ($entry_setting->data['groups'] as $key => $g) :
