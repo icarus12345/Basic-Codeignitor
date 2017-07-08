@@ -23,6 +23,7 @@ h1,h2,h3,h4,h5,h6{margin: 0}
     -ms-filter: blur(5px);
     filter: blur(5px);
 }
+p:last-child{margin-bottom: 0}
 .list-group-item:last-child, a.list-group-item:last-child{
     border-bottom: 0
 }
@@ -226,3 +227,23 @@ textarea.form-control.ng-invalid.ng-touched{
 .question-content{padding-bottom: 10px;text-align: left;}
 .answers .btn{white-space: normal;}
 .answers .btn.selected{}
+.list-group-item-risk{
+    padding: 0 0 0 40px;text-align: left;
+    position: relative;
+}
+.list-group-item-risk>.process-bar{
+    position: absolute;left: 0;top: 0;height: 100%;
+    background: rgba(255, 235, 59, 0.14);
+    z-index: 1;
+}
+.list-group-item-risk>div{
+    padding: 14px 10px 14px 0;
+    position: relative;z-index: 2;
+}
+.list-group-item-risk>.num{
+    position: absolute;left: 4px;top:50%;
+    height: 32px;width: 32px;margin-top: -16px;
+    text-align: center;line-height: 30px;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+}
