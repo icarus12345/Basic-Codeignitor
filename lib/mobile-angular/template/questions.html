@@ -1,7 +1,7 @@
 <div ui-content-for="navbarTop">
     <div class="navbar navbar-app navbar-absolute-top">
         <div class="navbar-brand navbar-brand-center">
-            {{question_info.title||projectData.title}}
+            {{category_info.title||projectData.title}}
         </div>
         <div class="btn-group pull-left">
             <div class="btn" ng-click="goBack()">
@@ -15,16 +15,16 @@
     <div class="scrollable-content">
         <div class="list-group text-center">
           <div class="list-group-item list-group-item-home">
-            <p >{{question_info.desc||projectData.desc}}</p>
+            <p >{{category_info.desc||projectData.desc}}</p>
           </div>
-          <div class="list-group-item" ng-repeat="foo in question_info.items">
+          <div class="list-group-item" ng-repeat="foo in category_info.questions">
             <div class="question">
                 <div class="question-content">{{foo.title}}</div>
                 <div class="answers">
                     <button 
-                        ng-repeat="ans in foo.answers" 
+                        ng-repeat="(i,ans) in foo.answers" 
                         class="btn btn-block"
-                        ng-class="{'selected btn-info':ans.selected}" 
+                        ng-class="{'selected btn-info':foo.answered == i}" 
                         ng-tap="answer_the_question(foo,ans)">
                         {{ans.title}}
                     </button>

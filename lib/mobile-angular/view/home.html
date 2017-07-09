@@ -2,16 +2,19 @@
   <div class="scrollable-content" ui-scroll-bottom="loadMore()" ng-controller="MainController">
 
     <div class="list-group text-center">
-      <div class="list-group-item list-group-item-home">
-        <h3>Project List<small>1.3</small></h3>
-      </div>
-      <any ng-repeat="foo in listProject" ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}">
-      <a href="#/project/{{foo.id}}/cat/0" class="list-group-item list-group-item-home" >
-        <div class="text-left">
-            {{foo.title}}
+        <div class="list-group-item">
+            <div class="login-logo">RISK</div>
         </div>
-      </a>
-      </any>
+        <div class="risk-list-item list-group">
+            
+          <any ng-repeat="foo in listProject" ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}">
+              <a href="#/project/{{foo.id}}/cat/0" class="list-group-item" >
+                <div class="item">
+                    {{foo.title}}
+                </div>
+              </a>
+          </any>
+        </div>
     </div>
 
   </div>

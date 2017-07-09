@@ -5,6 +5,7 @@ class Project extends Api_Controller {
     function __construct() {
         parent::__construct();
         $this->load->model("api/Project_Model");
+        $this->load->model("api/Answer_Model");
     }
 
     public $rules = array(
@@ -113,17 +114,22 @@ class Project extends Api_Controller {
             'code' => -1,
         );
         $id = $this->input->post('id');
+        $uid = $this->user->ac_id;
         // $this->form_validation->set_rules($this->rules['get_list']);
         // if ($this->form_validation->run() == FALSE) {
         //     $output['text'] = 'Fail.';
         //     $output['validation'] = validation_errors_array();
         //     $output['message'] = validation_errors();
         // } else {
-            $rs = $this->Project_Model->get($id);
+            $project = $this->Project_Model->get($id);
+            $answereds = $this->Answer_Model->get_by_uid_pid($uid,$id);
             $output['code'] = 1;
             $output['text'] = 'Success.';
             $output['message'] = 'Get list project success.';
-            $output['data'] = $rs;
+            $output['data'] = array(
+                'info' => $project,
+                'answereds' => $answereds,
+                );
         // }
         $this->output
             ->set_content_type('application/json')

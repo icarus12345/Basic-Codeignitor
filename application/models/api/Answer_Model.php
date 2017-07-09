@@ -33,6 +33,24 @@ class Answer_Model extends CI_Model {
         $entrys = $query->result();
         return $entrys;
     }
+    function get_by_uid_pid($uid,$pid){
+        $query=$this->db
+            ->select('tbl_answer.*')
+            ->from('tbl_answer')
+            ->join('tbl_data2','tbl_answer.qid = tbl_data2.id','left')
+            ->where("uid", $uid)
+            ->where("pid", $pid)
+            ->where("status", '1')
+            ->get();
+
+        $errordb = $this->db->error();
+        $error_message = $errordb['message'];
+        if($errordb['code']!==0){
+            return null;
+        }
+        $entrys = $query->result();
+        return $entrys;
+    }
     function get_answer($uid,$pid,$qid){
         $query=$this->db
             ->where("uid", $uid)

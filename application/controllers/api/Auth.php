@@ -254,7 +254,7 @@ class Auth extends CI_Controller {
                             
                         }
                     } else {
-                        $output['text'] = 'User does\'t exists.';
+                        $output['message'] = 'User does\'t exists.';
                     }
                 
             // } else {

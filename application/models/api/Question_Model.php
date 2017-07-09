@@ -34,6 +34,24 @@ class Question_Model extends CI_Model {
         return $entrys;
     }
     
+    function get_list(){
+        $query=$this->db
+            ->where("status", '1')
+            ->get('tbl_data2');
+
+        $errordb = $this->db->error();
+        $error_message = $errordb['message'];
+        if($errordb['code']!==0){
+            return null;
+        }
+        $entrys = $query->result();
+        if($entrys) foreach ($entrys as $key => $value) {
+            $data = unserialize($entrys[$key]->data);
+            unset($entrys[$key]->data);
+            $entrys[$key]->answers = $data['answers'];
+        }
+        return $entrys;
+    }
 }
 
 ?>

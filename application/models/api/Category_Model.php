@@ -14,6 +14,27 @@ class Category_Model extends CI_Model {
     {
         parent::__construct();
     }
+
+    function get_list(){
+        $query=$this->db
+            ->select('id,title,pid,created,modified,data')
+            ->where("type", 'risk')
+            ->where("status", '1')
+            ->get('tbl_category');
+
+        $errordb = $this->db->error();
+        $error_message = $errordb['message'];
+        if($errordb['code']!==0){
+            return null;
+        }
+        $entrys = $query->result();
+        if($entrys) foreach ($entrys as $key => $value) {
+                $data = unserialize($entrys[$key]->data);
+                $entrys[$key]->desc = $data['desc'];
+                unset($entrys[$key]->data);
+        }
+        return $entrys;
+    }
     function get_by_pid($pid=0){
         $query=$this->db
             ->select('id,title,pid,created,modified,status,value,child_num,quest_num,total_num')

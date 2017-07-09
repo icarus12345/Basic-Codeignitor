@@ -1,47 +1,75 @@
-<div class="modal modal-overlay" ui-if="IsShowLogin" ui-shared-state='IsShowLogin'>
-  <div class="modal-dialog full-screen">
-    <div class="modal-content">
-      <div class="modal-header">
-        <!-- <button class="close" ui-turn-off="IsShowLogin">&times;</button> -->
-        <h4 class="modal-title">Login</h4>
-      </div>
-      <div class="modal-body" ng-scrollbar>
-          <form role="form" ng-submit='doAuthLogin()' name="signin" id="signin">
-                <div class="form-group">
-                  <label>Username</label>
-                  <input type="text"
-                        required ng-minlength=4 ng-maxlength=50
-                        name="username" 
-                        ng-model="auth_singin_info.username"
-                        class="form-control"
-                        placeholder="Enter username">
+<div class="modal modal-overlay auto-modal" ui-if="IsShowLogin" ui-shared-state='IsShowLogin'>
+    <div class="modal-dialog full-screen login-modal-dialog">
+        <div class="modal-content">
+            <!--             
+            <div class="modal-header">
+                <button class="close" ui-turn-off="IsShowLogin">&times;</button>
+                <h4 class="modal-title">Login</h4>
+            </div> 
+            <div class="modal-footer navbar-fixed-bottom">
+                <button ui-turn-off="IsShowLogin" ui-turn-on="IsShowRegister" class="btn btn-link">Register</button>
+                <button form="signin" type="submit" class="btn btn-primary">Login</button>
+            </div>
+            -->
+            <div class="modal-body" >
+                <div class="" >
+                    <div ng-scrollbar class="login-box">
+                        <div class="login-logo">RISK</div>
+                        <form role="form" ng-submit='doAuthLogin()' name="signin" id="signin">
+                            <div 
+                                class="form-custom-control"
+                                ng-class="[(fc_uname || !!auth_singin_info.username)?'focused':'']"
+                                >
+                                <label>Username</label>
+                                <input type="text"
+                                    required 
+
+                                    name="username" 
+                                    ng-model="auth_singin_info.username"
+                                    class="form-control"
+                                    ng-focus="fc_uname = true"
+                                    ng-blur="fc_uname = false"
+                                    ng-init="fc_uname = false"
+                                    >
+                                
+                            </div>
+
+                            <div 
+                                class="form-custom-control"
+                                ng-class="[(fc_pass || !!auth_singin_info.password)?'focused':'']"
+                                >
+                                <label>Password</label>
+                                <input 
+                                    type="password" 
+                                    class="form-control"
+                                    required 
+                                    name="password" 
+                                    ng-model="auth_singin_info.password"
+                                    ng-focus="fc_pass = true"
+                                    ng-blur="fc_pass = false"
+                                    ng-init="fc_pass = false"
+                                    >
+                            </div>
+                            <!--
+                            <div 
+                                class="form-custom-control focused">
+                                <label>Remember Me</label>
+                                <ui-switch ng-model='rememberMe'></ui-switch>
+                            </div>
+                            -->
+                            <div style="height:10px;"></div>
+                            <button class="btn btn-info btn-block">
+                              Login
+                            </button>
+                            <div class="new-to">
+                                New to RISK ? <span ui-turn-off="IsShowLogin" ui-turn-on="IsShowRegister">Create account</span>
+                            </div>
+                        </form>
+                    </div>
                 </div>
+            </div>
+      
 
-                <div class="form-group">
-                  <label>Password</label>
-                  <input type="password" 
-                        class="form-control"
-                        required ng-minlength=4 ng-maxlength=50
-                        name="password" 
-                        ng-model="auth_singin_info.password"
-                        placeholder="Password">
-                </div>
-
-                <div class="form-group">
-                  <label>Remember Me</label>
-                  <ui-switch ng-model='rememberMe'></ui-switch>
-                </div>
-                <button class="btn btn-primary btn-block">
-                  Login
-                </button>
-
-          </form>
-      </div>
-      <div class="modal-footer navbar-fixed-bottom">
-        <button ui-turn-off="IsShowLogin" ui-turn-on="IsShowRegister" class="btn btn-link">Register</button>
-        <button form="signin" type="submit" class="btn btn-primary">Login</button>
-      </div>
-
+        </div>
     </div>
-  </div>
 </div>

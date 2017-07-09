@@ -5,6 +5,7 @@ class Category extends Api_Controller {
     function __construct() {
         parent::__construct();
         $this->load->model("api/Category_Model");
+        $this->load->model("api/Question_Model");
     }
 
     public $rules = array(
@@ -105,5 +106,20 @@ class Category extends Api_Controller {
             ->set_content_type('application/json')
             ->set_status_header($code)
             ->set_output(json_encode($output,JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+    }
+
+    function get_list(){
+        $items = $this->Category_Model->get_list();
+        $questions = $this->Question_Model->get_list();
+
+        $this->_code = 200;
+        $this->_output['text'] = 'Success.';
+        $this->_output['data'] = array(
+            'items' => $items,
+            'questions' => $questions,
+            );
+        $this->_output['code'] = 1;
+        $this->_output['message'] = 'Get list category success.';
+        $this->display();
     }
 }

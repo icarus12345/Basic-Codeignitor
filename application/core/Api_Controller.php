@@ -14,16 +14,24 @@ class Api_Controller extends CI_Controller {
         $this->load->model('api/Client_Model');
         $this->load->model('api/Account_Model');
         $this->valid_token();
+        $this->_code = 200;
+        $this->_output = array(
+            'text' => 'fail',
+            'message' => 'Bad request.',
+            'code' => -1,
+        );
+    }
 
+    function display(){
+        $this->output
+            ->set_content_type('application/json')
+            ->set_status_header($this->_code)
+            ->set_output(json_encode($this->_output,JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
+            ->_display();
+            die;
     }
 
     function valid_token() {
-        $code = 403;
-        $output = array(
-            'text' => 'fail',
-            'message' => 'Permission denied.',
-            'code' => -1,
-        );
         $app_id = $this->input->post('app_id');
         $token = $_SERVER['HTTP_X_CSRF_TOKEN'];
         $tok = $this->Token_Model->get_by_token($token);
@@ -39,12 +47,9 @@ class Api_Controller extends CI_Controller {
             $this->user = $user;
         }
         if(!$valid){
-            $this->output
-                ->set_content_type('application/json')
-                ->set_status_header($code)
-                ->set_output(json_encode($output,JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
-                ->_display();
-                die;
+            // $this->_code = 403;
+            // $this->_output['message'] = 'Permission denied.';
+            // $this->display();
         }
     }
 }
