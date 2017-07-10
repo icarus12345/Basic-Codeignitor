@@ -347,5 +347,31 @@ small .switch.active .switch-handle{
     /*padding: 10px;*/
     /*border-radius: 5px;*/
 }
-.risk-chart{position: relative;}
-.risk-chart>canvas{}
+.risk-chart{position: relative;max-width: 320px;margin: auto;}
+.risk-chart:before{
+    content: '';
+    position: absolute;
+    z-index: 0;
+    border-radius: 50%;
+    width: 272px;
+    height: 272px;
+    bottom: 0;
+    left: 50%;
+    background: #ccc;
+    transform: translateX(-50%);
+}
+.risk-chart:after{
+    content: '';
+    position: absolute;
+    z-index: 0;
+    border-radius: 50%;
+    width: 220px;
+    height: 220px;
+    bottom: 26px;
+    left: 50%;
+    background: #f0f0f0;
+    border: 27px solid #ebebeb;
+    transform: translateX(-50%);
+
+}
+.risk-chart>canvas{position: relative;z-index: 3}
