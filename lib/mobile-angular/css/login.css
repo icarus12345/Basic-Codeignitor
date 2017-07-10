@@ -121,6 +121,11 @@ a.list-group-item,
     border-radius: 20px;
     padding: 4px 6px;
 }
+.btn-default{
+    border:1px solid rgba(255,255,255,.5);
+    background: rgba(0,0,0,.1);
+    color: #fff;
+}
 @media (orientation: landscape){
     .login-box{
         padding-left: 130px !important;

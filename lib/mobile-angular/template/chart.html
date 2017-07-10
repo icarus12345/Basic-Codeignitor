@@ -1,0 +1,51 @@
+<div ui-content-for="navbarTop">
+    <div class="navbar navbar-app navbar-absolute-top">
+        <div class="navbar-brand navbar-brand-center">
+            {{category_info.title||projectData.title}}
+        </div>
+        <div class="btn-group pull-left">
+            <div class="btn" ng-click="goBack()">
+                <i class="fa fa-arrow-left"></i>
+            </div>
+        </div>
+        <div class="btn-group pull-right">
+            <div class="btn">
+                <i class="icon-graph"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="scrollable viewer" ng-class="">
+    <div class="scrollable-content">
+        <div class="list-group text-center">
+            <div class="list-group-item" style="min-height:calc(100vh - 51px - {{category_info.items.length*51}}px);min-height:-webkit-calc(100vh - 51px - {{category_info.items.length*51}}px)">
+                <p >{{category_info.desc||projectData.desc}}</p>
+            </div>
+            <div class="risk-chart">
+                <canvas 
+                    class="chart chart-radar" style="height:100vw;width:100vw"
+                    responsive="false"
+                    width="320"
+                    height="320"
+                    chart-series="series"
+                    chart-options="chartOptions" 
+                    chart-colors="chartColors"
+                    chart-lineTension="0"
+                    chart-legend="true"
+                    chart-fill="false"
+                    chart-data="data" 
+                    chart-labels="labels"
+                    >
+                </canvas> 
+            </div>
+            <a ng-tap="go(foo)" class="list-group-item list-group-item-risk" ng-repeat="(i,foo) in category_info.items">
+                <span class="num">{{i+1}}</span>
+                <span class="process-bar" style="width:{{foo.process()*100}}%"></span>
+                <div class="">
+                    {{foo.title}}
+                </div>
+            </a>
+        </div>
+    </div>
+</div>

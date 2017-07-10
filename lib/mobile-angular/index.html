@@ -22,6 +22,8 @@
         <script src="../angular-1.5.6/angular-animate.js"></script>
         <script src="js/mobile-angular-ui.min.js"></script>
         <script src="js/mobile-angular-ui.gestures.min.js"></script>
+        <script src="../angular-1.5.6/chart/dist/Chart.min.js"></script>
+        <script src="../angular-1.5.6/angular-chart/dist/angular-chart.min.js"></script>
         <!-- <script src="js/ngTouch.js"></script> -->
         <script src="js/ngTap.js"></script>
         <script src="../angular-1.5.6/angular-fancy-modal/angular-fancy-modal.js"></script>
@@ -37,6 +39,7 @@
         <script src="controller/touch-controller.js"></script>
         <script src="controller/project-controller.js"></script>
         <script src="controller/question-controller.js"></script>
+        <script src="controller/chart-controller.js"></script>
     </head>
 
     <body
@@ -70,12 +73,7 @@
                         ng-include="'view/home.html'" 
                         class="page-animation" 
                         ng-class="{'page-back':__backPage=='home','to-left':__level>0,'page-actived':__frontPage=='home'}"></div>
-                    <div 
-                        ng-include="'view/touch.html'" 
-                        class="page-animation"
-                        class="page-animation" 
-                        ng-class="{'page-back':__backPage=='touch','to-left':__level>0,'page-actived':__frontPage=='touch'}"
-                        ></div>
+
                 </div>
             </div>
         </div>

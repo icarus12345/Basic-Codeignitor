@@ -29,9 +29,11 @@
     height: 100%;
     width: 100%;
     left: 0%;top: 0;
-    display: none;
+    /*display: none;*/
+    opacity: 0;
 }
 .page-actived{
     z-index: 3;
-    display: block;
+    /*display: block;*/
+    opacity: 1;
 }

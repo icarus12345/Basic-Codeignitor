@@ -8,13 +8,18 @@
                 <i class="fa fa-arrow-left"></i>
             </div>
         </div>
+        <div class="btn-group pull-right" ng-tap="view_chart(category_info)">
+            <div class="btn">
+                <i class="icon-graph"></i>
+            </div>
+        </div>
     </div>
 </div>
 
 <div class="scrollable viewer" ng-class="">
     <div class="scrollable-content">
         <div class="list-group text-center">
-          <div class="list-group-item" style="min-height:calc(100vh - 51px - {{category_info.items.length*41}}px);min-height:-webkit-calc(100vh - 51px - {{category_info.items.length*50}}px)">
+          <div class="list-group-item" style="min-height:calc(100vh - 51px - {{category_info.items.length*51}}px);min-height:-webkit-calc(100vh - 51px - {{category_info.items.length*51}}px)">
             <p >{{category_info.desc||projectData.desc}}</p>
           </div>
           <a ng-tap="go(foo)" class="list-group-item list-group-item-risk" ng-repeat="(i,foo) in category_info.items">
