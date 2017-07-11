@@ -349,7 +349,7 @@ small .switch.active .switch-handle{
 }
 .risk-chart{position: relative;max-width: 320px;margin: auto;}
 .risk-chart:before{
-    content: '';
+    /*content: '';
     position: absolute;
     z-index: 0;
     border-radius: 50%;
@@ -358,10 +358,10 @@ small .switch.active .switch-handle{
     bottom: 0;
     left: 50%;
     background: #ccc;
-    transform: translateX(-50%);
+    transform: translateX(-50%);*/
 }
 .risk-chart:after{
-    content: '';
+    /*content: '';
     position: absolute;
     z-index: 0;
     border-radius: 50%;
@@ -371,7 +371,28 @@ small .switch.active .switch-handle{
     left: 50%;
     background: #f0f0f0;
     border: 27px solid #ebebeb;
-    transform: translateX(-50%);
+    transform: translateX(-50%);*/
 
 }
 .risk-chart>canvas{position: relative;z-index: 3}
+.chart-legend{
+    position: relative;
+    /*text-align: left;*/
+    padding-left: 40px;
+    padding-right: 40px;
+}
+.chart-legend>.legend{
+    position: relative;display: inline-block;
+    /*width: 160px;*/
+    font-size: 12px;
+    padding-left: 44px;
+    padding-right: 10px;
+    line-height: 20px;
+    max-width: 50%;
+}
+.chart-legend>.legend>span{
+    display: block;position: absolute;
+    left: 0;width: 40px;height: 12px;top:50%;margin-top: -6px;
+    /*border-width: 2px;*/
+    /*border-style: solid;*/
+}

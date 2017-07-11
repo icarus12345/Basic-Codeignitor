@@ -24,7 +24,7 @@
           </div>
           <a ng-tap="go(foo)" class="list-group-item list-group-item-risk" ng-repeat="(i,foo) in category_info.items">
             <span class="num">{{i+1}}</span>
-            <span class="process-bar" style="width:{{foo.process()*100}}%"></span>
+            <span class="process-bar" style="width:{{foo.process*100}}%"></span>
             <div class="">
                 {{foo.title}}
             </div>

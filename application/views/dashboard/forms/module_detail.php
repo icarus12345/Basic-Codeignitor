@@ -308,7 +308,7 @@
                         <th>Value</th>
                         <th>Display</th>
                         <th width="20">
-                            <a href="JavaScript:App.Setting.ShowColumnDataItemDialog()" class="icon-plus"></a>
+                            <a href="JavaScript:App.Module.ShowColumnDataItemDialog()" class="icon-plus"></a>
                         </th>
                     </tr>
                 </thead>
