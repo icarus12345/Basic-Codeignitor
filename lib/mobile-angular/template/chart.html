@@ -8,11 +8,6 @@
                 <i class="fa fa-arrow-left"></i>
             </div>
         </div>
-        <div class="btn-group pull-right">
-            <div class="btn">
-                <i class="icon-graph"></i>
-            </div>
-        </div>
     </div>
 </div>
 
@@ -23,13 +18,15 @@
                 <p >{{category_info.desc||projectData.desc}}</p>
             </div>
             <div class="risk-chart">
+                <div class="chart-title over-all">Over all</div>
+                <div>
                 <canvas 
-                    class="chart chart-radar" style="height:100vw;width:100vw"
+                    class="chart chart-radar"
                     responsive="false"
                     width="320"
                     height="320"
                     chart-series="series"
-                    chart-options="chartOptions" 
+                    chart-options="category_info.chart_info.options" 
                     chart-colors="category_info.chart_info.colors"
                     chart-lineTension="0"
                     chart-legend="true"
@@ -39,42 +36,108 @@
                     chart-dataset-override="category_info.chart_info.dataset_override"
                     >
                 </canvas>
+                </div>
                 <div class="chart-legend">
                     <div class="legend" ng-repeat="(i,serie) in series" ng-tap="category_info.toggle_serie(i)">
-                        <span style="background-color:{{chartColors[i]}}"></span>{{serie}}
+                        <span style="background-color:{{category_info.chart_info.colors[i]}}"></span>{{serie}}
                     </div>
+                </div>
+                <div class="chart-info">
+                    <div ng-repeat="(i,item) in category_info.items"
+                        ng-class="{'open':check_open_comment(category_info,i)}"
+                        >
+                        <div class="chart-item-head" 
+                            ng-tap="toggle_comment(category_info,i)"
+                            >
+                            <span class="num">{{i+1}}</span> {{item.title}}
+                            <i class="icon-arrow-up"></i>
+                        </div>
+
+                        <div ng-if="item.score < 2.5" class="comment-lower">
+                            <p class="word-wrap">{{item.lower || 'No data to display'}}</p>
+                        </div>
+                        <div ng-if="item.score >= 2.5 && item.score < 3.5" class="comment-medium">
+                            <p class="word-wrap">{{item.medium || 'No data to display'}}</p>
+                        </div>
+                        <div ng-if="item.score >= 3.5" class="comment-higher">
+                            <p class="word-wrap">{{item.higher || 'No data to display'}}</p>
+                        </div>
+                    </div> 
                 </div>
             </div>
             <div class="risk-chart" ng-repeat="(i,foo) in category_info.items">
-                <canvas 
-                    class="chart chart-radar" style="height:100vw;width:100vw"
-                    responsive="false"
-                    width="320"
-                    height="320"
-                    chart-series="series"
-                    chart-options="chartOptions" 
-                    chart-colors="foo.chart_info.colors"
-                    chart-lineTension="0"
-                    chart-legend="true"
-                    chart-fill="false"
-                    chart-data="foo.chart_info.data" 
-                    chart-labels="foo.chart_info.labels"
-                    chart-dataset-override="foo.chart_info.dataset_override"
-                    >
-                </canvas>
+                <div class="chart-title">{{foo.title}}</div>
+                <div>
+                    <canvas 
+                        class="chart chart-radar"
+                        responsive="false"
+                        width="320"
+                        height="320"
+                        chart-series="series"
+                        chart-options="foo.chart_info.options" 
+                        chart-colors="foo.chart_info.colors"
+                        chart-lineTension="0"
+                        chart-legend="true"
+                        chart-fill="false"
+                        chart-data="foo.chart_info.data" 
+                        chart-labels="foo.chart_info.labels"
+                        chart-dataset-override="foo.chart_info.dataset_override"
+                        >
+                    </canvas>
+                </div>
                 <div class="chart-legend">
                     <div class="legend" ng-repeat="(i,serie) in series" ng-tap="foo.toggle_serie(i)">
-                        <span style="background-color:{{chartColors[i]}}"></span>{{serie}}
+                        <span style="background-color:{{foo.chart_info.colors[i]}}"></span>{{serie}}
                     </div>
                 </div>
-            </div>
-            <a ng-tap="go(foo)" class="list-group-item list-group-item-risk" ng-repeat="(i,foo) in category_info.items">
-                <span class="num">{{i+1}}</span>
-                <span class="process-bar" style="width:{{foo.process*100}}%"></span>
-                <div class="">
-                    {{foo.title}}
+                <div class="chart-info">
+                    <div ng-repeat="(no,item) in foo.items"
+                        ng-class="{'open':check_open_comment(foo,no)}"
+                        >
+                        <div class="chart-item-head" 
+                            ng-click="toggle_comment(foo,no)"
+                            >
+                            <span class="num">{{no+1}}</span> 
+                            {{item.title}}
+                            <i class="icon-arrow-down"></i>
+                        </div>
+
+                        <div ng-if="item.score < 2.5" class="comment-lower">
+                            <p class="word-wrap">{{item.lower || 'No data to display'}}</p>
+                        </div>
+                        <div ng-if="item.score >= 2.5 && item.score < 3.5" class="comment-medium">
+                            <p class="word-wrap">{{item.medium || 'No data to display'}}</p>
+                        </div>
+                        <div ng-if="item.score >= 3.5" class="comment-higher">
+                            <p class="word-wrap">{{item.higher || 'No data to display'}}</p>
+                        </div>
+                    </div>
+                    <div ng-repeat="(no,item) in foo.questions"
+                        ng-class="{'open':check_open_comment(foo,no)}"
+                        >
+                        <div class="chart-item-head" 
+                            ng-tap="toggle_comment(foo,no)"
+                            >
+                            <span class="num">{{no+1}}</span> 
+                            {{item.title}}
+                            <i class="icon-arrow-down"></i>
+                        </div>
+
+                        <div ng-if="item.answered == 0" class="comment-lower">
+                            <p class="word-wrap">{{item.lower || 'No data to display'}}</p>
+                        </div>
+                        <div ng-if="item.answered == 1" class="comment-medium">
+                            <p class="word-wrap">{{item.medium || 'No data to display'}}</p>
+                        </div>
+                        <div ng-if="item.answered == 2" class="comment-higher">
+                            <p class="word-wrap">{{item.higher || 'No data to display'}}</p>
+                        </div>
+                        <div ng-if="!item.answered" class="comment-none">
+                            <p class="word-wrap">You have not completed this section</p>
+                        </div>
+                    </div> 
                 </div>
-            </a>
+            </div>
 
         </div>
     </div>

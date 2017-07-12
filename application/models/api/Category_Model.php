@@ -31,6 +31,9 @@ class Category_Model extends CI_Model {
         if($entrys) foreach ($entrys as $key => $value) {
                 $data = unserialize($entrys[$key]->data);
                 $entrys[$key]->desc = $data['desc'];
+                $entrys[$key]->lower = $data['lower'];
+                $entrys[$key]->medium = $data['medium'];
+                $entrys[$key]->higher = $data['higher'];
                 unset($entrys[$key]->data);
         }
         return $entrys;

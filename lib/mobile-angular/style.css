@@ -396,3 +396,81 @@ small .switch.active .switch-handle{
     /*border-width: 2px;*/
     /*border-style: solid;*/
 }
+.comment-lower{}
+.comment-medium{}
+.comment-higher{}
+.chart-info{
+    padding: 10px 10px 10px 20px;
+    text-align: left;
+}
+.chart-item-head{
+    position: relative;
+    padding: 5px 24px 5px 24px;
+    line-height: 20px;
+}
+.chart-item-head>.num{
+    display: block;position: absolute;
+    width: 20px;height: 20px;
+    border-radius: 50%;border:1px solid #333;
+    line-height: 18px;text-align: center;
+    left: 0px;top: 50%;margin-top: -10px;
+}
+.chart-item-head>i{
+    position: absolute;right: 0;top: 50%;
+    transform: translateY(-50%);
+    color: #333;
+    -webkit-transition: 0.4s ease-in-out ;
+    -moz-transition: 0.4s ease-in-out ;
+    -o-transition: 0.4s ease-in-out ;
+    transition: 0.4s ease-in-out ;
+}
+.open .chart-item-head>i{
+    transform: rotate(180deg) translateY(50%);
+}
+.chart-title.over-all{border-top:0;}
+.chart-title{
+    padding: 10px;border-top: 1px solid rgba(0,0,0,.1);
+    text-transform: uppercase;
+}
+.comment-none,
+.comment-lower,
+.comment-medium,
+.comment-higher{
+    padding-left: 10px;
+    font-size: 13px;
+    max-height: 0px;
+    overflow-y: hidden;
+    -webkit-transition: 0.4s ease-in-out ;
+    -moz-transition: 0.4s ease-in-out ;
+    -o-transition: 0.4s ease-in-out ;
+    transition: 0.4s ease-in-out ;
+}
+.open .comment-none,
+.open .comment-lower,
+.open .comment-medium,
+.open .comment-higher{
+    max-height: 1000px;
+}
+.word-wrap{
+    white-space: pre-wrap; /* css-3 */ 
+    white-space: -moz-pre-wrap; /* Mozilla, since 1999 */ 
+    white-space: -pre-wrap; /* Opera 4-6 */ 
+    white-space: -o-pre-wrap; /* Opera 7 */ 
+    word-wrap: break-word; /* Internet Explorer 5.5+ */
+}
+.comment-lower p{
+    border-left: 1px solid #FF5722;
+    padding-left: 10px;text-align: justify;
+}
+.comment-none p{
+    padding-left: 10px;text-align: justify;
+    border-left: 1px solid #ccc;
+}
+.comment-medium p{
+    border-left: 1px solid #FFEB3B;
+    padding-left: 10px;text-align: justify;
+}
+.comment-higher p{
+    border-left: 1px solid #4CAF50;
+    padding-left: 10px;text-align: justify;
+}

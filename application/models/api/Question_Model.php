@@ -47,8 +47,13 @@ class Question_Model extends CI_Model {
         $entrys = $query->result();
         if($entrys) foreach ($entrys as $key => $value) {
             $data = unserialize($entrys[$key]->data);
-            unset($entrys[$key]->data);
             $entrys[$key]->answers = $data['answers'];
+            $entrys[$key]->question = $data['question'];
+            $entrys[$key]->lower = $data['lower'];
+            $entrys[$key]->medium = $data['medium'];
+            $entrys[$key]->higher = $data['higher'];
+            $entrys[$key]->global = $data['global'];
+            unset($entrys[$key]->data);
         }
         return $entrys;
     }
