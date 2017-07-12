@@ -17,9 +17,9 @@
             <div class="list-group-item">
                 <p >{{category_info.desc||projectData.desc}}</p>
             </div>
-            <div class="risk-chart">
+            <div >
                 <div class="chart-title over-all">Over all</div>
-                <div>
+                <div class="risk-chart">
                 <canvas 
                     class="chart chart-radar"
                     responsive="false"
@@ -65,9 +65,9 @@
                     </div> 
                 </div>
             </div>
-            <div class="risk-chart" ng-repeat="(i,foo) in category_info.items">
+            <div class="" ng-repeat="(i,foo) in category_info.items">
                 <div class="chart-title">{{foo.title}}</div>
-                <div>
+                <div class="risk-chart">
                     <canvas 
                         class="chart chart-radar"
                         responsive="false"

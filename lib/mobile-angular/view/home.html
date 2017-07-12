@@ -8,13 +8,38 @@
         </div>
         <div class="risk-list-item list-group">
             
-          <any ng-repeat="foo in listProject" ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}">
-              <a href="#/project/{{foo.id}}/cat/0" class="list-group-item" >
-                <div class="item">
-                    {{foo.title}}
+          <div 
+            ng-repeat="foo in listProject" 
+            ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}" 
+            class="item"
+            ng-class="Ui.active('dropdown' + foo.id)?'active':''"
+            >
+                <a href="#/project/{{foo.id}}/cat/0" class="list-group-item" >
+                    <div class="">
+                        {{foo.title}}
+                    </div>
+                </a>
+                <div class="dropdown">
+                    <button ui-turn-on='dropdown{{foo.id}}' class='btn' ng-tap="showmenu($event)">
+                        <i class="icon-options-vertical"></i>
+                    </button>
+                    <ul
+                    ui-state="dropdown{{foo.id}}"
+                    class="dropdown-menu"
+                    ui-outer-click="Ui.turnOff('dropdown' + foo.id)"
+                    ui-outer-click-if="Ui.active('dropdown' + foo.id)"
+                    role="menu"
+                    ui-show="dropdown{{foo.id}}"
+                    ui-turn-off="dropdown{{foo.id}}"
+                    >
+                        <li><a>Action</a></li>
+                        <li><a>Another action</a></li>
+                        <li><a>Something else here</a></li>
+                        <li class="divider"></li>
+                        <li><a>Separated link</a></li>
+                    </ul>
                 </div>
-              </a>
-          </any>
+          </div>
         </div>
     </div>
 
