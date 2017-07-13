@@ -1,49 +1,63 @@
 <div class="scrollable viewer" ng-class="__path=='/'?'actived':''">
-  <div class="scrollable-content" ui-scroll-bottom="loadMore()" ng-controller="MainController">
-
-    <div class="list-group text-center">
-        <div class="list-group-item">
-            <div class="login-logo">RISK</div>
-            <button class="btn btn-default btn-block" ui-turn-on="modalAddProject"><span class="fa fa-plus"></span></button>
-        </div>
-        <div class="risk-list-item list-group">
-            
-          <div 
-            ng-repeat="foo in listProject" 
-            ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}" 
-            class="item"
-            ng-class="Ui.active('dropdown' + foo.id)?'active':''"
-            >
-                <a href="#/project/{{foo.id}}/cat/0" class="list-group-item" >
-                    <div class="">
-                        {{foo.title}}
+    <div class="scrollable-content" ui-scroll-bottom="loadMore()" ng-controller="MainController">
+        <div class="list-group text-center">
+            <div class="list-group-item">
+                <div class="login-logo">RISK</div>
+                <button class="btn btn-default btn-block" ui-turn-on="modalAddProject"><span class="fa fa-plus"></span></button>
+            </div>
+            <div class="risk-list-item list-group">
+                
+              <div 
+                ng-repeat="foo in listProject" 
+                ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}" 
+                class="item"
+                ng-class="Ui.active('dropdown' + foo.id)?'active':''"
+                >
+                    <a href="#/project/{{foo.id}}/cat/0" class="list-group-item" >
+                        <div class="">
+                            {{foo.title}}
+                        </div>
+                    </a>
+                    <div class="dropdown">
+                        <button ui-turn-on='dropdown{{foo.id}}' class='btn'>
+                            <i class="icon-options-vertical"></i>
+                        </button>
+                        <ul
+                        ui-state="dropdown{{foo.id}}"
+                        class="dropdown-menu"
+                        ui-outer-click="Ui.turnOff('dropdown' + foo.id)"
+                        ui-outer-click-if="Ui.active('dropdown' + foo.id)"
+                        role="menu"
+                        ui-show="dropdown{{foo.id}}"
+                        ui-turn-off="dropdown{{foo.id}}"
+                        >
+                            <li><a><span class="icon-note"></span> Edit</a></li>
+                            <li><a ng-tap="export_pdf(foo.id)"><span class="icon-book-open"></span> Export</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#/share/{{foo.id}}"><span class="icon-share"></span> Share</a></li>
+                            <li><a href="#/send/{{foo.id}}"><span class="icon-envelope-letter"></span> Email</a></li>
+                            <li class="divider"></li>
+                            <li><a><span class="icon-trash"></span> Delete</a></li>
+                        </ul>
                     </div>
-                </a>
-                <div class="dropdown">
-                    <button ui-turn-on='dropdown{{foo.id}}' class='btn' ng-tap="showmenu($event)">
-                        <i class="icon-options-vertical"></i>
-                    </button>
-                    <ul
-                    ui-state="dropdown{{foo.id}}"
-                    class="dropdown-menu"
-                    ui-outer-click="Ui.turnOff('dropdown' + foo.id)"
-                    ui-outer-click-if="Ui.active('dropdown' + foo.id)"
-                    role="menu"
-                    ui-show="dropdown{{foo.id}}"
-                    ui-turn-off="dropdown{{foo.id}}"
-                    >
-                        <li><a><span class="icon-note"></span> Edit</a></li>
-                        <li><a ng-tap="export_pdf(foo.id)"><span class="icon-book-open"></span> Export</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#/share/{{foo.id}}"><span class="icon-share"></span> Share</a></li>
-                        <li><a href="#/send/{{foo.id}}"><span class="icon-envelope-letter"></span> Email</a></li>
-                        <li class="divider"></li>
-                        <li><a><span class="icon-trash"></span> Delete</a></li>
-                    </ul>
-                </div>
-          </div>
+              </div>
+            </div>
         </div>
+        <md-content>
+            <md-list flex>
+                <md-list-item class="md-2-line mb-risk-item" ng-repeat="foo in listProject" ng-click="null">
+                    <div class="md-list-item-text" layout="column">
+                        <h3>{{ foo.title }}</h3>
+                        <p>{{foo.created}}</p>
+                    </div>
+                        <md-button  
+                            class="md-icon-button md-secondary" 
+                            aria-label="showListBottomSheet(foo)"
+                            ng-click="showListBottomSheet(foo)">
+                            <i class="icon-options-vertical"></i>
+                        </md-button >
+                </md-list-item>
+            </md-list>
+    </md-content>
     </div>
-
-  </div>
 </div>

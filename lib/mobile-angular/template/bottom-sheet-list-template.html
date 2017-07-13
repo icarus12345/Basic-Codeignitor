@@ -1,0 +1,39 @@
+<md-bottom-sheet class="md-list md-has-header">
+  <md-subheader ng-cloak>Comment Actions: {{selected_project.title}}</md-subheader>
+  <md-list ng-cloak>
+    <md-list-item>
+      <div 
+            ng-tap="run_action('edit')"
+            class="md-list-item-content btn-block" >
+        <span class="icon-note"></span> <span class="md-inline-list-icon-label">Edit</span>
+      </div>
+    </md-list-item>
+    <md-list-item>
+      <div
+            ng-tap="run_action('export')"
+          class="md-list-item-content btn-block" >
+        <span class="icon-book-open"></span> <span class="md-inline-list-icon-label">Export</span>
+      </div>
+    </md-list-item>
+    <md-divider></md-divider>
+    <md-list-item>
+      <div
+          class="md-list-item-content btn-block" >
+        <span class="icon-share"></span> <span class="md-inline-list-icon-label">Share</span>
+      </div>
+    </md-list-item>
+    <md-list-item>
+      <div
+          class="md-list-item-content btn-block" >
+        <span class="icon-envelope-letter"></span> <span class="md-inline-list-icon-label">Email</span>
+      </div>
+    </md-list-item>
+    <md-divider></md-divider>
+    <md-list-item>
+      <div
+          class="md-list-item-content btn-block" >
+        <span class="icon-trash"></span> <span class="md-inline-list-icon-label">Delete</span>
+      </div>
+    </md-list-item>
+  </md-list>
+</md-bottom-sheet>

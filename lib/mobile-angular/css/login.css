@@ -4,7 +4,7 @@ a.list-group-item,
     background-color: transparent;
     border-color: rgba(0,0,0,.1)
 }
-.app-body{
+./*app-body{
     background-image: url(../img/blur-background09.jpg);
     background-repeat: no-repeat;
     background-position: center;
@@ -19,16 +19,18 @@ a.list-group-item,
     background-size: 100% 100%;
     -webkit-background-size: 100% 100%;
     -ms-background-size: 100% 100%;
-}
+}*/
 .login-modal-dialog .modal-body{
     
 }
+.frm input.form-control,
 .login-modal-dialog input.form-control{
     background: rgba(0,0,0,.1);
     border: 0px solid transparent;
     box-shadow: none;
     color: #fff;
 }
+.frm input.form-control::-webkit-input-placeholder,
 .login-modal-dialog input.form-control::-webkit-input-placeholder { /* WebKit, Blink, Edge */
     color:    #fff;
 }
@@ -38,11 +40,11 @@ a.list-group-item,
 .login-modal-dialog input.form-control::-ms-input-placeholder { /* Microsoft Edge */
    color:    #fff;
 }
+.frm input.form-control.ng-invalid.ng-touched,
 .form-custom-control input.form-control.ng-invalid.ng-touched, 
 .form-custom-control textarea.form-control.ng-invalid.ng-touched{
     background: rgba(244, 67, 54, 0.22)
 }
-
 .form-custom-control .form-error{font-size: 12px}
 .form-custom-control{
     position: relative;
@@ -127,7 +129,7 @@ a.list-group-item,
     color: #fff;
 }
 @media (orientation: landscape){
-    .login-box{
+    /*.login-box{
         padding-left: 130px !important;
     }
     .login-logo{
@@ -135,7 +137,7 @@ a.list-group-item,
         left: 15px;
         top: 50%;
         margin-top: -50px;
-    }
+    }*/
 }
 @media (orientation: portrait){
 }

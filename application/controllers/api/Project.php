@@ -56,6 +56,9 @@ class Project extends Api_Controller {
         //     $output['message'] = validation_errors();
         // } else {
             $rs = $this->Project_Model->get_list($this->user->ac_id,$page,$perpage);
+            foreach ($rs as $key => $value) {
+                $rs[$key]->created = date('Y M D',strtotime($rs[$key]->created));
+            }
             $output['code'] = 1;
             $output['text'] = 'Success.';
             $output['message'] = 'Get list project success.';

@@ -1,0 +1,27 @@
+md-bottom-sheet .md-subheader{
+    line-height: 40px;
+}
+md-bottom-sheet .md-subheader .md-subheader-inner{
+    padding: 0
+}
+md-bottom-sheet .md-button{
+    margin: 0;
+    text-align: left;
+}
+md-bottom-sheet md-list{
+    padding: 0
+}
+md-bottom-sheet.md-list md-list-item{
+    height: 40px;
+}
+md-bottom-sheet md-divider{
+    margin: 5px 0;
+}
+md-bottom-sheet md-list-item, 
+md-bottom-sheet md-list-item .md-list-item-inner{
+    min-height: 40px;
+}
+.mb-risk-item h3,
+.mb-risk-item p{
+    padding-left: 10px;
+}

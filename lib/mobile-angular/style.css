@@ -1,3 +1,4 @@
+@import url('css/material.css');
 @import url('css/login.css');
 @import url('css/simple-line-icons.css');
 *{
@@ -545,4 +546,32 @@ small .switch.active .switch-handle{
 .dropdown-menu .divider{
     margin-top: 4px;margin-bottom: 5px;
     background: rgba(0,0,0,.1)
+}
+.search-brand{
+    position: absolute;
+    left: 0px;right: 0px;top: 50px;
+    padding: 10px;
+    -webkit-transition: 0.4s ease-in-out ;
+    -moz-transition: 0.4s ease-in-out ;
+    -o-transition: 0.4s ease-in-out ;
+    transition: 0.4s ease-in-out ;
+}
+.search-brand.focused{
+    /*top: 0px;left: 0px;right: 0px;*/
+    /*padding-left: 36px;padding-right: 36px;*/
+}
+.search-brand .form-control{
+    border: 0px solid rgba(255,255,255,.1);
+    background: rgba(0,0,0,.1);
+    color: #fff;
+}
+
+md-icon{position: relative;}
+md-icon>span{
+    position: absolute;
+    left: 50%;top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
 }
