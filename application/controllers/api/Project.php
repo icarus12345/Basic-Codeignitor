@@ -136,4 +136,28 @@ class Project extends Api_Controller {
             ->set_status_header($code)
             ->set_output(json_encode($output,JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
     }
+    function export(){
+        $this->load->library('mpdf/mpdf');
+        $mpdf = new mPDF('c','A4','','' , 0 , 0 , 0 , 0 , 0 , 0); 
+        $mpdf->SetDisplayMode('fullpage');
+        $mpdf->list_indent_first_level = 0;  // 1 or 0 - whether to indent the first level of a list
+
+        $items = $this->input->post('items');
+        $info = $this->input->post('info');
+        $this->load->vars(array(
+            'items' => $items,
+            'info' => $info,
+        ));
+        $html = $this->load->view('risk/pdf',null,true);
+
+        $mpdf->WriteHTML($html);
+        $pdffile = APPPATH . "../data/image/test.pdf";
+        $mpdf->Output($pdffile,'F');
+
+        $this->_code = 200;
+        $this->_output['text'] = 'Success.';
+        $this->_output['code'] = 1;
+        $this->_output['message'] = 'Export success.';
+        $this->display();
+    }
 }

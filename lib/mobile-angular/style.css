@@ -345,6 +345,10 @@ small .switch.active .switch-handle{
     padding: 0px;
     border:0;
 }
+.risk-list-item .item .list-group-item>div{
+    font-size: 16px;
+    /*color: #fff;*/
+}
 .risk-list-item .item{
     position: relative;
     background: rgba(255,255,255,.1);
@@ -537,4 +541,8 @@ small .switch.active .switch-handle{
 .comment-higher p{
     border-left: 1px solid #4CAF50;
     padding-left: 10px;text-align: justify;
+}
+.dropdown-menu .divider{
+    margin-top: 4px;margin-bottom: 5px;
+    background: rgba(0,0,0,.1)
 }

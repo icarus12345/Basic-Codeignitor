@@ -53,14 +53,8 @@
                             <i class="icon-arrow-up"></i>
                         </div>
 
-                        <div ng-if="item.score < 2.5" class="comment-lower">
-                            <p class="word-wrap">{{item.lower || 'No data to display'}}</p>
-                        </div>
-                        <div ng-if="item.score >= 2.5 && item.score < 3.5" class="comment-medium">
-                            <p class="word-wrap">{{item.medium || 'No data to display'}}</p>
-                        </div>
-                        <div ng-if="item.score >= 3.5" class="comment-higher">
-                            <p class="word-wrap">{{item.higher || 'No data to display'}}</p>
+                        <div ng-class="{'comment-lower': item.answered < 2.5, 'comment-medium': item.score >= 2.5 && item.score < 3.5, 'comment-higher': item.score >= 3.5}">
+                            <p class="word-wrap">{{item.comment}}</p>
                         </div>
                     </div> 
                 </div>
@@ -102,14 +96,8 @@
                             <i class="icon-arrow-down"></i>
                         </div>
 
-                        <div ng-if="item.score < 2.5" class="comment-lower">
-                            <p class="word-wrap">{{item.lower || 'No data to display'}}</p>
-                        </div>
-                        <div ng-if="item.score >= 2.5 && item.score < 3.5" class="comment-medium">
-                            <p class="word-wrap">{{item.medium || 'No data to display'}}</p>
-                        </div>
-                        <div ng-if="item.score >= 3.5" class="comment-higher">
-                            <p class="word-wrap">{{item.higher || 'No data to display'}}</p>
+                        <div ng-class="{'comment-lower': item.answered < 2.5, 'comment-medium': item.score >= 2.5 && item.score < 3.5, 'comment-higher': item.score >= 3.5}">
+                            <p class="word-wrap">{{item.comment}}</p>
                         </div>
                     </div>
                     <div ng-repeat="(no,item) in foo.questions"
@@ -123,17 +111,9 @@
                             <i class="icon-arrow-down"></i>
                         </div>
 
-                        <div ng-if="item.answered == 0" class="comment-lower">
-                            <p class="word-wrap">{{item.lower || 'No data to display'}}</p>
-                        </div>
-                        <div ng-if="item.answered == 1" class="comment-medium">
-                            <p class="word-wrap">{{item.medium || 'No data to display'}}</p>
-                        </div>
-                        <div ng-if="item.answered == 2" class="comment-higher">
-                            <p class="word-wrap">{{item.higher || 'No data to display'}}</p>
-                        </div>
-                        <div ng-if="!item.answered" class="comment-none">
-                            <p class="word-wrap">You have not completed this section</p>
+                        
+                        <div ng-class="{'comment-lower': item.answered == 0, 'comment-medium': item.answered == 1, 'comment-higher': item.answered == 2, 'comment-none':item.answered==undefined}">
+                            <p class="word-wrap">{{item.comment}}</p>
                         </div>
                     </div> 
                 </div>

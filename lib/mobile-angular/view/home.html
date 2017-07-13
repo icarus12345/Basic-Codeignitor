@@ -32,11 +32,13 @@
                     ui-show="dropdown{{foo.id}}"
                     ui-turn-off="dropdown{{foo.id}}"
                     >
-                        <li><a>Action</a></li>
-                        <li><a>Another action</a></li>
-                        <li><a>Something else here</a></li>
+                        <li><a><span class="icon-note"></span> Edit</a></li>
+                        <li><a ng-tap="export_pdf(foo.id)"><span class="icon-book-open"></span> Export</a></li>
                         <li class="divider"></li>
-                        <li><a>Separated link</a></li>
+                        <li><a href="#/share/{{foo.id}}"><span class="icon-share"></span> Share</a></li>
+                        <li><a href="#/send/{{foo.id}}"><span class="icon-envelope-letter"></span> Email</a></li>
+                        <li class="divider"></li>
+                        <li><a><span class="icon-trash"></span> Delete</a></li>
                     </ul>
                 </div>
           </div>
