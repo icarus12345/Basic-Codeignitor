@@ -29,12 +29,14 @@
                 padding-left: 15mm;
             }
             .chart-image{
-                display: block;margin: auto;
+                width: 50%;
+                text-align: center;
                 float: left;
             }
+            .chart-image img{display: block;margin: auto}
             .series{
                 float: left;
-                width: 320;
+                width: 50%;
             }
             .header{
                 width:180mm;
@@ -57,8 +59,9 @@
                 clear: both; margin: 0pt; padding: 0pt; 
             }
             .lendgen-color{
-                width: 10;height: 4;
+                width: 4em;height: 8;
                 float: left;
+                margin-top: .5em;
             }
             .lendgen-colorbel{
                 float: left;width: 260;
@@ -98,7 +101,9 @@
                 <div><?php echo $value['desc'] ?></div>
                 <?php } ?>
                 <div style="">
-                    <img class="chart-image" src="<?php echo $value['image'] ?>" width="320" height="320">
+                    <div class="chart-image">
+                        <img  src="<?php echo $value['image'] ?>" width="320" height="320">
+                    </div>
                     <div class="series">
                         <div class="legend">
                             <div class="lendgen-color" style="background: #99cc33"></div>
