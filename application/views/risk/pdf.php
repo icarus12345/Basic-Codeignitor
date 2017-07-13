@@ -30,6 +30,11 @@
             }
             .chart-image{
                 display: block;margin: auto;
+                float: left;
+            }
+            .series{
+                float: left;
+                width: 320;
             }
             .header{
                 width:180mm;
@@ -48,6 +53,16 @@
                 width: 40%;
                 text-align: right;
             }
+            .clear{
+                clear: both; margin: 0pt; padding: 0pt; 
+            }
+            .lendgen-color{
+                width: 10;height: 4;
+                float: left;
+            }
+            .lendgen-colorbel{
+                float: left;width: 260;
+            }
         </style>
     </head>
    <body>
@@ -56,8 +71,8 @@
                 <div class="project-name">
                    <?php echo $info['title'] ?>
                 </div>
-                <p class="author">RISK - <?php echo date('Y-M-D') ?></p>
-                <div style="clear: both; margin: 0pt; padding: 0pt; "></div>
+                <p class="author">RISK - <?php echo date('Y M D') ?></p>
+                <div class="clear"></div>
             </div>
         </htmlpageheader>
        <htmlpagefooter name="Risk_Footer">
@@ -82,8 +97,21 @@
                 <h3><?php echo $value['title'] ?></h3>
                 <div><?php echo $value['desc'] ?></div>
                 <?php } ?>
-                <div style="text-align: center">
+                <div style="">
                     <img class="chart-image" src="<?php echo $value['image'] ?>" width="320" height="320">
+                    <div class="series">
+                        <div class="legend">
+                            <div class="lendgen-color" style="background: #99cc33"></div>
+                            <div class="legend-label">Global</div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="legend">
+                            <div class="lendgen-color" style="background: #117bc0"></div>
+                            <div class="legend-label">Goal</div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
                 </div>
                 <div>
                     <?php foreach ($value['items'] as $ckey => $cvalue) { ?>
@@ -91,7 +119,7 @@
                         <div style="margin-left:-10mm;float:left;width: 2em;height: 2em;border:1px solid #ccc;border-radius:50%;line-height: 2em;text-align: center;margin-top:0.5em"><?php echo $ckey+1; ?></div>
                         <div style="margin-left:-10mm;width: 160mm;">
                             <div style=""><?php echo $cvalue['title']; ?></div>
-                            <div style=""><?php echo $cvalue['comment']; ?></div>
+                            <div style="color:<?php echo $cvalue['score'] < 2.5?'red':$cvalue['score'] < 3.5?'':'green'; ?>"><?php echo $cvalue['comment']; ?></div>
                         </div>
                     </div>
                     <?php } ?>
