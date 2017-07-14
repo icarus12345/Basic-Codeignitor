@@ -20,6 +20,7 @@ class Api_Controller extends CI_Controller {
             'message' => 'Bad request.',
             'code' => -1,
         );
+        $this->form_validation->set_error_delimiters('', '');
     }
 
     function display(){

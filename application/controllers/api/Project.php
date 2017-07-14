@@ -6,6 +6,7 @@ class Project extends Api_Controller {
         parent::__construct();
         $this->load->model("api/Project_Model");
         $this->load->model("api/Answer_Model");
+        $this->load->model("api/Share_Model");
     }
 
     public $rules = array(
@@ -28,8 +29,22 @@ class Project extends Api_Controller {
                     'rules'=>'trim|required|min_length[2]|max_length[50]'
                     ),
         ),
-        'get_list' => array(
-                
+        'share' => array(
+                'pid' => array(
+                    'field'=>'pid',
+                    'label'=>'Project',
+                    'rules'=>'trim|required'
+                    ),
+                'email' => array(
+                    'field'=>'email',
+                    'label'=>'Email',
+                    'rules'=>'trim|valid_email|required'
+                    ),
+                'mode' => array(
+                    'field'=>'mode',
+                    'label'=>'Mode',
+                    'rules'=>'trim|required'
+                    ),
         )
     );
 
@@ -126,12 +141,14 @@ class Project extends Api_Controller {
         // } else {
             $project = $this->Project_Model->get($id);
             $answereds = $this->Answer_Model->get_by_uid_pid($uid,$id);
+            $shared = $this->Share_Model->get_by_pid($id);
             $output['code'] = 1;
             $output['text'] = 'Success.';
             $output['message'] = 'Get list project success.';
             $output['data'] = array(
                 'info' => $project,
                 'answereds' => $answereds,
+                'shared' => $shared,
                 );
         // }
         $this->output
@@ -161,6 +178,45 @@ class Project extends Api_Controller {
         $this->_output['text'] = 'Success.';
         $this->_output['code'] = 1;
         $this->_output['message'] = 'Export success.';
+        $this->display();
+    }
+    function share(){
+        $email = $this->input->post('email');
+        $mode = $this->input->post('mode');
+        $pid = $this->input->post('pid');
+        $this->form_validation->set_rules($this->rules['share']);
+        if ($this->form_validation->run() == FALSE) {
+            $this->_output['text'] = 'Fail.';
+            $this->_output['validation'] = validation_errors_array();
+            $this->_output['message'] = validation_errors('','');
+        } else {
+            $shared = $this->Share_Model->get_by_pid_email($pid,$email);
+            if($shared){
+                $params = array(
+                    'pid' => $pid,
+                    'email' => $email,
+                    'mode' => $mode,
+                    );
+                $rs = $this->Share_Model->update($shared->id,$params);
+            }else{
+                $params = array(
+                    'pid' => $pid,
+                    'email' => $email,
+                    'mode' => $mode,
+                    );
+                $rs = $this->Share_Model->insert($params);
+            }
+            if($rs){
+                $this->_output['code'] = 1;
+                $this->_output['text'] = 'Success.';
+                $this->_output['message'] = 'Share success.';
+                // $output['data'] = $rs;
+            } else {
+                $this->_output['text'] = 'fail';
+                $this->_output['message'] = 'Cant share.';
+            }
+        }
+        $this->_code = 200;
         $this->display();
     }
 }

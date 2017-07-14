@@ -18,19 +18,20 @@
     <md-divider></md-divider>
     <md-list-item>
       <div
+          ng-tap="run_action('share')"
           class="md-list-item-content btn-block" >
         <span class="icon-share"></span> <span class="md-inline-list-icon-label">Share</span>
       </div>
     </md-list-item>
     <md-list-item>
-      <div
+      <div ng-tap="run_action('send')"
           class="md-list-item-content btn-block" >
         <span class="icon-envelope-letter"></span> <span class="md-inline-list-icon-label">Email</span>
       </div>
     </md-list-item>
     <md-divider></md-divider>
     <md-list-item>
-      <div
+      <div ng-tap="run_action('delete')"
           class="md-list-item-content btn-block" >
         <span class="icon-trash"></span> <span class="md-inline-list-icon-label">Delete</span>
       </div>

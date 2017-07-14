@@ -201,10 +201,14 @@ body.has-modal .app{
 }
 .auto-modal .modal-dialog .modal-content>.modal-body>div{display: table-cell;vertical-align: middle;}
 .auto-modal .modal-dialog .modal-content>.modal-body>div>div{
-    padding: 15px;overflow: auto;
+    padding: 15px;
+    overflow: auto;
     max-height: -moz-calc(100vh);
     max-height: -webkit-calc(100vh);
     max-height: calc(100vh);
+}
+.auto-modal .modal-dialog .modal-content>.modal-body>div>div.wrap{
+    padding: 0
 }
 .auto-modal .modal-dialog .modal-content>.modal-header+.modal-body,
 .auto-modal .modal-dialog .modal-content>.modal-header+.modal-body>div{

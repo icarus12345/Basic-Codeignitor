@@ -25,3 +25,22 @@ md-bottom-sheet md-list-item .md-list-item-inner{
 .mb-risk-item p{
     padding-left: 10px;
 }
+.mb-risk-item{
+    /*border-top:1px solid rgba(0,0,0,.1);*/
+    background: #fff;margin-top: 1px
+}
+md-input-container{
+    margin: 15px 0;
+}
+md-content.md-default-theme, md-content{
+    background: #fff;
+}
+label{font-weight: normal;}
+.md-button.md-raised{
+    margin-left: 0;
+    margin-right: 0;
+}
+.md-button.md-default-theme:not([disabled]).md-focused, 
+.md-button:not([disabled]).md-focused{
+    background: transparent;
+}

@@ -13,150 +13,111 @@
             -->
             <div class="modal-body" >
                 <div class="" >
-                    <div ng-scrollbar class="login-box">
-                        <div class="login-logo">RISK</div>
-                        <form role="form" ng-submit='doAuthRegister()' name="register" id="register">
-                            <div 
-                                class="form-custom-control"
-                                ng-class="[(fc_fname || !!auth_reg_info.first_name)?'focused':'']"
-                                >
-                                <div>
-                                    <label>Fist name</label>
-                                    <input type="text" 
-                                        name="first_name" 
-                                        required ng-maxlength=50
-                                        ng-model="auth_reg_info.first_name"
-                                        class="form-control"
-                                        ng-focus="fc_fname = true"
-                                        ng-blur="fc_fname = false"
-                                        ng-init="fc_fname = false"
-                                        >
-                                </div>
-                                <div class="form-error" ng-messages="register.first_name.$error" ng-show="register.$submitted || register.first_name.$touched">
-                                    <div ng-show="register.first_name.$error.required">Please enter First name.</div>
-                                    <div ng-show="register.first_name.$error.minlength">Should be great than 2 chars</div>
-                                    <div ng-show="register.first_name.$error.maxlength">Should be less than 50 chars</div>
-                                </div>
+                    <div ng-scrollbar class="wrap">
+                    <md-content layout-padding>
+                        <form 
+                            name="registerForm" 
+                            id="registerForm" 
+                            ng-submit='doAuthRegister()' 
+                            >
+                            <div class="login-logo">RISK</div>
+                            <div layout="row">
+                                <md-input-container flex="50">
+                                    <label>First Name</label>
+                                    <input required name="first_name" ng-model="auth_reg_info.first_name">
+                                    <div ng-messages="registerForm.first_name.$error">
+                                        <div ng-message="required">This is required.</div>
+                                    </div>
+                                </md-input-container>
+
+                                <md-input-container flex="50">
+                                    <label>Last Name</label>
+                                    <input required name="last_name" ng-model="auth_reg_info.last_name">
+                                    <div ng-messages="registerForm.last_name.$error">
+                                        <div ng-message="required">This is required.</div>
+                                    </div>
+                                </md-input-container>
                             </div>
 
-                            <div 
-                                class="form-custom-control"
-                                ng-class="[(fc_lname || !!auth_reg_info.last_name)?'focused':'']"
-                                >
-                                <div>
-                                    <label>Last name</label>
-                                    <input type="text" 
-                                        name="last_name" 
-                                        required ng-maxlength=50
-                                        ng-model="auth_reg_info.last_name"
-                                        class="form-control"
-                                        ng-focus="fc_lname = true"
-                                        ng-blur="fc_lname = false"
-                                        ng-init="fc_lname = false"
-                                        >
+                            <md-input-container class="md-block">
+                                <label>Username</label>
+                                <input 
+                                    md-maxlength="30" 
+                                    required md-no-asterisk 
+                                    name="username" 
+                                    ng-model="auth_reg_info.username">
+                                <div ng-messages="registerForm.username.$error">
+                                    <div ng-message="required">This is required.</div>
+                                    <div ng-message="md-maxlength">The description must be less than 30 characters long.</div>
                                 </div>
-                                <div class="form-error" ng-messages="register.last_name.$error" ng-show="register.$submitted || register.last_name.$touched">
-                                    <div ng-show="register.last_name.$error.required">Please enter Last name.</div>
-                                    <div ng-show="register.last_name.$error.maxlength">Should be less than 50 chars</div>
-                                </div>
-                            </div>
+                            </md-input-container>
 
-                            <div 
-                                class="form-custom-control"
-                                ng-class="[(fc_email || !!auth_reg_info.email)?'focused':'']"
-                                >
-                                <div>
-                                    <label>Email</label>
-                                    <input type="text" 
-                                        name="email" 
-                                        required ng-maxlength=120
-                                        ng-model="auth_reg_info.email"
-                                        class="form-control"
-                                        ng-focus="fc_email = true"
-                                        ng-blur="fc_email = false"
-                                        ng-init="fc_email = false"
-                                        >
-                                </div>
-                                <div class="form-error" ng-messages="register.email.$error" ng-show="register.$submitted || register.email.$touched">
-                                    <div ng-show="register.email.$error.required">Please enter Email.</div>
-                                    <div ng-show="register.email.$error.maxlength">Should be less than 120 chars</div>
-                                </div>
-                            </div>
+                            <md-input-container class="md-block">
+                                <label>Email</label>
+                                <input 
+                                    required 
+                                    type="email" 
+                                    name="email" 
+                                    ng-model="auth_reg_info.email"
+                                    minlength="10" 
+                                    maxlength="100" 
+                                    ng-pattern="/^.+@.+\..+$/" 
+                                    />
 
-                            <div 
-                                class="form-custom-control"
-                                ng-class="[(fc_uname || !!auth_reg_info.username)?'focused':'']"
-                                >
-                                <div>
-                                    <label>Username</label>
-                                    <input type="text" 
-                                        name="username" 
-                                        required ng-maxlength=120
-                                        ng-model="auth_reg_info.username"
-                                        class="form-control"
-                                        ng-focus="fc_uname = true"
-                                        ng-blur="fc_uname = false"
-                                        ng-init="fc_uname = false"
-                                        >
+                                <div ng-messages="registerForm.email.$error" role="alert">
+                                    <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                                Your email must be between 10 and 100 characters long and look like an e-mail address.
+                                    </div>
                                 </div>
-                                <div class="form-error" ng-messages="register.username.$error" ng-show="register.$submitted || register.username.$touched">
-                                    <div ng-show="register.username.$error.required">Please enter Username.</div>
-                                    <div ng-show="register.username.$error.maxlength">Should be less than 120 chars</div>
-                                </div>
-                            </div>
+                            </md-input-container>
 
-                            <div 
-                                class="form-custom-control"
-                                ng-class="[(fc_pass || !!auth_reg_info.password)?'focused':'']"
-                                >
+                            <md-input-container class="md-block">
                                 <label>Password</label>
                                 <input 
                                     type="password" 
-                                    class="form-control"
-                                    required 
+                                    md-maxlength="30" 
+                                    required md-no-asterisk 
                                     name="password" 
-                                    ng-model="auth_reg_info.password"
-                                    password-verify="confirm_password"
-                                    ng-focus="fc_pass = true"
-                                    ng-blur="fc_pass = false"
-                                    ng-init="fc_pass = false"
-                                    >
+                                    ng-model="auth_reg_info.password">
+                                <div ng-messages="registerForm.password.$error">
+                                    <div ng-message="required">This is required.</div>
+                                    <div ng-message="md-maxlength">The pasword must be less than 30 characters long.</div>
+                                </div>
+                            </md-input-container>
+
+                            <md-input-container class="md-block">
+                                <label>Password Confirm</label>
+                                <input 
+                                    md-maxlength="30" 
+                                    required md-no-asterisk 
+                                    name="confirm_password" 
+                                    ng-model="auth_reg_info.confirm_password">
+                                <div ng-messages="registerForm.confirm_password.$error">
+                                    <div ng-message="required">This is required.</div>
+                                    <div ng-message="md-maxlength">The confirm pasword must be less than 30 characters long.</div>
+                                </div>
+                            </md-input-container>
+
+                            <md-input-container class="md-block">
+                                <md-checkbox name="tos" ng-model="auth_reg_info.tos" required>
+                                    I accept the terms of service.
+                                </md-checkbox>
+                                <div ng-messages="registerForm.tos.$error" multiple md-auto-hide="false">
+                                    <div ng-message="required">
+                                        You must accept the terms of service before you can proceed.
+                                    </div>
+                                </div>
+                            </md-input-container>
+                            <div  layout="column">
+                                <md-button md-colors="{background:'red'}" class="btn-block md-raised" type="submit">Submit</md-button>
                             </div>
 
-                            <div 
-                                class="form-custom-control"
-                                ng-class="[(fc_cpass || !!auth_reg_info.confirm_password)?'focused':'']"
-                                >
-                                <label>Confirm password</label>
-                                <input 
-                                    type="password" 
-                                    class="form-control"
-                                    required 
-                                    name="confirm_password" 
-                                    ng-model="auth_reg_info.confirm_password"
-                                    password-verify="password"
-                                    ng-required="password && !confirm_password"
-                                    ng-focus="fc_cpass = true"
-                                    ng-blur="fc_cpass = false"
-                                    ng-init="fc_cpass = false"
-                                    >
-                            </div>
-                            <!--
-                            <div 
-                                class="form-custom-control focused">
-                                <label>Remember Me</label>
-                                <ui-switch ng-model='rememberMe'></ui-switch>
-                            </div>
-                            -->
-                            <div style="height:10px;"></div>
-                            <button class="btn btn-info btn-block">
-                              Register
-                            </button>
-                            <div class="new-to">
-                                Have Risk account ? <span ui-turn-off="IsShowRegister" ui-turn-on="IsShowLogin">Login</span>
-                            </div>
+                            <p style="font-size:.8em; width: 100%; text-align: center;">
+                            Have Risk account ? <a ui-turn-off="IsShowRegister" ui-turn-on="IsShowLogin">Login</a>
+                            </p>
                         </form>
-                    </div>
+                    </md-content>
+                    </div> 
                 </div>
             </div>
       
